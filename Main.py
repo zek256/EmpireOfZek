@@ -1282,8 +1282,8 @@ def Combat(npc_id):
     player_hit_chance = round(player_dexterity / npc_agility * 100) #Raw percentage
 
     npc_hit_chance = round(npc_dexterity / player_agility * 100)
-    print("NPC hit chance")
-    print(npc_hit_chance)
+    #print("NPC hit chance")
+    #print(npc_hit_chance)
 
 
 
@@ -1295,10 +1295,10 @@ def Combat(npc_id):
 
         print()
         player_hit_roll = random.randrange(1, 100)
-        print("player hit chance: ", end='')
-        print(player_hit_chance)
-        print("player hit roll: ", end='')
-        print(player_hit_roll)
+        #print("player hit chance: ", end='')
+        #print(player_hit_chance)
+        #print("player hit roll: ", end='')
+        #print(player_hit_roll)
         if(player_hit_roll < player_hit_chance):
             player_damage = random.randrange(player_damage_min, player_damage_max)
             print(name + " hits " + npc_name + " for " + str(player_damage) + " points of damage.")
@@ -1328,10 +1328,10 @@ def Combat(npc_id):
         
         print()
         npc_hit_roll = random.randrange(1, 100)
-        print("npc hit chance: ", end='')
-        print(npc_hit_chance)
-        print("npc hit roll: ", end='')
-        print(npc_hit_roll)
+        #print("npc hit chance: ", end='')
+        #print(npc_hit_chance)
+        #print("npc hit roll: ", end='')
+        #print(npc_hit_roll)
         if(npc_hit_roll < npc_hit_chance):
             npc_damage = random.randrange(npc_damage_min, npc_damage_max)
             print(npc_name + " hits " + name + " for " + str(npc_damage) + " points of damage.")
@@ -1404,29 +1404,30 @@ def Command(choice):
         npc = choice.lower()[5:]
 
         for each in npc_list:
-            if(npc == each[1][0] and found_fight == 0):
-                found_fight = 1
-                npc_id = each[0][0]
+            if(found_fight == 0):
+                if(npc == each[1][0]):
+                    found_fight = 1
+                    npc_id = each[0][0]
 
-                conn = create_connection(database)
-                cur = conn.cursor()
-                conn.close()
-                
-                thread = threading.Thread(target = Combat, args = (npc_id,))
-                thread.daemon = True
-                thread.start()
+                    conn = create_connection(database)
+                    cur = conn.cursor()
+                    conn.close()
+                    
+                    thread = threading.Thread(target = Combat, args = (npc_id,))
+                    thread.daemon = True
+                    thread.start()
 
-                while True:
-                    choice = input("")
-                    if choice == 'flee':
-                        stop_combat = True
-                        #thread.join()
-                        time.sleep(2)
-                        break
+                    while True:
+                        choice = input("")
+                        if choice == 'flee':
+                            stop_combat = True
+                            #thread.join()
+                            time.sleep(2)
+                            break
 
-                
-                conn = create_connection(database)
-                cur = conn.cursor()
+                    
+                    conn = create_connection(database)
+                    cur = conn.cursor()
         
     else:
         print("That is not a valid command.")
