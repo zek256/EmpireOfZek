@@ -1,12 +1,16 @@
+import sys
 import sqlite3
 import hashlib
 import os
 from sqlite3 import Error
 from Player import Player
+import time
+import threading
+import random
 
 database = r"pythonsqlite.db"
 name = 'random'
-
+stop_combat = False
 
 #-----------------------GET_STAT-----------------------
 #cur.execute('SELECT name FROM Player WHERE pid = ?', (pid,))
@@ -205,7 +209,7 @@ def count_player(conn):
     return count
 
 def Show_NPC():
-    
+
     npc_list = []
 
     cur.execute("SELECT location FROM Player WHERE name = ?", (name,))
@@ -261,6 +265,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("1")
+        temp_list.append(npc_1)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -274,6 +279,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("2")
+        temp_list.append(npc_2)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -287,6 +293,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("3")
+        temp_list.append(npc_3)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -300,6 +307,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("4")
+        temp_list.append(npc_4)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -313,6 +321,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("5")
+        temp_list.append(npc_5)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -326,6 +335,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("6")
+        temp_list.append(npc_6)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -339,6 +349,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("7")
+        temp_list.append(npc_7)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -352,6 +363,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("8")
+        temp_list.append(npc_8)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -365,6 +377,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("9")
+        temp_list.append(npc_9)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -378,6 +391,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("10")
+        temp_list.append(npc_10)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -391,6 +405,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("11")
+        temp_list.append(npc_11)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -404,6 +419,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("12")
+        temp_list.append(npc_12)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -417,6 +433,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("13")
+        temp_list.append(npc_13)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -430,6 +447,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("14")
+        temp_list.append(npc_14)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -443,6 +461,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("15")
+        temp_list.append(npc_15)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -456,6 +475,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("16")
+        temp_list.append(npc_16)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -469,6 +489,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("17")
+        temp_list.append(npc_17)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -482,6 +503,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("18")
+        temp_list.append(npc_18)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -495,6 +517,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("19")
+        temp_list.append(npc_19)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -508,6 +531,7 @@ def Show_NPC():
         npc_level = cur.fetchall()[0][0]
         temp_list = []
         temp_list.append("20")
+        temp_list.append(npc_20)
         temp_list.append(npc_name)
         temp_list.append(npc_level)
         npc_list.append(temp_list)
@@ -528,8 +552,8 @@ def Look():
 
     for each in npc_list:
         print("-", end='')
-        print(each[1], end='')
-        print("[Lv. " + str(each[2]) + "]-")  
+        print(each[2], end='')
+        print("[Lv. " + str(each[3]) + "]-")  
     
     print()
 
@@ -1474,38 +1498,244 @@ def Move(direction):
 
     Look()
     
-def Combat(npc):
-    
-    npc_list = Show_NPC()
+def Combat(npc, npc_list):
+
+    conn = create_connection(database)
+    cur = conn.cursor()
+
+    global stop_combat
+    stop_combat = False
+    win = False
+
     npc_slot = 0
+    npc_id = 0
     npc_name = 0
 
     for each in npc_list:
-        if(npc == each[1]):
+        if(npc == each[2]):
             npc_slot = each[0]
-            npc_name = each[1]
+            npc_id = each[1]
+            npc_name = each[2]
             break
-    
-    print(npc_slot)
-    print(npc_name)
 
+#-----------------------NPC_STUFF----------------------------------
+    cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_id,))
+    npc_level = cur.fetchall()[0][0]
+    cur.execute("SELECT health FROM Npc WHERE id = ?", (npc_id,))
+    npc_health = cur.fetchall()[0][0]
+    cur.execute("SELECT max_health FROM Npc WHERE id = ?", (npc_id,))
+    npc_max_health = cur.fetchall()[0][0]
+    cur.execute("SELECT mana FROM Npc WHERE id = ?", (npc_id,))
+    npc_mana = cur.fetchall()[0][0]
+    cur.execute("SELECT max_mana FROM Npc WHERE id = ?", (npc_id,))
+    npc_max_mana = cur.fetchall()[0][0]
+    cur.execute("SELECT dexterity FROM Npc WHERE id = ?", (npc_id,))
+    npc_dexterity = cur.fetchall()[0][0]
+    cur.execute("SELECT agility FROM Npc WHERE id = ?", (npc_id,))
+    npc_agility = cur.fetchall()[0][0]
+    cur.execute("SELECT intelligence FROM Npc WHERE id = ?", (npc_id,))
+    npc_intelligence = cur.fetchall()[0][0]
+    cur.execute("SELECT wisdom FROM Npc WHERE id = ?", (npc_id,))
+    npc_wisdom = cur.fetchall()[0][0]
+    cur.execute("SELECT charisma FROM Npc WHERE id = ?", (npc_id,))
+    npc_charisma = cur.fetchall()[0][0]
+    cur.execute("SELECT damage_min FROM Npc WHERE id = ?", (npc_id,))
+    npc_damage_min = cur.fetchall()[0][0]
+    cur.execute("SELECT damage_max FROM Npc WHERE id = ?", (npc_id,))
+    npc_damage_max = cur.fetchall()[0][0]
+
+
+#-------------------------PLAYER_STATS-------------------------------------
+    cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
+    player_level = cur.fetchall()[0][0]
+    cur.execute("SELECT health FROM Player WHERE name = ?", (name,))
+    player_health = cur.fetchall()[0][0]
+    cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
+    player_max_health = cur.fetchall()[0][0]
+    cur.execute("SELECT mana FROM Player WHERE name = ?", (name,))
+    player_mana = cur.fetchall()[0][0]
+    cur.execute("SELECT max_mana FROM Player WHERE name = ?", (name,))
+    player_max_mana = cur.fetchall()[0][0]
+    cur.execute("SELECT strength FROM Player WHERE name = ?", (name,))
+    player_strength = cur.fetchall()[0][0]
+    cur.execute("SELECT stamina FROM Player WHERE name = ?", (name,))
+    player_stamina = cur.fetchall()[0][0]
+    cur.execute("SELECT dexterity FROM Player WHERE name = ?", (name,))
+    player_dexterity = cur.fetchall()[0][0]
+    cur.execute("SELECT agility FROM Player WHERE name = ?", (name,))
+    player_agility = cur.fetchall()[0][0]
+    cur.execute("SELECT intelligence FROM Player WHERE name = ?", (name,))
+    player_intelligence = cur.fetchall()[0][0]
+    cur.execute("SELECT wisdom FROM Player WHERE name = ?", (name,))
+    player_wisdom = cur.fetchall()[0][0]
+    cur.execute("SELECT charisma FROM Player WHERE name = ?", (name,))
+    player_charisma = cur.fetchall()[0][0]
+
+    cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
+    player_level = cur.fetchall()[0][0]
+    cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
+    player_totalexp = cur.fetchall()[0][0]
+    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (player_level + 1,))
+    player_next_level_exp = cur.fetchall()[0][0]
+    player_exp_percent =  round(player_totalexp / player_next_level_exp * 100, 5)
+
+#-------------------------PLAYER_EQUIPMENT---------------------------------
+    cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
+    equipment_primary = cur.fetchall()[0][0]
+    cur.execute("SELECT equipment_secondary FROM Player WHERE name = ?", (name,))
+    equipment_secondary = cur.fetchall()[0][0]
+
+    if(equipment_primary > 0):
+        cur.execute("SELECT damage_min FROM Item WHERE id = ?", (equipment_primary,))
+        player_damage_min = cur.fetchall()[0][0]
+        cur.execute("SELECT damage_max FROM Item WHERE id = ?", (equipment_primary,))
+        player_damage_max = cur.fetchall()[0][0]
+
+
+    player_damage_min += player_strength
+    player_damage_max += player_strength
+
+    player_hit_chance = round(player_dexterity / npc_agility * 100) #Raw percentage
+
+    npc_hit_chance = round(npc_dexterity / player_agility * 100)
+    print("NPC hit chance")
+    print(npc_hit_chance)
+
+
+
+
+
+    while(True):
+        if(stop_combat):
+            break
+
+        print()
+        player_hit_roll = random.randrange(1, 100)
+        print("player hit chance: ", end='')
+        print(player_hit_chance)
+        print("player hit roll: ", end='')
+        print(player_hit_roll)
+        if(player_hit_roll < player_hit_chance):
+            player_damage = random.randrange(player_damage_min, player_damage_max)
+            print(name + " hits " + npc_name + " for " + str(player_damage) + " points of damage.")
+        else:
+            print(name + " misses " + npc_name + ".")
+
+        print("[", end='')
+        print(player_health, end='')
+        print("/", end='')
+        print(player_max_health, end=' ')
+        print("(", end='')
+        print(player_health / player_max_health * 100, end='')
+        print("%) ", end='')
+        print(player_mana, end='')
+        print("/", end='')
+        print(player_max_mana, end=' ')
+        print("(", end='')
+        print(player_mana / player_max_mana * 100, end='')
+        print("%) ", end='')
+        print("EXP: ", end='')
+        print("{:0.2f}".format(player_exp_percent), end='')
+        print("%", end='')
+        print("]", end='')
+        #print(">", end='')
+        print(">")
+        time.sleep(1.5)
+        
+        print()
+        npc_hit_roll = random.randrange(1, 100)
+        print("npc hit chance: ", end='')
+        print(npc_hit_chance)
+        print("npc hit roll: ", end='')
+        print(npc_hit_roll)
+        if(npc_hit_roll < npc_hit_chance):
+            npc_damage = random.randrange(npc_damage_min, npc_damage_max)
+            print(npc_name + " hits " + name + " for " + str(npc_damage) + " points of damage.")
+        else:
+            print(npc_name + " misses " + name + ".")
+        print("[", end='')
+        print(player_health, end='')
+        print("/", end='')
+        print(player_max_health, end=' ')
+        print("(", end='')
+        print(player_health / player_max_health * 100, end='')
+        print("%) ", end='')
+        print(player_mana, end='')
+        print("/", end='')
+        print(player_max_mana, end=' ')
+        print("(", end='')
+        print(player_mana / player_max_mana * 100, end='')
+        print("%) ", end='')
+        print("EXP: ", end='')
+        print("{:0.2f}".format(player_exp_percent), end='')
+        print("%", end='')
+        print("]", end='')
+        #print(">", end='')
+        print(">")
+        time.sleep(1.5)
+
+        if(player_health <= 0):
+            print("You died.")
+            break
+        if(npc_health <= 0):
+            print(str(npc_name) + " has been slain.")
+            win = True
+            break
+
+
+    #Awarding EXP
+    if(win == True):
+        #Award EXP directly
+        pass
+
+
+
+    conn.close()
 
 def Command(choice):
     if(choice.lower() == 'north' or choice.lower() == 'n' or choice.lower() == 'south' or choice.lower() == 's' or choice.lower() == 'east' or choice.lower() == 'e' or choice.lower() == 'west' or choice.lower() == 'w'):
         Move(choice.lower())
+
     elif(choice.lower() == 'score' or choice.lower() == 'character'):
         Score()
+
     elif(choice.lower() == 'look' or choice.lower() == 'l'):
         Look()
+
     elif(choice.lower() == 'equipment'):
         Show_Equipment()
+
     elif(choice.lower() == 'inventory'):
         Show_Inventory()
+
     elif(choice.lower() == 'buffs'):
         Show_Buffs()
+
     elif(choice.lower()[0:4] == 'kill'):
-        Combat(choice.lower()[5:])
-    
+        global stop_combat
+        #stop_combat = False
+        npc_list = Show_NPC()
+
+        conn = create_connection(database)
+        cur = conn.cursor()
+        conn.close()
+        
+        thread = threading.Thread(target = Combat, args = (choice.lower()[5:], npc_list))
+        thread.daemon = True
+        thread.start()
+
+        while True:
+            choice = input("")
+            if choice == 'flee':
+                stop_combat = True
+                #thread.join()
+                time.sleep(2)
+                break
+
+        
+        conn = create_connection(database)
+        cur = conn.cursor()
+        
     else:
         print("That is not a valid command.")
         print()
@@ -1631,20 +1861,20 @@ def Login():
                 mana = 1
                 base_max_mana = 1
                 max_mana = 1
-                base_strength = 15
-                strength = 15
-                base_stamina = 20
-                stamina = 20
-                base_dexterity = 10
-                dexterity = 10
-                base_agility = 10
-                agility = 10
-                base_intelligence = 5
-                intelligence = 5
-                base_wisdom = 5
-                wisdom = 5
-                base_charisma = 8
-                charisma = 8
+                base_strength = 10
+                strength = 10
+                base_stamina = 3
+                stamina = 3
+                base_dexterity = 5
+                dexterity = 5
+                base_agility = 5
+                agility = 5
+                base_intelligence = 3
+                intelligence = 3
+                base_wisdom = 3
+                wisdom = 3
+                base_charisma = 5
+                charisma = 5
                 equipment_primary = 0
                 equipment_secondary = 0
                 equipment_head = 0
