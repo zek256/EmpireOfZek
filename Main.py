@@ -174,7 +174,6 @@ def select_player(conn, name):
 
     return cur.fetchall()
 
-
 def delete_player(conn, name):
     """
     Delete a task by task id
@@ -221,15 +220,39 @@ def Show_NPC():
     npc_name = cur.fetchall()
     cur.execute("SELECT level FROM Npc WHERE room = ?", (location,))
     npc_level = cur.fetchall()
+    cur.execute("SELECT alive FROM Npc WHERE room = ?", (location,))
+    npc_alive = cur.fetchall()
     
     for i in range(0, len(npc_id)):
         npc_temp = []
         npc_temp.append(npc_id[i])
         npc_temp.append(npc_name[i])
         npc_temp.append(npc_level[i])
+        npc_temp.append(npc_alive[i])
         npc_list.append(npc_temp)
 
     return(npc_list)
+#The below two methods are activated at the beginning of the game, they look to see if there are any dead npcs(from when the player logs out with a dead npc), it then respawns them after 30 seconds. This must occur because the only other way an npc spawns is 30 seconds after its death. So if the player logs out right after kill an npc, there needs to be a way for it to respawn.
+def Npc_Initial_Spawn_Helper():
+
+    cur.execute("SELECT id FROM Npc WHERE alive = ?", (0,))
+    npc_list = cur.fetchall()
+
+    thread = threading.Thread(target = Npc_Initial_Spawn, args = (npc_list,))
+    thread.daemon = True
+    thread.start()
+
+def Npc_Initial_Spawn(npc_list):
+    
+    conn = create_connection(database)
+    cur = conn.cursor()
+
+    time.sleep(30)
+
+    for each in npc_list:
+        sql = "UPDATE Npc SET alive = ? WHERE id = ?"
+        cur.execute(sql, (1, each[0],))
+        conn.commit()
 
 def Look():
     cur = conn.cursor()
@@ -244,9 +267,10 @@ def Look():
     npc_list = Show_NPC()
 
     for each in npc_list:
-        print("-", end='')
-        print(each[1][0], end='')
-        print("[Lv. " + str(each[2][0]) + "]-")  
+        if(each[3][0] == 1):
+            print("-", end='')
+            print(each[1][0], end='')
+            print("[Lv. " + str(each[2][0]) + "]-")  
 
     print()
 
@@ -1282,8 +1306,8 @@ def Combat(npc_id):
     player_hit_chance = round(player_dexterity / npc_agility * 100) #Raw percentage
 
     npc_hit_chance = round(npc_dexterity / player_agility * 100)
-    print("NPC hit chance")
-    print(npc_hit_chance)
+    #print("NPC hit chance")
+    #print(npc_hit_chance)
 
 
 
@@ -1295,46 +1319,36 @@ def Combat(npc_id):
 
         print()
         player_hit_roll = random.randrange(1, 100)
-        print("player hit chance: ", end='')
-        print(player_hit_chance)
-        print("player hit roll: ", end='')
-        print(player_hit_roll)
+        #print("player hit chance: ", end='')
+        #print(player_hit_chance)
+        #print("player hit roll: ", end='')
+        #print(player_hit_roll)
         if(player_hit_roll < player_hit_chance):
-            player_damage = random.randrange(player_damage_min, player_damage_max)
+            player_damage = random.randrange(player_damage_min, player_damage_max + 1)
             print(name + " hits " + npc_name + " for " + str(player_damage) + " points of damage.")
+            npc_health -= player_damage
+            if(npc_health < 0):
+                npc_health = 0
+            sql = "UPDATE Npc SET health = ? WHERE id = ?"
+            cur.execute(sql, (npc_health, npc_id,))
+            conn.commit()
         else:
             print(name + " misses " + npc_name + ".")
 
-        print("[", end='')
-        print(player_health, end='')
-        print("/", end='')
-        print(player_max_health, end=' ')
-        print("(", end='')
-        print(player_health / player_max_health * 100, end='')
-        print("%) ", end='')
-        print(player_mana, end='')
-        print("/", end='')
-        print(player_max_mana, end=' ')
-        print("(", end='')
-        print(player_mana / player_max_mana * 100, end='')
-        print("%) ", end='')
-        print("EXP: ", end='')
-        print("{:0.2f}".format(player_exp_percent), end='')
-        print("%", end='')
-        print("]", end='')
-        #print(">", end='')
-        print(">")
-        time.sleep(1.5)
-        
-        print()
         npc_hit_roll = random.randrange(1, 100)
-        print("npc hit chance: ", end='')
-        print(npc_hit_chance)
-        print("npc hit roll: ", end='')
-        print(npc_hit_roll)
+        #print("npc hit chance: ", end='')
+        #print(npc_hit_chance)
+        #print("npc hit roll: ", end='')
+        #print(npc_hit_roll)
         if(npc_hit_roll < npc_hit_chance):
-            npc_damage = random.randrange(npc_damage_min, npc_damage_max)
+            npc_damage = random.randrange(npc_damage_min, npc_damage_max + 1)
             print(npc_name + " hits " + name + " for " + str(npc_damage) + " points of damage.")
+            player_health -= npc_damage
+            if(player_health < 0):
+                player_health = 0
+            sql = "UPDATE Player SET health = ? WHERE name = ?"
+            cur.execute(sql, (player_health, name,))
+            conn.commit()
         else:
             print(npc_name + " misses " + name + ".")
         print("[", end='')
@@ -1342,28 +1356,43 @@ def Combat(npc_id):
         print("/", end='')
         print(player_max_health, end=' ')
         print("(", end='')
-        print(player_health / player_max_health * 100, end='')
+        print("{:0.2f}".format(player_health / player_max_health * 100), end='')
         print("%) ", end='')
         print(player_mana, end='')
         print("/", end='')
         print(player_max_mana, end=' ')
         print("(", end='')
-        print(player_mana / player_max_mana * 100, end='')
+        print("{:0.2f}".format(player_mana / player_max_mana * 100), end='')
         print("%) ", end='')
         print("EXP: ", end='')
         print("{:0.2f}".format(player_exp_percent), end='')
         print("%", end='')
+        print(" ENEMY:", end='')
+        print(npc_health, end='')
+        print("/", end='')
+        print(npc_max_health, end=' ')
+        print("(", end='')
+        print("{:0.2f}".format(npc_health / npc_max_health * 100), end='')
+        print("%) ", end='')
         print("]", end='')
         #print(">", end='')
         print(">")
-        time.sleep(1.5)
+        time.sleep(3)
 
         if(player_health <= 0):
             print("You died.")
+            stop_combat = True
             break
         if(npc_health <= 0):
             print(str(npc_name) + " has been slain.")
+            sql = "UPDATE Npc SET alive = ? WHERE id = ?"
+            cur.execute(sql, (0, npc_id,))
+            conn.commit()
+            stop_combat = True
             win = True
+            thread = threading.Thread(target = Npc_Respawn, args = (npc_id,))
+            thread.daemon = True
+            thread.start()
             break
 
 
@@ -1375,6 +1404,86 @@ def Combat(npc_id):
 
 
     conn.close()
+
+def Precombat(choice):
+    global stop_combat
+    stop_combat = False
+    npc_list = Show_NPC()
+    found_fight = 0
+
+    npc = choice.lower()[5:]
+
+    for each in npc_list:
+        if(found_fight == 0):
+            if(npc == each[1][0] and each[3][0] == 1):
+                found_fight = 1
+                npc_id = each[0][0]
+
+                conn = create_connection(database)
+                cur = conn.cursor()
+                conn.close()
+                    
+                thread = threading.Thread(target = Combat, args = (npc_id,))
+                thread.daemon = True
+                thread.start()
+
+                while True:
+                    choice = input("")
+                    if(choice == 'flee'):
+                        stop_combat = True
+                        #thread.join()
+                        time.sleep(2)
+                        break
+                    elif(stop_combat == True):
+                        break
+                    
+                conn = create_connection(database)
+                cur = conn.cursor()
+
+def Health_Regen():
+
+    while(True):
+    
+        conn = create_connection(database)
+        cur = conn.cursor()
+
+        time.sleep(5)
+
+        cur.execute("SELECT health FROM Player WHERE name = ?", (name,))
+        health = cur.fetchall()[0][0]
+        cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
+        max_health = cur.fetchall()[0][0]
+
+        health += round(max_health * 0.09)
+
+        if(health > max_health):
+            health = max_health
+
+        sql = "UPDATE Player SET health = ? WHERE name = ?"
+        cur.execute(sql, (health, name,))
+        conn.commit()
+
+def Health_Regen_Initiate():
+    thread = threading.Thread(target = Health_Regen)
+    thread.daemon = True
+    thread.start()
+#Respawns NPCs immediately after death
+def Npc_Respawn(npc_id):
+    conn = create_connection(database)
+    cur = conn.cursor()
+
+    time.sleep(30)
+
+    sql = "UPDATE Npc SET alive = ? WHERE id = ?"
+    cur.execute(sql, (1, npc_id,))
+    conn.commit()
+
+    cur.execute("SELECT max_health FROM Npc WHERE id = ?", (npc_id,))
+    max_health = cur.fetchall()[0][0]
+
+    sql = "UPDATE Npc SET health = ? WHERE id = ?"
+    cur.execute(sql, (max_health, npc_id,))
+    conn.commit()
 
 def Command(choice):
     if(choice.lower() == 'north' or choice.lower() == 'n' or choice.lower() == 'south' or choice.lower() == 's' or choice.lower() == 'east' or choice.lower() == 'e' or choice.lower() == 'west' or choice.lower() == 'w'):
@@ -1396,42 +1505,14 @@ def Command(choice):
         Show_Buffs()
 
     elif(choice.lower()[0:4] == 'kill'):
-        global stop_combat
-        #stop_combat = False
-        npc_list = Show_NPC()
-        found_fight = 0
-
-        npc = choice.lower()[5:]
-
-        for each in npc_list:
-            if(npc == each[1][0] and found_fight == 0):
-                found_fight = 1
-                npc_id = each[0][0]
-
-                conn = create_connection(database)
-                cur = conn.cursor()
-                conn.close()
-                
-                thread = threading.Thread(target = Combat, args = (npc_id,))
-                thread.daemon = True
-                thread.start()
-
-                while True:
-                    choice = input("")
-                    if choice == 'flee':
-                        stop_combat = True
-                        #thread.join()
-                        time.sleep(2)
-                        break
-
-                
-                conn = create_connection(database)
-                cur = conn.cursor()
+        Precombat(choice)
         
+    elif(choice.lower() == ''):
+        pass
+
     else:
         print("That is not a valid command.")
         print()
-
 
 def Login():
     global cur
@@ -1648,13 +1729,15 @@ def MainLoop():
         print("/", end='')
         print(max_health, end=' ')
         print("(", end='')
-        print(health / max_health * 100, end='')
+        #print(health / max_health * 100, end='')
+        print("{:0.2f}".format(health / max_health * 100), end='')
         print("%) ", end='')
         print(mana, end='')
         print("/", end='')
         print(max_mana, end=' ')
         print("(", end='')
-        print(mana / max_mana * 100, end='')
+        #print(mana / max_mana * 100, end='')
+        print("{:0.2f}".format(mana / max_mana * 100), end='')
         print("%) ", end='')
         print("EXP: ", end='')
         print("{:0.2f}".format(exp_percent), end='')
@@ -1669,14 +1752,12 @@ def MainLoop():
             break
 
         Command(choice)
-
-
-
-
 #------------------------MAIN--------------------------
 def main():
 
     Login()
+    Health_Regen_Initiate()
+    Npc_Initial_Spawn_Helper()
     MainLoop()
 
 main()
