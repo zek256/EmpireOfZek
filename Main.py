@@ -3,7 +3,6 @@ import sqlite3
 import hashlib
 import os
 from sqlite3 import Error
-from Player import Player
 import time
 import threading
 import random
