@@ -215,327 +215,20 @@ def Show_NPC():
     cur.execute("SELECT location FROM Player WHERE name = ?", (name,))
     location = cur.fetchall()[0][0]
 
-    cur.execute("SELECT npc_1_existence FROM Room WHERE location = ?", (location,))
-    npc_1_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_2_existence FROM Room WHERE location = ?", (location,))
-    npc_2_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_3_existence FROM Room WHERE location = ?", (location,))
-    npc_3_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_4_existence FROM Room WHERE location = ?", (location,))
-    npc_4_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_5_existence FROM Room WHERE location = ?", (location,))
-    npc_5_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_6_existence FROM Room WHERE location = ?", (location,))
-    npc_6_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_7_existence FROM Room WHERE location = ?", (location,))
-    npc_7_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_8_existence FROM Room WHERE location = ?", (location,))
-    npc_8_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_9_existence FROM Room WHERE location = ?", (location,))
-    npc_9_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_10_existence FROM Room WHERE location = ?", (location,))
-    npc_10_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_11_existence FROM Room WHERE location = ?", (location,))
-    npc_11_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_12_existence FROM Room WHERE location = ?", (location,))
-    npc_12_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_13_existence FROM Room WHERE location = ?", (location,))
-    npc_13_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_14_existence FROM Room WHERE location = ?", (location,))
-    npc_14_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_15_existence FROM Room WHERE location = ?", (location,))
-    npc_15_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_16_existence FROM Room WHERE location = ?", (location,))
-    npc_16_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_17_existence FROM Room WHERE location = ?", (location,))
-    npc_17_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_18_existence FROM Room WHERE location = ?", (location,))
-    npc_18_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_19_existence FROM Room WHERE location = ?", (location,))
-    npc_19_existence = cur.fetchall()[0][0]
-    cur.execute("SELECT npc_20_existence FROM Room WHERE location = ?", (location,))
-    npc_20_existence = cur.fetchall()[0][0]
-
-    if(npc_1_existence == 1):
-        cur.execute("SELECT npc_1 FROM Room WHERE location = ?", (location,))
-        npc_1 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_1,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_1,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("1")
-        temp_list.append(npc_1)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_2_existence == 1):
-        cur.execute("SELECT npc_2 FROM Room WHERE location = ?", (location,))
-        npc_2 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_2,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_2,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("2")
-        temp_list.append(npc_2)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_3_existence == 1):
-        cur.execute("SELECT npc_3 FROM Room WHERE location = ?", (location,))
-        npc_3 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_3,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_3,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("3")
-        temp_list.append(npc_3)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_4_existence == 1):
-        cur.execute("SELECT npc_4 FROM Room WHERE location = ?", (location,))
-        npc_4 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_4,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_4,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("4")
-        temp_list.append(npc_4)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_5_existence == 1):
-        cur.execute("SELECT npc_5 FROM Room WHERE location = ?", (location,))
-        npc_5 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_5,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_5,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("5")
-        temp_list.append(npc_5)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_6_existence == 1):
-        cur.execute("SELECT npc_6 FROM Room WHERE location = ?", (location,))
-        npc_6 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_6,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_6,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("6")
-        temp_list.append(npc_6)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_7_existence == 1):
-        cur.execute("SELECT npc_7 FROM Room WHERE location = ?", (location,))
-        npc_7 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_7,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_7,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("7")
-        temp_list.append(npc_7)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_8_existence == 1):
-        cur.execute("SELECT npc_8 FROM Room WHERE location = ?", (location,))
-        npc_8 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_8,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_8,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("8")
-        temp_list.append(npc_8)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_9_existence == 1):
-        cur.execute("SELECT npc_9 FROM Room WHERE location = ?", (location,))
-        npc_9 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_9,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_9,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("9")
-        temp_list.append(npc_9)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_10_existence == 1):
-        cur.execute("SELECT npc_10 FROM Room WHERE location = ?", (location,))
-        npc_10 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_10,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_10,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("10")
-        temp_list.append(npc_10)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_11_existence == 1):
-        cur.execute("SELECT npc_11 FROM Room WHERE location = ?", (location,))
-        npc_11 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_11,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_11,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("11")
-        temp_list.append(npc_11)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_12_existence == 1):
-        cur.execute("SELECT npc_12 FROM Room WHERE location = ?", (location,))
-        npc_12 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_12,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_12,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("12")
-        temp_list.append(npc_12)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_13_existence == 1):
-        cur.execute("SELECT npc_13 FROM Room WHERE location = ?", (location,))
-        npc_13 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_13,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_13,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("13")
-        temp_list.append(npc_13)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_14_existence == 1):
-        cur.execute("SELECT npc_14 FROM Room WHERE location = ?", (location,))
-        npc_14 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_14,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_14,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("14")
-        temp_list.append(npc_14)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_15_existence == 1):
-        cur.execute("SELECT npc_15 FROM Room WHERE location = ?", (location,))
-        npc_15 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_15,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_15,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("15")
-        temp_list.append(npc_15)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_16_existence == 1):
-        cur.execute("SELECT npc_16 FROM Room WHERE location = ?", (location,))
-        npc_16 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_16,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_16,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("16")
-        temp_list.append(npc_16)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_17_existence == 1):
-        cur.execute("SELECT npc_17 FROM Room WHERE location = ?", (location,))
-        npc_17 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_17,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_17,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("17")
-        temp_list.append(npc_17)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_18_existence == 1):
-        cur.execute("SELECT npc_18 FROM Room WHERE location = ?", (location,))
-        npc_18 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_18,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_18,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("18")
-        temp_list.append(npc_18)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_19_existence == 1):
-        cur.execute("SELECT npc_19 FROM Room WHERE location = ?", (location,))
-        npc_19 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_19,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_19,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("19")
-        temp_list.append(npc_19)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
-
-    if(npc_20_existence == 1):
-        cur.execute("SELECT npc_20 FROM Room WHERE location = ?", (location,))
-        npc_20 = cur.fetchall()[0][0]
-        cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_20,))
-        npc_name = cur.fetchall()[0][0]
-        cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_20,))
-        npc_level = cur.fetchall()[0][0]
-        temp_list = []
-        temp_list.append("20")
-        temp_list.append(npc_20)
-        temp_list.append(npc_name)
-        temp_list.append(npc_level)
-        npc_list.append(temp_list)
+    cur.execute("SELECT id FROM Npc WHERE room = ?", (location,))
+    npc_id = cur.fetchall()
+    cur.execute("SELECT name FROM Npc WHERE room = ?", (location,))
+    npc_name = cur.fetchall()
+    cur.execute("SELECT level FROM Npc WHERE room = ?", (location,))
+    npc_level = cur.fetchall()
     
+    for i in range(0, len(npc_id)):
+        npc_temp = []
+        npc_temp.append(npc_id[i])
+        npc_temp.append(npc_name[i])
+        npc_temp.append(npc_level[i])
+        npc_list.append(npc_temp)
+
     return(npc_list)
 
 def Look():
@@ -552,9 +245,9 @@ def Look():
 
     for each in npc_list:
         print("-", end='')
-        print(each[2], end='')
-        print("[Lv. " + str(each[3]) + "]-")  
-    
+        print(each[1][0], end='')
+        print("[Lv. " + str(each[2][0]) + "]-")  
+
     print()
 
 def Score():
@@ -1498,7 +1191,7 @@ def Move(direction):
 
     Look()
     
-def Combat(npc, npc_list):
+def Combat(npc_id):
 
     conn = create_connection(database)
     cur = conn.cursor()
@@ -1507,18 +1200,9 @@ def Combat(npc, npc_list):
     stop_combat = False
     win = False
 
-    npc_slot = 0
-    npc_id = 0
-    npc_name = 0
-
-    for each in npc_list:
-        if(npc == each[2]):
-            npc_slot = each[0]
-            npc_id = each[1]
-            npc_name = each[2]
-            break
-
-#-----------------------NPC_STUFF----------------------------------
+    #-----------------------NPC_STUFF----------------------------------
+    cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_id,))
+    npc_name = cur.fetchall()[0][0]
     cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_id,))
     npc_level = cur.fetchall()[0][0]
     cur.execute("SELECT health FROM Npc WHERE id = ?", (npc_id,))
@@ -1545,7 +1229,7 @@ def Combat(npc, npc_list):
     npc_damage_max = cur.fetchall()[0][0]
 
 
-#-------------------------PLAYER_STATS-------------------------------------
+    #-------------------------PLAYER_STATS-------------------------------------
     cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
     player_level = cur.fetchall()[0][0]
     cur.execute("SELECT health FROM Player WHERE name = ?", (name,))
@@ -1579,7 +1263,7 @@ def Combat(npc, npc_list):
     player_next_level_exp = cur.fetchall()[0][0]
     player_exp_percent =  round(player_totalexp / player_next_level_exp * 100, 5)
 
-#-------------------------PLAYER_EQUIPMENT---------------------------------
+    #-------------------------PLAYER_EQUIPMENT---------------------------------
     cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
     equipment_primary = cur.fetchall()[0][0]
     cur.execute("SELECT equipment_secondary FROM Player WHERE name = ?", (name,))
@@ -1715,26 +1399,34 @@ def Command(choice):
         global stop_combat
         #stop_combat = False
         npc_list = Show_NPC()
+        found_fight = 0
 
-        conn = create_connection(database)
-        cur = conn.cursor()
-        conn.close()
-        
-        thread = threading.Thread(target = Combat, args = (choice.lower()[5:], npc_list))
-        thread.daemon = True
-        thread.start()
+        npc = choice.lower()[5:]
 
-        while True:
-            choice = input("")
-            if choice == 'flee':
-                stop_combat = True
-                #thread.join()
-                time.sleep(2)
-                break
+        for each in npc_list:
+            if(npc == each[1][0] and found_fight == 0):
+                found_fight = 1
+                npc_id = each[0][0]
 
-        
-        conn = create_connection(database)
-        cur = conn.cursor()
+                conn = create_connection(database)
+                cur = conn.cursor()
+                conn.close()
+                
+                thread = threading.Thread(target = Combat, args = (npc_id,))
+                thread.daemon = True
+                thread.start()
+
+                while True:
+                    choice = input("")
+                    if choice == 'flee':
+                        stop_combat = True
+                        #thread.join()
+                        time.sleep(2)
+                        break
+
+                
+                conn = create_connection(database)
+                cur = conn.cursor()
         
     else:
         print("That is not a valid command.")
