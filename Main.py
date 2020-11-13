@@ -283,7 +283,8 @@ def Score():
     cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
     totalexp = cur.fetchall()[0][0]
     cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level + 1,))
-    to_next_level = cur.fetchall()[0][0] - totalexp
+    exp_for_next_level = cur.fetchall()[0][0]
+    to_next_level = exp_for_next_level - totalexp
     cur.execute("SELECT rebirths FROM Player WHERE name = ?", (name,))
     rebirths = cur.fetchall()[0][0]
 
@@ -331,7 +332,7 @@ def Score():
     print()
     print(dash)
     print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Name", " : ", name, " | ", "Total Experience", " : ", totalexp, " | "))
-    print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Level", " : ", level, " | ", "Next Level", " : ", to_next_level, " | "))
+    print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Level", " : ", level, " | ", "To Next Level", " : ", to_next_level, " | "))
     print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Class", " : ", pclass, " | ", "Rebirths", " : ", rebirths, " | "))
     print(dash)
     print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Health", ":", current_health, '/', max_health, " | ", " ", " | "))
@@ -1214,6 +1215,146 @@ def Move(direction):
 
     Look()
     
+def Level_Up():
+    
+    cur.execute("SELECT pclass FROM Player WHERE name = ?", (name,))
+    pclass = cur.fetchall()[0][0]
+    cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
+    level = cur.fetchall()[0][0]
+    level += 1
+    sql = "UPDATE Player SET level = ? WHERE name = ?"
+    cur.execute(sql, (level, name,))
+    conn.commit()
+
+    if(pclass == "Warrior"):
+
+        cur.execute("SELECT base_strength FROM Player WHERE name = ?", (name,))
+        base_strength = cur.fetchall()[0][0]
+        cur.execute("SELECT base_stamina FROM Player WHERE name = ?", (name,))
+        base_stamina = cur.fetchall()[0][0]
+        cur.execute("SELECT base_dexterity FROM Player WHERE name = ?", (name,))
+        base_dexterity = cur.fetchall()[0][0]
+        cur.execute("SELECT base_agility FROM Player WHERE name = ?", (name,))
+        base_agility = cur.fetchall()[0][0]
+        cur.execute("SELECT base_intelligence FROM Player WHERE name = ?", (name,))
+        base_intelligence = cur.fetchall()[0][0]
+        cur.execute("SELECT base_wisdom FROM Player WHERE name = ?", (name,))
+        base_wisdom = cur.fetchall()[0][0]
+        cur.execute("SELECT base_charisma FROM Player WHERE name = ?", (name,))
+        base_charisma = cur.fetchall()[0][0]
+
+        cur.execute("SELECT strength FROM Player WHERE name = ?", (name,))
+        strength = cur.fetchall()[0][0]
+        cur.execute("SELECT stamina FROM Player WHERE name = ?", (name,))
+        stamina = cur.fetchall()[0][0]
+        cur.execute("SELECT dexterity FROM Player WHERE name = ?", (name,))
+        dexterity = cur.fetchall()[0][0]
+        cur.execute("SELECT agility FROM Player WHERE name = ?", (name,))
+        agility = cur.fetchall()[0][0]
+        cur.execute("SELECT intelligence FROM Player WHERE name = ?", (name,))
+        intelligence = cur.fetchall()[0][0]
+        cur.execute("SELECT wisdom FROM Player WHERE name = ?", (name,))
+        wisdom = cur.fetchall()[0][0]
+        cur.execute("SELECT charisma FROM Player WHERE name = ?", (name,))
+        charisma = cur.fetchall()[0][0]
+
+        temp_strength_buff = strength - base_strength
+        temp_stamina_buff = stamina - base_stamina
+        temp_dexterity_buff = dexterity - base_dexterity
+        temp_agility_buff = agility - base_agility
+        temp_intelligence_buff = intelligence - base_intelligence
+        temp_wisdom_buff = wisdom - base_wisdom
+        temp_charisma_buff = charisma - base_charisma
+
+        cur.execute("SELECT base_strength FROM Warrior_Level_Up WHERE level = ?", (level,))
+        base_strength_add = cur.fetchall()[0][0]
+        cur.execute("SELECT base_stamina FROM Warrior_Level_Up WHERE level = ?", (level,))
+        base_stamina_add = cur.fetchall()[0][0]
+        cur.execute("SELECT base_dexterity FROM Warrior_Level_Up WHERE level = ?", (level,))
+        base_dexterity_add = cur.fetchall()[0][0]
+        cur.execute("SELECT base_agility FROM Warrior_Level_Up WHERE level = ?", (level,))
+        base_agility_add = cur.fetchall()[0][0]
+        cur.execute("SELECT base_intelligence FROM Warrior_Level_Up WHERE level = ?", (level,))
+        base_intelligence_add = cur.fetchall()[0][0]
+        cur.execute("SELECT base_wisdom FROM Warrior_Level_Up WHERE level = ?", (level,))
+        base_wisdom_add = cur.fetchall()[0][0]
+        cur.execute("SELECT base_charisma FROM Warrior_Level_Up WHERE level = ?", (level,))
+        base_charisma_add = cur.fetchall()[0][0]
+
+        base_strength += base_strength_add
+        base_stamina += base_stamina_add
+        base_dexterity += base_dexterity_add
+        base_agility += base_agility_add
+        base_intelligence += base_intelligence_add
+        base_wisdom += base_wisdom_add
+        base_charisma += base_charisma_add
+
+        sql = "UPDATE Player SET base_strength = ? WHERE name = ?"
+        cur.execute(sql, (base_strength, name,))
+        conn.commit()
+        sql = "UPDATE Player SET base_stamina = ? WHERE name = ?"
+        cur.execute(sql, (base_stamina, name,))
+        conn.commit()
+        sql = "UPDATE Player SET base_dexterity = ? WHERE name = ?"
+        cur.execute(sql, (base_dexterity, name,))
+        conn.commit()
+        sql = "UPDATE Player SET base_agility = ? WHERE name = ?"
+        cur.execute(sql, (base_agility, name,))
+        conn.commit()
+        sql = "UPDATE Player SET base_intelligence = ? WHERE name = ?"
+        cur.execute(sql, (base_intelligence, name,))
+        conn.commit()
+        sql = "UPDATE Player SET base_wisdom = ? WHERE name = ?"
+        cur.execute(sql, (base_wisdom, name,))
+        conn.commit()
+        sql = "UPDATE Player SET base_charisma = ? WHERE name = ?"
+        cur.execute(sql, (base_charisma, name,))
+        conn.commit()
+
+        sql = "UPDATE Player SET strength = ? WHERE name = ?"
+        cur.execute(sql, (base_strength + temp_strength_buff, name,))
+        conn.commit()
+        sql = "UPDATE Player SET stamina = ? WHERE name = ?"
+        cur.execute(sql, (base_stamina + temp_stamina_buff, name,))
+        conn.commit()
+        sql = "UPDATE Player SET dexterity = ? WHERE name = ?"
+        cur.execute(sql, (base_dexterity + temp_dexterity_buff, name,))
+        conn.commit()
+        sql = "UPDATE Player SET agility = ? WHERE name = ?"
+        cur.execute(sql, (base_agility + temp_agility_buff, name,))
+        conn.commit()
+        sql = "UPDATE Player SET intelligence = ? WHERE name = ?"
+        cur.execute(sql, (base_intelligence + temp_intelligence_buff, name,))
+        conn.commit()
+        sql = "UPDATE Player SET wisdom = ? WHERE name = ?"
+        cur.execute(sql, (base_wisdom + temp_wisdom_buff, name,))
+        conn.commit()
+        sql = "UPDATE Player SET charisma = ? WHERE name = ?"
+        cur.execute(sql, (base_charisma + temp_charisma_buff, name,))
+        conn.commit()
+
+
+
+        #----------------------------Health--------------------------------------
+        cur.execute("SELECT base_max_health FROM Player WHERE name = ?", (name,))
+        base_max_health = cur.fetchall()[0][0]
+        cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
+        max_health = cur.fetchall()[0][0]
+        #new base_stamina
+        cur.execute("SELECT base_stamina FROM Player WHERE name = ?", (name,))
+        base_stamina = cur.fetchall()[0][0]
+
+        #saving difference in hp from buffs. Say base_max_health = 30 but max_health = 50 due to a 20 hp buff. We save the 20 hp in temp_health_buff, we increase base_max_health for levelup, say to 40 hp, then max_health + temp_health_buff = 60. Now we have new hp value with the buff still applied.
+        temp_health_buff = max_health - base_max_health
+
+        base_max_health = base_stamina * 10
+        sql = "UPDATE Player SET base_max_health = ? WHERE name = ?"
+        cur.execute(sql, (base_max_health, name,))
+        conn.commit()
+        sql = "UPDATE Player SET max_health = ? WHERE name = ?"
+        cur.execute(sql, (base_max_health + temp_health_buff, name,))
+        conn.commit()
+
 def Combat(npc_id):
 
     conn = create_connection(database)
@@ -1297,7 +1438,9 @@ def Combat(npc_id):
         player_damage_min = cur.fetchall()[0][0]
         cur.execute("SELECT damage_max FROM Item WHERE id = ?", (equipment_primary,))
         player_damage_max = cur.fetchall()[0][0]
-
+    else:
+        player_damage_min = 1
+        player_damage_max = 1
 
     player_damage_min += player_strength
     player_damage_max += player_strength
@@ -1366,7 +1509,7 @@ def Combat(npc_id):
         print("EXP: ", end='')
         print("{:0.2f}".format(player_exp_percent), end='')
         print("%", end='')
-        print(" ENEMY:", end='')
+        print(" ENEMY: ", end='')
         print(npc_health, end='')
         print("/", end='')
         print(npc_max_health, end=' ')
@@ -1379,14 +1522,37 @@ def Combat(npc_id):
         time.sleep(3)
 
         if(player_health <= 0):
-            print("You died.")
+            print("You have been slain by " + npc_name)
             stop_combat = True
+            sql = "UPDATE Player SET location = ? WHERE name = ?"
+            cur.execute(sql, (550, name,))
+            conn.commit()
             break
         if(npc_health <= 0):
             print(str(npc_name) + " has been slain.")
             sql = "UPDATE Npc SET alive = ? WHERE id = ?"
             cur.execute(sql, (0, npc_id,))
             conn.commit()
+
+            cur.execute("SELECT experience FROM NPC_EXP_Table WHERE level = ?", (npc_level,))
+            exp_gain = cur.fetchall()[0][0]
+            player_totalexp += exp_gain
+            sql = "UPDATE Player SET totalexp = ? WHERE name = ?"
+            cur.execute(sql, (player_totalexp, name,))
+            conn.commit()
+            print("You have gained " + str(exp_gain) + " experience points.")
+            """
+            cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (player_level + 1,))
+            exp_needed_to_level = cur.fetchall()[0][0]
+
+            if(player_totalexp >= exp_needed_to_level):
+                player_level += 1
+                sql = "UPDATE Player SET level = ? WHERE name = ?"
+                cur.execute(sql, (player_level, name,))
+                conn.commit()
+            """
+
+
             stop_combat = True
             win = True
             thread = threading.Thread(target = Npc_Respawn, args = (npc_id,))
@@ -1438,6 +1604,16 @@ def Precombat(choice):
                     
                 conn = create_connection(database)
                 cur = conn.cursor()
+    
+    cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
+    level = cur.fetchall()[0][0]
+    cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
+    totalexp = cur.fetchall()[0][0]
+    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level + 1,))
+    exp_needed_to_level = cur.fetchall()[0][0]
+
+    if(totalexp >= exp_needed_to_level):
+        Level_Up()
 
 def Health_Regen():
 
@@ -1717,9 +1893,14 @@ def MainLoop():
         level = cur.fetchall()[0][0]
         cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
         totalexp = cur.fetchall()[0][0]
+        cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level,))
+        current_level_exp = cur.fetchall()[0][0]
         cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level + 1,))
         next_level_exp = cur.fetchall()[0][0]
-        exp_percent =  round(totalexp / next_level_exp * 100, 5)
+        
+        level_tnl = next_level_exp - current_level_exp
+        exp_percent = round((totalexp - current_level_exp) / level_tnl * 100, 5)
+
 
         #print()
         #print("HP: ", end='')
