@@ -1,0 +1,5 @@
+1-99 = weapons
+100-199 = head
+200-299 = body
+300-399 = feet
+400-499 = hands
