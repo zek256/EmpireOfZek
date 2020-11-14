@@ -1575,6 +1575,8 @@ def Precombat(choice):
     stop_combat = False
     npc_list = Show_NPC()
     found_fight = 0
+    conn = create_connection(database)
+    cur = conn.cursor()
 
     npc = choice.lower()[5:]
 
@@ -1660,6 +1662,167 @@ def Npc_Respawn(npc_id):
     cur.execute(sql, (max_health, npc_id,))
     conn.commit()
 
+def Equip_Item(item):
+    
+    item_names = []
+
+    #fetch item integers
+    cur.execute("SELECT inventory_slot_1 FROM Player WHERE name = ?", (name,))
+    inventory_slot_1 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_1_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_1_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_2 FROM Player WHERE name = ?", (name,))
+    inventory_slot_2 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_2_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_2_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_3 FROM Player WHERE name = ?", (name,))
+    inventory_slot_3 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_3_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_3_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_4 FROM Player WHERE name = ?", (name,))
+    inventory_slot_4 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_4_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_4_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_5 FROM Player WHERE name = ?", (name,))
+    inventory_slot_5 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_5_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_5_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_6 FROM Player WHERE name = ?", (name,))
+    inventory_slot_6 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_6_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_6_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_7 FROM Player WHERE name = ?", (name,))
+    inventory_slot_7 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_7_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_7_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_8 FROM Player WHERE name = ?", (name,))
+    inventory_slot_8 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_8_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_8_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_9 FROM Player WHERE name = ?", (name,))
+    inventory_slot_9 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_9_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_9_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_10 FROM Player WHERE name = ?", (name,))
+    inventory_slot_10 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_10_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_10_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_11 FROM Player WHERE name = ?", (name,))
+    inventory_slot_11 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_11_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_11_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_12 FROM Player WHERE name = ?", (name,))
+    inventory_slot_12 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_12_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_12_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_13 FROM Player WHERE name = ?", (name,))
+    inventory_slot_13 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_13_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_13_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_14 FROM Player WHERE name = ?", (name,))
+    inventory_slot_14 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_14_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_14_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_15 FROM Player WHERE name = ?", (name,))
+    inventory_slot_15 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_15_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_15_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_16 FROM Player WHERE name = ?", (name,))
+    inventory_slot_16 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_16_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_16_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_17 FROM Player WHERE name = ?", (name,))
+    inventory_slot_17 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_17_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_17_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_18 FROM Player WHERE name = ?", (name,))
+    inventory_slot_18 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_18_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_18_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_19 FROM Player WHERE name = ?", (name,))
+    inventory_slot_19 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_19_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_19_quantity = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_20 FROM Player WHERE name = ?", (name,))
+    inventory_slot_20 = cur.fetchall()[0][0]
+    cur.execute("SELECT inventory_slot_20_quantity FROM Player WHERE name = ?", (name,))
+    inventory_slot_20_quantity = cur.fetchall()[0][0]
+
+    #fetch item names, from integers
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_1,))
+    inventory_slot_1_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_2,))
+    inventory_slot_2_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_3,))
+    inventory_slot_3_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_3,))
+    inventory_slot_3_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_4,))
+    inventory_slot_4_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_5,))
+    inventory_slot_5_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_6,))
+    inventory_slot_6_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_7,))
+    inventory_slot_7_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_8,))
+    inventory_slot_8_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_9,))
+    inventory_slot_9_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_10,))
+    inventory_slot_10_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_11,))
+    inventory_slot_11_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_12,))
+    inventory_slot_12_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_13,))
+    inventory_slot_13_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_14,))
+    inventory_slot_14_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_15,))
+    inventory_slot_15_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_16,))
+    inventory_slot_16_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_17,))
+    inventory_slot_17_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_18,))
+    inventory_slot_18_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_19,))
+    inventory_slot_19_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_20,))
+    inventory_slot_20_name = cur.fetchall()[0][0]
+    
+    #Put names in a list
+    item_names.append(inventory_slot_1_name)
+    item_names.append(inventory_slot_2_name)
+    item_names.append(inventory_slot_3_name)
+    item_names.append(inventory_slot_4_name)
+    item_names.append(inventory_slot_5_name)
+    item_names.append(inventory_slot_6_name)
+    item_names.append(inventory_slot_7_name)
+    item_names.append(inventory_slot_8_name)
+    item_names.append(inventory_slot_9_name)
+    item_names.append(inventory_slot_10_name)
+    item_names.append(inventory_slot_11_name)
+    item_names.append(inventory_slot_11_name)
+    item_names.append(inventory_slot_13_name)
+    item_names.append(inventory_slot_14_name)
+    item_names.append(inventory_slot_15_name)
+    item_names.append(inventory_slot_16_name)
+    item_names.append(inventory_slot_17_name)
+    item_names.append(inventory_slot_18_name)
+    item_names.append(inventory_slot_19_name)
+    item_names.append(inventory_slot_20_name)
+
+    for each in item_names:
+        if(items[6:] == each):
+            cur.execute("SELECT id FROM Item WHERE name = ?", (each,))
+            item_id = cur.fetchall()[0][0]
+    
+    
+    #item[6:]
+    pass
+
 def Command(choice):
     if(choice.lower() == 'north' or choice.lower() == 'n' or choice.lower() == 'south' or choice.lower() == 's' or choice.lower() == 'east' or choice.lower() == 'e' or choice.lower() == 'west' or choice.lower() == 'w'):
         Move(choice.lower())
@@ -1684,6 +1847,9 @@ def Command(choice):
         
     elif(choice.lower() == ''):
         pass
+
+    elif(choice.lower()[0:5] == 'equip'):
+        Equip_Item(choice)
 
     else:
         print("That is not a valid command.")
