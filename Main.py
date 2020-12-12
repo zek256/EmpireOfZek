@@ -1423,9 +1423,14 @@ def Combat(npc_id):
     player_level = cur.fetchall()[0][0]
     cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
     player_totalexp = cur.fetchall()[0][0]
+    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (player_level,))
+    current_level_exp = cur.fetchall()[0][0]
     cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (player_level + 1,))
-    player_next_level_exp = cur.fetchall()[0][0]
-    player_exp_percent =  round(player_totalexp / player_next_level_exp * 100, 5)
+    next_level_exp = cur.fetchall()[0][0]
+        
+    level_tnl = next_level_exp - current_level_exp
+    player_exp_percent = round((player_totalexp - current_level_exp) / level_tnl * 100, 5)
+    
 
     #-------------------------PLAYER_EQUIPMENT---------------------------------
     cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
@@ -1664,160 +1669,449 @@ def Npc_Respawn(npc_id):
 
 def Equip_Item(item):
     
-    item_names = []
+    items = []
+    item_inventory_slot = -1
 
-    #fetch item integers
+    #fetch item integers [from inventory] - This is the unique ID of the item in general - inventory_slot_#_integer
+    #fetch item quantity [from inventory] - inventory_slot_#_quantity
     cur.execute("SELECT inventory_slot_1 FROM Player WHERE name = ?", (name,))
-    inventory_slot_1 = cur.fetchall()[0][0]
+    inventory_slot_1_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_1_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_1_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_2 FROM Player WHERE name = ?", (name,))
-    inventory_slot_2 = cur.fetchall()[0][0]
+    inventory_slot_2_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_2_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_2_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_3 FROM Player WHERE name = ?", (name,))
-    inventory_slot_3 = cur.fetchall()[0][0]
+    inventory_slot_3_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_3_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_3_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_4 FROM Player WHERE name = ?", (name,))
-    inventory_slot_4 = cur.fetchall()[0][0]
+    inventory_slot_4_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_4_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_4_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_5 FROM Player WHERE name = ?", (name,))
-    inventory_slot_5 = cur.fetchall()[0][0]
+    inventory_slot_5_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_5_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_5_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_6 FROM Player WHERE name = ?", (name,))
-    inventory_slot_6 = cur.fetchall()[0][0]
+    inventory_slot_6_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_6_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_6_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_7 FROM Player WHERE name = ?", (name,))
-    inventory_slot_7 = cur.fetchall()[0][0]
+    inventory_slot_7_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_7_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_7_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_8 FROM Player WHERE name = ?", (name,))
-    inventory_slot_8 = cur.fetchall()[0][0]
+    inventory_slot_8_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_8_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_8_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_9 FROM Player WHERE name = ?", (name,))
-    inventory_slot_9 = cur.fetchall()[0][0]
+    inventory_slot_9_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_9_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_9_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_10 FROM Player WHERE name = ?", (name,))
-    inventory_slot_10 = cur.fetchall()[0][0]
+    inventory_slot_10_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_10_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_10_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_11 FROM Player WHERE name = ?", (name,))
-    inventory_slot_11 = cur.fetchall()[0][0]
+    inventory_slot_11_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_11_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_11_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_12 FROM Player WHERE name = ?", (name,))
-    inventory_slot_12 = cur.fetchall()[0][0]
+    inventory_slot_12_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_12_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_12_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_13 FROM Player WHERE name = ?", (name,))
-    inventory_slot_13 = cur.fetchall()[0][0]
+    inventory_slot_13_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_13_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_13_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_14 FROM Player WHERE name = ?", (name,))
-    inventory_slot_14 = cur.fetchall()[0][0]
+    inventory_slot_14_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_14_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_14_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_15 FROM Player WHERE name = ?", (name,))
-    inventory_slot_15 = cur.fetchall()[0][0]
+    inventory_slot_15_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_15_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_15_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_16 FROM Player WHERE name = ?", (name,))
-    inventory_slot_16 = cur.fetchall()[0][0]
+    inventory_slot_16_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_16_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_16_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_17 FROM Player WHERE name = ?", (name,))
-    inventory_slot_17 = cur.fetchall()[0][0]
+    inventory_slot_17_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_17_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_17_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_18 FROM Player WHERE name = ?", (name,))
-    inventory_slot_18 = cur.fetchall()[0][0]
+    inventory_slot_18_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_18_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_18_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_19 FROM Player WHERE name = ?", (name,))
-    inventory_slot_19 = cur.fetchall()[0][0]
+    inventory_slot_19_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_19_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_19_quantity = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_20 FROM Player WHERE name = ?", (name,))
-    inventory_slot_20 = cur.fetchall()[0][0]
+    inventory_slot_20_integer = cur.fetchall()[0][0]
     cur.execute("SELECT inventory_slot_20_quantity FROM Player WHERE name = ?", (name,))
     inventory_slot_20_quantity = cur.fetchall()[0][0]
 
-    #fetch item names, from integers
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_1,))
+    #fetch item names [from inventory], from integers
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_1_integer,))
     inventory_slot_1_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_2,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_2_integer,))
     inventory_slot_2_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_3,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_3_integer,))
     inventory_slot_3_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_3,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_3_integer,))
     inventory_slot_3_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_4,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_4_integer,))
     inventory_slot_4_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_5,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_5_integer,))
     inventory_slot_5_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_6,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_6_integer,))
     inventory_slot_6_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_7,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_7_integer,))
     inventory_slot_7_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_8,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_8_integer,))
     inventory_slot_8_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_9,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_9_integer,))
     inventory_slot_9_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_10,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_10_integer,))
     inventory_slot_10_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_11,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_11_integer,))
     inventory_slot_11_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_12,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_12_integer,))
     inventory_slot_12_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_13,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_13_integer,))
     inventory_slot_13_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_14,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_14_integer,))
     inventory_slot_14_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_15,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_15_integer,))
     inventory_slot_15_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_16,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_16_integer,))
     inventory_slot_16_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_17,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_17_integer,))
     inventory_slot_17_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_18,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_18_integer,))
     inventory_slot_18_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_19,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_19_integer,))
     inventory_slot_19_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_20,))
+    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_20_integer,))
     inventory_slot_20_name = cur.fetchall()[0][0]
-    
-    #Put names in a list
-    item_names.append(inventory_slot_1_name)
-    item_names.append(inventory_slot_2_name)
-    item_names.append(inventory_slot_3_name)
-    item_names.append(inventory_slot_4_name)
-    item_names.append(inventory_slot_5_name)
-    item_names.append(inventory_slot_6_name)
-    item_names.append(inventory_slot_7_name)
-    item_names.append(inventory_slot_8_name)
-    item_names.append(inventory_slot_9_name)
-    item_names.append(inventory_slot_10_name)
-    item_names.append(inventory_slot_11_name)
-    item_names.append(inventory_slot_11_name)
-    item_names.append(inventory_slot_13_name)
-    item_names.append(inventory_slot_14_name)
-    item_names.append(inventory_slot_15_name)
-    item_names.append(inventory_slot_16_name)
-    item_names.append(inventory_slot_17_name)
-    item_names.append(inventory_slot_18_name)
-    item_names.append(inventory_slot_19_name)
-    item_names.append(inventory_slot_20_name)
 
-    for each in item_names:
-        if(items[6:] == each):
-            cur.execute("SELECT id FROM Item WHERE name = ?", (each,))
-            item_id = cur.fetchall()[0][0]
+    #At this point we have the:
+    #integer
+    #quantity
+    #name
+    
+    #Put names in a list, with the inventory slot number attached. This links the name and the inventory slot together.
+    items.append([inventory_slot_1_name, 1, inventory_slot_1_quantity])
+    items.append([inventory_slot_2_name, 2, inventory_slot_2_quantity])
+    items.append([inventory_slot_3_name, 3, inventory_slot_3_quantity])
+    items.append([inventory_slot_4_name, 4, inventory_slot_4_quantity])
+    items.append([inventory_slot_5_name, 5, inventory_slot_5_quantity])
+    items.append([inventory_slot_6_name, 6, inventory_slot_6_quantity])
+    items.append([inventory_slot_7_name, 7, inventory_slot_7_quantity])
+    items.append([inventory_slot_8_name, 8, inventory_slot_8_quantity])
+    items.append([inventory_slot_9_name, 9, inventory_slot_9_quantity])
+    items.append([inventory_slot_10_name, 10, inventory_slot_10_quantity])
+    items.append([inventory_slot_11_name, 11, inventory_slot_11_quantity])
+    items.append([inventory_slot_11_name, 12, inventory_slot_12_quantity])
+    items.append([inventory_slot_13_name, 13, inventory_slot_13_quantity])
+    items.append([inventory_slot_14_name, 14, inventory_slot_14_quantity])
+    items.append([inventory_slot_15_name, 15, inventory_slot_15_quantity])
+    items.append([inventory_slot_16_name, 16, inventory_slot_16_quantity])
+    items.append([inventory_slot_17_name, 17, inventory_slot_17_quantity])
+    items.append([inventory_slot_18_name, 18, inventory_slot_18_quantity])
+    items.append([inventory_slot_19_name, 19, inventory_slot_19_quantity])
+    items.append([inventory_slot_20_name, 20, inventory_slot_20_quantity])
+
+    #Fetch equipment integers
+    cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
+    equipment_primary = cur.fetchall()[0][0]
+    cur.execute("SELECT equipment_secondary FROM Player WHERE name = ?", (name,))
+    equipment_secondary = cur.fetchall()[0][0]
+    cur.execute("SELECT equipment_head FROM Player WHERE name = ?", (name,))
+    equipment_head = cur.fetchall()[0][0]
+    cur.execute("SELECT equipment_body FROM Player WHERE name = ?", (name,))
+    equipment_body = cur.fetchall()[0][0]
+    cur.execute("SELECT equipment_feet FROM Player WHERE name = ?", (name,))
+    equipment_feet = cur.fetchall()[0][0]
+    cur.execute("SELECT equipment_hands FROM Player WHERE name = ?", (name,))
+    equipment_hands = cur.fetchall()[0][0]
+
+    #fetch equipment names, from integers
+    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_primary,))
+    equipment_primary_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_secondary,))
+    equipment_secondary_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_head,))
+    equipment_head_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_body,))
+    equipment_body_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_feet,))
+    equipment_feet_name = cur.fetchall()[0][0]
+    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_hands,))
+    equipment_hands_name = cur.fetchall()[0][0]
+
+    found_item = False
+    for each in items:
+        if(item[6:] == each[0] and item[6:] != "Nothing"): #checks to see if item is in inventory
+            cur.execute("SELECT id FROM Item WHERE name = ?", (each[0],)) #If item is in inventory, find its name in Item db and extract the id number
+
+            item_id = cur.fetchall()[0][0] #ID of item that is trying to be equipped
+            item_inventory_slot = each[1] #Inventory slot number of item that is trying to be equipped
+            item_quantity = each[2]
+            
+            found_item = True #Set found_item flag to true for below if statement.
+
+            break
+
+    if(found_item == True):
+
+        #Select all item information from db using the id number acquired earlier
+        cur.execute("SELECT slot FROM Item WHERE id = ?", (item_id,))
+        equipment_slot = cur.fetchall()[0][0]
+        cur.execute("SELECT level_requirement FROM Item WHERE id = ?", (item_id,))
+        level_requirement = cur.fetchall()[0][0]
+        cur.execute("SELECT modify_strength FROM Item WHERE id = ?", (item_id,))
+        modify_strength = cur.fetchall()[0][0]
+        cur.execute("SELECT modify_stamina FROM Item WHERE id = ?", (item_id,))
+        modify_stamina = cur.fetchall()[0][0]
+        cur.execute("SELECT modify_dexterity FROM Item WHERE id = ?", (item_id,))
+        modify_dexterity = cur.fetchall()[0][0]
+        cur.execute("SELECT modify_agility FROM Item WHERE id = ?", (item_id,))
+        modify_agility = cur.fetchall()[0][0]
+        cur.execute("SELECT modify_intelligence FROM Item WHERE id = ?", (item_id,))
+        modify_intelligence = cur.fetchall()[0][0]
+        cur.execute("SELECT modify_wisdom FROM Item WHERE id = ?", (item_id,))
+        modify_wisdom = cur.fetchall()[0][0]
+        cur.execute("SELECT modify_charisma FROM Item WHERE id = ?", (item_id,))
+        modify_charisma = cur.fetchall()[0][0]
+        cur.execute("SELECT damage_min FROM Item WHERE id = ?", (item_id,))
+        damage_min = cur.fetchall()[0][0]
+        cur.execute("SELECT damage_max FROM Item WHERE id = ?", (item_id,))
+        damage_max = cur.fetchall()[0][0]
+
+        cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
+        player_level = cur.fetchall()[0][0]
+
+        #If quantity is only 1 then delete the item entirely
+        if(item_quantity == 1):
+            if(item_inventory_slot == 1):
+                sql = "UPDATE Player SET inventory_slot_1 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 2):
+                sql = "UPDATE Player SET inventory_slot_2 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 3):
+                sql = "UPDATE Player SET inventory_slot_3 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 4):
+                sql = "UPDATE Player SET inventory_slot_4 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 5):
+                sql = "UPDATE Player SET inventory_slot_5 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 6):
+                sql = "UPDATE Player SET inventory_slot_6 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 7):
+                sql = "UPDATE Player SET inventory_slot_7 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 8):
+                sql = "UPDATE Player SET inventory_slot_8 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 9):
+                sql = "UPDATE Player SET inventory_slot_9 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 10):
+                sql = "UPDATE Player SET inventory_slot_10 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 11):
+                sql = "UPDATE Player SET inventory_slot_11 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 12):
+                sql = "UPDATE Player SET inventory_slot_12 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 13):
+                sql = "UPDATE Player SET inventory_slot_13 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 14):
+                sql = "UPDATE Player SET inventory_slot_14 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 15):
+                sql = "UPDATE Player SET inventory_slot_15 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 16):
+                sql = "UPDATE Player SET inventory_slot_16 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 17):
+                sql = "UPDATE Player SET inventory_slot_17 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 18):
+                sql = "UPDATE Player SET inventory_slot_18 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 19):
+                sql = "UPDATE Player SET inventory_slot_19 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            elif(item_inventory_slot == 20):
+                sql = "UPDATE Player SET inventory_slot_20 = ? WHERE name = ?"
+                cur.execute(sql, (0, name,))
+                conn.commit()
+            else:
+                pass
+
+        
+        if(item_inventory_slot == 1):
+            sql = "UPDATE Player SET inventory_slot_1_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_1_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 2):
+            sql = "UPDATE Player SET inventory_slot_2_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_2_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 3):
+            sql = "UPDATE Player SET inventory_slot_3_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_3_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 4):
+            sql = "UPDATE Player SET inventory_slot_4_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_4_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 5):
+            sql = "UPDATE Player SET inventory_slot_5_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_5_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 6):
+            sql = "UPDATE Player SET inventory_slot_6_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_6_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 7):
+            sql = "UPDATE Player SET inventory_slot_7_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_7_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 8):
+            sql = "UPDATE Player SET inventory_slot_8_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_8_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 9):
+            sql = "UPDATE Player SET inventory_slot_9_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_9_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 10):
+            sql = "UPDATE Player SET inventory_slot_10_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_10_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 11):
+            sql = "UPDATE Player SET inventory_slot_11_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_11_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 12):
+            sql = "UPDATE Player SET inventory_slot_12_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_12_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 13):
+            sql = "UPDATE Player SET inventory_slot_13_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_13_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 14):
+            sql = "UPDATE Player SET inventory_slot_14_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_14_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 15):
+            sql = "UPDATE Player SET inventory_slot_15_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_15_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 16):
+            sql = "UPDATE Player SET inventory_slot_16_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_16_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 17):
+            sql = "UPDATE Player SET inventory_slot_17_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_17_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 18):
+            sql = "UPDATE Player SET inventory_slot_18_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_18_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 19):
+            sql = "UPDATE Player SET inventory_slot_19_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_19_quantity - 1, name,))
+            conn.commit()
+        elif(item_inventory_slot == 20):
+            sql = "UPDATE Player SET inventory_slot_20_quantity = ? WHERE name = ?"
+            cur.execute(sql, (inventory_slot_20_quantity - 1, name,))
+            conn.commit()
+
+
+        if(player_level >= level_requirement):
+    
+            #select appropriate equipment ID that is already worn
+            #Save it as the temp_item_id before equipping the new item
+            #Check quantity
+            #Equip item
+            if(equipment_slot == 'equipment_primary'):
+                cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
+                temp_item_id = cur.fetchall()[0][0]
+                sql = "UPDATE Player SET equipment_primary = ? WHERE name = ?"
+                cur.execute(sql, (item_id, name,))
+                conn.commit()
+            elif(equipment_slot == 'equipment_secondary'):
+                cur.execute("SELECT equipment_secondary FROM Player WHERE name = ?", (name,))
+                temp_item_id = cur.fetchall()[0][0]
+                sql = "UPDATE Player SET equipment_secondary = ? WHERE name = ?"
+                cur.execute(sql, (item_id, name,))
+                conn.commit()
+            elif(equipment_slot == 'equipment_head'):
+                cur.execute("SELECT equipment_head FROM Player WHERE name = ?", (name,))
+                temp_item_id = cur.fetchall()[0][0]
+                sql = "UPDATE Player SET equipment_head = ? WHERE name = ?"
+                cur.execute(sql, (item_id, name,))
+                conn.commit()
+            elif(equipment_slot == 'equipment_body'):
+                cur.execute("SELECT equipment_body FROM Player WHERE name = ?", (name,))
+                temp_item_id = cur.fetchall()[0][0]
+                sql = "UPDATE Player SET equipment_body = ? WHERE name = ?"
+                cur.execute(sql, (item_id, name,))
+                conn.commit()
+            elif(equipment_slot == 'equipment_feet'):
+                cur.execute("SELECT equipment_feet FROM Player WHERE name = ?", (name,))
+                temp_item_id = cur.fetchall()[0][0]
+                sql = "UPDATE Player SET equipment_feet = ? WHERE name = ?"
+                cur.execute(sql, (item_id, name,))
+                conn.commit()           
+            elif(equipment_slot == 'equipment_hands'):
+                cur.execute("SELECT equipment_hands FROM Player WHERE name = ?", (name,))
+                temp_item_id = cur.fetchall()[0][0]
+                sql = "UPDATE Player SET equipment_hands = ? WHERE name = ?"
+                cur.execute(sql, (item_id, name,))
+                conn.commit()
+
+    
+        #else:
+            #print("You do not have sufficient ability to equip such an item.")
+    else:
+        print("You do not possess such an item.")
     
     
     #item[6:]
