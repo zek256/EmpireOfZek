@@ -55,7 +55,7 @@ def create_table(conn, create_table_sql):
     except Error as e:
         print(e)
     
-def create_player(conn, name, pkey, salt, pclass, health, base_max_health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands):
+def create_player(conn, name, player_password_key, player_password_salt, player_class, health, base_max_health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands):
     """
     Create a Player
     :param conn:  Connection to the SQLite database
@@ -64,9 +64,9 @@ def create_player(conn, name, pkey, salt, pclass, health, base_max_health, max_h
     """
     sql = """ INSERT INTO Player (
         name,
-        pkey,
-        salt,
-        pclass,
+        player_password_key,
+        player_password_salt,
+        player_class,
         health,
         base_max_health,
         max_health,
@@ -96,7 +96,7 @@ def create_player(conn, name, pkey, salt, pclass, health, base_max_health, max_h
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) """
     #(id, name, location, totalexp, level, base_max_health, base_max_mana, base_strength, base_stamina, base_dexterity, base_agility, base_intelligence, base_wisdom, base_charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, gold, invetory_slot_1, invetory_slot_2, invetory_slot_3, invetory_slot_4, invetory_slot_5, invetory_slot_6, invetory_slot_7, invetory_slot_8, invetory_slot_9, invetory_slot_10, invetory_slot_11, invetory_slot_12, invetory_slot_13, invetory_slot_14, invetory_slot_15, invetory_slot_16, invetory_slot_17, invetory_slot_18, invetory_slot_19, invetory_slot_20)
     cur = conn.cursor()
-    cur.execute(sql, (name, pkey, salt, pclass, health, base_max_health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands))
+    cur.execute(sql, (name, player_password_key, player_password_salt, player_class, health, base_max_health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands))
     conn.commit()
 
 def create_room(conn, location, description, npc1, npc1_existence, npc2, npc2_existence, npc3, npc3_existence, npc4, npc4_existence, npc5, npc5_existence, npc6, npc6_existence, npc7, npc7_existence, npc8, npc8_existence, npc9, npc9_existence, npc10, npc10_existence, npc11, npc11_existence, npc12, npc12_existence, npc13, npc13_existence, npc14, npc14_existence, npc15, npc15_existence, npc16, npc16_existence, npc17, npc17_existence, npc18, npc18_existence, npc19, npc19_existence, npc20, npc20_existence):
@@ -278,8 +278,8 @@ def Score():
     global name
     cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
     level = cur.fetchall()[0][0]
-    cur.execute("SELECT pclass FROM Player WHERE name = ?", (name,))
-    pclass = cur.fetchall()[0][0]
+    cur.execute("SELECT player_class FROM Player WHERE name = ?", (name,))
+    player_class = cur.fetchall()[0][0]
     cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
     totalexp = cur.fetchall()[0][0]
     cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level + 1,))
@@ -333,7 +333,7 @@ def Score():
     print(dash)
     print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Name", " : ", name, " | ", "Total Experience", " : ", totalexp, " | "))
     print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Level", " : ", level, " | ", "To Next Level", " : ", to_next_level, " | "))
-    print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Class", " : ", pclass, " | ", "Rebirths", " : ", rebirths, " | "))
+    print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Class", " : ", player_class, " | ", "Rebirths", " : ", rebirths, " | "))
     print(dash)
     print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Health", ":", current_health, '/', max_health, " | ", " ", " | "))
     print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Mana", ":", current_mana, '/', max_mana, " | ", " ", " | "))
@@ -1217,8 +1217,8 @@ def Move(direction):
     
 def Level_Up():
     
-    cur.execute("SELECT pclass FROM Player WHERE name = ?", (name,))
-    pclass = cur.fetchall()[0][0]
+    cur.execute("SELECT player_class FROM Player WHERE name = ?", (name,))
+    player_class = cur.fetchall()[0][0]
     cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
     level = cur.fetchall()[0][0]
     level += 1
@@ -1226,7 +1226,7 @@ def Level_Up():
     cur.execute(sql, (level, name,))
     conn.commit()
 
-    if(pclass == "Warrior"):
+    if(player_class == "Warrior"):
 
         cur.execute("SELECT base_strength FROM Player WHERE name = ?", (name,))
         base_strength = cur.fetchall()[0][0]
@@ -1649,6 +1649,7 @@ def Health_Regen_Initiate():
     thread = threading.Thread(target = Health_Regen)
     thread.daemon = True
     thread.start()
+    
 #Respawns NPCs immediately after death
 def Npc_Respawn(npc_id):
     conn = create_connection(database)
@@ -1669,482 +1670,139 @@ def Npc_Respawn(npc_id):
 
 def Equip_Item(item):
     
-    items = []
-    item_inventory_slot = -1
-
-    #fetch item integers [from inventory] - This is the unique ID of the item in general - inventory_slot_#_integer
-    #fetch item quantity [from inventory] - inventory_slot_#_quantity
-    cur.execute("SELECT inventory_slot_1 FROM Player WHERE name = ?", (name,))
-    inventory_slot_1_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_1_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_1_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_2 FROM Player WHERE name = ?", (name,))
-    inventory_slot_2_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_2_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_2_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_3 FROM Player WHERE name = ?", (name,))
-    inventory_slot_3_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_3_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_3_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_4 FROM Player WHERE name = ?", (name,))
-    inventory_slot_4_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_4_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_4_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_5 FROM Player WHERE name = ?", (name,))
-    inventory_slot_5_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_5_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_5_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_6 FROM Player WHERE name = ?", (name,))
-    inventory_slot_6_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_6_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_6_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_7 FROM Player WHERE name = ?", (name,))
-    inventory_slot_7_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_7_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_7_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_8 FROM Player WHERE name = ?", (name,))
-    inventory_slot_8_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_8_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_8_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_9 FROM Player WHERE name = ?", (name,))
-    inventory_slot_9_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_9_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_9_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_10 FROM Player WHERE name = ?", (name,))
-    inventory_slot_10_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_10_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_10_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_11 FROM Player WHERE name = ?", (name,))
-    inventory_slot_11_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_11_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_11_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_12 FROM Player WHERE name = ?", (name,))
-    inventory_slot_12_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_12_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_12_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_13 FROM Player WHERE name = ?", (name,))
-    inventory_slot_13_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_13_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_13_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_14 FROM Player WHERE name = ?", (name,))
-    inventory_slot_14_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_14_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_14_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_15 FROM Player WHERE name = ?", (name,))
-    inventory_slot_15_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_15_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_15_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_16 FROM Player WHERE name = ?", (name,))
-    inventory_slot_16_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_16_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_16_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_17 FROM Player WHERE name = ?", (name,))
-    inventory_slot_17_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_17_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_17_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_18 FROM Player WHERE name = ?", (name,))
-    inventory_slot_18_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_18_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_18_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_19 FROM Player WHERE name = ?", (name,))
-    inventory_slot_19_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_19_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_19_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_20 FROM Player WHERE name = ?", (name,))
-    inventory_slot_20_integer = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_20_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_20_quantity = cur.fetchall()[0][0]
-
-    #fetch item names [from inventory], from integers
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_1_integer,))
-    inventory_slot_1_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_2_integer,))
-    inventory_slot_2_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_3_integer,))
-    inventory_slot_3_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_3_integer,))
-    inventory_slot_3_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_4_integer,))
-    inventory_slot_4_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_5_integer,))
-    inventory_slot_5_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_6_integer,))
-    inventory_slot_6_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_7_integer,))
-    inventory_slot_7_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_8_integer,))
-    inventory_slot_8_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_9_integer,))
-    inventory_slot_9_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_10_integer,))
-    inventory_slot_10_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_11_integer,))
-    inventory_slot_11_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_12_integer,))
-    inventory_slot_12_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_13_integer,))
-    inventory_slot_13_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_14_integer,))
-    inventory_slot_14_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_15_integer,))
-    inventory_slot_15_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_16_integer,))
-    inventory_slot_16_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_17_integer,))
-    inventory_slot_17_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_18_integer,))
-    inventory_slot_18_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_19_integer,))
-    inventory_slot_19_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_20_integer,))
-    inventory_slot_20_name = cur.fetchall()[0][0]
-
-    #At this point we have the:
-    #integer
-    #quantity
-    #name
+    #Get the ID of item player is trying to equip
+    item_id = Get_Item_Id(item)
+    item_slot = Get_Item_Equip_Slot(item)
+    item_is_in_inventory = False
+    inventory_slot_id_for_found_item = None
     
-    #Put names in a list, with the inventory slot number attached. This links the name and the inventory slot together.
-    items.append([inventory_slot_1_name, 1, inventory_slot_1_quantity])
-    items.append([inventory_slot_2_name, 2, inventory_slot_2_quantity])
-    items.append([inventory_slot_3_name, 3, inventory_slot_3_quantity])
-    items.append([inventory_slot_4_name, 4, inventory_slot_4_quantity])
-    items.append([inventory_slot_5_name, 5, inventory_slot_5_quantity])
-    items.append([inventory_slot_6_name, 6, inventory_slot_6_quantity])
-    items.append([inventory_slot_7_name, 7, inventory_slot_7_quantity])
-    items.append([inventory_slot_8_name, 8, inventory_slot_8_quantity])
-    items.append([inventory_slot_9_name, 9, inventory_slot_9_quantity])
-    items.append([inventory_slot_10_name, 10, inventory_slot_10_quantity])
-    items.append([inventory_slot_11_name, 11, inventory_slot_11_quantity])
-    items.append([inventory_slot_11_name, 12, inventory_slot_12_quantity])
-    items.append([inventory_slot_13_name, 13, inventory_slot_13_quantity])
-    items.append([inventory_slot_14_name, 14, inventory_slot_14_quantity])
-    items.append([inventory_slot_15_name, 15, inventory_slot_15_quantity])
-    items.append([inventory_slot_16_name, 16, inventory_slot_16_quantity])
-    items.append([inventory_slot_17_name, 17, inventory_slot_17_quantity])
-    items.append([inventory_slot_18_name, 18, inventory_slot_18_quantity])
-    items.append([inventory_slot_19_name, 19, inventory_slot_19_quantity])
-    items.append([inventory_slot_20_name, 20, inventory_slot_20_quantity])
+    inventory_slot_id = {}
+    inventory_slot_quantity = {}
+    inventory_slot_name = {}
 
-    #Fetch equipment integers
-    cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
-    equipment_primary = cur.fetchall()[0][0]
-    cur.execute("SELECT equipment_secondary FROM Player WHERE name = ?", (name,))
-    equipment_secondary = cur.fetchall()[0][0]
-    cur.execute("SELECT equipment_head FROM Player WHERE name = ?", (name,))
-    equipment_head = cur.fetchall()[0][0]
-    cur.execute("SELECT equipment_body FROM Player WHERE name = ?", (name,))
-    equipment_body = cur.fetchall()[0][0]
-    cur.execute("SELECT equipment_feet FROM Player WHERE name = ?", (name,))
-    equipment_feet = cur.fetchall()[0][0]
-    cur.execute("SELECT equipment_hands FROM Player WHERE name = ?", (name,))
-    equipment_hands = cur.fetchall()[0][0]
-
-    #fetch equipment names, from integers
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_primary,))
-    equipment_primary_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_secondary,))
-    equipment_secondary_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_head,))
-    equipment_head_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_body,))
-    equipment_body_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_feet,))
-    equipment_feet_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_hands,))
-    equipment_hands_name = cur.fetchall()[0][0]
-
-    found_item = False
-    for each in items:
-        if(item[6:] == each[0] and item[6:] != "Nothing"): #checks to see if item is in inventory
-            cur.execute("SELECT id FROM Item WHERE name = ?", (each[0],)) #If item is in inventory, find its name in Item db and extract the id number
-
-            item_id = cur.fetchall()[0][0] #ID of item that is trying to be equipped
-            item_inventory_slot = each[1] #Inventory slot number of item that is trying to be equipped
-            item_quantity = each[2]
-            
-            found_item = True #Set found_item flag to true for below if statement.
-
-            break
-
-    if(found_item == True):
-
-        #Select all item information from db using the id number acquired earlier
-        cur.execute("SELECT slot FROM Item WHERE id = ?", (item_id,))
-        equipment_slot = cur.fetchall()[0][0]
-        cur.execute("SELECT level_requirement FROM Item WHERE id = ?", (item_id,))
-        level_requirement = cur.fetchall()[0][0]
-        cur.execute("SELECT modify_strength FROM Item WHERE id = ?", (item_id,))
-        modify_strength = cur.fetchall()[0][0]
-        cur.execute("SELECT modify_stamina FROM Item WHERE id = ?", (item_id,))
-        modify_stamina = cur.fetchall()[0][0]
-        cur.execute("SELECT modify_dexterity FROM Item WHERE id = ?", (item_id,))
-        modify_dexterity = cur.fetchall()[0][0]
-        cur.execute("SELECT modify_agility FROM Item WHERE id = ?", (item_id,))
-        modify_agility = cur.fetchall()[0][0]
-        cur.execute("SELECT modify_intelligence FROM Item WHERE id = ?", (item_id,))
-        modify_intelligence = cur.fetchall()[0][0]
-        cur.execute("SELECT modify_wisdom FROM Item WHERE id = ?", (item_id,))
-        modify_wisdom = cur.fetchall()[0][0]
-        cur.execute("SELECT modify_charisma FROM Item WHERE id = ?", (item_id,))
-        modify_charisma = cur.fetchall()[0][0]
-        cur.execute("SELECT damage_min FROM Item WHERE id = ?", (item_id,))
-        damage_min = cur.fetchall()[0][0]
-        cur.execute("SELECT damage_max FROM Item WHERE id = ?", (item_id,))
-        damage_max = cur.fetchall()[0][0]
-
-        cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
-        player_level = cur.fetchall()[0][0]
-
-        #If quantity is only 1 then delete the item entirely
-        if(item_quantity == 1):
-            if(item_inventory_slot == 1):
-                sql = "UPDATE Player SET inventory_slot_1 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 2):
-                sql = "UPDATE Player SET inventory_slot_2 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 3):
-                sql = "UPDATE Player SET inventory_slot_3 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 4):
-                sql = "UPDATE Player SET inventory_slot_4 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 5):
-                sql = "UPDATE Player SET inventory_slot_5 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 6):
-                sql = "UPDATE Player SET inventory_slot_6 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 7):
-                sql = "UPDATE Player SET inventory_slot_7 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 8):
-                sql = "UPDATE Player SET inventory_slot_8 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 9):
-                sql = "UPDATE Player SET inventory_slot_9 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 10):
-                sql = "UPDATE Player SET inventory_slot_10 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 11):
-                sql = "UPDATE Player SET inventory_slot_11 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 12):
-                sql = "UPDATE Player SET inventory_slot_12 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 13):
-                sql = "UPDATE Player SET inventory_slot_13 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 14):
-                sql = "UPDATE Player SET inventory_slot_14 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 15):
-                sql = "UPDATE Player SET inventory_slot_15 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 16):
-                sql = "UPDATE Player SET inventory_slot_16 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 17):
-                sql = "UPDATE Player SET inventory_slot_17 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 18):
-                sql = "UPDATE Player SET inventory_slot_18 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 19):
-                sql = "UPDATE Player SET inventory_slot_19 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            elif(item_inventory_slot == 20):
-                sql = "UPDATE Player SET inventory_slot_20 = ? WHERE name = ?"
-                cur.execute(sql, (0, name,))
-                conn.commit()
-            else:
-                pass
-
+    #If item exists in general
+    if(item_id != None and item_id != 0):
+        if(item_slot != None):
+            #Fetch player inventory from database
+            for i in range(1, 21):
+                cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
+                inventory_slot_id[i] = cur.fetchall()[0][0]
+                cur.execute("SELECT inventory_slot_" + str(i) + "_quantity FROM Player WHERE name = ?", (name,))
+                inventory_slot_quantity[i] = cur.fetchall()[0][0]
+                cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_id[i],))
+                inventory_slot_name[i] = cur.fetchall()[0][0]
+                #Is the item in inventory?
+                if(inventory_slot_id[i] == item_id):
+                    print("Match!")
+                    item_is_in_inventory = True
+                    inventory_slot_id_for_found_item = i
+                    break
         
-        if(item_inventory_slot == 1):
-            sql = "UPDATE Player SET inventory_slot_1_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_1_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 2):
-            sql = "UPDATE Player SET inventory_slot_2_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_2_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 3):
-            sql = "UPDATE Player SET inventory_slot_3_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_3_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 4):
-            sql = "UPDATE Player SET inventory_slot_4_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_4_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 5):
-            sql = "UPDATE Player SET inventory_slot_5_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_5_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 6):
-            sql = "UPDATE Player SET inventory_slot_6_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_6_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 7):
-            sql = "UPDATE Player SET inventory_slot_7_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_7_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 8):
-            sql = "UPDATE Player SET inventory_slot_8_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_8_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 9):
-            sql = "UPDATE Player SET inventory_slot_9_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_9_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 10):
-            sql = "UPDATE Player SET inventory_slot_10_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_10_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 11):
-            sql = "UPDATE Player SET inventory_slot_11_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_11_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 12):
-            sql = "UPDATE Player SET inventory_slot_12_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_12_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 13):
-            sql = "UPDATE Player SET inventory_slot_13_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_13_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 14):
-            sql = "UPDATE Player SET inventory_slot_14_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_14_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 15):
-            sql = "UPDATE Player SET inventory_slot_15_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_15_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 16):
-            sql = "UPDATE Player SET inventory_slot_16_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_16_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 17):
-            sql = "UPDATE Player SET inventory_slot_17_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_17_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 18):
-            sql = "UPDATE Player SET inventory_slot_18_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_18_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 19):
-            sql = "UPDATE Player SET inventory_slot_19_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_19_quantity - 1, name,))
-            conn.commit()
-        elif(item_inventory_slot == 20):
-            sql = "UPDATE Player SET inventory_slot_20_quantity = ? WHERE name = ?"
-            cur.execute(sql, (inventory_slot_20_quantity - 1, name,))
-            conn.commit()
+            #At this point we have the:
+            #integer
+            #quantity
+            #name
 
-
-        if(player_level >= level_requirement):
-    
-            #select appropriate equipment ID that is already worn
-            #Save it as the temp_item_id before equipping the new item
-            #Check quantity
-            #Equip item
-            if(equipment_slot == 'equipment_primary'):
+            if(item_is_in_inventory):
+                current_equipment = {}
+                #Fetch equipment integers
                 cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
-                temp_item_id = cur.fetchall()[0][0]
-                sql = "UPDATE Player SET equipment_primary = ? WHERE name = ?"
-                cur.execute(sql, (item_id, name,))
-                conn.commit()
-            elif(equipment_slot == 'equipment_secondary'):
+                current_equipment["primary"] = cur.fetchall()[0][0]
                 cur.execute("SELECT equipment_secondary FROM Player WHERE name = ?", (name,))
-                temp_item_id = cur.fetchall()[0][0]
-                sql = "UPDATE Player SET equipment_secondary = ? WHERE name = ?"
-                cur.execute(sql, (item_id, name,))
-                conn.commit()
-            elif(equipment_slot == 'equipment_head'):
+                current_equipment["secondary"] = cur.fetchall()[0][0]
                 cur.execute("SELECT equipment_head FROM Player WHERE name = ?", (name,))
-                temp_item_id = cur.fetchall()[0][0]
-                sql = "UPDATE Player SET equipment_head = ? WHERE name = ?"
-                cur.execute(sql, (item_id, name,))
-                conn.commit()
-            elif(equipment_slot == 'equipment_body'):
+                current_equipment["head"] = cur.fetchall()[0][0]
                 cur.execute("SELECT equipment_body FROM Player WHERE name = ?", (name,))
-                temp_item_id = cur.fetchall()[0][0]
-                sql = "UPDATE Player SET equipment_body = ? WHERE name = ?"
-                cur.execute(sql, (item_id, name,))
-                conn.commit()
-            elif(equipment_slot == 'equipment_feet'):
+                current_equipment["body"] = cur.fetchall()[0][0]
                 cur.execute("SELECT equipment_feet FROM Player WHERE name = ?", (name,))
-                temp_item_id = cur.fetchall()[0][0]
-                sql = "UPDATE Player SET equipment_feet = ? WHERE name = ?"
-                cur.execute(sql, (item_id, name,))
-                conn.commit()           
-            elif(equipment_slot == 'equipment_hands'):
+                current_equipment["feet"] = cur.fetchall()[0][0]
                 cur.execute("SELECT equipment_hands FROM Player WHERE name = ?", (name,))
-                temp_item_id = cur.fetchall()[0][0]
-                sql = "UPDATE Player SET equipment_hands = ? WHERE name = ?"
-                cur.execute(sql, (item_id, name,))
-                conn.commit()
+                current_equipment["hands"] = cur.fetchall()[0][0]
 
-    
-        #else:
-            #print("You do not have sufficient ability to equip such an item.")
+                if(item_slot == "primary"):
+                    cur.execute("update Player set equipment_primary = ? WHERE name = ?", (item_id, name,))
+                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["primary"], name,))
+                    conn.commit()
+                elif(item_slot == "secondary"):
+                    cur.execute("update Player set equipment_secondary = ? WHERE name = ?", (item_id, name,))
+                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["secondary"], name,))
+                    conn.commit()
+                elif(item_slot == "head"):
+                    cur.execute("update Player set equipment_head = ? WHERE name = ?", (item_id, name,))
+                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["head"], name,))
+                    conn.commit()
+                elif(item_slot == "body"):
+                    cur.execute("update Player set equipment_body = ? WHERE name = ?", (item_id, name,))
+                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["body"], name,))
+                    conn.commit()
+                elif(item_slot == "feet"):
+                    cur.execute("update Player set equipment_feet = ? WHERE name = ?", (item_id, name,))
+                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["feet"], name,))
+                    conn.commit()
+                elif(item_slot == "hands"):
+                    cur.execute("update Player set equipment_hands = ? WHERE name = ?", (item_id, name,))
+                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["hands"], name,))
+                    conn.commit()
+
+            else:
+                print("You do not possess such item.")
+        else:
+            print("You cannot equip this item")
     else:
-        print("You do not possess such an item.")
+        print("The item you described does not exist in this universe.")
+        
+
+
+#Takes in the item name as a string
+def Get_Item_Id(item):
+    global cur
+    cur.execute("select count(name) from Item where name = ?", (item,))
+    count = cur.fetchall()[0][0]
+    #If it has an ID (aka if it exists as an item in the world) then set item_id
+    if(count > 0):
+        cur.execute("select id from Item where name = ?", (item,))
+        item_id = cur.fetchall()[0][0]
+        return item_id
+    else:
+        return None
+
+#Takes in the item name as a string    
+def Get_Item_Equip_Slot(item):
+    global cur
+    cur.execute("select count(name) from Item where name = ?", (item,))
+    count = cur.fetchall()[0][0]
+    #If it has an ID (aka if it exists as an item in the world) then set item_slot
+    if(count > 0):
+        cur.execute("select slot from Item where name = ?", (item,))
+        item_slot = cur.fetchall()[0][0]
+        return item_slot
+    else:
+        return None
     
-    
-    #item[6:]
-    pass
 
 def Command(choice):
-    if(choice.lower() == 'north' or choice.lower() == 'n' or choice.lower() == 'south' or choice.lower() == 's' or choice.lower() == 'east' or choice.lower() == 'e' or choice.lower() == 'west' or choice.lower() == 'w'):
-        Move(choice.lower())
-
-    elif(choice.lower() == 'score' or choice.lower() == 'character'):
+    choice = choice.lower()
+    if(choice == 'north' or choice == 'n' or choice == 'south' or choice == 's' or choice == 'east' or choice == 'e' or choice == 'west' or choice == 'w'):
+        Move(choice)
+    elif(choice == 'score' or choice == 'character'):
         Score()
-
-    elif(choice.lower() == 'look' or choice.lower() == 'l'):
+    elif(choice == 'look' or choice == 'l'):
         Look()
-
-    elif(choice.lower() == 'equipment'):
+    elif(choice == 'equipment'):
         Show_Equipment()
-
-    elif(choice.lower() == 'inventory'):
+    elif(choice == 'inventory'):
         Show_Inventory()
-
-    elif(choice.lower() == 'buffs'):
+    elif(choice == 'buffs'):
         Show_Buffs()
-
-    elif(choice.lower()[0:4] == 'kill'):
+    elif(choice[0:4] == 'kill'):
         Precombat(choice)
-        
-    elif(choice.lower() == ''):
+    elif(choice == ''):
         pass
-
-    elif(choice.lower()[0:5] == 'equip'):
-        Equip_Item(choice)
-
+    elif(choice[0:5] == 'equip'):
+        Equip_Item(choice[6:])
+    elif(choice == 'quit' or choice == 'camp'):
+        print("You have left the realm.")
+        Login()
     else:
         print("That is not a valid command.")
         print()
@@ -2152,192 +1810,203 @@ def Command(choice):
 def Login():
     global cur
     global name
-    delete_char_flag = 0
-    while(delete_char_flag == 0):
+    login_loop = True
+    while(login_loop):
 
         print()
         print("New")
         print("Load")
         print("Delete")
+        print("Quit")
         choice = input(">")
         choice = choice.lower()
     
     
         if(choice == "load"):
-            
-            invalid = 1
-            while(invalid == 1):
-                tempString = select_all_player(conn)
-                print()
-                print("--------------------------------------------------------")
-                for each in tempString:
-                    print(each[0])
-                print("--------------------------------------------------------")
-                print("Which name would you like to load?")
-                name = input(">")
-
-                cur.execute("SELECT count(*) FROM Player WHERE name = ?", (name,))
-                if(cur.fetchall()[0][0] == 1):
-                    invalid = 0
-                else:
-                    print("That is not a valid character, please try again.")
-            
-            invalid = 1
-            while(invalid == 1):
-                print()
-                print("Please enter your password.")
-                password = input(">")
-
-                #Verifying password
-                cur.execute("SELECT salt FROM Player WHERE name = ?", (name,))
-                salt = cur.fetchall()[0][0]
-                cur.execute("SELECT pkey FROM Player WHERE name = ?", (name,))
-                pkey = cur.fetchall()[0][0]
-
-                new_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
-
-                if(pkey == new_key):
-                    invalid = 0
-                else:
-                    print()
-                    print("Your password was incorrect.")
-
-            print("Welcome back ", end='')
-            print(name, end='')
-            print("!")
-            delete_char_flag = 1
-        
-
-
+            login_loop = LoadCharacter()
         elif(choice == "new"):
-            
-            invalid = 1
-            while(invalid == 1):
-                print()
-                print("What is your name?")
-                name = input(">")
-
-                cur = conn.cursor()
-                cur.execute("SELECT count(*) FROM Player WHERE name = ?", (name,))
-                if(cur.fetchall()[0][0] == 0):
-                    invalid = 0
-                else:
-                    print()
-                    print("That character already exists, please try again.")
-
-            invalid = 1
-            while(invalid == 1):
-
-                print()
-                print("What would you like your password to be?")
-                password1 = input(">")
-                print()
-                print("Please enter it in again")
-                password2 = input(">")
-                if(password1 == password2):
-                    invalid = 0
-                    password = password1
-                else:
-                    print()
-                    print("Your passwords did not match, please try again.")
-
-                # Example generation
-                salt = os.urandom(32)
-                pkey = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
-
-                # Store them as:
-                final_password_hash = salt + pkey 
-
-            invalid = 1
-            while(invalid == 1):
-                print()
-                print("Which class will you choose?")
-                print("Warrior")
-                choice = input(">")
-                print()
-                if(choice.lower() == "warrior"):
-                    invalid = 0
-                    pclass = "Warrior"
-                else:
-                    print()
-                    print("Please select a valid class.")
-            
-            if(pclass == "Warrior"):
-                health = 25
-                base_max_health = 25
-                max_health = 25
-                mana = 1
-                base_max_mana = 1
-                max_mana = 1
-                base_strength = 10
-                strength = 10
-                base_stamina = 3
-                stamina = 3
-                base_dexterity = 5
-                dexterity = 5
-                base_agility = 5
-                agility = 5
-                base_intelligence = 3
-                intelligence = 3
-                base_wisdom = 3
-                wisdom = 3
-                base_charisma = 5
-                charisma = 5
-                equipment_primary = 0
-                equipment_secondary = 0
-                equipment_head = 0
-                equipment_body = 0
-                equipment_feet = 0
-                equipment_hands = 0
-                create_player(conn, name, final_password_hash[32:], final_password_hash[:32], pclass, health, base_max_health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands)
-            
-            print()
-            print("Welcome, " + name + " to the Empire of Zek!")
-            delete_char_flag = 1
-        
+            login_loop = CreateCharacter()                    
         elif(choice == "delete"):
-            invalid = 1
-            while(invalid == 1):
-                tempString = select_all_player(conn)
-                print()
-                for each in tempString:
-                    print(each[0])
-                
-                print()
-                print("Which character would you like to delete?")
-                name = input(">")
-                cur = conn.cursor()
-                cur.execute('SELECT count(*) FROM Player WHERE name = ?', (name,))
-                if(cur.fetchall()[0][0] == 1):
-                    invalid = 0
-                else:
-                    print("That is not a valid character, please try again.")
-            invalid = 1
-            while(invalid == 1):
-                print()
-                print("Please enter your password.")
-                password = input(">")
-
-                #Verifying password
-                cur.execute("SELECT salt FROM Player WHERE name = ?", (name,))
-                salt = cur.fetchall()[0][0]
-                cur.execute("SELECT pkey FROM Player WHERE name = ?", (name,))
-                pkey = cur.fetchall()[0][0]
-
-                new_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100000)
-
-                if(pkey == new_key):
-                    invalid = 0
-                    print(name, end ="")
-                    print(" has been removed from the Empire of Zek for eternity.")
-                    delete_player(conn, name)
-                else:
-                    print()
-                    print("Your password was incorrect.")
+            DeleteCharacter()
+        elif(choice == "quit"):
+            sys.exit()
     Look()
 
-def MainLoop():
+def LoadCharacter():
+    global cur
+    global name
+    invalid = True
+    while(invalid == True):
+        tempString = select_all_player(conn)
+        print()
+        print("--------------------------------------------------------")
+        for each in tempString:
+            print(each[0])
+        print("--------------------------------------------------------")
+        print("Which name would you like to load?")
+        name = input(">")
 
+        cur.execute("SELECT count(*) FROM Player WHERE name = ?", (name,))
+        if(cur.fetchall()[0][0] == 1):
+            invalid = False
+        else:
+            print("That is not a valid character, please try again.")
+    
+    invalid = True
+    while(invalid == True):
+        print()
+        print("Please enter your password.")
+        password = input(">")
+
+        #Verifying password
+        cur.execute("SELECT player_password_salt FROM Player WHERE name = ?", (name,))
+        player_password_salt = cur.fetchall()[0][0]
+        cur.execute("SELECT player_password_key FROM Player WHERE name = ?", (name,))
+        player_password_key = cur.fetchall()[0][0]
+
+        new_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), player_password_salt, 100000)
+
+        if(player_password_key == new_key):
+            invalid = False
+        else:
+            print()
+            print("Your password was incorrect.")
+
+    print("Welcome back ", end='')
+    print(name, end='')
+    print("!")
+    login_loop = False
+    
+def CreateCharacter():
+    global cur
+    global name
+    invalid = True
+    while(invalid == True):
+        print()
+        print("What is your name?")
+        name = input(">")
+
+        cur = conn.cursor()
+        cur.execute("SELECT count(*) FROM Player WHERE name = ?", (name,))
+        if(cur.fetchall()[0][0] == 0):
+            invalid = False
+        else:
+            print()
+            print("That character already exists, please try again.")
+
+    invalid = True
+    while(invalid == True):
+
+        print()
+        print("What would you like your password to be?")
+        password1 = input(">")
+        print()
+        print("Please enter it in again")
+        password2 = input(">")
+        if(password1 == password2):
+            invalid = False
+            password = password1
+        else:
+            print()
+            print("Your passwords did not match, please try again.")
+
+        # Example generation
+        player_password_salt = os.urandom(32)
+        player_password_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), player_password_salt, 100000)
+
+        # Store them as:
+        final_password_hash = player_password_salt + player_password_key 
+
+    invalid = True
+    while(invalid == True):
+        print()
+        print("Which class will you choose?")
+        print("Warrior")
+        choice = input(">")
+        print()
+        if(choice.lower() == "warrior"):
+            invalid = False
+            player_class = "Warrior"
+        else:
+            print()
+            print("Please select a valid class.")
+    
+    if(player_class == "Warrior"):
+        health = 25
+        base_max_health = 25
+        max_health = 25
+        mana = 1
+        base_max_mana = 1
+        max_mana = 1
+        base_strength = 10
+        strength = 10
+        base_stamina = 3
+        stamina = 3
+        base_dexterity = 5
+        dexterity = 5
+        base_agility = 5
+        agility = 5
+        base_intelligence = 3
+        intelligence = 3
+        base_wisdom = 3
+        wisdom = 3
+        base_charisma = 5
+        charisma = 5
+        equipment_primary = 0
+        equipment_secondary = 0
+        equipment_head = 0
+        equipment_body = 0
+        equipment_feet = 0
+        equipment_hands = 0
+        create_player(conn, name, final_password_hash[32:], final_password_hash[:32], player_class, health, base_max_health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands)
+    
+    print()
+    print("Welcome, " + name + " to the Empire of Zek!")
+    return False
+
+def DeleteCharacter():
+    global cur
+    global name    
+    invalid = True
+    while(invalid == True):
+        tempString = select_all_player(conn)
+        print()
+        for each in tempString:
+            print(each[0])
+        
+        print()
+        print("Which character would you like to delete?")
+        name = input(">")
+        cur = conn.cursor()
+        cur.execute('SELECT count(*) FROM Player WHERE name = ?', (name,))
+        if(cur.fetchall()[0][0] == 1):
+            invalid = False
+        else:
+            print("That is not a valid character, please try again.")
+    invalid = True
+    while(invalid == True):
+        print()
+        print("Please enter your password.")
+        password = input(">")
+
+        #Verifying password
+        cur.execute("SELECT player_password_salt FROM Player WHERE name = ?", (name,))
+        player_password_salt = cur.fetchall()[0][0]
+        cur.execute("SELECT player_password_key FROM Player WHERE name = ?", (name,))
+        player_password_key = cur.fetchall()[0][0]
+
+        new_key = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), player_password_salt, 100000)
+
+        if(player_password_key == new_key):
+            invalid = False
+            print(name, end ="")
+            print(" has been removed from the Empire of Zek for eternity.")
+            delete_player(conn, name)
+        else:
+            print()
+            print("Your password was incorrect.")    
+
+def MainLoop():
     while(True):
         #-------------------------------PROMPT----------------------------------
         cur.execute("SELECT health FROM Player WHERE name = ?", (name,))
@@ -2386,10 +2055,6 @@ def MainLoop():
         print(">", end='')
         #-----------------------------------------------------------------------
         choice = input()
-
-        if(choice.lower() == 'quit'):
-            print("You have left the realm.")
-            break
 
         Command(choice)
 #------------------------MAIN--------------------------
