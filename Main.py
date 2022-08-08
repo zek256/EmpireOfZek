@@ -1673,12 +1673,10 @@ def Equip_Item(item):
     #Get the ID of item player is trying to equip
     item_id = Get_Item_Id(item)
     item_slot = Get_Item_Equip_Slot(item)
+    item_level_requirement = Get_Item_Level_Requirement(item)
+    player_level = Get_Player_Level()
     item_is_in_inventory = False
     inventory_slot_id_for_found_item = None
-    
-    inventory_slot_id = {}
-    inventory_slot_quantity = {}
-    inventory_slot_name = {}
 
     #If item exists in general
     if(item_id != None and item_id != 0):
@@ -1686,63 +1684,82 @@ def Equip_Item(item):
             #Fetch player inventory from database
             for i in range(1, 21):
                 cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
-                inventory_slot_id[i] = cur.fetchall()[0][0]
-                cur.execute("SELECT inventory_slot_" + str(i) + "_quantity FROM Player WHERE name = ?", (name,))
-                inventory_slot_quantity[i] = cur.fetchall()[0][0]
-                cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_id[i],))
-                inventory_slot_name[i] = cur.fetchall()[0][0]
+                inventory_slot_id = cur.fetchall()[0][0]
                 #Is the item in inventory?
-                if(inventory_slot_id[i] == item_id):
-                    print("Match!")
+                if(inventory_slot_id == item_id):
+                    cur.execute("SELECT inventory_slot_" + str(i) + "_quantity FROM Player WHERE name = ?", (name,))
+                    inventory_slot_quantity = cur.fetchall()[0][0]
                     item_is_in_inventory = True
                     inventory_slot_id_for_found_item = i
                     break
-        
-            #At this point we have the:
-            #integer
-            #quantity
-            #name
 
-            if(item_is_in_inventory):
-                current_equipment = {}
-                #Fetch equipment integers
-                cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
-                current_equipment["primary"] = cur.fetchall()[0][0]
-                cur.execute("SELECT equipment_secondary FROM Player WHERE name = ?", (name,))
-                current_equipment["secondary"] = cur.fetchall()[0][0]
-                cur.execute("SELECT equipment_head FROM Player WHERE name = ?", (name,))
-                current_equipment["head"] = cur.fetchall()[0][0]
-                cur.execute("SELECT equipment_body FROM Player WHERE name = ?", (name,))
-                current_equipment["body"] = cur.fetchall()[0][0]
-                cur.execute("SELECT equipment_feet FROM Player WHERE name = ?", (name,))
-                current_equipment["feet"] = cur.fetchall()[0][0]
-                cur.execute("SELECT equipment_hands FROM Player WHERE name = ?", (name,))
-                current_equipment["hands"] = cur.fetchall()[0][0]
+            if(item_is_in_inventory and inventory_slot_quantity > 0):
+                
+                if(player_level >= item_level_requirement):
 
-                if(item_slot == "primary"):
-                    cur.execute("update Player set equipment_primary = ? WHERE name = ?", (item_id, name,))
-                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["primary"], name,))
-                    conn.commit()
-                elif(item_slot == "secondary"):
-                    cur.execute("update Player set equipment_secondary = ? WHERE name = ?", (item_id, name,))
-                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["secondary"], name,))
-                    conn.commit()
-                elif(item_slot == "head"):
-                    cur.execute("update Player set equipment_head = ? WHERE name = ?", (item_id, name,))
-                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["head"], name,))
-                    conn.commit()
-                elif(item_slot == "body"):
-                    cur.execute("update Player set equipment_body = ? WHERE name = ?", (item_id, name,))
-                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["body"], name,))
-                    conn.commit()
-                elif(item_slot == "feet"):
-                    cur.execute("update Player set equipment_feet = ? WHERE name = ?", (item_id, name,))
-                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["feet"], name,))
-                    conn.commit()
-                elif(item_slot == "hands"):
-                    cur.execute("update Player set equipment_hands = ? WHERE name = ?", (item_id, name,))
-                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["hands"], name,))
-                    conn.commit()
+                    current_equipment = {}
+                    empty_inventory_slot = None
+                    if(item_slot == "primary"):
+                        cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
+                        current_equipment["primary"] = cur.fetchall()[0][0]
+                        if(current_equipment["primary"] != item_id):
+                            previously_equipped_inventory_slot_quantity = 0
+                            for i in range(1, 21):
+                                cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
+                                previously_equipped_inventory_slot_id = cur.fetchall()[0][0]
+                                if(previously_equipped_inventory_slot_id == current_equipment["primary"]):
+                                    cur.execute("SELECT inventory_slot_" + str(i) + "_quantity FROM Player WHERE name = ?", (name,))
+                                    previously_equipped_inventory_slot_quantity = cur.fetchall()[0][0]
+                                    previously_equipped_item_is_in_inventory = True
+                                    previously_equipped_inventory_slot_id_for_found_item = i
+                                    break                        
+
+                            #If the item in inventory has quantity of more than one and the previously equipped item also exists in inventory
+                            #In this case decrement the one to be equipped and increment the one being de-equipped
+                            if(inventory_slot_quantity > 1 and previously_equipped_inventory_slot_quantity > 0):
+                                #Reduce quantity in current inventory
+                                cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (inventory_slot_quantity - 1, name,))
+                                #Increase quantity of previously equipped item in inventory
+                                cur.execute("update Player set inventory_slot_" + str(previously_equipped_inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (previously_equipped_inventory_slot_quantity + 1, name,))
+                                cur.execute("update Player set equipment_primary = ? WHERE name = ?", (item_id, name,))
+                            #If the item in inventory has quantity of more than one but the one already equipped doesn't exist in inventory
+                            #In this case decrement the one to be equipped and ensure there's an empty spot in inventory for the currently equipped item to go
+                            elif(inventory_slot_quantity > 1 and previously_equipped_inventory_slot_quantity == 0):
+                                #Is there an empty spot in the inventory for the currently equipped item to go?
+                                is_there_empty_inventory_slot = False
+                                for i in range(1, 21):
+                                    cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
+                                    temp_slot = cur.fetchall()[0][0]
+                                    if(temp_slot == 0):
+                                        is_there_empty_inventory_slot = True
+                                        empty_inventory_slot = i
+                                        break
+                                if(is_there_empty_inventory_slot):
+                                    #Reduce quantity in current inventory
+                                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (inventory_slot_quantity - 1, name,))                                    
+                                    cur.execute("update Player set inventory_slot_" + str(empty_inventory_slot) + " = ? WHERE name = ?", (current_equipment["primary"], name,))
+                                    cur.execute("update Player set inventory_slot_" + str(empty_inventory_slot) + "_quantity = ? WHERE name = ?", (1, name,))
+                                    cur.execute("update Player set equipment_primary = ? WHERE name = ?", (item_id, name,))
+                                else:
+                                    print("You don't have room in your inventory for the currently equipped item.")
+                            #If the item in inventory only has one but the item to be equipped also exists in inventory
+                            #In this case replace inventory item with item ID 0 (Nothing), and increment the quantity in inventory of item being de-equipped
+                            elif(inventory_slot_quantity == 1 and previously_equipped_inventory_slot_quantity > 0):
+                                #Increment currently equipped, set inventory to 0 (Nothing)
+                                #Increase quantity of previously equipped item in inventory
+                                cur.execute("update Player set inventory_slot_" + str(previously_equipped_inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (previously_equipped_inventory_slot_quantity + 1, name,))                            
+                                #Update inventory id to 0 for the item to be equipped
+                                cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (0, name,))
+                                cur.execute("update Player set equipment_primary = ? WHERE name = ?", (item_id, name,))                                                         
+                            else:
+                                cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["primary"], name,))
+                                cur.execute("update Player set equipment_primary = ? WHERE name = ?", (item_id, name,))
+                            conn.commit()
+                            print("You are now using " + item + ".")
+                        else:
+                            print("You already have that equipped.")
+                else:
+                    print("You are not powerful enough to equip this item.")
 
             else:
                 print("You do not possess such item.")
@@ -1754,30 +1771,49 @@ def Equip_Item(item):
 
 
 #Takes in the item name as a string
-def Get_Item_Id(item):
+def Get_Item_Id(item_name):
     global cur
-    cur.execute("select count(name) from Item where name = ?", (item,))
+    cur.execute("select count(name) from Item where name = ?", (item_name,))
     count = cur.fetchall()[0][0]
     #If it has an ID (aka if it exists as an item in the world) then set item_id
     if(count > 0):
-        cur.execute("select id from Item where name = ?", (item,))
+        cur.execute("select id from Item where name = ?", (item_name,))
         item_id = cur.fetchall()[0][0]
         return item_id
     else:
         return None
 
 #Takes in the item name as a string    
-def Get_Item_Equip_Slot(item):
+def Get_Item_Equip_Slot(item_name):
     global cur
-    cur.execute("select count(name) from Item where name = ?", (item,))
+    cur.execute("select count(name) from Item where name = ?", (item_name,))
     count = cur.fetchall()[0][0]
     #If it has an ID (aka if it exists as an item in the world) then set item_slot
     if(count > 0):
-        cur.execute("select slot from Item where name = ?", (item,))
-        item_slot = cur.fetchall()[0][0]
-        return item_slot
+        cur.execute("select slot from Item where name = ?", (item_name,))
+        item_equipment_slot = cur.fetchall()[0][0]
+        return item_equipment_slot
     else:
         return None
+
+def Get_Item_Level_Requirement(item_name):
+    global cur
+    cur.execute("select count(name) from Item where name = ?", (item_name,))
+    count = cur.fetchall()[0][0]
+    #If it has an ID (aka if it exists as an item in the world) then set item_slot
+    if(count > 0):
+        cur.execute("select level_requirement from Item where name = ?", (item_name,))
+        item_level_requirement = cur.fetchall()[0][0]
+        return item_level_requirement
+    else:
+        return None
+
+def Get_Player_Level():
+    global cur
+    global name
+    cur.execute("select level from Player where name = ?", (name,))
+    player_level = cur.fetchall()[0][0]
+    return player_level       
     
 
 def Command(choice):
