@@ -1,4 +1,3 @@
-from mmap import ALLOCATIONGRANULARITY
 import sys
 import sqlite3
 import hashlib
