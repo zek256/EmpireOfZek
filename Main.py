@@ -55,7 +55,7 @@ def create_table(conn, create_table_sql):
     except Error as e:
         print(e)
     
-def create_player(conn, name, player_password_key, player_password_salt, player_class, health, base_max_health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands):
+def create_player(conn, name, player_password_key, player_password_salt, player_class, health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, equipment_legs, equipment_ring):
     """
     Create a Player
     :param conn:  Connection to the SQLite database
@@ -68,7 +68,6 @@ def create_player(conn, name, player_password_key, player_password_salt, player_
         player_password_salt,
         player_class,
         health,
-        base_max_health,
         max_health,
         mana,
         base_max_mana,
@@ -92,11 +91,13 @@ def create_player(conn, name, player_password_key, player_password_salt, player_
         equipment_head,
         equipment_body,
         equipment_feet,
-        equipment_hands
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) """
-    #(id, name, location, totalexp, level, base_max_health, base_max_mana, base_strength, base_stamina, base_dexterity, base_agility, base_intelligence, base_wisdom, base_charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, gold, invetory_slot_1, invetory_slot_2, invetory_slot_3, invetory_slot_4, invetory_slot_5, invetory_slot_6, invetory_slot_7, invetory_slot_8, invetory_slot_9, invetory_slot_10, invetory_slot_11, invetory_slot_12, invetory_slot_13, invetory_slot_14, invetory_slot_15, invetory_slot_16, invetory_slot_17, invetory_slot_18, invetory_slot_19, invetory_slot_20)
+        equipment_hands,
+        equipment_legs,
+        equipment_ring
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) """
+    #(id, name, location, totalexp, level, base_max_mana, base_strength, base_stamina, base_dexterity, base_agility, base_intelligence, base_wisdom, base_charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, gold, invetory_slot_1, invetory_slot_2, invetory_slot_3, invetory_slot_4, invetory_slot_5, invetory_slot_6, invetory_slot_7, invetory_slot_8, invetory_slot_9, invetory_slot_10, invetory_slot_11, invetory_slot_12, invetory_slot_13, invetory_slot_14, invetory_slot_15, invetory_slot_16, invetory_slot_17, invetory_slot_18, invetory_slot_19, invetory_slot_20)
     cur = conn.cursor()
-    cur.execute(sql, (name, player_password_key, player_password_salt, player_class, health, base_max_health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands))
+    cur.execute(sql, (name, player_password_key, player_password_salt, player_class, health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, equipment_legs, equipment_ring))
     conn.commit()
 
 def create_room(conn, location, description, npc1, npc1_existence, npc2, npc2_existence, npc3, npc3_existence, npc4, npc4_existence, npc5, npc5_existence, npc6, npc6_existence, npc7, npc7_existence, npc8, npc8_existence, npc9, npc9_existence, npc10, npc10_existence, npc11, npc11_existence, npc12, npc12_existence, npc13, npc13_existence, npc14, npc14_existence, npc15, npc15_existence, npc16, npc16_existence, npc17, npc17_existence, npc18, npc18_existence, npc19, npc19_existence, npc20, npc20_existence):
@@ -150,7 +151,7 @@ def create_room(conn, location, description, npc1, npc1_existence, npc2, npc2_ex
         npc20,
         npc20_existence
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) """
-    #(id, name, location, totalexp, level, base_max_health, base_max_mana, base_strength, base_stamina, base_dexterity, base_agility, base_intelligence, base_wisdom, base_charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, gold, invetory_slot_1, invetory_slot_2, invetory_slot_3, invetory_slot_4, invetory_slot_5, invetory_slot_6, invetory_slot_7, invetory_slot_8, invetory_slot_9, invetory_slot_10, invetory_slot_11, invetory_slot_12, invetory_slot_13, invetory_slot_14, invetory_slot_15, invetory_slot_16, invetory_slot_17, invetory_slot_18, invetory_slot_19, invetory_slot_20)
+    #(id, name, location, totalexp, level, base_max_mana, base_strength, base_stamina, base_dexterity, base_agility, base_intelligence, base_wisdom, base_charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, gold, invetory_slot_1, invetory_slot_2, invetory_slot_3, invetory_slot_4, invetory_slot_5, invetory_slot_6, invetory_slot_7, invetory_slot_8, invetory_slot_9, invetory_slot_10, invetory_slot_11, invetory_slot_12, invetory_slot_13, invetory_slot_14, invetory_slot_15, invetory_slot_16, invetory_slot_17, invetory_slot_18, invetory_slot_19, invetory_slot_20)
     cur = conn.cursor()
     cur.execute(sql, (location, description, npc1, npc1_existence, npc2, npc2_existence, npc3, npc3_existence, npc4, npc4_existence, npc5, npc5_existence, npc6, npc6_existence, npc7, npc7_existence, npc8, npc8_existence, npc9, npc9_existence, npc10, npc10_existence, npc11, npc11_existence, npc12, npc12_existence, npc13, npc13_existence, npc14, npc14_existence, npc15, npc15_existence, npc16, npc16_existence, npc17, npc17_existence, npc18, npc18_existence, npc19, npc19_existence, npc20, npc20_existence))
     conn.commit()
@@ -231,6 +232,7 @@ def Show_NPC():
         npc_list.append(npc_temp)
 
     return(npc_list)
+    
 #The below two methods are activated at the beginning of the game, they look to see if there are any dead npcs(from when the player logs out with a dead npc), it then respawns them after 30 seconds. This must occur because the only other way an npc spawns is 30 seconds after its death. So if the player logs out right after kill an npc, there needs to be a way for it to respawn.
 def Npc_Initial_Spawn_Helper():
 
@@ -337,339 +339,76 @@ def Score():
     print(dash)
     print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Health", ":", current_health, '/', max_health, " | ", " ", " | "))
     print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Mana", ":", current_mana, '/', max_mana, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Strength", ":", strength, '/', base_strength, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Stamina", ":", stamina, '/', base_stamina, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Dexterity", ":", dexterity, '/', base_dexterity, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Agility", ":", agility, '/', base_agility, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Intelligence", ":", intelligence, '/', base_intelligence, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Wisdom", ":", wisdom, '/', base_wisdom, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Charisma", ":", charisma, '/', base_charisma, " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Strength", ":", base_strength, '/', strength, " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Stamina", ":", base_stamina, '/', stamina, " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Dexterity", ":", base_dexterity, '/', dexterity, " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Agility", ":", base_agility, '/', agility, " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Intelligence", ":", base_intelligence, '/', intelligence, " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Wisdom", ":", base_wisdom, '/', wisdom, " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Charisma", ":", base_charisma, '/', charisma, " | ", " ", " | "))
     print(dash)
 
 def Show_Equipment():
 
-    #Fetch equipment integers
-    cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
-    equipment_primary = cur.fetchall()[0][0]
-    cur.execute("SELECT equipment_secondary FROM Player WHERE name = ?", (name,))
-    equipment_secondary = cur.fetchall()[0][0]
-    cur.execute("SELECT equipment_head FROM Player WHERE name = ?", (name,))
-    equipment_head = cur.fetchall()[0][0]
-    cur.execute("SELECT equipment_body FROM Player WHERE name = ?", (name,))
-    equipment_body = cur.fetchall()[0][0]
-    cur.execute("SELECT equipment_feet FROM Player WHERE name = ?", (name,))
-    equipment_feet = cur.fetchall()[0][0]
-    cur.execute("SELECT equipment_hands FROM Player WHERE name = ?", (name,))
-    equipment_hands = cur.fetchall()[0][0]
+    slot_list = ["primary", "secondary", "head", "body", "feet", "hands", "legs", "ring"]
+    equipment_id = {}
+    equipment_name = {}
 
-    #fetch equipment names, from integers
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_primary,))
-    equipment_primary_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_secondary,))
-    equipment_secondary_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_head,))
-    equipment_head_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_body,))
-    equipment_body_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_feet,))
-    equipment_feet_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (equipment_hands,))
-    equipment_hands_name = cur.fetchall()[0][0]
+    #for i in range(0, 5):
+    for each in slot_list:
+        cur.execute("select equipment_" + each + " from player where name = ?", (name,))
+        equipment_id[each] = cur.fetchall()[0][0]
+        cur.execute("select name from Item where id = ?", (equipment_id[each],))
+        equipment_name[each] = cur.fetchall()[0][0]
 
     dash = '-' * 64
     print()
     print(dash)
-    print('{:2s}{:<9s}{:3s}{:<48s}{:2s}'.format("| ", "Primary", " : ", equipment_primary_name, " |"))
-    print('{:2s}{:<9s}{:3s}{:<48s}{:2s}'.format("| ", "Secondary", " : ", equipment_secondary_name, " |"))
-    print('{:2s}{:<9s}{:3s}{:<48s}{:2s}'.format("| ", "Head", " : ", equipment_head_name, " |"))
-    print('{:2s}{:<9s}{:3s}{:<48s}{:2s}'.format("| ", "Body", " : ", equipment_body_name, " |"))
-    print('{:2s}{:<9s}{:3s}{:<48s}{:2s}'.format("| ", "Hands", " : ", equipment_hands_name, " |"))
-    print('{:2s}{:<9s}{:3s}{:<48s}{:2s}'.format("| ", "Feet", " : ", equipment_feet_name, " |"))
+    for each in slot_list:
+        print('{:2s}{:<9s}{:3s}{:<48s}{:2s}'.format("| ", each.capitalize(), " : ", equipment_name[each], " |"))
+    
     print(dash)
 
 def Show_Inventory():
 
+    inventory_slot = {}
+    inventory_slot_quantity = {}
+    inventory_slot_name = {}
+
     #fetch item integers
-    cur.execute("SELECT inventory_slot_1 FROM Player WHERE name = ?", (name,))
-    inventory_slot_1 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_1_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_1_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_2 FROM Player WHERE name = ?", (name,))
-    inventory_slot_2 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_2_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_2_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_3 FROM Player WHERE name = ?", (name,))
-    inventory_slot_3 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_3_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_3_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_4 FROM Player WHERE name = ?", (name,))
-    inventory_slot_4 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_4_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_4_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_5 FROM Player WHERE name = ?", (name,))
-    inventory_slot_5 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_5_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_5_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_6 FROM Player WHERE name = ?", (name,))
-    inventory_slot_6 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_6_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_6_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_7 FROM Player WHERE name = ?", (name,))
-    inventory_slot_7 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_7_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_7_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_8 FROM Player WHERE name = ?", (name,))
-    inventory_slot_8 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_8_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_8_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_9 FROM Player WHERE name = ?", (name,))
-    inventory_slot_9 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_9_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_9_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_10 FROM Player WHERE name = ?", (name,))
-    inventory_slot_10 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_10_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_10_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_11 FROM Player WHERE name = ?", (name,))
-    inventory_slot_11 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_11_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_11_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_12 FROM Player WHERE name = ?", (name,))
-    inventory_slot_12 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_12_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_12_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_13 FROM Player WHERE name = ?", (name,))
-    inventory_slot_13 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_13_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_13_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_14 FROM Player WHERE name = ?", (name,))
-    inventory_slot_14 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_14_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_14_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_15 FROM Player WHERE name = ?", (name,))
-    inventory_slot_15 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_15_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_15_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_16 FROM Player WHERE name = ?", (name,))
-    inventory_slot_16 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_16_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_16_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_17 FROM Player WHERE name = ?", (name,))
-    inventory_slot_17 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_17_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_17_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_18 FROM Player WHERE name = ?", (name,))
-    inventory_slot_18 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_18_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_18_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_19 FROM Player WHERE name = ?", (name,))
-    inventory_slot_19 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_19_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_19_quantity = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_20 FROM Player WHERE name = ?", (name,))
-    inventory_slot_20 = cur.fetchall()[0][0]
-    cur.execute("SELECT inventory_slot_20_quantity FROM Player WHERE name = ?", (name,))
-    inventory_slot_20_quantity = cur.fetchall()[0][0]
-
-    #fetch item names, from integers
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_1,))
-    inventory_slot_1_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_2,))
-    inventory_slot_2_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_3,))
-    inventory_slot_3_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_3,))
-    inventory_slot_3_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_4,))
-    inventory_slot_4_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_5,))
-    inventory_slot_5_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_6,))
-    inventory_slot_6_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_7,))
-    inventory_slot_7_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_8,))
-    inventory_slot_8_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_9,))
-    inventory_slot_9_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_10,))
-    inventory_slot_10_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_11,))
-    inventory_slot_11_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_12,))
-    inventory_slot_12_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_13,))
-    inventory_slot_13_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_14,))
-    inventory_slot_14_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_15,))
-    inventory_slot_15_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_16,))
-    inventory_slot_16_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_17,))
-    inventory_slot_17_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_18,))
-    inventory_slot_18_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_19,))
-    inventory_slot_19_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot_20,))
-    inventory_slot_20_name = cur.fetchall()[0][0]
-
+    for i in range(1,21):
+        cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
+        inventory_slot[i] = cur.fetchall()[0][0]
+        cur.execute("SELECT inventory_slot_" + str(i) + "_quantity FROM Player WHERE name = ?", (name,))
+        inventory_slot_quantity[i] = cur.fetchall()[0][0]
+        cur.execute("SELECT name FROM Item WHERE id = ?", (inventory_slot[i],))
+        inventory_slot_name[i] = cur.fetchall()[0][0]
 
     #inventory printing
     dash = '-' * 64
     print()
     print(dash)
-    if(inventory_slot_1 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "1", " : ", inventory_slot_1_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "1", " : ", inventory_slot_1_name + " x " + str(inventory_slot_1_quantity), " |"))
-    if(inventory_slot_2 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "2", " : ", inventory_slot_2_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "2", " : ", inventory_slot_2_name + " x " + str(inventory_slot_2_quantity), " |"))
-    if(inventory_slot_3 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "3", " : ", inventory_slot_3_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "3", " : ", inventory_slot_3_name + " x " + str(inventory_slot_3_quantity), " |"))
-    if(inventory_slot_4 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "4", " : ", inventory_slot_4_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "4", " : ", inventory_slot_4_name + " x " + str(inventory_slot_4_quantity), " |"))
-    if(inventory_slot_5 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "5", " : ", inventory_slot_5_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "5", " : ", inventory_slot_5_name + " x " + str(inventory_slot_5_quantity), " |"))
-    if(inventory_slot_6 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "6", " : ", inventory_slot_6_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "6", " : ", inventory_slot_6_name + " x " + str(inventory_slot_6_quantity), " |"))
-    if(inventory_slot_7 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "7", " : ", inventory_slot_7_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "7", " : ", inventory_slot_7_name + " x " + str(inventory_slot_7_quantity), " |"))
-    if(inventory_slot_8 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "8", " : ", inventory_slot_8_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "8", " : ", inventory_slot_8_name + " x " + str(inventory_slot_8_quantity), " |"))
-    if(inventory_slot_9 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "9", " : ", inventory_slot_9_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "9", " : ", inventory_slot_9_name + " x " + str(inventory_slot_9_quantity), " |"))
-    if(inventory_slot_10 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "10", " : ", inventory_slot_10_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "10", " : ", inventory_slot_10_name + " x " + str(inventory_slot_10_quantity), " |"))
-    if(inventory_slot_11 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "11", " : ", inventory_slot_11_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "11", " : ", inventory_slot_11_name + " x " + str(inventory_slot_11_quantity), " |"))
-    if(inventory_slot_12 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "12", " : ", inventory_slot_12_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "12", " : ", inventory_slot_12_name + " x " + str(inventory_slot_12_quantity), " |"))
-    if(inventory_slot_13 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "13", " : ", inventory_slot_13_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "13", " : ", inventory_slot_13_name + " x " + str(inventory_slot_13_quantity), " |"))
-    if(inventory_slot_14 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "14", " : ", inventory_slot_14_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "14", " : ", inventory_slot_14_name + " x " + str(inventory_slot_14_quantity), " |"))
-    if(inventory_slot_15 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "15", " : ", inventory_slot_15_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "15", " : ", inventory_slot_15_name + " x " + str(inventory_slot_15_quantity), " |"))
-    if(inventory_slot_16 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "16", " : ", inventory_slot_16_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "16", " : ", inventory_slot_16_name + " x " + str(inventory_slot_16_quantity), " |"))
-    if(inventory_slot_17 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "17", " : ", inventory_slot_17_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "17", " : ", inventory_slot_17_name + " x " + str(inventory_slot_17_quantity), " |"))
-    if(inventory_slot_18 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "18", " : ", inventory_slot_18_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "18", " : ", inventory_slot_18_name + " x " + str(inventory_slot_18_quantity), " |"))
-    if(inventory_slot_19 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "19", " : ", inventory_slot_19_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "19", " : ", inventory_slot_19_name + " x " + str(inventory_slot_19_quantity), " |"))
-    if(inventory_slot_20 == 0):
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "20", " : ", inventory_slot_20_name, " |"))
-    else:
-        print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", "20", " : ", inventory_slot_20_name + " x " + str(inventory_slot_20_quantity), " |"))
+
+    for i in range(1,21):
+        if(inventory_slot[i] == 0):
+            print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", str(i), " : ", inventory_slot_name[i], " |"))
+        else:
+            print('{:2s}{:>2s}{:3s}{:<55s}{:2s}'.format("| ", str(i), " : ", inventory_slot_name[i] + " x " + str(inventory_slot_quantity[i]), " |"))
     print(dash)
 
 def Show_Buffs():
 
-    #fetch buff integers
-    cur.execute("SELECT buff_slot_1 FROM Player WHERE name = ?", (name,))
-    buff_slot_1 = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_2 FROM Player WHERE name = ?", (name,))
-    buff_slot_2 = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_3 FROM Player WHERE name = ?", (name,))
-    buff_slot_3 = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_4 FROM Player WHERE name = ?", (name,))
-    buff_slot_4 = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_5 FROM Player WHERE name = ?", (name,))
-    buff_slot_5 = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_6 FROM Player WHERE name = ?", (name,))
-    buff_slot_6 = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_7 FROM Player WHERE name = ?", (name,))
-    buff_slot_7 = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_8 FROM Player WHERE name = ?", (name,))
-    buff_slot_8 = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_9 FROM Player WHERE name = ?", (name,))
-    buff_slot_9 = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_10 FROM Player WHERE name = ?", (name,))
-    buff_slot_10 = cur.fetchall()[0][0]
+    buff_id = {}
+    buff_name = {}
+    buff_timer = {}
 
-    #fetch buff names, from integers
-    cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_slot_1,))
-    buff_slot_1_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_slot_2,))
-    buff_slot_2_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_slot_3,))
-    buff_slot_3_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_slot_4,))
-    buff_slot_4_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_slot_5,))
-    buff_slot_5_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_slot_6,))
-    buff_slot_6_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_slot_7,))
-    buff_slot_7_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_slot_8,))
-    buff_slot_8_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_slot_9,))
-    buff_slot_9_name = cur.fetchall()[0][0]
-    cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_slot_10,))
-    buff_slot_10_name = cur.fetchall()[0][0]
-    
-
-    #fetch buff times, from integers
-    cur.execute("SELECT buff_slot_1_timer FROM Player WHERE name = ?", (name,))
-    buff_slot_1_timer = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_2_timer FROM Player WHERE name = ?", (name,))
-    buff_slot_2_timer = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_3_timer FROM Player WHERE name = ?", (name,))
-    buff_slot_3_timer = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_4_timer FROM Player WHERE name = ?", (name,))
-    buff_slot_4_timer = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_5_timer FROM Player WHERE name = ?", (name,))
-    buff_slot_5_timer = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_6_timer FROM Player WHERE name = ?", (name,))
-    buff_slot_6_timer = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_7_timer FROM Player WHERE name = ?", (name,))
-    buff_slot_7_timer = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_8_timer FROM Player WHERE name = ?", (name,))
-    buff_slot_8_timer = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_9_timer FROM Player WHERE name = ?", (name,))
-    buff_slot_9_timer = cur.fetchall()[0][0]
-    cur.execute("SELECT buff_slot_10_timer FROM Player WHERE name = ?", (name,))
-    buff_slot_10_timer = cur.fetchall()[0][0]
+    for i in range(1, 11):
+        cur.execute("SELECT buff_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
+        buff_id[i] = cur.fetchall()[0][0]
+        cur.execute("SELECT name FROM Buff WHERE id = ?", (buff_id[i],))
+        buff_name[i] = cur.fetchall()[0][0]
+        cur.execute("SELECT buff_slot_" + str(i) + "_timer FROM Player WHERE name = ?", (name,))
+        buff_timer[i] = cur.fetchall()[0][0]
 
     #buff printing
     dash = '-' * 120
@@ -677,492 +416,99 @@ def Show_Buffs():
     print(dash)
     print('{:2s}{:3s}{:113s}{:2s}'.format("| ", "", "Current Buffs", " |"))
     print(dash)
+    print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
 
     #buff slot 1
-    if(buff_slot_1 > 0):
-        print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_slot_1_timer, "s", " : ", buff_slot_1_name, " |"))
+    for i in range(1, 11):
+        if(buff_id[i] > 0):
+            print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_timer[i], "s", " : ", buff_name[i], " |"))
 
-        buff_stat_list = ""
-        cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_slot_1,))
-        buff_max_health = cur.fetchall()[0][0]
-        if(buff_max_health > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
-        
-        cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_slot_1,))
-        buff_max_mana = cur.fetchall()[0][0]
-        if(buff_max_mana > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
+            buff_stat_list = ""
+            cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_id[i],))
+            buff_max_health = cur.fetchall()[0][0]
+            if(buff_max_health > 0):
+                buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
+            
+            cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_id[i],))
+            buff_max_mana = cur.fetchall()[0][0]
+            if(buff_max_mana > 0):
+                buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
 
-        cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_slot_1,))
-        buff_strength = cur.fetchall()[0][0]
-        if(buff_strength > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
-        
-        cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_slot_1,))
-        buff_stamina = cur.fetchall()[0][0]
-        if(buff_stamina > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
-        
-        cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_slot_1,))
-        buff_dexterity = cur.fetchall()[0][0]
-        if(buff_dexterity > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
+            cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_id[i],))
+            buff_strength = cur.fetchall()[0][0]
+            if(buff_strength > 0):
+                buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
+            
+            cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_id[i],))
+            buff_stamina = cur.fetchall()[0][0]
+            if(buff_stamina > 0):
+                buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
+            
+            cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_id[i],))
+            buff_dexterity = cur.fetchall()[0][0]
+            if(buff_dexterity > 0):
+                buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
 
-        cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_slot_1,))
-        buff_agility = cur.fetchall()[0][0]
-        if(buff_agility > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
-        
-        cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_slot_1,))
-        buff_intelligence = cur.fetchall()[0][0]
-        if(buff_intelligence > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
+            cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_id[i],))
+            buff_agility = cur.fetchall()[0][0]
+            if(buff_agility > 0):
+                buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
+            
+            cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_id[i],))
+            buff_intelligence = cur.fetchall()[0][0]
+            if(buff_intelligence > 0):
+                buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
 
-        cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_slot_1,))
-        buff_charisma = cur.fetchall()[0][0]
-        if(buff_charisma > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
+            cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_id[i],))
+            buff_charisma = cur.fetchall()[0][0]
+            if(buff_charisma > 0):
+                buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
 
-        print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
-        print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
-
-    #buff slot 2
-    if(buff_slot_2 > 0):
-        print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_slot_2_timer, "s", " : ", buff_slot_2_name, " |"))
-        
-        buff_stat_list = ""
-        cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_slot_2,))
-        buff_max_health = cur.fetchall()[0][0]
-        if(buff_max_health > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
-        
-        cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_slot_2,))
-        buff_max_mana = cur.fetchall()[0][0]
-        if(buff_max_mana > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
-
-        cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_slot_2,))
-        buff_strength = cur.fetchall()[0][0]
-        if(buff_strength > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
-        
-        cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_slot_2,))
-        buff_stamina = cur.fetchall()[0][0]
-        if(buff_stamina > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
-        
-        cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_slot_2,))
-        buff_dexterity = cur.fetchall()[0][0]
-        if(buff_dexterity > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
-
-        cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_slot_2,))
-        buff_agility = cur.fetchall()[0][0]
-        if(buff_agility > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
-        
-        cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_slot_2,))
-        buff_intelligence = cur.fetchall()[0][0]
-        if(buff_intelligence > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
-
-        cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_slot_2,))
-        buff_charisma = cur.fetchall()[0][0]
-        if(buff_charisma > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
-
-        print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
-        print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
-
-    #buff slot 3
-    if(buff_slot_3 > 0):
-        print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_slot_3_timer, "s", " : ", buff_slot_3_name, " |"))
-
-        buff_stat_list = ""
-        cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_slot_3,))
-        buff_max_health = cur.fetchall()[0][0]
-        if(buff_max_health > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
-        
-        cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_slot_3,))
-        buff_max_mana = cur.fetchall()[0][0]
-        if(buff_max_mana > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
-
-        cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_slot_3,))
-        buff_strength = cur.fetchall()[0][0]
-        if(buff_strength > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
-        
-        cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_slot_3,))
-        buff_stamina = cur.fetchall()[0][0]
-        if(buff_stamina > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
-        
-        cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_slot_3,))
-        buff_dexterity = cur.fetchall()[0][0]
-        if(buff_dexterity > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
-
-        cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_slot_3,))
-        buff_agility = cur.fetchall()[0][0]
-        if(buff_agility > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
-        
-        cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_slot_3,))
-        buff_intelligence = cur.fetchall()[0][0]
-        if(buff_intelligence > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
-
-        cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_slot_3,))
-        buff_charisma = cur.fetchall()[0][0]
-        if(buff_charisma > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
-
-        print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
-        print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
-
-    #buff slot 4
-    if(buff_slot_4 > 0):
-        print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_slot_4_timer, "s", " : ", buff_slot_4_name, " |"))
-
-        buff_stat_list = ""
-        cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_slot_4,))
-        buff_max_health = cur.fetchall()[0][0]
-        if(buff_max_health > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
-        
-        cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_slot_4,))
-        buff_max_mana = cur.fetchall()[0][0]
-        if(buff_max_mana > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
-
-        cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_slot_4,))
-        buff_strength = cur.fetchall()[0][0]
-        if(buff_strength > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
-        
-        cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_slot_4,))
-        buff_stamina = cur.fetchall()[0][0]
-        if(buff_stamina > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
-        
-        cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_slot_4,))
-        buff_dexterity = cur.fetchall()[0][0]
-        if(buff_dexterity > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
-
-        cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_slot_4,))
-        buff_agility = cur.fetchall()[0][0]
-        if(buff_agility > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
-        
-        cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_slot_4,))
-        buff_intelligence = cur.fetchall()[0][0]
-        if(buff_intelligence > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
-
-        cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_slot_4,))
-        buff_charisma = cur.fetchall()[0][0]
-        if(buff_charisma > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
-
-        print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
-        print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
-
-    #buff slot 5
-    if(buff_slot_5 > 0):
-        print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_slot_5_timer, "s", " : ", buff_slot_5_name, " |"))
-
-        buff_stat_list = ""
-        cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_slot_5,))
-        buff_max_health = cur.fetchall()[0][0]
-        if(buff_max_health > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
-        
-        cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_slot_5,))
-        buff_max_mana = cur.fetchall()[0][0]
-        if(buff_max_mana > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
-
-        cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_slot_5,))
-        buff_strength = cur.fetchall()[0][0]
-        if(buff_strength > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
-        
-        cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_slot_5,))
-        buff_stamina = cur.fetchall()[0][0]
-        if(buff_stamina > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
-        
-        cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_slot_5,))
-        buff_dexterity = cur.fetchall()[0][0]
-        if(buff_dexterity > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
-
-        cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_slot_5,))
-        buff_agility = cur.fetchall()[0][0]
-        if(buff_agility > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
-        
-        cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_slot_5,))
-        buff_intelligence = cur.fetchall()[0][0]
-        if(buff_intelligence > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
-
-        cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_slot_5,))
-        buff_charisma = cur.fetchall()[0][0]
-        if(buff_charisma > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
-
-        print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
-        print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
-    
-    #buff slot 6
-    if(buff_slot_6 > 0):
-        print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_slot_6_timer, "s", " : ", buff_slot_6_name, " |"))
-
-        buff_stat_list = ""
-        cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_slot_6,))
-        buff_max_health = cur.fetchall()[0][0]
-        if(buff_max_health > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
-        
-        cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_slot_6,))
-        buff_max_mana = cur.fetchall()[0][0]
-        if(buff_max_mana > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
-
-        cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_slot_6,))
-        buff_strength = cur.fetchall()[0][0]
-        if(buff_strength > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
-        
-        cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_slot_6,))
-        buff_stamina = cur.fetchall()[0][0]
-        if(buff_stamina > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
-        
-        cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_slot_6,))
-        buff_dexterity = cur.fetchall()[0][0]
-        if(buff_dexterity > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
-
-        cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_slot_6,))
-        buff_agility = cur.fetchall()[0][0]
-        if(buff_agility > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
-        
-        cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_slot_6,))
-        buff_intelligence = cur.fetchall()[0][0]
-        if(buff_intelligence > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
-
-        cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_slot_6,))
-        buff_charisma = cur.fetchall()[0][0]
-        if(buff_charisma > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
-
-        print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
-        print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
-
-    #buff slot 7
-    if(buff_slot_7 > 0):
-        print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_slot_7_timer, "s", " : ", buff_slot_7_name, " |"))
-
-        buff_stat_list = ""
-        cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_slot_7,))
-        buff_max_health = cur.fetchall()[0][0]
-        if(buff_max_health > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
-        
-        cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_slot_7,))
-        buff_max_mana = cur.fetchall()[0][0]
-        if(buff_max_mana > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
-
-        cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_slot_7,))
-        buff_strength = cur.fetchall()[0][0]
-        if(buff_strength > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
-        
-        cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_slot_7,))
-        buff_stamina = cur.fetchall()[0][0]
-        if(buff_stamina > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
-        
-        cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_slot_7,))
-        buff_dexterity = cur.fetchall()[0][0]
-        if(buff_dexterity > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
-
-        cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_slot_7,))
-        buff_agility = cur.fetchall()[0][0]
-        if(buff_agility > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
-        
-        cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_slot_7,))
-        buff_intelligence = cur.fetchall()[0][0]
-        if(buff_intelligence > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
-
-        cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_slot_7,))
-        buff_charisma = cur.fetchall()[0][0]
-        if(buff_charisma > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
-
-        print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
-        print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
-
-    #buff slot 8
-    if(buff_slot_8 > 0):
-        print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_slot_8_timer, "s", " : ", buff_slot_8_name, " |"))
-
-        buff_stat_list = ""
-        cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_slot_8,))
-        buff_max_health = cur.fetchall()[0][0]
-        if(buff_max_health > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
-        
-        cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_slot_8,))
-        buff_max_mana = cur.fetchall()[0][0]
-        if(buff_max_mana > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
-
-        cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_slot_8,))
-        buff_strength = cur.fetchall()[0][0]
-        if(buff_strength > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
-        
-        cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_slot_8,))
-        buff_stamina = cur.fetchall()[0][0]
-        if(buff_stamina > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
-        
-        cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_slot_8,))
-        buff_dexterity = cur.fetchall()[0][0]
-        if(buff_dexterity > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
-
-        cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_slot_8,))
-        buff_agility = cur.fetchall()[0][0]
-        if(buff_agility > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
-        
-        cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_slot_8,))
-        buff_intelligence = cur.fetchall()[0][0]
-        if(buff_intelligence > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
-
-        cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_slot_8,))
-        buff_charisma = cur.fetchall()[0][0]
-        if(buff_charisma > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
-
-        print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
-        print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
-
-    #buff slot 9
-    if(buff_slot_9 > 0):
-        print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_slot_9_timer, "s", " : ", buff_slot_9_name, " |"))
-
-        buff_stat_list = ""
-        cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_slot_9,))
-        buff_max_health = cur.fetchall()[0][0]
-        if(buff_max_health > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
-        
-        cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_slot_9,))
-        buff_max_mana = cur.fetchall()[0][0]
-        if(buff_max_mana > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
-
-        cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_slot_9,))
-        buff_strength = cur.fetchall()[0][0]
-        if(buff_strength > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
-        
-        cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_slot_9,))
-        buff_stamina = cur.fetchall()[0][0]
-        if(buff_stamina > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
-        
-        cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_slot_9,))
-        buff_dexterity = cur.fetchall()[0][0]
-        if(buff_dexterity > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
-
-        cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_slot_9,))
-        buff_agility = cur.fetchall()[0][0]
-        if(buff_agility > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
-        
-        cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_slot_9,))
-        buff_intelligence = cur.fetchall()[0][0]
-        if(buff_intelligence > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
-
-        cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_slot_9,))
-        buff_charisma = cur.fetchall()[0][0]
-        if(buff_charisma > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
-
-        print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
-        print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
-
-    #buff slot 10
-    if(buff_slot_10 > 0):
-        print('{:2s}{:>4}{:1s}{:3s}{:<108s}{:2s}'.format("| ", buff_slot_10_timer, "s", " : ", buff_slot_10_name, " |"))
-
-        buff_stat_list = ""
-        cur.execute("SELECT max_health FROM Buff WHERE id = ?", (buff_slot_10,))
-        buff_max_health = cur.fetchall()[0][0]
-        if(buff_max_health > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_health) + " Health "
-        
-        cur.execute("SELECT max_mana FROM Buff WHERE id = ?", (buff_slot_10,))
-        buff_max_mana = cur.fetchall()[0][0]
-        if(buff_max_mana > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_max_mana) + " Mana "
-
-        cur.execute("SELECT strength FROM Buff WHERE id = ?", (buff_slot_10,))
-        buff_strength = cur.fetchall()[0][0]
-        if(buff_strength > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_strength) + " Strength "
-        
-        cur.execute("SELECT stamina FROM Buff WHERE id = ?", (buff_slot_10,))
-        buff_stamina = cur.fetchall()[0][0]
-        if(buff_stamina > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_stamina) + " Stamina "
-        
-        cur.execute("SELECT dexterity FROM Buff WHERE id = ?", (buff_slot_10,))
-        buff_dexterity = cur.fetchall()[0][0]
-        if(buff_dexterity > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_dexterity) + " Dexterity "
-
-        cur.execute("SELECT agility FROM Buff WHERE id = ?", (buff_slot_10,))
-        buff_agility = cur.fetchall()[0][0]
-        if(buff_agility > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_agility) + " Agility "
-        
-        cur.execute("SELECT intelligence FROM Buff WHERE id = ?", (buff_slot_10,))
-        buff_intelligence = cur.fetchall()[0][0]
-        if(buff_intelligence > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_intelligence) + " Intelligence "
-
-        cur.execute("SELECT charisma FROM Buff WHERE id = ?", (buff_slot_10,))
-        buff_charisma = cur.fetchall()[0][0]
-        if(buff_charisma > 0):
-            buff_stat_list = buff_stat_list + "+" + str(buff_charisma) + " Charisma"
-
-        print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
-        print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
+            print('{:2s}{:8s}{:<108s}{:2s}'.format("| ", "", buff_stat_list, " |"))
+            print('{:2s}{:116s}{:2s}'.format("| ", "", " |"))
 
     print(dash)
 
-def Move(direction):
+def RecalibrateStats():
 
-    #cur = conn.cursor()
+    slot_list = ["primary", "secondary", "head", "body", "feet", "hands", "legs", "ring"]
+    equipment = {}
+    to_add = {"strength" : 0, "stamina" : 0, "dexterity" : 0, "agility" : 0, "intelligence" : 0, "wisdom" : 0, "charisma" : 0}
+
+    #Iterate through equipment and add stats together
+    for slot in slot_list:
+        cur.execute("select equipment_" + slot + " from player where name = ?", (name,))
+        equipment[slot] = cur.fetchall()[0][0]
+
+        if(equipment[slot] != "0"):
+            for stat in to_add:
+                cur.execute("select modify_" + stat + " from Item where id = ?", (equipment[slot],))
+                to_add[stat] += int(cur.fetchall()[0][0])
+
+    print(to_add)
+
+    base_stat = {}
+    new_stat = {}
+    #Get the base stats
+    for stat in to_add:
+        cur.execute("select base_" + stat + " from Player where name = ?", (name,))
+        base_stat[stat] = int(cur.fetchall()[0][0])
+
+    #Add new stats to the base stats
+    for stat in to_add:
+        new_stat[stat] = base_stat[stat] + to_add[stat]
+        cur.execute("update Player set " + stat + " = " + str(new_stat[stat]) + " where name = ?", (name,))
+
+    #HP recalibration with stamina
+    max_health = new_stat["stamina"] * 10
+    cur.execute("update Player set max_health = " + str(max_health) + " where name = ?", (name,))
+    conn.commit()
+
+    
+
+
+
+def Move(direction):
     cur.execute("SELECT location FROM Player WHERE name = ?", (name,))
     location = cur.fetchall()[0][0]
     cur.execute("SELECT north FROM Room WHERE location = ?", (location,))
@@ -1215,6 +561,10 @@ def Move(direction):
 
     Look()
     
+def Get_Health(stamina):
+    return stamina * 10
+    
+
 def Level_Up():
     
     cur.execute("SELECT player_class FROM Player WHERE name = ?", (name,))
@@ -1332,18 +682,20 @@ def Level_Up():
         sql = "UPDATE Player SET charisma = ? WHERE name = ?"
         cur.execute(sql, (base_charisma + temp_charisma_buff, name,))
         conn.commit()
-
-
-
+        
         #----------------------------Health--------------------------------------
-        cur.execute("SELECT base_max_health FROM Player WHERE name = ?", (name,))
-        base_max_health = cur.fetchall()[0][0]
         cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
         max_health = cur.fetchall()[0][0]
         #new base_stamina
         cur.execute("SELECT base_stamina FROM Player WHERE name = ?", (name,))
         base_stamina = cur.fetchall()[0][0]
 
+        max_health = stamina * 10
+        sql = "UPDATE Player SET max_health = ? WHERE name = ?"
+        cur.execute(sql, (max_health, name,))
+        conn.commit()        
+
+        """
         #saving difference in hp from buffs. Say base_max_health = 30 but max_health = 50 due to a 20 hp buff. We save the 20 hp in temp_health_buff, we increase base_max_health for levelup, say to 40 hp, then max_health + temp_health_buff = 60. Now we have new hp value with the buff still applied.
         temp_health_buff = max_health - base_max_health
 
@@ -1354,6 +706,10 @@ def Level_Up():
         sql = "UPDATE Player SET max_health = ? WHERE name = ?"
         cur.execute(sql, (base_max_health + temp_health_buff, name,))
         conn.commit()
+        """
+
+    
+    RecalibrateStats()
 
 def Combat(npc_id):
 
@@ -1636,7 +992,7 @@ def Health_Regen():
         cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
         max_health = cur.fetchall()[0][0]
 
-        health += round(max_health * 0.09)
+        health += round(max_health * 0.1)
 
         if(health > max_health):
             health = max_health
@@ -1644,6 +1000,7 @@ def Health_Regen():
         sql = "UPDATE Player SET health = ? WHERE name = ?"
         cur.execute(sql, (health, name,))
         conn.commit()
+        conn.close()
 
 def Health_Regen_Initiate():
     thread = threading.Thread(target = Health_Regen)
@@ -1667,6 +1024,7 @@ def Npc_Respawn(npc_id):
     sql = "UPDATE Npc SET health = ? WHERE id = ?"
     cur.execute(sql, (max_health, npc_id,))
     conn.commit()
+    conn.close()
 
 def Equip_Item(item):
     
@@ -1692,75 +1050,11 @@ def Equip_Item(item):
                     item_is_in_inventory = True
                     inventory_slot_id_for_found_item = i
                     break
-
             if(item_is_in_inventory and inventory_slot_quantity > 0):
-                
                 if(player_level >= item_level_requirement):
-
-                    current_equipment = {}
-                    empty_inventory_slot = None
-                    if(item_slot == "primary"):
-                        cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
-                        current_equipment["primary"] = cur.fetchall()[0][0]
-                        if(current_equipment["primary"] != item_id):
-                            previously_equipped_inventory_slot_quantity = 0
-                            for i in range(1, 21):
-                                cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
-                                previously_equipped_inventory_slot_id = cur.fetchall()[0][0]
-                                if(previously_equipped_inventory_slot_id == current_equipment["primary"]):
-                                    cur.execute("SELECT inventory_slot_" + str(i) + "_quantity FROM Player WHERE name = ?", (name,))
-                                    previously_equipped_inventory_slot_quantity = cur.fetchall()[0][0]
-                                    previously_equipped_item_is_in_inventory = True
-                                    previously_equipped_inventory_slot_id_for_found_item = i
-                                    break                        
-
-                            #If the item in inventory has quantity of more than one and the previously equipped item also exists in inventory
-                            #In this case decrement the one to be equipped and increment the one being de-equipped
-                            if(inventory_slot_quantity > 1 and previously_equipped_inventory_slot_quantity > 0):
-                                #Reduce quantity in current inventory
-                                cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (inventory_slot_quantity - 1, name,))
-                                #Increase quantity of previously equipped item in inventory
-                                cur.execute("update Player set inventory_slot_" + str(previously_equipped_inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (previously_equipped_inventory_slot_quantity + 1, name,))
-                                cur.execute("update Player set equipment_primary = ? WHERE name = ?", (item_id, name,))
-                            #If the item in inventory has quantity of more than one but the one already equipped doesn't exist in inventory
-                            #In this case decrement the one to be equipped and ensure there's an empty spot in inventory for the currently equipped item to go
-                            elif(inventory_slot_quantity > 1 and previously_equipped_inventory_slot_quantity == 0):
-                                #Is there an empty spot in the inventory for the currently equipped item to go?
-                                is_there_empty_inventory_slot = False
-                                for i in range(1, 21):
-                                    cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
-                                    temp_slot = cur.fetchall()[0][0]
-                                    if(temp_slot == 0):
-                                        is_there_empty_inventory_slot = True
-                                        empty_inventory_slot = i
-                                        break
-                                if(is_there_empty_inventory_slot):
-                                    #Reduce quantity in current inventory
-                                    cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (inventory_slot_quantity - 1, name,))                                    
-                                    cur.execute("update Player set inventory_slot_" + str(empty_inventory_slot) + " = ? WHERE name = ?", (current_equipment["primary"], name,))
-                                    cur.execute("update Player set inventory_slot_" + str(empty_inventory_slot) + "_quantity = ? WHERE name = ?", (1, name,))
-                                    cur.execute("update Player set equipment_primary = ? WHERE name = ?", (item_id, name,))
-                                else:
-                                    print("You don't have room in your inventory for the currently equipped item.")
-                            #If the item in inventory only has one but the item to be equipped also exists in inventory
-                            #In this case replace inventory item with item ID 0 (Nothing), and increment the quantity in inventory of item being de-equipped
-                            elif(inventory_slot_quantity == 1 and previously_equipped_inventory_slot_quantity > 0):
-                                #Increment currently equipped, set inventory to 0 (Nothing)
-                                #Increase quantity of previously equipped item in inventory
-                                cur.execute("update Player set inventory_slot_" + str(previously_equipped_inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (previously_equipped_inventory_slot_quantity + 1, name,))                            
-                                #Update inventory id to 0 for the item to be equipped
-                                cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (0, name,))
-                                cur.execute("update Player set equipment_primary = ? WHERE name = ?", (item_id, name,))                                                         
-                            else:
-                                cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment["primary"], name,))
-                                cur.execute("update Player set equipment_primary = ? WHERE name = ?", (item_id, name,))
-                            conn.commit()
-                            print("You are now using " + item + ".")
-                        else:
-                            print("You already have that equipped.")
+                    Inventory_Swap(item_slot, item_id, inventory_slot_quantity, inventory_slot_id_for_found_item, item)
                 else:
                     print("You are not powerful enough to equip this item.")
-
             else:
                 print("You do not possess such item.")
         else:
@@ -1768,7 +1062,74 @@ def Equip_Item(item):
     else:
         print("The item you described does not exist in this universe.")
         
+#Still need to account for dual wielding        
+def Inventory_Swap(item_slot, item_id, inventory_slot_quantity, inventory_slot_id_for_found_item, item):
+    global cur
+    cur.execute("SELECT equipment_" + item_slot + " FROM Player WHERE name = ?", (name,))
+    #Item ID of equipped item
+    current_equipment = cur.fetchall()[0][0]
+    if(current_equipment != item_id):
+        previously_equipped_inventory_slot_quantity = 0
+        for i in range(1, 21):
+            cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
+            previously_equipped_inventory_slot_id = cur.fetchall()[0][0]
+            if(previously_equipped_inventory_slot_id == current_equipment):
+                cur.execute("SELECT inventory_slot_" + str(i) + "_quantity FROM Player WHERE name = ?", (name,))
+                previously_equipped_inventory_slot_quantity = cur.fetchall()[0][0]
+                previously_equipped_item_is_in_inventory = True
+                previously_equipped_inventory_slot_id_for_found_item = i
+                break                        
 
+        #If the item in inventory has quantity of more than one and the previously equipped item also exists in inventory
+        #In this case decrement the one to be equipped and increment the one being de-equipped
+        if(inventory_slot_quantity > 1 and previously_equipped_inventory_slot_quantity > 0):
+            #Reduce quantity in current inventory
+            cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (inventory_slot_quantity - 1, name,))
+            #Increase quantity of previously equipped item in inventory
+            cur.execute("update Player set inventory_slot_" + str(previously_equipped_inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (previously_equipped_inventory_slot_quantity + 1, name,))
+            cur.execute("update Player set equipment_" + item_slot + " = ? WHERE name = ?", (item_id, name,))
+        #If the item in inventory has quantity of more than one but the one already equipped doesn't exist in inventory
+        #In this case decrement the one to be equipped and ensure there's an empty spot in inventory for the currently equipped item to go
+        elif(inventory_slot_quantity > 1 and previously_equipped_inventory_slot_quantity == 0):
+            #Is there an empty spot in the inventory for the currently equipped item to go?
+            is_there_empty_inventory_slot = False
+            for i in range(1, 21):
+                cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
+                temp_slot = cur.fetchall()[0][0]
+                if(temp_slot == 0):
+                    is_there_empty_inventory_slot = True
+                    empty_inventory_slot = i
+                    break
+            if(is_there_empty_inventory_slot):
+                #Reduce quantity in current inventory
+                cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (inventory_slot_quantity - 1, name,))                                    
+                cur.execute("update Player set inventory_slot_" + str(empty_inventory_slot) + " = ? WHERE name = ?", (current_equipment, name,))
+                cur.execute("update Player set inventory_slot_" + str(empty_inventory_slot) + "_quantity = ? WHERE name = ?", (1, name,))
+                cur.execute("update Player set equipment_" + item_slot + " = ? WHERE name = ?", (item_id, name,))
+            else:
+                print("You don't have room in your inventory for the currently equipped item.")
+        #If the item in inventory only has one but the item to be equipped also exists in inventory
+        #In this case replace inventory item with item ID 0 (Nothing), and increment the quantity in inventory of item being de-equipped
+        elif(inventory_slot_quantity == 1 and previously_equipped_inventory_slot_quantity > 0):
+            #Increment currently equipped, set inventory to 0 (Nothing)
+            #Increase quantity of previously equipped item in inventory
+            cur.execute("update Player set inventory_slot_" + str(previously_equipped_inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (previously_equipped_inventory_slot_quantity + 1, name,))                            
+            #Update inventory id to 0 for the item to be equipped
+            cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (0, name,))
+            cur.execute("update Player set equipment_" + item_slot + " = ? WHERE name = ?", (item_id, name,))                                                         
+        else:
+            cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + " = ? WHERE name = ?", (current_equipment, name,))
+            cur.execute("update Player set equipment_" + item_slot + " = ? WHERE name = ?", (item_id, name,))
+        conn.commit()
+        print("You are now using " + item + ".")
+    else:
+        print("You already have that equipped.")
+
+    RecalibrateStats()
+
+def Sql_Select(selecter, table, comparer_column, comparer_value):
+    global name
+    cur.execute("SELECT " + selecter + " FROM " + table + " WHERE name = ?", (name,))
 
 #Takes in the item name as a string
 def Get_Item_Id(item_name):
@@ -1968,9 +1329,6 @@ def CreateCharacter():
             print("Please select a valid class.")
     
     if(player_class == "Warrior"):
-        health = 25
-        base_max_health = 25
-        max_health = 25
         mana = 1
         base_max_mana = 1
         max_mana = 1
@@ -1988,14 +1346,19 @@ def CreateCharacter():
         wisdom = 3
         base_charisma = 5
         charisma = 5
-        equipment_primary = 0
+        health = Get_Health(stamina)
+        max_health = Get_Health(stamina)
+        equipment_primary = 1
         equipment_secondary = 0
         equipment_head = 0
-        equipment_body = 0
+        equipment_body = 2000
         equipment_feet = 0
         equipment_hands = 0
-        create_player(conn, name, final_password_hash[32:], final_password_hash[:32], player_class, health, base_max_health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands)
+        equipment_legs = 0
+        equipment_ring = 0
+        create_player(conn, name, final_password_hash[32:], final_password_hash[:32], player_class, health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, equipment_legs, equipment_ring)
     
+    RecalibrateStats()
     print()
     print("Welcome, " + name + " to the Empire of Zek!")
     return False
@@ -2042,57 +1405,55 @@ def DeleteCharacter():
             print()
             print("Your password was incorrect.")    
 
+def Show_Prompt(cur):
+    
+    cur.execute("SELECT health FROM Player WHERE name = ?", (name,))
+    health = cur.fetchall()[0][0]
+    cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
+    max_health = cur.fetchall()[0][0]
+    cur.execute("SELECT mana FROM Player WHERE name = ?", (name,))
+    mana = cur.fetchall()[0][0]
+    cur.execute("SELECT max_mana FROM Player WHERE name = ?", (name,))
+    max_mana = cur.fetchall()[0][0]
+    
+    cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
+    level = cur.fetchall()[0][0]
+    cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
+    totalexp = cur.fetchall()[0][0]
+    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level,))
+    current_level_exp = cur.fetchall()[0][0]
+    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level + 1,))
+    next_level_exp = cur.fetchall()[0][0]
+    
+    level_tnl = next_level_exp - current_level_exp
+    exp_percent = round((totalexp - current_level_exp) / level_tnl * 100, 5)
+    print("[", end='')
+    print(health, end='')
+    print("/", end='')
+    print(max_health, end=' ')
+    print("(", end='')
+    #print(health / max_health * 100, end='')
+    print("{:0.2f}".format(health / max_health * 100), end='')
+    print("%) ", end='')
+    print(mana, end='')
+    print("/", end='')
+    print(max_mana, end=' ')
+    print("(", end='')
+    #print(mana / max_mana * 100, end='')
+    print("{:0.2f}".format(mana / max_mana * 100), end='')
+    print("%) ", end='')
+    print("EXP: ", end='')
+    print("{:0.2f}".format(exp_percent), end='')
+    print("%", end='')
+    print("]", end='')
+    print(">", end='')
+
 def MainLoop():
     while(True):
-        #-------------------------------PROMPT----------------------------------
-        cur.execute("SELECT health FROM Player WHERE name = ?", (name,))
-        health = cur.fetchall()[0][0]
-        cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
-        max_health = cur.fetchall()[0][0]
-        cur.execute("SELECT mana FROM Player WHERE name = ?", (name,))
-        mana = cur.fetchall()[0][0]
-        cur.execute("SELECT max_mana FROM Player WHERE name = ?", (name,))
-        max_mana = cur.fetchall()[0][0]
-        
-        cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
-        level = cur.fetchall()[0][0]
-        cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
-        totalexp = cur.fetchall()[0][0]
-        cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level,))
-        current_level_exp = cur.fetchall()[0][0]
-        cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level + 1,))
-        next_level_exp = cur.fetchall()[0][0]
-        
-        level_tnl = next_level_exp - current_level_exp
-        exp_percent = round((totalexp - current_level_exp) / level_tnl * 100, 5)
-
-
-        #print()
-        #print("HP: ", end='')
-        print("[", end='')
-        print(health, end='')
-        print("/", end='')
-        print(max_health, end=' ')
-        print("(", end='')
-        #print(health / max_health * 100, end='')
-        print("{:0.2f}".format(health / max_health * 100), end='')
-        print("%) ", end='')
-        print(mana, end='')
-        print("/", end='')
-        print(max_mana, end=' ')
-        print("(", end='')
-        #print(mana / max_mana * 100, end='')
-        print("{:0.2f}".format(mana / max_mana * 100), end='')
-        print("%) ", end='')
-        print("EXP: ", end='')
-        print("{:0.2f}".format(exp_percent), end='')
-        print("%", end='')
-        print("]", end='')
-        print(">", end='')
-        #-----------------------------------------------------------------------
+        Show_Prompt(cur)
         choice = input()
-
         Command(choice)
+
 #------------------------MAIN--------------------------
 def main():
 
