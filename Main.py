@@ -55,7 +55,7 @@ def create_table(conn, create_table_sql):
     except Error as e:
         print(e)
     
-def create_player(conn, name, player_password_key, player_password_salt, player_class, health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, equipment_legs, equipment_ring):
+def create_player(conn, name, player_password_key, player_password_salt, player_class, location, health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, equipment_legs, equipment_ring):
     """
     Create a Player
     :param conn:  Connection to the SQLite database
@@ -67,6 +67,7 @@ def create_player(conn, name, player_password_key, player_password_salt, player_
         player_password_key,
         player_password_salt,
         player_class,
+        location,
         health,
         max_health,
         mana,
@@ -94,11 +95,13 @@ def create_player(conn, name, player_password_key, player_password_salt, player_
         equipment_hands,
         equipment_legs,
         equipment_ring
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) """
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) """
     #(id, name, location, totalexp, level, base_max_mana, base_strength, base_stamina, base_dexterity, base_agility, base_intelligence, base_wisdom, base_charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, gold, invetory_slot_1, invetory_slot_2, invetory_slot_3, invetory_slot_4, invetory_slot_5, invetory_slot_6, invetory_slot_7, invetory_slot_8, invetory_slot_9, invetory_slot_10, invetory_slot_11, invetory_slot_12, invetory_slot_13, invetory_slot_14, invetory_slot_15, invetory_slot_16, invetory_slot_17, invetory_slot_18, invetory_slot_19, invetory_slot_20)
     cur = conn.cursor()
-    cur.execute(sql, (name, player_password_key, player_password_salt, player_class, health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, equipment_legs, equipment_ring))
+    cur.execute(sql, (name, player_password_key, player_password_salt, player_class, location, health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, equipment_legs, equipment_ring))
     conn.commit()
+    
+    RecalibrateStats()
 
 def create_room(conn, location, description, npc1, npc1_existence, npc2, npc2_existence, npc3, npc3_existence, npc4, npc4_existence, npc5, npc5_existence, npc6, npc6_existence, npc7, npc7_existence, npc8, npc8_existence, npc9, npc9_existence, npc10, npc10_existence, npc11, npc11_existence, npc12, npc12_existence, npc13, npc13_existence, npc14, npc14_existence, npc15, npc15_existence, npc16, npc16_existence, npc17, npc17_existence, npc18, npc18_existence, npc19, npc19_existence, npc20, npc20_existence):
     """
@@ -256,7 +259,7 @@ def Npc_Initial_Spawn(npc_list):
         conn.commit()
 
 def Look():
-    cur = conn.cursor()
+    print(name)
     cur.execute("SELECT location FROM Player WHERE name = ?", (name,))
     location = cur.fetchall()[0][0]
     cur.execute("SELECT description FROM Room WHERE location = ?", (location,))
@@ -477,6 +480,7 @@ def RecalibrateStats():
 
     #Iterate through equipment and add stats together
     for slot in slot_list:
+        print(slot)
         cur.execute("select equipment_" + slot + " from player where name = ?", (name,))
         equipment[slot] = cur.fetchall()[0][0]
 
@@ -484,8 +488,6 @@ def RecalibrateStats():
             for stat in to_add:
                 cur.execute("select modify_" + stat + " from Item where id = ?", (equipment[slot],))
                 to_add[stat] += int(cur.fetchall()[0][0])
-
-    print(to_add)
 
     base_stat = {}
     new_stat = {}
@@ -1242,6 +1244,7 @@ def LoadCharacter():
         print("--------------------------------------------------------")
         print("Which name would you like to load?")
         name = input(">")
+        name = name.lower().capitalize()
 
         cur.execute("SELECT count(*) FROM Player WHERE name = ?", (name,))
         if(cur.fetchall()[0][0] == 1):
@@ -1282,10 +1285,14 @@ def CreateCharacter():
         print()
         print("What is your name?")
         name = input(">")
+        name = name.lower().capitalize()
 
         cur = conn.cursor()
         cur.execute("SELECT count(*) FROM Player WHERE name = ?", (name,))
-        if(cur.fetchall()[0][0] == 0):
+        if(len(name) >= 17):
+            print()
+            print("The name can't be longer than 17 characters.")
+        elif(cur.fetchall()[0][0] == 0):
             invalid = False
         else:
             print()
@@ -1293,7 +1300,6 @@ def CreateCharacter():
 
     invalid = True
     while(invalid == True):
-
         print()
         print("What would you like your password to be?")
         password1 = input(">")
@@ -1329,6 +1335,7 @@ def CreateCharacter():
             print("Please select a valid class.")
     
     if(player_class == "Warrior"):
+        location = 550
         mana = 1
         base_max_mana = 1
         max_mana = 1
@@ -1356,9 +1363,8 @@ def CreateCharacter():
         equipment_hands = 0
         equipment_legs = 0
         equipment_ring = 0
-        create_player(conn, name, final_password_hash[32:], final_password_hash[:32], player_class, health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, equipment_legs, equipment_ring)
+        create_player(conn, name, final_password_hash[32:], final_password_hash[:32], player_class, location, health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, equipment_legs, equipment_ring)
     
-    RecalibrateStats()
     print()
     print("Welcome, " + name + " to the Empire of Zek!")
     return False
@@ -1376,6 +1382,8 @@ def DeleteCharacter():
         print()
         print("Which character would you like to delete?")
         name = input(">")
+        name = name.lower().capitalize()
+        
         cur = conn.cursor()
         cur.execute('SELECT count(*) FROM Player WHERE name = ?', (name,))
         if(cur.fetchall()[0][0] == 1):
@@ -1405,7 +1413,7 @@ def DeleteCharacter():
             print()
             print("Your password was incorrect.")    
 
-def Show_Prompt(cur):
+def Show_Prompt():
     
     cur.execute("SELECT health FROM Player WHERE name = ?", (name,))
     health = cur.fetchall()[0][0]
@@ -1450,7 +1458,7 @@ def Show_Prompt(cur):
 
 def MainLoop():
     while(True):
-        Show_Prompt(cur)
+        Show_Prompt()
         choice = input()
         Command(choice)
 
