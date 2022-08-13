@@ -11,18 +11,6 @@ database = r"pythonsqlite.db"
 name = 'random'
 stop_combat = False
 
-#-----------------------GET_STAT-----------------------
-#cur.execute('SELECT name FROM Player WHERE pid = ?', (pid,))
-#print(cur.fetchall())
-
-#-----------------------SET_STAT-----------------------
-#sql = "UPDATE Player SET base_strength = '5' WHERE pid = ?"
-#cur = conn.cursor()
-#cur.execute(sql, (pid,))
-#conn.commit()
-
-#Location_Dictionary_Description = {550:"You are at the town square inside of the Great Citadel. \nObvious exits:\nnorth - The Tavern\nsouth - The Main Road\nwest - The Gilded Greatsword\neast - The Cathedral"}
-
 #---------------------DATABASE-------------------------
 def create_connection(db_file):
     """ create a database connection to the SQLite database
@@ -101,63 +89,7 @@ def create_player(conn, name, player_password_key, player_password_salt, player_
     cur.execute(sql, (name, player_password_key, player_password_salt, player_class, location, health, max_health, mana, base_max_mana, max_mana, base_strength, strength, base_stamina, stamina, base_dexterity, dexterity, base_agility, agility, base_intelligence, intelligence, base_wisdom, wisdom, base_charisma, charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, equipment_legs, equipment_ring))
     conn.commit()
     
-    RecalibrateStats()
-
-def create_room(conn, location, description, npc1, npc1_existence, npc2, npc2_existence, npc3, npc3_existence, npc4, npc4_existence, npc5, npc5_existence, npc6, npc6_existence, npc7, npc7_existence, npc8, npc8_existence, npc9, npc9_existence, npc10, npc10_existence, npc11, npc11_existence, npc12, npc12_existence, npc13, npc13_existence, npc14, npc14_existence, npc15, npc15_existence, npc16, npc16_existence, npc17, npc17_existence, npc18, npc18_existence, npc19, npc19_existence, npc20, npc20_existence):
-    """
-    Create a Room
-    :param conn:  Connection to the SQLite database
-    :param id: id of the task
-    :return:
-    """
-    sql = """ INSERT INTO Room (
-        location,
-        description,
-        npc1,
-        npc1_existence,
-        npc2,
-        npc2_existence,
-        npc3,
-        npc3_existence,
-        npc4,
-        npc4_existence,
-        npc5,
-        npc5_existence,
-        npc6,
-        npc6_existence,
-        npc7,
-        npc7_existence,
-        npc8,
-        npc8_existence,
-        npc9,
-        npc9_existence,
-        npc10,
-        npc10_existence,
-        npc11,
-        npc11_existence,
-        npc12,
-        npc12_existence,
-        npc13,
-        npc13_existence,
-        npc14,
-        npc14_existence,
-        npc15,
-        npc15_existence,
-        npc16,
-        npc16_existence,
-        npc17,
-        npc17_existence,
-        npc18,
-        npc18_existence,
-        npc19,
-        npc19_existence,
-        npc20,
-        npc20_existence
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) """
-    #(id, name, location, totalexp, level, base_max_mana, base_strength, base_stamina, base_dexterity, base_agility, base_intelligence, base_wisdom, base_charisma, equipment_primary, equipment_secondary, equipment_head, equipment_body, equipment_feet, equipment_hands, gold, invetory_slot_1, invetory_slot_2, invetory_slot_3, invetory_slot_4, invetory_slot_5, invetory_slot_6, invetory_slot_7, invetory_slot_8, invetory_slot_9, invetory_slot_10, invetory_slot_11, invetory_slot_12, invetory_slot_13, invetory_slot_14, invetory_slot_15, invetory_slot_16, invetory_slot_17, invetory_slot_18, invetory_slot_19, invetory_slot_20)
-    cur = conn.cursor()
-    cur.execute(sql, (location, description, npc1, npc1_existence, npc2, npc2_existence, npc3, npc3_existence, npc4, npc4_existence, npc5, npc5_existence, npc6, npc6_existence, npc7, npc7_existence, npc8, npc8_existence, npc9, npc9_existence, npc10, npc10_existence, npc11, npc11_existence, npc12, npc12_existence, npc13, npc13_existence, npc14, npc14_existence, npc15, npc15_existence, npc16, npc16_existence, npc17, npc17_existence, npc18, npc18_existence, npc19, npc19_existence, npc20, npc20_existence))
-    conn.commit()
+    Recalibrate_Stats()
 
 def select_all_player(conn):
     """
@@ -170,52 +102,9 @@ def select_all_player(conn):
 
     return cur.fetchall()
 
-def select_player(conn, name):
-
-    cur = conn.cursor()
-    cur.execute('SELECT * FROM Player WHERE name = ?', (name,))
-
-    return cur.fetchall()
-
-def delete_player(conn, name):
-    """
-    Delete a task by task id
-    :param conn:  Connection to the SQLite database
-    :param id: id of the task
-    :return:
-    """
-    sql = 'DELETE FROM Player WHERE name=?'
-    cur = conn.cursor()
-    cur.execute(sql, (name,))
-    conn.commit()
-
-def delete_all_player(conn):
-    """
-    Delete all rows in the tasks table
-    :param conn: Connection to the SQLite database
-    :return:
-    """
-    sql = 'DELETE FROM Player'
-    cur = conn.cursor()
-    cur.execute(sql)
-    conn.commit()
-
-def count_player(conn):
-
-    sql = 'SELECT COUNT(*) FROM Player'
-    cur = conn.cursor()
-    cur.execute(sql)
-
-    count = cur.fetchall()
-
-    return count
-
-def Show_NPC():
+def Show_NPC(location):
 
     npc_list = []
-
-    cur.execute("SELECT location FROM Player WHERE name = ?", (name,))
-    location = cur.fetchall()[0][0]
 
     cur.execute("SELECT id FROM Npc WHERE room = ?", (location,))
     npc_id = cur.fetchall()
@@ -226,6 +115,7 @@ def Show_NPC():
     cur.execute("SELECT alive FROM Npc WHERE room = ?", (location,))
     npc_alive = cur.fetchall()
     
+    #Don't need all of this***********************************************************************************************************************************************************
     for i in range(0, len(npc_id)):
         npc_temp = []
         npc_temp.append(npc_id[i])
@@ -259,7 +149,6 @@ def Npc_Initial_Spawn(npc_list):
         conn.commit()
 
 def Look():
-    print(name)
     cur.execute("SELECT location FROM Player WHERE name = ?", (name,))
     location = cur.fetchall()[0][0]
     cur.execute("SELECT description FROM Room WHERE location = ?", (location,))
@@ -268,7 +157,7 @@ def Look():
     print()
     print(description)
 
-    npc_list = Show_NPC()
+    npc_list = Show_NPC(location)
 
     for each in npc_list:
         if(each[3][0] == 1):
@@ -281,74 +170,34 @@ def Look():
 def Score():
     
     global name
-    cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
-    level = cur.fetchall()[0][0]
-    cur.execute("SELECT player_class FROM Player WHERE name = ?", (name,))
-    player_class = cur.fetchall()[0][0]
-    cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
-    totalexp = cur.fetchall()[0][0]
-    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level + 1,))
+
+    player_stat_name_list = ["level", "player_class", "totalexp", "rebirths", "health", "max_health", "mana", "max_mana", "base_strength", "base_stamina", "base_dexterity", "base_agility", "base_intelligence", "base_wisdom", "base_charisma", "strength", "stamina", "dexterity", "agility", "intelligence", "wisdom", "charisma"]
+    player_stats = {}
+
+    for player_stat_name in player_stat_name_list:
+        cur.execute("SELECT " + player_stat_name + " FROM Player WHERE name = ?", (name,))
+        player_stats[player_stat_name] = cur.fetchall()[0][0]        
+    
+    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (player_stats["level"] + 1,))
     exp_for_next_level = cur.fetchall()[0][0]
-    to_next_level = exp_for_next_level - totalexp
-    cur.execute("SELECT rebirths FROM Player WHERE name = ?", (name,))
-    rebirths = cur.fetchall()[0][0]
-
-    cur.execute("SELECT health FROM Player WHERE name = ?", (name,))
-    current_health = cur.fetchall()[0][0]
-    cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
-    max_health = cur.fetchall()[0][0]
-    cur.execute("SELECT mana FROM Player WHERE name = ?", (name,))
-    current_mana = cur.fetchall()[0][0]
-    cur.execute("SELECT max_mana FROM Player WHERE name = ?", (name,))
-    max_mana = cur.fetchall()[0][0]
-
-    cur.execute("SELECT base_strength FROM Player WHERE name = ?", (name,))
-    base_strength = cur.fetchall()[0][0]
-    cur.execute("SELECT base_stamina FROM Player WHERE name = ?", (name,))
-    base_stamina = cur.fetchall()[0][0]
-    cur.execute("SELECT base_dexterity FROM Player WHERE name = ?", (name,))
-    base_dexterity = cur.fetchall()[0][0]
-    cur.execute("SELECT base_agility FROM Player WHERE name = ?", (name,))
-    base_agility = cur.fetchall()[0][0]
-    cur.execute("SELECT base_intelligence FROM Player WHERE name = ?", (name,))
-    base_intelligence = cur.fetchall()[0][0]
-    cur.execute("SELECT base_wisdom FROM Player WHERE name = ?", (name,))
-    base_wisdom = cur.fetchall()[0][0]
-    cur.execute("SELECT base_charisma FROM Player WHERE name = ?", (name,))
-    base_charisma = cur.fetchall()[0][0]
-
-    cur.execute("SELECT strength FROM Player WHERE name = ?", (name,))
-    strength = cur.fetchall()[0][0]
-    cur.execute("SELECT stamina FROM Player WHERE name = ?", (name,))
-    stamina = cur.fetchall()[0][0]
-    cur.execute("SELECT dexterity FROM Player WHERE name = ?", (name,))
-    dexterity = cur.fetchall()[0][0]
-    cur.execute("SELECT agility FROM Player WHERE name = ?", (name,))
-    agility = cur.fetchall()[0][0]
-    cur.execute("SELECT intelligence FROM Player WHERE name = ?", (name,))
-    intelligence = cur.fetchall()[0][0]
-    cur.execute("SELECT wisdom FROM Player WHERE name = ?", (name,))
-    wisdom = cur.fetchall()[0][0]
-    cur.execute("SELECT charisma FROM Player WHERE name = ?", (name,))
-    charisma = cur.fetchall()[0][0]
-
+    to_next_level = exp_for_next_level - player_stats["totalexp"]
 
     dash = '-' * 64
     print()
     print(dash)
-    print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Name", " : ", name, " | ", "Total Experience", " : ", totalexp, " | "))
-    print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Level", " : ", level, " | ", "To Next Level", " : ", to_next_level, " | "))
-    print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Class", " : ", player_class, " | ", "Rebirths", " : ", rebirths, " | "))
+    print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Name", " : ", name, " | ", "Total Experience", " : ", player_stats["totalexp"], " | "))
+    print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Level", " : ", player_stats["level"], " | ", "To Next Level", " : ", to_next_level, " | "))
+    print('{:2s}{:<5s}{:3s}{:<17}{:3}{:<17s}{:3}{:<12}{:3}'.format("| ", "Class", " : ", player_stats["player_class"], " | ", "Rebirths", " : ", player_stats["rebirths"], " | "))
     print(dash)
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Health", ":", current_health, '/', max_health, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Mana", ":", current_mana, '/', max_mana, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Strength", ":", base_strength, '/', strength, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Stamina", ":", base_stamina, '/', stamina, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Dexterity", ":", base_dexterity, '/', dexterity, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Agility", ":", base_agility, '/', agility, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Intelligence", ":", base_intelligence, '/', intelligence, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Wisdom", ":", base_wisdom, '/', wisdom, " | ", " ", " | "))
-    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Charisma", ":", base_charisma, '/', charisma, " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Health", ":", player_stats["health"], '/', player_stats["max_health"], " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Mana", ":", player_stats["mana"], '/', player_stats["max_mana"], " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Strength", ":", player_stats["base_strength"], '/', player_stats["strength"], " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Stamina", ":", player_stats["base_stamina"], '/', player_stats["stamina"], " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Dexterity", ":", player_stats["base_dexterity"], '/', player_stats["dexterity"], " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Agility", ":", player_stats["base_agility"], '/', player_stats["agility"], " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Intelligence", ":", player_stats["base_intelligence"], '/', player_stats["intelligence"], " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Wisdom", ":", player_stats["base_wisdom"], '/', player_stats["wisdom"], " | ", " ", " | "))
+    print('{:2s}{:<15s}{:>1s}{:>4}{:<1s}{:<4}{:3s}{:<32}{:3s}'.format("| ", "Charisma", ":", player_stats["base_charisma"], '/', player_stats["charisma"], " | ", " ", " | "))
     print(dash)
 
 def Show_Equipment():
@@ -472,7 +321,7 @@ def Show_Buffs():
 
     print(dash)
 
-def RecalibrateStats():
+def Recalibrate_Stats():
 
     slot_list = ["primary", "secondary", "head", "body", "feet", "hands", "legs", "ring"]
     equipment = {}
@@ -480,7 +329,6 @@ def RecalibrateStats():
 
     #Iterate through equipment and add stats together
     for slot in slot_list:
-        print(slot)
         cur.execute("select equipment_" + slot + " from player where name = ?", (name,))
         equipment[slot] = cur.fetchall()[0][0]
 
@@ -505,10 +353,6 @@ def RecalibrateStats():
     max_health = new_stat["stamina"] * 10
     cur.execute("update Player set max_health = " + str(max_health) + " where name = ?", (name,))
     conn.commit()
-
-    
-
-
 
 def Move(direction):
     cur.execute("SELECT location FROM Player WHERE name = ?", (name,))
@@ -578,140 +422,28 @@ def Level_Up():
     cur.execute(sql, (level, name,))
     conn.commit()
 
+    player_base_stat_name_list = ["base_strength", "base_stamina", "base_dexterity", "base_agility", "base_intelligence", "base_wisdom", "base_charisma"]   
+    player_base_stats = {}
+    
+    for player_base_stat_name in player_base_stat_name_list:
+        cur.execute("SELECT " + player_base_stat_name + " FROM Player WHERE name = ?", (name,))
+        player_base_stats[player_base_stat_name] = cur.fetchall()[0][0]
+
     if(player_class == "Warrior"):
 
-        cur.execute("SELECT base_strength FROM Player WHERE name = ?", (name,))
-        base_strength = cur.fetchall()[0][0]
-        cur.execute("SELECT base_stamina FROM Player WHERE name = ?", (name,))
-        base_stamina = cur.fetchall()[0][0]
-        cur.execute("SELECT base_dexterity FROM Player WHERE name = ?", (name,))
-        base_dexterity = cur.fetchall()[0][0]
-        cur.execute("SELECT base_agility FROM Player WHERE name = ?", (name,))
-        base_agility = cur.fetchall()[0][0]
-        cur.execute("SELECT base_intelligence FROM Player WHERE name = ?", (name,))
-        base_intelligence = cur.fetchall()[0][0]
-        cur.execute("SELECT base_wisdom FROM Player WHERE name = ?", (name,))
-        base_wisdom = cur.fetchall()[0][0]
-        cur.execute("SELECT base_charisma FROM Player WHERE name = ?", (name,))
-        base_charisma = cur.fetchall()[0][0]
+        add_stats = {}
+        for player_base_stat_name in player_base_stat_name_list:
+            cur.execute("SELECT " + player_base_stat_name + " FROM Warrior_Level_Up WHERE level = ?", (level,))
+            add_stats[player_base_stat_name] = cur.fetchall()[0][0]
+            player_base_stats[player_base_stat_name] += add_stats[player_base_stat_name]
+            cur.execute("UPDATE Player SET " + player_base_stat_name + " = ? WHERE name = ?", (player_base_stats[player_base_stat_name], name,))
+        conn.commit()      
 
-        cur.execute("SELECT strength FROM Player WHERE name = ?", (name,))
-        strength = cur.fetchall()[0][0]
-        cur.execute("SELECT stamina FROM Player WHERE name = ?", (name,))
-        stamina = cur.fetchall()[0][0]
-        cur.execute("SELECT dexterity FROM Player WHERE name = ?", (name,))
-        dexterity = cur.fetchall()[0][0]
-        cur.execute("SELECT agility FROM Player WHERE name = ?", (name,))
-        agility = cur.fetchall()[0][0]
-        cur.execute("SELECT intelligence FROM Player WHERE name = ?", (name,))
-        intelligence = cur.fetchall()[0][0]
-        cur.execute("SELECT wisdom FROM Player WHERE name = ?", (name,))
-        wisdom = cur.fetchall()[0][0]
-        cur.execute("SELECT charisma FROM Player WHERE name = ?", (name,))
-        charisma = cur.fetchall()[0][0]
+    Recalibrate_Stats()
+    print("Welcome to level " + str(level) + "!!")
+    for player_base_stat_name in player_base_stat_name_list:
+        print(player_base_stat_name[5:].capitalize() + " has increased by " + str(add_stats[player_base_stat_name]) + " points.")
 
-        temp_strength_buff = strength - base_strength
-        temp_stamina_buff = stamina - base_stamina
-        temp_dexterity_buff = dexterity - base_dexterity
-        temp_agility_buff = agility - base_agility
-        temp_intelligence_buff = intelligence - base_intelligence
-        temp_wisdom_buff = wisdom - base_wisdom
-        temp_charisma_buff = charisma - base_charisma
-
-        cur.execute("SELECT base_strength FROM Warrior_Level_Up WHERE level = ?", (level,))
-        base_strength_add = cur.fetchall()[0][0]
-        cur.execute("SELECT base_stamina FROM Warrior_Level_Up WHERE level = ?", (level,))
-        base_stamina_add = cur.fetchall()[0][0]
-        cur.execute("SELECT base_dexterity FROM Warrior_Level_Up WHERE level = ?", (level,))
-        base_dexterity_add = cur.fetchall()[0][0]
-        cur.execute("SELECT base_agility FROM Warrior_Level_Up WHERE level = ?", (level,))
-        base_agility_add = cur.fetchall()[0][0]
-        cur.execute("SELECT base_intelligence FROM Warrior_Level_Up WHERE level = ?", (level,))
-        base_intelligence_add = cur.fetchall()[0][0]
-        cur.execute("SELECT base_wisdom FROM Warrior_Level_Up WHERE level = ?", (level,))
-        base_wisdom_add = cur.fetchall()[0][0]
-        cur.execute("SELECT base_charisma FROM Warrior_Level_Up WHERE level = ?", (level,))
-        base_charisma_add = cur.fetchall()[0][0]
-
-        base_strength += base_strength_add
-        base_stamina += base_stamina_add
-        base_dexterity += base_dexterity_add
-        base_agility += base_agility_add
-        base_intelligence += base_intelligence_add
-        base_wisdom += base_wisdom_add
-        base_charisma += base_charisma_add
-
-        sql = "UPDATE Player SET base_strength = ? WHERE name = ?"
-        cur.execute(sql, (base_strength, name,))
-        conn.commit()
-        sql = "UPDATE Player SET base_stamina = ? WHERE name = ?"
-        cur.execute(sql, (base_stamina, name,))
-        conn.commit()
-        sql = "UPDATE Player SET base_dexterity = ? WHERE name = ?"
-        cur.execute(sql, (base_dexterity, name,))
-        conn.commit()
-        sql = "UPDATE Player SET base_agility = ? WHERE name = ?"
-        cur.execute(sql, (base_agility, name,))
-        conn.commit()
-        sql = "UPDATE Player SET base_intelligence = ? WHERE name = ?"
-        cur.execute(sql, (base_intelligence, name,))
-        conn.commit()
-        sql = "UPDATE Player SET base_wisdom = ? WHERE name = ?"
-        cur.execute(sql, (base_wisdom, name,))
-        conn.commit()
-        sql = "UPDATE Player SET base_charisma = ? WHERE name = ?"
-        cur.execute(sql, (base_charisma, name,))
-        conn.commit()
-
-        sql = "UPDATE Player SET strength = ? WHERE name = ?"
-        cur.execute(sql, (base_strength + temp_strength_buff, name,))
-        conn.commit()
-        sql = "UPDATE Player SET stamina = ? WHERE name = ?"
-        cur.execute(sql, (base_stamina + temp_stamina_buff, name,))
-        conn.commit()
-        sql = "UPDATE Player SET dexterity = ? WHERE name = ?"
-        cur.execute(sql, (base_dexterity + temp_dexterity_buff, name,))
-        conn.commit()
-        sql = "UPDATE Player SET agility = ? WHERE name = ?"
-        cur.execute(sql, (base_agility + temp_agility_buff, name,))
-        conn.commit()
-        sql = "UPDATE Player SET intelligence = ? WHERE name = ?"
-        cur.execute(sql, (base_intelligence + temp_intelligence_buff, name,))
-        conn.commit()
-        sql = "UPDATE Player SET wisdom = ? WHERE name = ?"
-        cur.execute(sql, (base_wisdom + temp_wisdom_buff, name,))
-        conn.commit()
-        sql = "UPDATE Player SET charisma = ? WHERE name = ?"
-        cur.execute(sql, (base_charisma + temp_charisma_buff, name,))
-        conn.commit()
-        
-        #----------------------------Health--------------------------------------
-        cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
-        max_health = cur.fetchall()[0][0]
-        #new base_stamina
-        cur.execute("SELECT base_stamina FROM Player WHERE name = ?", (name,))
-        base_stamina = cur.fetchall()[0][0]
-
-        max_health = stamina * 10
-        sql = "UPDATE Player SET max_health = ? WHERE name = ?"
-        cur.execute(sql, (max_health, name,))
-        conn.commit()        
-
-        """
-        #saving difference in hp from buffs. Say base_max_health = 30 but max_health = 50 due to a 20 hp buff. We save the 20 hp in temp_health_buff, we increase base_max_health for levelup, say to 40 hp, then max_health + temp_health_buff = 60. Now we have new hp value with the buff still applied.
-        temp_health_buff = max_health - base_max_health
-
-        base_max_health = base_stamina * 10
-        sql = "UPDATE Player SET base_max_health = ? WHERE name = ?"
-        cur.execute(sql, (base_max_health, name,))
-        conn.commit()
-        sql = "UPDATE Player SET max_health = ? WHERE name = ?"
-        cur.execute(sql, (base_max_health + temp_health_buff, name,))
-        conn.commit()
-        """
-
-    
-    RecalibrateStats()
 
 def Combat(npc_id):
 
@@ -722,74 +454,30 @@ def Combat(npc_id):
     stop_combat = False
     win = False
 
-    #-----------------------NPC_STUFF----------------------------------
-    cur.execute("SELECT name FROM Npc WHERE id = ?", (npc_id,))
-    npc_name = cur.fetchall()[0][0]
-    cur.execute("SELECT level FROM Npc WHERE id = ?", (npc_id,))
-    npc_level = cur.fetchall()[0][0]
-    cur.execute("SELECT health FROM Npc WHERE id = ?", (npc_id,))
-    npc_health = cur.fetchall()[0][0]
-    cur.execute("SELECT max_health FROM Npc WHERE id = ?", (npc_id,))
-    npc_max_health = cur.fetchall()[0][0]
-    cur.execute("SELECT mana FROM Npc WHERE id = ?", (npc_id,))
-    npc_mana = cur.fetchall()[0][0]
-    cur.execute("SELECT max_mana FROM Npc WHERE id = ?", (npc_id,))
-    npc_max_mana = cur.fetchall()[0][0]
-    cur.execute("SELECT dexterity FROM Npc WHERE id = ?", (npc_id,))
-    npc_dexterity = cur.fetchall()[0][0]
-    cur.execute("SELECT agility FROM Npc WHERE id = ?", (npc_id,))
-    npc_agility = cur.fetchall()[0][0]
-    cur.execute("SELECT intelligence FROM Npc WHERE id = ?", (npc_id,))
-    npc_intelligence = cur.fetchall()[0][0]
-    cur.execute("SELECT wisdom FROM Npc WHERE id = ?", (npc_id,))
-    npc_wisdom = cur.fetchall()[0][0]
-    cur.execute("SELECT charisma FROM Npc WHERE id = ?", (npc_id,))
-    npc_charisma = cur.fetchall()[0][0]
-    cur.execute("SELECT damage_min FROM Npc WHERE id = ?", (npc_id,))
-    npc_damage_min = cur.fetchall()[0][0]
-    cur.execute("SELECT damage_max FROM Npc WHERE id = ?", (npc_id,))
-    npc_damage_max = cur.fetchall()[0][0]
+    #-----------------------NPC_STATS----------------------------------
+    npc_stat_list = ["name", "level", "health", "max_health", "mana", "max_mana", "dexterity", "agility", "intelligence", "wisdom", "charisma", "min_damage", "max_damage"]
+    npc_stats = {}
 
+    for npc_stat_name in npc_stat_list:
+        cur.execute("SELECT " + npc_stat_name + " FROM Npc WHERE id = ?", (npc_id,))
+        npc_stats[npc_stat_name] = cur.fetchall()[0][0]
 
     #-------------------------PLAYER_STATS-------------------------------------
-    cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
-    player_level = cur.fetchall()[0][0]
-    cur.execute("SELECT health FROM Player WHERE name = ?", (name,))
-    player_health = cur.fetchall()[0][0]
-    cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
-    player_max_health = cur.fetchall()[0][0]
-    cur.execute("SELECT mana FROM Player WHERE name = ?", (name,))
-    player_mana = cur.fetchall()[0][0]
-    cur.execute("SELECT max_mana FROM Player WHERE name = ?", (name,))
-    player_max_mana = cur.fetchall()[0][0]
-    cur.execute("SELECT strength FROM Player WHERE name = ?", (name,))
-    player_strength = cur.fetchall()[0][0]
-    cur.execute("SELECT stamina FROM Player WHERE name = ?", (name,))
-    player_stamina = cur.fetchall()[0][0]
-    cur.execute("SELECT dexterity FROM Player WHERE name = ?", (name,))
-    player_dexterity = cur.fetchall()[0][0]
-    cur.execute("SELECT agility FROM Player WHERE name = ?", (name,))
-    player_agility = cur.fetchall()[0][0]
-    cur.execute("SELECT intelligence FROM Player WHERE name = ?", (name,))
-    player_intelligence = cur.fetchall()[0][0]
-    cur.execute("SELECT wisdom FROM Player WHERE name = ?", (name,))
-    player_wisdom = cur.fetchall()[0][0]
-    cur.execute("SELECT charisma FROM Player WHERE name = ?", (name,))
-    player_charisma = cur.fetchall()[0][0]
+    player_stat_list = ["level", "health", "max_health", "mana", "max_mana", "strength", "stamina", "dexterity", "agility", "intelligence", "wisdom", "charisma", "totalexp"]
+    player_stats = {}
 
-    cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
-    player_level = cur.fetchall()[0][0]
-    cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
-    player_totalexp = cur.fetchall()[0][0]
-    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (player_level,))
+    for player_stat_name in player_stat_list:
+        cur.execute("SELECT " + player_stat_name + " FROM Player WHERE name = ?", (name,))
+        player_stats[player_stat_name] = cur.fetchall()[0][0]
+
+    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (player_stats["level"],))
     current_level_exp = cur.fetchall()[0][0]
-    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (player_level + 1,))
+    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (player_stats["level"] + 1,))
     next_level_exp = cur.fetchall()[0][0]
         
     level_tnl = next_level_exp - current_level_exp
-    player_exp_percent = round((player_totalexp - current_level_exp) / level_tnl * 100, 5)
+    player_exp_percent = round((player_stats["totalexp"] - current_level_exp) / level_tnl * 100, 5)
     
-
     #-------------------------PLAYER_EQUIPMENT---------------------------------
     cur.execute("SELECT equipment_primary FROM Player WHERE name = ?", (name,))
     equipment_primary = cur.fetchall()[0][0]
@@ -805,18 +493,14 @@ def Combat(npc_id):
         player_damage_min = 1
         player_damage_max = 1
 
-    player_damage_min += player_strength
-    player_damage_max += player_strength
+    player_damage_min += player_stats["strength"]
+    player_damage_max += player_stats["strength"]
 
-    player_hit_chance = round(player_dexterity / npc_agility * 100) #Raw percentage
-
-    npc_hit_chance = round(npc_dexterity / player_agility * 100)
+    #--------------------------HIT_CHANCE--------------------------------------
+    player_hit_chance = round(player_stats["dexterity"] / npc_stats["agility"] * 80)
+    npc_hit_chance = round(npc_stats["dexterity"] / player_stats["agility"] * 80)
     #print("NPC hit chance")
     #print(npc_hit_chance)
-
-
-
-
 
     while(True):
         if(stop_combat):
@@ -830,15 +514,15 @@ def Combat(npc_id):
         #print(player_hit_roll)
         if(player_hit_roll < player_hit_chance):
             player_damage = random.randrange(player_damage_min, player_damage_max + 1)
-            print(name + " hits " + npc_name + " for " + str(player_damage) + " points of damage.")
-            npc_health -= player_damage
-            if(npc_health < 0):
-                npc_health = 0
+            print(name + " hits " + npc_stats["name"] + " for " + str(player_damage) + " points of damage.")
+            npc_stats["health"] -= player_damage
+            if(npc_stats["health"] < 0):
+                npc_stats["health"] = 0
             sql = "UPDATE Npc SET health = ? WHERE id = ?"
-            cur.execute(sql, (npc_health, npc_id,))
+            cur.execute(sql, (npc_stats["health"], npc_id,))
             conn.commit()
         else:
-            print(name + " misses " + npc_name + ".")
+            print(name + " misses " + npc_stats["name"] + ".")
 
         npc_hit_roll = random.randrange(1, 100)
         #print("npc hit chance: ", end='')
@@ -846,76 +530,65 @@ def Combat(npc_id):
         #print("npc hit roll: ", end='')
         #print(npc_hit_roll)
         if(npc_hit_roll < npc_hit_chance):
-            npc_damage = random.randrange(npc_damage_min, npc_damage_max + 1)
-            print(npc_name + " hits " + name + " for " + str(npc_damage) + " points of damage.")
-            player_health -= npc_damage
-            if(player_health < 0):
-                player_health = 0
+            npc_damage = random.randrange(npc_stats["min_damage"], npc_stats["max_damage"] + 1)
+            print(npc_stats["name"] + " hits " + name + " for " + str(npc_damage) + " points of damage.")
+            player_stats["health"] -= npc_damage
+            if(player_stats["health"] < 0):
+                player_stats["health"] = 0
             sql = "UPDATE Player SET health = ? WHERE name = ?"
-            cur.execute(sql, (player_health, name,))
+            cur.execute(sql, (player_stats["health"], name,))
             conn.commit()
         else:
-            print(npc_name + " misses " + name + ".")
+            print(npc_stats["name"] + " misses " + name + ".")
         print("[", end='')
-        print(player_health, end='')
+        print(player_stats["health"], end='')
         print("/", end='')
-        print(player_max_health, end=' ')
+        print(player_stats["max_health"], end=' ')
         print("(", end='')
-        print("{:0.2f}".format(player_health / player_max_health * 100), end='')
+        print("{:0.2f}".format(player_stats["health"] / player_stats["max_health"] * 100), end='')
         print("%) ", end='')
-        print(player_mana, end='')
+        print(player_stats["mana"], end='')
         print("/", end='')
-        print(player_max_mana, end=' ')
+        print(player_stats["max_mana"], end=' ')
         print("(", end='')
-        print("{:0.2f}".format(player_mana / player_max_mana * 100), end='')
+        print("{:0.2f}".format(player_stats["mana"] / player_stats["max_mana"] * 100), end='')
         print("%) ", end='')
         print("EXP: ", end='')
         print("{:0.2f}".format(player_exp_percent), end='')
         print("%", end='')
         print(" ENEMY: ", end='')
-        print(npc_health, end='')
+        print(npc_stats["health"], end='')
         print("/", end='')
-        print(npc_max_health, end=' ')
+        print(npc_stats["max_health"], end=' ')
         print("(", end='')
-        print("{:0.2f}".format(npc_health / npc_max_health * 100), end='')
+        print("{:0.2f}".format(npc_stats["health"] / npc_stats["max_health"] * 100), end='')
         print("%) ", end='')
         print("]", end='')
         #print(">", end='')
         print(">")
         time.sleep(3)
 
-        if(player_health <= 0):
-            print("You have been slain by " + npc_name)
+        if(player_stats["health"] <= 0):
+            print("You have been slain by " + npc_stats["name"])
             stop_combat = True
             sql = "UPDATE Player SET location = ? WHERE name = ?"
             cur.execute(sql, (550, name,))
             conn.commit()
             break
-        if(npc_health <= 0):
-            print(str(npc_name) + " has been slain.")
+        if(npc_stats["health"] <= 0):
+            print()
+            print(str(npc_stats["name"]) + " has been slain.")
             sql = "UPDATE Npc SET alive = ? WHERE id = ?"
             cur.execute(sql, (0, npc_id,))
             conn.commit()
 
-            cur.execute("SELECT experience FROM NPC_EXP_Table WHERE level = ?", (npc_level,))
+            cur.execute("SELECT experience FROM NPC_EXP_Table WHERE level = ?", (npc_stats["level"],))
             exp_gain = cur.fetchall()[0][0]
-            player_totalexp += exp_gain
+            player_stats["totalexp"] += exp_gain
             sql = "UPDATE Player SET totalexp = ? WHERE name = ?"
-            cur.execute(sql, (player_totalexp, name,))
+            cur.execute(sql, (player_stats["totalexp"], name,))
             conn.commit()
             print("You have gained " + str(exp_gain) + " experience points.")
-            """
-            cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (player_level + 1,))
-            exp_needed_to_level = cur.fetchall()[0][0]
-
-            if(player_totalexp >= exp_needed_to_level):
-                player_level += 1
-                sql = "UPDATE Player SET level = ? WHERE name = ?"
-                cur.execute(sql, (player_level, name,))
-                conn.commit()
-            """
-
-
             stop_combat = True
             win = True
             thread = threading.Thread(target = Npc_Respawn, args = (npc_id,))
@@ -969,16 +642,15 @@ def Precombat(choice):
                     
                 conn = create_connection(database)
                 cur = conn.cursor()
+
+    level = Get_Stat("level")
     
-    cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
-    level = cur.fetchall()[0][0]
-    cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
-    totalexp = cur.fetchall()[0][0]
     cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level + 1,))
     exp_needed_to_level = cur.fetchall()[0][0]
 
-    if(totalexp >= exp_needed_to_level):
-        Level_Up()
+    if(level < 50):
+        if(Get_Stat("totalexp") >= exp_needed_to_level):
+            Level_Up()
 
 def Health_Regen():
 
@@ -1016,25 +688,23 @@ def Npc_Respawn(npc_id):
 
     time.sleep(30)
 
-    sql = "UPDATE Npc SET alive = ? WHERE id = ?"
-    cur.execute(sql, (1, npc_id,))
+    cur.execute("UPDATE Npc SET alive = ? WHERE id = ?", (1, npc_id,))
     conn.commit()
 
     cur.execute("SELECT max_health FROM Npc WHERE id = ?", (npc_id,))
     max_health = cur.fetchall()[0][0]
 
-    sql = "UPDATE Npc SET health = ? WHERE id = ?"
-    cur.execute(sql, (max_health, npc_id,))
+    cur.execute("UPDATE Npc SET health = ? WHERE id = ?", (max_health, npc_id,))
     conn.commit()
     conn.close()
 
 def Equip_Item(item):
-    
+
     #Get the ID of item player is trying to equip
     item_id = Get_Item_Id(item)
     item_slot = Get_Item_Equip_Slot(item)
     item_level_requirement = Get_Item_Level_Requirement(item)
-    player_level = Get_Player_Level()
+    player_level = Get_Stat("level")
     item_is_in_inventory = False
     inventory_slot_id_for_found_item = None
 
@@ -1094,15 +764,8 @@ def Inventory_Swap(item_slot, item_id, inventory_slot_quantity, inventory_slot_i
         #In this case decrement the one to be equipped and ensure there's an empty spot in inventory for the currently equipped item to go
         elif(inventory_slot_quantity > 1 and previously_equipped_inventory_slot_quantity == 0):
             #Is there an empty spot in the inventory for the currently equipped item to go?
-            is_there_empty_inventory_slot = False
-            for i in range(1, 21):
-                cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
-                temp_slot = cur.fetchall()[0][0]
-                if(temp_slot == 0):
-                    is_there_empty_inventory_slot = True
-                    empty_inventory_slot = i
-                    break
-            if(is_there_empty_inventory_slot):
+            empty_inventory_slot = Is_There_Empty_Slot_In_Inventory()
+            if(empty_inventory_slot):
                 #Reduce quantity in current inventory
                 cur.execute("update Player set inventory_slot_" + str(inventory_slot_id_for_found_item) + "_quantity = ? WHERE name = ?", (inventory_slot_quantity - 1, name,))                                    
                 cur.execute("update Player set inventory_slot_" + str(empty_inventory_slot) + " = ? WHERE name = ?", (current_equipment, name,))
@@ -1127,11 +790,73 @@ def Inventory_Swap(item_slot, item_id, inventory_slot_quantity, inventory_slot_i
     else:
         print("You already have that equipped.")
 
-    RecalibrateStats()
+    Recalibrate_Stats()
 
-def Sql_Select(selecter, table, comparer_column, comparer_value):
-    global name
-    cur.execute("SELECT " + selecter + " FROM " + table + " WHERE name = ?", (name,))
+def Is_There_Empty_Slot_In_Inventory():
+    empty_inventory_slot = None
+    for i in range(1, 21):
+        cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
+        temp_slot = cur.fetchall()[0][0]
+        if(temp_slot == 0):
+            empty_inventory_slot = i
+            return empty_inventory_slot
+
+def Is_Item_In_Inventory(item_id):
+    item_exists_in_inventory_slot = None
+    for i in range(1, 21):
+        cur.execute("SELECT inventory_slot_" + str(i) + " FROM Player WHERE name = ?", (name,))
+        temp_slot = cur.fetchall()[0][0]
+        if(temp_slot == item_id):
+            item_exists_in_inventory_slot = i
+            return item_exists_in_inventory_slot
+
+def Is_Item_Equipped(item_id):
+    is_item_equipped = False
+    #See if item is actually equipped
+    slot_list = ["equipment_primary", "equipment_secondary", "equipment_head", "equipment_body", "equipment_feet", "equipment_hands", "equipment_legs", "equipment_ring"]
+    for slot_name in slot_list:
+        cur.execute("SELECT " + slot_name + " FROM Player WHERE name = ?", (name,))
+        equipped_id = cur.fetchall()[0][0]
+        if(item_id == equipped_id):
+            is_item_equipped =  True
+            return is_item_equipped
+            
+            #Clear the slot to Empty
+            #cur.execute("update Player set " + slot_name + " = ? where name = ?", (0, name))
+
+
+def Remove_Item(item_name):
+    item_id = Get_Item_Id(item_name)
+    item_slot = Get_Item_Equip_Slot(item_name)
+    item_is_equipped = False
+
+    #Is item already in inventory?
+    is_item_in_inventory = Is_Item_In_Inventory(item_id)
+    is_item_equipped = Is_Item_Equipped(item_id)
+    if(not(is_item_equipped)):
+        print("That item is not equipped.")
+    elif(is_item_in_inventory and is_item_equipped):
+        cur.execute("update Player set equipment_" + str(item_slot) + " = ? where name = ?", (0, name,))
+        cur.execute("select inventory_slot_" + str(is_item_in_inventory) + "_quantity from Player where name = ?", (name,))
+        previous_quantity = cur.fetchall()[0][0]
+        cur.execute("update Player set inventory_slot_" + str(is_item_in_inventory) + "_quantity = ? where name = ?", (previous_quantity + 1, name))
+        conn.commit()
+        print("You remove " + item_name + ".")
+    elif(not(is_item_in_inventory) and is_item_equipped):
+        #Is there an empty spot in the inventory for the currently equipped item to go?
+        empty_inventory_slot = Is_There_Empty_Slot_In_Inventory()
+        if(empty_inventory_slot):
+            cur.execute("update Player set equipment_" + str(item_slot) + " = ? where name = ?", ("0", name,))
+            cur.execute("update Player set inventory_slot_" + str(empty_inventory_slot) + " = ? WHERE name = ?", (item_id, name,))
+            cur.execute("update Player set inventory_slot_" + str(empty_inventory_slot) + "_quantity = ? WHERE name = ?", ("1", name,))
+            conn.commit()
+            print("You remove " + item_name + ".")
+        else:
+            print("You don't have room in your inventory for the currently equipped item.")
+    Recalibrate_Stats()            
+
+
+
 
 #Takes in the item name as a string
 def Get_Item_Id(item_name):
@@ -1169,16 +894,15 @@ def Get_Item_Level_Requirement(item_name):
         item_level_requirement = cur.fetchall()[0][0]
         return item_level_requirement
     else:
-        return None
+        return None     
 
-def Get_Player_Level():
+def Get_Stat(stat):
     global cur
     global name
-    cur.execute("select level from Player where name = ?", (name,))
-    player_level = cur.fetchall()[0][0]
-    return player_level       
+    cur.execute("select " + stat + " from Player where name = ?", (name,))
+    value = cur.fetchall()[0][0]
+    return value
     
-
 def Command(choice):
     choice = choice.lower()
     if(choice == 'north' or choice == 'n' or choice == 'south' or choice == 's' or choice == 'east' or choice == 'e' or choice == 'west' or choice == 'w'):
@@ -1199,6 +923,8 @@ def Command(choice):
         pass
     elif(choice[0:5] == 'equip'):
         Equip_Item(choice[6:])
+    elif(choice[0:6] == 'remove'):
+        Remove_Item(choice[7:])
     elif(choice == 'quit' or choice == 'camp'):
         print("You have left the realm.")
         Login()
@@ -1383,7 +1109,7 @@ def DeleteCharacter():
         print("Which character would you like to delete?")
         name = input(">")
         name = name.lower().capitalize()
-        
+
         cur = conn.cursor()
         cur.execute('SELECT count(*) FROM Player WHERE name = ?', (name,))
         if(cur.fetchall()[0][0] == 1):
@@ -1415,43 +1141,34 @@ def DeleteCharacter():
 
 def Show_Prompt():
     
-    cur.execute("SELECT health FROM Player WHERE name = ?", (name,))
-    health = cur.fetchall()[0][0]
-    cur.execute("SELECT max_health FROM Player WHERE name = ?", (name,))
-    max_health = cur.fetchall()[0][0]
-    cur.execute("SELECT mana FROM Player WHERE name = ?", (name,))
-    mana = cur.fetchall()[0][0]
-    cur.execute("SELECT max_mana FROM Player WHERE name = ?", (name,))
-    max_mana = cur.fetchall()[0][0]
+    stat_name_list = ["health", "max_health", "mana", "max_mana", "level", "totalexp"]
+    stats = {}
+
+    for stat_name in stat_name_list:
+        stats[stat_name] = Get_Stat(stat_name)
     
-    cur.execute("SELECT level FROM Player WHERE name = ?", (name,))
-    level = cur.fetchall()[0][0]
-    cur.execute("SELECT totalexp FROM Player WHERE name = ?", (name,))
-    totalexp = cur.fetchall()[0][0]
-    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level,))
-    current_level_exp = cur.fetchall()[0][0]
-    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (level + 1,))
-    next_level_exp = cur.fetchall()[0][0]
+    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (stats["level"],))
+    stats["current_level_exp"] = cur.fetchall()[0][0]
+    cur.execute("SELECT experience FROM Player_EXP_Table WHERE level = ?", (stats["level"] + 1,))
+    stats["next_level_exp"] = cur.fetchall()[0][0]
     
-    level_tnl = next_level_exp - current_level_exp
-    exp_percent = round((totalexp - current_level_exp) / level_tnl * 100, 5)
+    stats["level_tnl"] = stats["next_level_exp"] - stats["current_level_exp"]
+    stats["exp_percent"] = round((stats["totalexp"] - stats["current_level_exp"]) / stats["level_tnl"] * 100, 5)
     print("[", end='')
-    print(health, end='')
+    print(stats["health"], end='')
     print("/", end='')
-    print(max_health, end=' ')
+    print(stats["max_health"], end=' ')
     print("(", end='')
-    #print(health / max_health * 100, end='')
-    print("{:0.2f}".format(health / max_health * 100), end='')
+    print("{:0.2f}".format(stats["health"] / stats["max_health"] * 100), end='')
     print("%) ", end='')
-    print(mana, end='')
+    print(stats["mana"], end='')
     print("/", end='')
-    print(max_mana, end=' ')
+    print(stats["max_mana"], end=' ')
     print("(", end='')
-    #print(mana / max_mana * 100, end='')
-    print("{:0.2f}".format(mana / max_mana * 100), end='')
+    print("{:0.2f}".format(stats["mana"] / stats["max_mana"] * 100), end='')
     print("%) ", end='')
     print("EXP: ", end='')
-    print("{:0.2f}".format(exp_percent), end='')
+    print("{:0.2f}".format(stats["exp_percent"]), end='')
     print("%", end='')
     print("]", end='')
     print(">", end='')
