@@ -104,6 +104,10 @@ def select_all_player(conn):
 
 def Show_NPC(location):
 
+    if(not(location)):
+        cur.execute("SELECT location FROM Player WHERE name = ?", (name,))
+        location = cur.fetchall()[0][0]
+    
     npc_list = []
 
     cur.execute("SELECT id FROM Npc WHERE room = ?", (location,))
@@ -609,12 +613,12 @@ def Combat(npc_id):
 def Precombat(choice):
     global stop_combat
     stop_combat = False
-    npc_list = Show_NPC()
+    npc_list = Show_NPC(None)
     found_fight = 0
     conn = create_connection(database)
     cur = conn.cursor()
 
-    npc = choice.lower()[5:]
+    npc = choice.lower()
 
     for each in npc_list:
         if(found_fight == 0):
@@ -918,7 +922,7 @@ def Command(choice):
     elif(choice == 'buffs'):
         Show_Buffs()
     elif(choice[0:4] == 'kill'):
-        Precombat(choice)
+        Precombat(choice[5:])
     elif(choice == ''):
         pass
     elif(choice[0:5] == 'equip'):
