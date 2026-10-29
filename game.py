@@ -1101,8 +1101,7 @@ class Game:
         ui.say("You will return to level 1 with XP reset. You keep every ability you have learned (each "
                "becomes usable again when you reach the level you first learned it), and the full stat "
                "gains of your {} life become a permanent bonus that grows as you level. Gear above "
-               "level 1 will be unequipped until you can wield it again. Each rebirth makes levelling "
-               "{}% slower.".format(p.class_name, int(25)), "white")
+               "level 1 will be unequipped until you can wield it again.".format(p.class_name), "white")
         choices = [c for c in CLASS_ORDER if c != p.cls]
         for i, cid in enumerate(choices, 1):
             past = " (lived before)" if cid in p.lived_classes() else ""

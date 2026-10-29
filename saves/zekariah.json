@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 8,
-  "xp": 1992,
-  "gold": 142,
+  "level": 10,
+  "xp": 3100,
+  "gold": 526,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -44,7 +44,32 @@
    "leather_jerkin",
    "wolf_pelt",
    "minor_healing_potion",
-   "wolf_pelt"
+   "wolf_pelt",
+   "minor_mana_potion",
+   "wolf_pelt",
+   "steel_dagger",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "minor_healing_potion",
+   "wolf_pelt",
+   "spider_silk",
+   "spider_silk",
+   "spider_silk",
+   "wolf_pelt",
+   "wolf_pelt",
+   "studded_gloves",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "yew_longbow",
+   "minor_healing_potion",
+   "yew_longbow",
+   "minor_mana_potion",
+   "wolf_pelt",
+   "minor_mana_potion",
+   "minor_mana_potion"
   ],
   "equipment": {
    "weapon": "wand_of_sparks",
@@ -73,10 +98,10 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 85,
-  "deaths": 8,
-  "hp": 86,
-  "mana": 102,
+  "kills": 125,
+  "deaths": 11,
+  "hp": 90,
+  "mana": 73,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt"
@@ -85,7 +110,7 @@
  },
  "room": "woods_deep",
  "world": {
-  "tick": 1255,
+  "tick": 1812,
   "rooms": {
    "town_square": {
     "items": [],
@@ -260,13 +285,18 @@
      [
       "grey_wolf",
       73
+     ],
+     [
+      "grey_wolf",
+      73
+     ],
+     [
+      "grey_wolf",
+      73
      ]
     ],
     "respawn_at": {
-     "grey_wolf": [
-      1259,
-      1272
-     ]
+     "grey_wolf": []
     }
    },
    "spider_hollow": {
@@ -285,23 +315,25 @@
       96
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "giant_spider": []
+    }
    },
    "woods_deep": {
     "items": [],
     "monsters": [
      [
-      "bandit_scout",
-      101
+      "grey_wolf",
+      73
      ]
     ],
     "respawn_at": {
      "bandit_scout": [
-      1273
+      1846,
+      1843
      ],
      "grey_wolf": [
-      1279,
-      1275
+      1849
      ]
     }
    },
@@ -325,28 +357,23 @@
    },
    "bandit_approach": {
     "items": [],
-    "monsters": [
-     [
-      "bandit_archer",
-      42
+    "monsters": [],
+    "respawn_at": {
+     "bandit_archer": [
+      1830,
+      1826
      ],
-     [
-      "bandit_archer",
-      130
-     ],
-     [
-      "bandit_cutthroat",
-      144
+     "bandit_cutthroat": [
+      1825
      ]
-    ],
-    "respawn_at": {}
+    }
    },
    "bandit_camp": {
     "items": [],
     "monsters": [
      [
       "bandit_cutthroat",
-      144
+      39
      ],
      [
       "bandit_cutthroat",

@@ -7,12 +7,11 @@ from data.items import ITEMS, SLOTS
 from data.races import RACES
 
 MAX_LEVEL = 50
-REBIRTH_XP_PENALTY = 0.25  # each past life makes levelling 25% slower
 
 
-def xp_for_level(level, rebirths=0):
-    """Experience needed to advance from `level` to `level + 1`."""
-    return int(100 * level ** 1.5 * (1 + REBIRTH_XP_PENALTY * rebirths))
+def xp_for_level(level):
+    """Experience needed to advance from `level` to `level + 1` (the same in every life)."""
+    return int(100 * level ** 1.5)
 
 
 class Pet:
@@ -147,7 +146,7 @@ class Character:
     # ------------------------------------------------------------------ xp
     @property
     def xp_needed(self):
-        return xp_for_level(self.level, len(self.past_lives))
+        return xp_for_level(self.level)
 
     def gain_xp(self, amount):
         """Add experience and handle level-ups. Returns a list of message lines."""

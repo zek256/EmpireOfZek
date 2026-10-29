@@ -110,7 +110,7 @@ learned automatically on level up.
 - **HP** = 10 + (class HP + 3) x level + CON x level x 0.2 (x racial modifier)
 - **Mana** = 15 + class mana x level + casting stat x level x 0.1 (x racial modifier)
 - **Stats** = race base + class starting bonus + class gains x (level - 1) + rebirth bonus + gear
-- **XP to next level** = 100 x level^1.5 x (1 + 0.25 x number of past lives)
+- **XP to next level** = 100 x level^1.5, the same in every life no matter how many rebirths
 - Monsters far below your level give little XP and hit you less. Fighting above your level gives
   bonus XP and is dangerous.
 
@@ -124,8 +124,8 @@ At level 50, `rebirth` lets you choose any other class:
   Slam back at level 1, Cleave at 12, Avatar of War at 42).
 - The **full stat gains of each previous class at level 50** become a permanent bonus. It phases
   in as you level (bonus x level / 50), so it stacks across rebirths and reaches full strength at 50.
-- Gear above level 1 is unequipped until you can wield it again, and each life levels 25% slower,
-  so rebirth is powerful but not a free ride.
+- Gear above level 1 is unequipped until you can wield it again, so you climb back up with your
+  new class's starting gear. Experience needed per level is exactly the same as in your first life.
 
 ## World
 
