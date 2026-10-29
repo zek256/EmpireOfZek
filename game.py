@@ -48,6 +48,8 @@ HELP = [
               ("find <quest|#|monster>", "directions to your quest target, e.g. 'find vermin' -> 'wd'"),
               ("list / buy <item> / sell <item>", "trade with a merchant")]),
     ("System", [("save / load", "save or load your game"),
+                ("alias <word> <command>", "make a shortcut, e.g. 'alias mm cast magic missile'"),
+                ("alias / unalias <word>", "list your aliases / remove one"),
                 ("help", "show this help"),
                 ("quit", "leave the game")]),
 ]
@@ -202,12 +204,19 @@ class Game:
             self.world_tick()
 
     SLEEP_OK = {"wake", "sleep", "stats", "level", "inventory", "equipment", "spells", "quests",
-                "help", "save", "load", "quit", "pet", "examine", "find"}
+                "help", "save", "load", "quit", "pet", "examine", "find", "alias", "unalias"}
 
     def handle(self, line):
         parts = line.split(None, 1)
         verb = parts[0].lower()
         args = parts[1].strip() if len(parts) > 1 else ""
+        if verb in self.player.aliases:
+            # expand once (an alias can't start with another alias); extra words are appended,
+            # so with 'alias mm cast magic missile', 'mm rat' casts at the rat
+            line = self.player.aliases[verb] + (" " + args if args else "")
+            parts = line.split(None, 1)
+            verb = parts[0].lower()
+            args = parts[1].strip() if len(parts) > 1 else ""
         if verb in DIR_ALIASES and not args:
             verb, args = "move", DIR_ALIASES[verb]
         elif verb == "go" and args.lower() in DIR_ALIASES:
@@ -992,6 +1001,59 @@ class Game:
         else:
             ui.say("{}: {} ({}).".format(title, what, dest.name), "byellow")
             ui.out("  Route: " + ui.c("".join(path), "bwhite", "bold") + ui.c("  ({} steps)".format(len(path)), "grey"))
+
+    # ================================================================ player aliases
+    MAX_ALIASES = 50
+
+    def reserved_words(self):
+        """Every word the game already understands; aliases may not shadow them."""
+        words = {name[4:] for name in dir(self) if name.startswith("cmd_")}
+        return words | set(self.ALIASES) | set(DIR_ALIASES) | {"go"}
+
+    def cmd_alias(self, args):
+        aliases = self.player.aliases
+        parts = args.split(None, 1)
+        if not parts:
+            if not aliases:
+                ui.say("You have no aliases. Create one with 'alias <word> <command>', "
+                       "e.g. 'alias mm cast magic missile'.", "grey")
+                return
+            ui.out(ui.c("Your aliases:", "byellow"))
+            for word, expansion in sorted(aliases.items()):
+                ui.out("  {:<12} {}".format(ui.c(word, "bwhite"), expansion))
+            return
+        word = parts[0].lower()
+        if len(parts) == 1:
+            if word in aliases:
+                ui.out("  {:<12} {}".format(ui.c(word, "bwhite"), aliases[word]))
+            else:
+                ui.say("'{}' is not an alias.".format(word), "grey")
+            return
+        expansion = parts[1].strip()
+        if not re.fullmatch(r"[a-z0-9]{1,15}", word):
+            ui.say("An alias must be a single word of letters or digits (up to 15).", "grey")
+            return
+        if word in self.reserved_words():
+            ui.say("'{}' is already a game command and can't be used as an alias.".format(word), "red")
+            return
+        first = expansion.split()[0].lower()
+        if first in aliases:
+            ui.say("An alias can't start with another alias ('{}').".format(first), "red")
+            return
+        if word not in aliases and len(aliases) >= self.MAX_ALIASES:
+            ui.say("You can have at most {} aliases. Remove one with 'unalias <word>'.".format(self.MAX_ALIASES), "grey")
+            return
+        replaced = word in aliases
+        aliases[word] = expansion[:100]
+        ui.say("Alias {}: '{}' now means '{}'.".format("updated" if replaced else "created", word, aliases[word]), "bgreen")
+
+    def cmd_unalias(self, args):
+        word = args.strip().lower()
+        if word in self.player.aliases:
+            del self.player.aliases[word]
+            ui.say("Alias '{}' removed.".format(word), "bgreen")
+        else:
+            ui.say("'{}' is not an alias. Type 'alias' to list yours.".format(word) if word else "Unalias what?", "grey")
 
     # ================================================================ resting
     def cmd_sleep(self, args):

@@ -17,6 +17,7 @@ _CODES = {
 _color = True
 _input = queue.Queue()
 lines_printed = 0  # bumped by every printed line, so the game knows when to redraw the prompt
+_prompt_open = False  # a prompt is on screen without a newline after it
 
 
 def start_input():
@@ -45,17 +46,25 @@ def read_line(timeout=None):
             continue
         if line is None:
             raise SystemExit
+        global _prompt_open
+        _prompt_open = False  # the player's Enter already moved to a new line
         return line
 
 
 def write(text):
     """Print without a newline (prompts)."""
+    global _prompt_open
     sys.stdout.write(text)
     sys.stdout.flush()
+    _prompt_open = True
 
 
 def _emit(text):
-    global lines_printed
+    global lines_printed, _prompt_open
+    if _prompt_open:
+        # output arriving on its own (a combat round, sleep) starts below the prompt, not beside it
+        print()
+        _prompt_open = False
     lines_printed += 1
     print(text)
 

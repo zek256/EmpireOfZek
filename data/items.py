@@ -137,6 +137,30 @@ armor("dragonscale_mail", "Dragonscale Mail", "chest", 48, 52, 7000, "Armor craf
 armor("heart_of_flame", "the Heart of Flame", "neck", 50, 10, 8000, "A pendant holding a fragment of a dragon's heart.",
       STR=8, DEX=8, CON=8, INT=8, WIS=8, CHA=8)
 
+# ------------------------------------------------------------------ Caster gear (sold by Elowen Silverthread)
+# Light on armor, heavy on INT/WIS/CHA. The best caster gear still drops from monsters and bosses.
+armor("linen_robe", "a linen robe", "chest", 1, 2, 8, "A plain robe of undyed linen, the uniform of every apprentice.", INT=1, WIS=1)
+armor("apprentice_hood", "an apprentice's hood", "head", 2, 1, 12, "A soft grey hood embroidered with a single silver rune.", INT=1, WIS=1)
+armor("silk_gloves", "silk gloves", "hands", 3, 1, 15, "Thin gloves of black silk that never snag a spell.", INT=1, CHA=1)
+armor("felt_slippers", "felt slippers", "feet", 3, 1, 15, "Quiet slippers favoured by librarians and thieves alike.", WIS=1, DEX=1)
+armor("woven_trousers", "woven trousers", "legs", 4, 2, 20, "Loose trousers of tightly woven blue wool.", INT=1, WIS=1)
+armor("copper_focus_ring", "a copper focus ring", "ring", 5, 0, 45, "A copper band etched with a spiral that draws the mind inward.", INT=2, WIS=2)
+weapon("wand_of_sparks", "a wand of sparks", 6, (3, 7), 60, "A birch wand that crackles with tiny sparks when gripped.", INT=3, CHA=1)
+armor("moonstone_pendant", "a moonstone pendant", "neck", 8, 1, 90, "A milky moonstone that glows faintly at night.", INT=2, WIS=2, CHA=2)
+armor("acolyte_robe", "an acolyte's robe", "chest", 8, 5, 95, "A robe of deep blue wool trimmed with silver thread.", INT=2, WIS=3)
+armor("crystal_orb", "a crystal orb", "shield", 10, 1, 120, "A palm-sized orb of clear crystal, held in the off hand to focus the will.", INT=3, WIS=3)
+armor("spellweave_hood", "a spellweave hood", "head", 10, 3, 115, "A deep hood whose weave shifts colour when magic is near.", INT=3, WIS=2)
+weapon("willow_staff", "a willow staff", 12, (7, 13), 200, "A pale, supple staff cut from a sacred willow.", INT=4, WIS=4, CHA=2)
+armor("enchanted_gloves", "enchanted gloves", "hands", 12, 3, 140, "Grey gloves whose fingertips glow when a spell is cast.", INT=3, WIS=3)
+armor("mystic_leggings", "mystic leggings", "legs", 14, 5, 200, "Leggings of violet cloth stitched with warding sigils.", INT=3, WIS=3)
+armor("spellbinder_robe", "a spellbinder's robe", "chest", 14, 8, 260, "A heavy robe whose lining is written with a thousand tiny runes.", INT=4, WIS=4)
+armor("runebound_slippers", "runebound slippers", "feet", 16, 4, 240, "Slippers that leave faint glowing runes where they step.", INT=3, WIS=2, DEX=2)
+armor("sapphire_ring", "a sapphire ring", "ring", 18, 0, 400, "A ring set with a deep blue sapphire that hums softly.", INT=4, WIS=4)
+armor("archivist_robe", "an archivist's robe", "chest", 20, 12, 600, "The formal robe of a master of the Brightwater archives.", INT=6, WIS=6, CHA=2)
+armor("starsilk_hood", "a starsilk hood", "head", 22, 7, 550, "A hood of midnight silk sewn with tiny points of starlight.", INT=5, WIS=5)
+weapon("wand_of_embers", "a wand of embers", 22, (13, 22), 650, "A wand of charred oak with a glowing coal set in its tip.", INT=7, WIS=4, CHA=3)
+armor("tome_of_warding", "a tome of warding", "shield", 24, 5, 800, "A heavy spellbook chained to the wrist, its pages humming with protective wards.", INT=6, WIS=6, CON=2)
+
 # ------------------------------------------------------------------ Consumables
 potion("minor_healing_potion", "a minor healing potion", 1, 10, "A small vial of red liquid.", heal=45)
 potion("minor_mana_potion", "a minor mana potion", 1, 12, "A small vial of shimmering blue liquid.", mana=30)

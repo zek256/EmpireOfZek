@@ -49,6 +49,7 @@ class Character:
         self.effects = []     # buffs, shields, hots, dots, stuns
         self.cooldowns = {}   # ability id -> rounds remaining
         self.pet = None
+        self.aliases = {}     # player-defined shortcut -> command line
         self.kills = 0
         self.deaths = 0
         for iid in CLASSES[cls]["gear"]:
@@ -300,4 +301,5 @@ class Character:
         ch.pet = Pet.from_dict(d["pet"]) if d.get("pet") else None
         for s in SLOTS:
             ch.equipment.setdefault(s, None)
+        ch.__dict__.setdefault("aliases", {})  # saves from before aliases existed
         return ch

@@ -9,6 +9,8 @@ Eternal Flame. At level 50, be **reborn** as a new class and carry your past liv
 
 ## Running
 
+Open a terminal in this folder (in File Explorer, click the address bar, type `cmd` and press Enter) and run:
+
 ```
 python main.py
 ```
@@ -49,18 +51,20 @@ Saves are written as JSON to `saves/<name>.json`.
 | `talk` <person> | talk to NPCs; this offers and turns in quests |
 | `quests` / `journal` | quest log |
 | `find` <quest name, number, or monster> | shortest route to your quest target (or the quest giver once it's done), e.g. `find vermin` prints `wd`. With one active quest, plain `find` works. Also `track` / `where` |
-| `list`, `buy [qty] <item>`, `sell <item>`, `sell junk` | trade with merchants |
+| `list`, `buy [qty] <item>`, `sell <item>`, `sell junk` | trade with merchants: Durgan Ironhand (weapons and armor, smithy), Elowen Silverthread (cloth, wands, orbs and rings for casters, west off the South Road), Mirela (potions) |
 | `sleep` / `rest` | fall asleep and recover 10% of max HP and mana every tick (not with hostile monsters nearby) |
 | `wake` / `stand` | get up (you also wake automatically when fully rested, or when attacked) |
 | `pet` / `pet dismiss` | inspect or release your summoned companion |
 | `stats` / `score` | full character sheet |
 | `level` | XP progress and upcoming abilities |
 | `rebirth` | at level 50, be reborn as a new class |
+| `alias <word> <command>` | create a shortcut: after `alias mm cast magic missile`, typing `mm` casts it (`mm rat` targets the rat). Built-in commands and directions can't be overridden. `alias` lists yours, `unalias <word>` removes one. Aliases are saved with your character. |
 | `save`, `load`, `quit`, `help` | system |
 
-The prompt shows `<hp mp level%>` (e.g. `<25/28hp 16/16mp L1 33%>`, progress toward your next level in gold), plus `[COMBAT]` or `[ASLEEP]`. In room listings monsters are coloured by
-danger relative to your level (grey/green/blue easy, white even, yellow/red dangerous), and `(!)` / `(?)`
-mark NPCs with a quest to offer or turn in.
+The prompt shows `<hp mp level%>` (e.g. `<25/28hp 16/16mp L1 33%>`, progress toward your next level in gold),
+plus `[COMBAT]` or `[ASLEEP]`. In room listings monsters are coloured by danger relative to your level
+(grey/green/blue easy, white even, yellow/red dangerous), and `(!)` / `(?)` mark NPCs with a quest to
+offer or turn in.
 
 ## Time and combat
 
@@ -107,7 +111,8 @@ learned automatically on level up.
 - **Mana** = 15 + class mana x level + casting stat x level x 0.1 (x racial modifier)
 - **Stats** = race base + class starting bonus + class gains x (level - 1) + rebirth bonus + gear
 - **XP to next level** = 100 x level^1.5 x (1 + 0.25 x number of past lives)
-- Monsters far below your level give little XP. Fighting above your level gives bonus XP and is dangerous.
+- Monsters far below your level give little XP and hit you less. Fighting above your level gives
+  bonus XP and is dangerous.
 
 ## Rebirth
 
@@ -124,11 +129,11 @@ At level 50, `rebirth` lets you choose any other class:
 
 ## World
 
-Town of Brightwater (inn, temple, smithy, alchemist, barracks), Greenmeadow (1-5), Whispering Woods
-and the bandit camp (4-10), Barrowfield and the Crypt of Varnoth dungeon (9-17), the Mirefen (15-22),
-the Ironspine Mountains with the orc warcamp and frost caverns (20-34), the Ruins of Elandor (32-41),
-and the Ashen Peaks up to the dragon's lair (41-52). That is 54 rooms, 51 monster types including
-6 bosses, and 87 items.
+Town of Brightwater (inn, temple, smithy, alchemist, Silverthread Arcana caster shop, barracks),
+Greenmeadow (1-5), Whispering Woods and the bandit camp (4-10), Barrowfield and the Crypt of Varnoth
+dungeon (9-17), the Mirefen (15-22), the Ironspine Mountains with the orc warcamp and frost caverns
+(20-34), the Ruins of Elandor (32-41), and the Ashen Peaks up to the dragon's lair (41-52).
+That is 55 rooms, 51 monster types including 6 bosses, and 108 items.
 
 **Quests:** Vermin in the Cellar (Bram, inn), Wolves at the Gate, The Bandit Chieftain, The
 Skullsplitter Horde (Captain Halvard, barracks), The Bone King and The Hag of the Mirefen (Sister
@@ -141,15 +146,15 @@ your gold.
 
 ```
 main.py          entry point, title menu, CLI flags
-game.py          command parser, exploration, quests, shops, rebirth, save/load, character creation
-character.py     Character (stats, HP/mana, levelling, abilities, equipment, rebirth) and Pet
-combat.py        turn-based combat, ability resolution, monster AI, XP/loot rewards
+game.py          command parser, game clock, exploration, quests, find, aliases, shops, rebirth, save/load
+character.py     Character (stats, HP/mana, levelling, abilities, equipment, rebirth, aliases) and Pet
+combat.py        tick-based combat rounds, ability resolution, monster AI, XP/loot rewards
 world.py         rooms, monster instances, respawning, world persistence
-ui.py            colour and word-wrap helpers
+ui.py            colour, word wrap, background input reader
 data/races.py    races and racial perks
 data/classes.py  classes, stat growth, starting gear
 data/abilities.py  all spells and abilities
-data/items.py    weapons, armor, potions, trophies
+data/items.py    weapons, armor, caster gear, potions, trophies
 data/monsters.py monster templates, special attacks, loot tables
 data/rooms.py    the world map and NPCs
 data/quests.py   quests
