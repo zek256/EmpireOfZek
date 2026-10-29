@@ -83,7 +83,7 @@ The world runs on a real-time clock: every **4 seconds** is one game tick.
 
 ## Races and classes
 
-**Races:** human (+10% XP), high elf (+12% mana), elf (dodge/crit), dark elf (crit), gnome (mana/dodge),
+**Races:** human (+5% HP, mana and damage), high elf (+12% mana), elf (dodge/crit), dark elf (crit), gnome (mana/dodge),
 ogre (+12% HP), troll (regeneration), undead (immune to poison/disease), orc (+6% damage).
 
 **Classes:** warrior, cleric, wizard, bard, necromancer, shaman, druid, rogue, ranger, paladin,

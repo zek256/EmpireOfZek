@@ -15,8 +15,8 @@ RACES = {
     "human": {
         "name": "Human",
         "stats": {"STR": 10, "DEX": 10, "CON": 10, "INT": 10, "WIS": 10, "CHA": 12},
-        "perks": {"xp_mult": 1.10},
-        "perk_text": "Adaptable: +10% experience from all sources.",
+        "perks": {"hp_mult": 1.05, "mana_mult": 1.05, "dmg_mult": 1.05},
+        "perk_text": "Versatile: +5% maximum HP, +5% maximum mana and +5% damage.",
         "desc": "The scattered kingdoms of Men are young, restless and ambitious. "
                 "What humans lack in gifts they make up for in sheer determination.",
     },
