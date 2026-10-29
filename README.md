@@ -48,6 +48,7 @@ Saves are written as JSON to `saves/<name>.json`.
 | `get` <item> / `get all` / `drop` <item> | pick up / drop |
 | `talk` <person> | talk to NPCs; this offers and turns in quests |
 | `quests` / `journal` | quest log |
+| `find` <quest name, number, or monster> | shortest route to your quest target (or the quest giver once it's done), e.g. `find vermin` prints `wd`. With one active quest, plain `find` works. Also `track` / `where` |
 | `list`, `buy [qty] <item>`, `sell <item>`, `sell junk` | trade with merchants |
 | `sleep` / `rest` | fall asleep and recover 10% of max HP and mana every tick (not with hostile monsters nearby) |
 | `wake` / `stand` | get up (you also wake automatically when fully rested, or when attacked) |

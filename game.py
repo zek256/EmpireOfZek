@@ -11,6 +11,7 @@ from combat import AGGRO_GAP, Combat, con_color, resolve_self_effect
 from data.abilities import ABILITIES
 from data.classes import CLASS_ORDER, CLASSES, STATS
 from data.items import ITEMS, SLOTS
+from data.monsters import MONSTERS
 from data.quests import QUESTS
 from data.races import RACE_ORDER, RACES
 from data.rooms import NPCS, RESPAWN_ROOM, START_ROOM
@@ -44,6 +45,7 @@ HELP = [
                ("get / drop <item>", "pick up or drop an item ('get all')")]),
     ("Town", [("talk <person>", "speak with someone (accepts and completes quests)"),
               ("quests / journal", "show your quest log"),
+              ("find <quest|#|monster>", "directions to your quest target, e.g. 'find vermin' -> 'wd'"),
               ("list / buy <item> / sell <item>", "trade with a merchant")]),
     ("System", [("save / load", "save or load your game"),
                 ("help", "show this help"),
@@ -200,7 +202,7 @@ class Game:
             self.world_tick()
 
     SLEEP_OK = {"wake", "sleep", "stats", "level", "inventory", "equipment", "spells", "quests",
-                "help", "save", "load", "quit", "pet", "examine"}
+                "help", "save", "load", "quit", "pet", "examine", "find"}
 
     def handle(self, line):
         parts = line.split(None, 1)
@@ -232,6 +234,7 @@ class Game:
         "x": "examine", "inspect": "examine", "take": "get", "pick": "get",
         "speak": "talk", "greet": "talk", "ask": "talk",
         "journal": "quests", "j": "quests", "quest": "quests", "shop": "list",
+        "track": "find", "where": "find", "route": "find", "path": "find",
         "rest": "sleep", "stand": "wake", "con": "consider", "h": "help", "?": "help", "q": "quit", "exit": "quit",
         "abilities": "spells", "skills": "spells", "spellbook": "spells", "run": "flee",
     }
@@ -895,20 +898,100 @@ class Game:
         if not p.quests:
             ui.say("Your journal is empty. Speak with the townsfolk of Brightwater to find work.", "grey")
         for qid, st in p.quests.items():
-            q = QUESTS[qid]
             if st["status"] == "done":
-                ui.out(ui.c("  [done] {}".format(q["name"]), "grey"))
+                ui.out(ui.c("  [done] {}".format(QUESTS[qid]["name"]), "grey"))
+        for i, qid in enumerate(self.active_quests(), 1):
+            q = QUESTS[qid]
+            n = self.quest_progress(qid)
+            what = "slay" if q["type"] == "kill" else "collect"
+            ui.out(ui.c("  {}. {} - {} {} ({}/{}), then return to {}.".format(
+                i, q["name"], what, self.quest_target_name(qid), min(n, q["count"]), q["count"],
+                NPCS[q["giver"]]["name"]), "byellow"))
+        if self.active_quests():
+            ui.out(ui.c("  Type 'find <quest name or number>' for directions.", "grey"))
+
+    def active_quests(self):
+        return [qid for qid, st in self.player.quests.items() if st["status"] != "done"]
+
+    @staticmethod
+    def quest_target_name(qid):
+        q = QUESTS[qid]
+        if q["type"] == "collect":
+            return strip_article(ITEMS[q["target"]]["name"])
+        return strip_article(MONSTERS[q["target"]]["name"])
+
+    # ================================================================ find / directions
+    def route_to(self, goals):
+        """Shortest list of directions from here to any room in `goals`, or None if unreachable."""
+        prev = {self.room_id: None}
+        frontier = [self.room_id]
+        while frontier:
+            nxt = []
+            for rid in frontier:
+                if rid in goals:
+                    goal, path = rid, []
+                    while prev[rid]:
+                        rid, d = prev[rid]
+                        path.append(d)
+                    return path[::-1], self.world.room(goal)
+                for d, dest in self.world.room(rid).exits.items():
+                    if dest not in prev:
+                        prev[dest] = (rid, d)
+                        nxt.append(dest)
+            frontier = nxt
+        return None, None
+
+    def quest_goal(self, qid):
+        """(set of room ids, description of what is there) for a quest's next step."""
+        q = QUESTS[qid]
+        if self.quest_state(qid) == "ready":
+            rooms = {rid for rid, r in self.world.rooms.items() if q["giver"] in r.npcs}
+            return rooms, "turn in to " + NPCS[q["giver"]]["name"]
+        if q["type"] == "kill":
+            mids = {q["target"]}
+        else:
+            mids = {mid for mid, m in MONSTERS.items() if any(i == q["target"] for i, _ in m["loot"])}
+        rooms = {rid for rid, r in self.world.rooms.items() if any(mid in mids for mid, _ in r.spawns)}
+        return rooms, self.quest_target_name(qid)
+
+    def cmd_find(self, args):
+        active = self.active_quests()
+        word = args.strip().lower()
+        qid = None
+        if not word:
+            if len(active) == 1:
+                qid = active[0]
             else:
-                n = self.quest_progress(qid)
-                what = "slay" if q["type"] == "kill" else "collect"
-                tname = q["target"].replace("_", " ")
-                if q["type"] == "collect":
-                    tname = strip_article(ITEMS[q["target"]]["name"])
-                else:
-                    from data.monsters import MONSTERS
-                    tname = strip_article(MONSTERS[q["target"]]["name"])
-                ui.out(ui.c("  {} - {} {} ({}/{}), then return to {}.".format(
-                    q["name"], what, tname, min(n, q["count"]), q["count"], NPCS[q["giver"]]["name"]), "byellow"))
+                ui.say("Find what? Give a quest name or number from your journal, or a monster's name.", "grey")
+                for i, a in enumerate(active, 1):
+                    ui.out("  {}. {}".format(i, QUESTS[a]["name"]))
+                return
+        elif word.isdigit() and 1 <= int(word) <= len(active):
+            qid = active[int(word) - 1]
+        else:
+            qid = next((a for a in active if word in QUESTS[a]["name"].lower()), None)
+        if qid:
+            rooms, what = self.quest_goal(qid)
+            title = QUESTS[qid]["name"]
+        else:
+            # not a quest: treat it as a monster name
+            mids = {mid for mid, m in MONSTERS.items()
+                    if word in strip_article(m["name"]).lower() or mid == word.replace(" ", "_")}
+            if not mids:
+                ui.say("You have no active quest called that, and no one has heard of such a creature.", "grey")
+                return
+            rooms = {rid for rid, r in self.world.rooms.items() if any(mid in mids for mid, _ in r.spawns)}
+            title, what = args.strip(), None
+        path, dest = self.route_to(rooms)
+        if what is None and dest:
+            what = strip_article(MONSTERS[next(mid for mid, _ in dest.spawns if mid in mids)]["name"])
+        if path is None:
+            ui.say("You can't find a way to {} from here.".format(what), "grey")
+        elif not path:
+            ui.say("{}: {} - right here!".format(title, what), "byellow")
+        else:
+            ui.say("{}: {} ({}).".format(title, what, dest.name), "byellow")
+            ui.out("  Route: " + ui.c("".join(path), "bwhite", "bold") + ui.c("  ({} steps)".format(len(path)), "grey"))
 
     # ================================================================ resting
     def cmd_sleep(self, args):
