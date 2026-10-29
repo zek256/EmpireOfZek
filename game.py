@@ -539,8 +539,10 @@ class Game:
         ui.say("Darkness takes you. For a long moment there is nothing... and then a distant warmth, "
                "like sunrise through closed eyelids. You awaken upon the cold marble before the "
                "Dawnfather's altar, weak, but alive.", "bwhite")
-        lost_xp = min(p.xp, int(p.xp_needed * 0.1)) if p.level < MAX_LEVEL else 0
-        lost_gold = p.gold // 10
+        #lost_xp = min(p.xp, int(p.xp_needed * 0.1)) if p.level < MAX_LEVEL else 0
+        lost_xp = 0
+        #lost_gold = p.gold // 10
+        lost_gold = 0
         p.xp -= lost_xp
         p.gold -= lost_gold
         p.deaths += 1
@@ -718,11 +720,11 @@ class Game:
         p.inventory.remove(iid)
         ui.say("You drink {}.".format(it["name"]), "bgreen")
         if it.get("heal"):
-            ui.say("  You are healed for {} HP.".format(p.heal(it["heal"])), "bgreen")
+            ui.say("You are healed for {} HP.".format(p.heal(it["heal"])), "bgreen")
         if it.get("mana"):
             before = p.mana
             p.mana = min(p.max_mana, p.mana + it["mana"])
-            ui.say("  You regain {} mana.".format(p.mana - before), "bblue")
+            ui.say("You regain {} mana.".format(p.mana - before), "bblue")
 
     def cmd_examine(self, args):
         p = self.player

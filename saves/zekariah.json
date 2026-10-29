@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 5,
-  "xp": 822,
-  "gold": 151,
+  "level": 8,
+  "xp": 1992,
+  "gold": 142,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -22,21 +22,40 @@
    "minor_mana_potion",
    "rat_tail",
    "minor_healing_potion",
+   "minor_healing_potion",
+   "minor_healing_potion",
+   "wolf_pelt",
+   "healing_potion",
+   "wolf_pelt",
+   "wolf_pelt",
+   "minor_mana_potion",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolfhide_boots",
    "wolf_pelt",
    "minor_healing_potion",
    "wolf_pelt",
-   "minor_healing_potion"
+   "wolf_pelt",
+   "leather_jerkin",
+   "wolf_pelt",
+   "minor_healing_potion",
+   "wolf_pelt"
   ],
   "equipment": {
-   "weapon": "oak_staff",
+   "weapon": "wand_of_sparks",
    "shield": null,
-   "head": "leather_cap",
-   "chest": "padded_tunic",
-   "hands": null,
-   "legs": null,
-   "feet": null,
-   "neck": null,
-   "ring": null
+   "head": "apprentice_hood",
+   "chest": "acolyte_robe",
+   "hands": "silk_gloves",
+   "legs": "woven_trousers",
+   "feet": "felt_slippers",
+   "neck": "moonstone_pendant",
+   "ring": "copper_focus_ring"
   },
   "quests": {
    "cellar_rats": {
@@ -44,25 +63,29 @@
     "count": 6
    },
    "wolf_pelts": {
+    "status": "done",
+    "count": 0
+   },
+   "bandit_chief": {
     "status": "active",
     "count": 0
    }
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 41,
-  "deaths": 3,
-  "hp": 58,
-  "mana": 67,
+  "kills": 85,
+  "deaths": 8,
+  "hp": 86,
+  "mana": 102,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt"
   },
   "pet": null
  },
- "room": "woods_edge",
+ "room": "woods_deep",
  "world": {
-  "tick": 727,
+  "tick": 1255,
   "rooms": {
    "town_square": {
     "items": [],
@@ -138,6 +161,11 @@
     "monsters": [],
     "respawn_at": {}
    },
+   "silverthread": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
    "meadow_path": {
     "items": [],
     "monsters": [
@@ -201,7 +229,9 @@
       73
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "kobold_trapper": []
+    }
    },
    "meadow_crossing": {
     "items": [],
@@ -230,18 +260,13 @@
      [
       "grey_wolf",
       73
-     ],
-     [
-      "grey_wolf",
-      73
-     ],
-     [
-      "grey_wolf",
-      73
      ]
     ],
     "respawn_at": {
-     "grey_wolf": []
+     "grey_wolf": [
+      1259,
+      1272
+     ]
     }
    },
    "spider_hollow": {
@@ -268,21 +293,17 @@
      [
       "bandit_scout",
       101
-     ],
-     [
-      "bandit_scout",
-      101
-     ],
-     [
-      "grey_wolf",
-      73
-     ],
-     [
-      "grey_wolf",
-      73
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "bandit_scout": [
+      1273
+     ],
+     "grey_wolf": [
+      1279,
+      1275
+     ]
+    }
    },
    "wolf_den": {
     "items": [],
@@ -307,7 +328,7 @@
     "monsters": [
      [
       "bandit_archer",
-      126
+      42
      ],
      [
       "bandit_archer",
@@ -348,7 +369,7 @@
     "monsters": [
      [
       "restless_zombie",
-      192
+      186
      ],
      [
       "restless_zombie",
@@ -388,7 +409,7 @@
     "monsters": [
      [
       "crypt_bat",
-      135
+      126
      ],
      [
       "crypt_bat",
@@ -497,7 +518,7 @@
     "monsters": [
      [
       "bog_lurker",
-      285
+      281
      ],
      [
       "bog_lurker",
