@@ -46,7 +46,7 @@ HELP = [
     ("Town", [("talk <person>", "speak with someone (accepts and completes quests)"),
               ("quests / journal", "show your quest log"),
               ("find <quest|#|monster>", "directions to your quest target, e.g. 'find vermin' -> 'wd'"),
-              ("list / buy <item> / sell <item>", "trade with a merchant")]),
+              ("list / buy [n] <item> / sell [n|all] <item>", "trade with a merchant ('sell all rat tail', 'sell junk')")]),
     ("System", [("save / load", "save or load your game"),
                 ("alias <word> <command>", "make a shortcut, e.g. 'alias mm cast magic missile'"),
                 ("alias / unalias <word>", "list your aliases / remove one"),
@@ -832,14 +832,25 @@ class Game:
             p.gold += total
             ui.say("You sell {} trophies for {} gold.".format(len(junk), total), "yellow")
             return
+        qty = 1
+        m = re.match(r"^(all|\d+)\s+(.+)$", args, re.I)
+        if m:
+            qty, args = m.group(1).lower(), m.group(2)
         iid = self.find_item(p.inventory, args)
         if not iid:
             ui.say("You aren't carrying that.", "grey")
             return
-        gold = max(1, ITEMS[iid]["value"] // 3)
-        p.inventory.remove(iid)
-        p.gold += gold
-        ui.say("You sell {} for {} gold.".format(ITEMS[iid]["name"], gold), "yellow")
+        have = p.inventory.count(iid)
+        qty = have if qty == "all" else min(int(qty), have)
+        if qty < 1:
+            ui.say("Sell how many?", "grey")
+            return
+        each = max(1, ITEMS[iid]["value"] // 3)
+        for _ in range(qty):
+            p.inventory.remove(iid)
+        p.gold += each * qty
+        ui.say("You sell {}{} for {} gold.".format("{} x ".format(qty) if qty > 1 else "", ITEMS[iid]["name"],
+                                                    each * qty), "yellow")
 
     # ================================================================ quests & NPCs
     def quest_state(self, qid):

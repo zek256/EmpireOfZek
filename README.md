@@ -51,7 +51,7 @@ Saves are written as JSON to `saves/<name>.json`.
 | `talk` <person> | talk to NPCs; this offers and turns in quests |
 | `quests` / `journal` | quest log |
 | `find` <quest name, number, or monster> | shortest route to your quest target (or the quest giver once it's done), e.g. `find vermin` prints `wd`. With one active quest, plain `find` works. Also `track` / `where` |
-| `list`, `buy [qty] <item>`, `sell <item>`, `sell junk` | trade with merchants: Durgan Ironhand (weapons and armor, smithy), Elowen Silverthread (cloth, wands, orbs and rings for casters, west off the South Road), Mirela (potions) |
+| `list`, `buy [qty] <item>`, `sell [qty or all] <item>`, `sell junk` | trade with merchants: Durgan Ironhand (weapons and armor, smithy), Elowen Silverthread (cloth, wands, orbs and rings for casters, west off the South Road), Mirela (potions) |
 | `sleep` / `rest` | fall asleep and recover 10% of max HP and mana every tick (not with hostile monsters nearby) |
 | `wake` / `stand` | get up (you also wake automatically when fully rested, or when attacked) |
 | `pet` / `pet dismiss` | inspect or release your summoned companion |

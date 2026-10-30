@@ -5,8 +5,8 @@
   "race": "high elf",
   "cls": "wizard",
   "level": 13,
-  "xp": 2837,
-  "gold": 991,
+  "xp": 3929,
+  "gold": 732,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -20,7 +20,6 @@
    "minor_mana_potion",
    "minor_healing_potion",
    "minor_mana_potion",
-   "rat_tail",
    "minor_healing_potion",
    "minor_healing_potion",
    "minor_healing_potion",
@@ -36,12 +35,10 @@
    "wolf_pelt",
    "wolf_pelt",
    "wolf_pelt",
-   "wolfhide_boots",
    "wolf_pelt",
    "minor_healing_potion",
    "wolf_pelt",
    "wolf_pelt",
-   "leather_jerkin",
    "wolf_pelt",
    "minor_healing_potion",
    "wolf_pelt",
@@ -53,12 +50,8 @@
    "wolf_pelt",
    "minor_healing_potion",
    "wolf_pelt",
-   "spider_silk",
-   "spider_silk",
-   "spider_silk",
    "wolf_pelt",
    "wolf_pelt",
-   "studded_gloves",
    "wolf_pelt",
    "wolf_pelt",
    "wolf_pelt",
@@ -74,14 +67,9 @@
    "wolf_pelt",
    "wolf_pelt",
    "wolf_pelt",
-   "spider_silk",
-   "spider_silk",
-   "wolfhide_boots",
-   "wolfhide_boots",
    "wolf_pelt",
    "minor_mana_potion",
    "wolf_pelt",
-   "wolfhide_boots",
    "wolf_pelt",
    "minor_mana_potion",
    "wolf_pelt",
@@ -92,7 +80,6 @@
    "minor_mana_potion",
    "wolf_pelt",
    "wolf_pelt",
-   "wolfhide_boots",
    "minor_mana_potion",
    "wolf_pelt",
    "minor_healing_potion",
@@ -104,15 +91,16 @@
    "minor_mana_potion",
    "wolf_pelt",
    "wolf_pelt",
-   "wolfhide_boots",
-   "wolf_pelt"
+   "wolf_pelt",
+   "minor_healing_potion",
+   "wand_of_sparks"
   ],
   "equipment": {
-   "weapon": "wand_of_sparks",
+   "weapon": "willow_staff",
    "shield": null,
-   "head": "apprentice_hood",
+   "head": "spellweave_hood",
    "chest": "acolyte_robe",
-   "hands": "silk_gloves",
+   "hands": "enchanted_gloves",
    "legs": "woven_trousers",
    "feet": "felt_slippers",
    "neck": "moonstone_pendant",
@@ -134,19 +122,19 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 184,
+  "kills": 189,
   "deaths": 14,
-  "hp": 35,
-  "mana": 164,
+  "hp": 134,
+  "mana": 206,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt"
   },
   "pet": null
  },
- "room": "woods_deep",
+ "room": "silverthread",
  "world": {
-  "tick": 5882,
+  "tick": 5973,
   "rooms": {
    "town_square": {
     "items": [],
@@ -390,12 +378,14 @@
      [
       "dire_wolf",
       141
+     ],
+     [
+      "dire_wolf",
+      141
      ]
     ],
     "respawn_at": {
-     "dire_wolf": [
-      5918
-     ]
+     "dire_wolf": []
     }
    },
    "bandit_approach": {
