@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 13,
-  "xp": 3929,
-  "gold": 732,
+  "level": 18,
+  "xp": 5921,
+  "gold": 1357,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -23,88 +23,63 @@
    "minor_healing_potion",
    "minor_healing_potion",
    "minor_healing_potion",
-   "wolf_pelt",
    "healing_potion",
-   "wolf_pelt",
-   "wolf_pelt",
    "minor_mana_potion",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
    "minor_healing_potion",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
    "minor_healing_potion",
-   "wolf_pelt",
    "minor_mana_potion",
-   "wolf_pelt",
-   "steel_dagger",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
    "minor_healing_potion",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "yew_longbow",
    "minor_healing_potion",
-   "yew_longbow",
-   "minor_mana_potion",
-   "wolf_pelt",
    "minor_mana_potion",
    "minor_mana_potion",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
    "minor_mana_potion",
-   "wolf_pelt",
-   "wolf_pelt",
    "minor_mana_potion",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
    "minor_mana_potion",
-   "wolf_pelt",
-   "wolf_pelt",
    "minor_mana_potion",
-   "wolf_pelt",
+   "minor_mana_potion",
    "minor_healing_potion",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
    "minor_healing_potion",
-   "wolf_pelt",
    "minor_mana_potion",
-   "wolf_pelt",
-   "wolf_pelt",
-   "wolf_pelt",
    "minor_healing_potion",
-   "wand_of_sparks"
+   "bone_dust",
+   "bone_dust",
+   "healing_potion",
+   "bone_dust",
+   "bone_dust",
+   "bone_dust",
+   "chain_leggings",
+   "bone_dust",
+   "mana_potion",
+   "bone_dust",
+   "chain_leggings",
+   "bone_dust",
+   "bone_dust",
+   "bone_dust",
+   "healing_potion",
+   "healing_potion",
+   "healing_potion",
+   "grave_shroud",
+   "healing_potion",
+   "grave_shroud",
+   "healing_potion",
+   "healing_potion",
+   "copper_focus_ring",
+   "felt_slippers",
+   "bone_dust",
+   "bone_dust",
+   "bone_dust",
+   "mana_potion"
   ],
   "equipment": {
    "weapon": "willow_staff",
    "shield": null,
    "head": "spellweave_hood",
-   "chest": "acolyte_robe",
+   "chest": "spellbinder_robe",
    "hands": "enchanted_gloves",
-   "legs": "woven_trousers",
-   "feet": "felt_slippers",
+   "legs": "mystic_leggings",
+   "feet": "runebound_slippers",
    "neck": "moonstone_pendant",
-   "ring": "copper_focus_ring"
+   "ring": "sapphire_ring"
   },
   "quests": {
    "cellar_rats": {
@@ -122,19 +97,19 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 189,
-  "deaths": 14,
-  "hp": 134,
-  "mana": 206,
+  "kills": 251,
+  "deaths": 17,
+  "hp": 169,
+  "mana": 240,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt"
   },
   "pet": null
  },
- "room": "silverthread",
+ "room": "crypt_catacombs",
  "world": {
-  "tick": 5973,
+  "tick": 6444,
   "rooms": {
    "town_square": {
     "items": [],
@@ -437,10 +412,6 @@
     "monsters": [
      [
       "restless_zombie",
-      186
-     ],
-     [
-      "restless_zombie",
       192
      ],
      [
@@ -450,9 +421,16 @@
      [
       "carrion_ghoul",
       176
+     ],
+     [
+      "restless_zombie",
+      192
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "restless_zombie": [],
+     "carrion_ghoul": []
+    }
    },
    "barrow_chapel": {
     "items": [],
@@ -462,51 +440,48 @@
       176
      ],
      [
-      "carrion_ghoul",
-      176
-     ],
-     [
       "restless_zombie",
       192
+     ],
+     [
+      "carrion_ghoul",
+      176
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "restless_zombie": [],
+     "carrion_ghoul": []
+    }
    },
    "crypt_entry": {
     "items": [],
     "monsters": [
      [
       "crypt_bat",
-      126
+      135
      ],
      [
       "crypt_bat",
       135
-     ],
-     [
-      "skeleton_warrior",
-      230
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "crypt_bat": [],
+     "skeleton_warrior": [
+      6458
+     ]
+    }
    },
    "crypt_hall": {
     "items": [],
-    "monsters": [
-     [
-      "skeleton_warrior",
-      230
-     ],
-     [
-      "skeleton_warrior",
-      230
-     ],
-     [
-      "skeleton_warrior",
-      230
+    "monsters": [],
+    "respawn_at": {
+     "skeleton_warrior": [
+      6459,
+      6467,
+      6470
      ]
-    ],
-    "respawn_at": {}
+    }
    },
    "crypt_ossuary": {
     "items": [],
@@ -536,13 +511,13 @@
      [
       "wailing_spirit",
       218
-     ],
-     [
-      "wailing_spirit",
-      218
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "wailing_spirit": [
+      6473
+     ]
+    }
    },
    "crypt_shrine": {
     "items": [],
@@ -564,14 +539,17 @@
       218
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "crypt_cultist": [],
+     "wailing_spirit": []
+    }
    },
    "crypt_sanctum": {
     "items": [],
     "monsters": [
      [
       "varnoth",
-      675
+      69
      ]
     ],
     "respawn_at": {}

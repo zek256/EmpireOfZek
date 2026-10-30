@@ -73,13 +73,19 @@ The world runs on a real-time clock: every **4 seconds** is one game tick.
 - **Combat:** `kill <target>` starts a fight, and your first attack lands at once. After that, one
   combat round happens every tick, and you automatically attack your current target each round.
   A spell, ability, potion or flee you type is queued and replaces the auto-attack on the next round.
-  Moving during a fight also tries to flee. Aggressive monsters attack you as soon as you enter
-  their room. In outdoor areas only one or two of a pack attack on sight, and the rest wait until
-  you attack them. Dungeons, enemy camps and boss lairs are fully hostile. `consider` tells you
-  whether a monster will attack on sight.
+  Moving during a fight also tries to flee.
+- **Who attacks on sight:** aggressive monsters are rare. Only undead, demons, elementals, guards,
+  cultists and bosses attack you as soon as you enter their room, and outside boss rooms at most
+  one monster per room does. In a boss room, everything attacks. Animals and roaming humanoids
+  (wolves, spiders, kobolds, lizardfolk, orcs...) leave you alone and only fight the one you
+  attack; the others in the room stay out of it. `consider` tells you whether a monster will
+  attack on sight.
 - **Sleep:** while asleep you recover 10% of your max HP and mana each tick. You can't move or
   fight, but you can check `stats`, `inventory` and so on. You wake when fully rested, when
   attacked, or when you type `wake`.
+- **Monsters** don't regenerate. Instead, when you leave a room (walking out, fleeing or dying),
+  every monster in it recovers to full health and loses any stuns or damage-over-time effects.
+  A boss has to be beaten in one go.
 - **Awake:** outside combat you slowly regenerate (2% HP and 3% mana per tick). Spell cooldowns,
   buffs and monster respawns all count in ticks.
 

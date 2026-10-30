@@ -9,8 +9,8 @@ RESPAWN_ROOM = "temple"
 
 
 def R(name, area, desc, exits, spawns=None, npcs=None, safe=False, items=None, level=None, max_aggro=None):
-    """max_aggro caps how many monsters here attack on sight; the rest wait until you attack them.
-    Outdoor packs are capped; dungeons, enemy camps and boss lairs leave it unset (all aggressive)."""
+    """max_aggro: how many monsters here may attack on sight (default 1); the rest wait until you
+    attack them. Rooms with a boss ignore it: everything in a boss room attacks."""
     return {"name": name, "area": area, "desc": desc, "exits": exits, "spawns": spawns or [],
             "npcs": npcs or [], "safe": safe, "items": items or [], "level": level, "max_aggro": max_aggro}
 
@@ -102,7 +102,7 @@ ROOMS = {
         "Burrows riddle a low hillside, the earth stamped flat and littered with bones, rags and stolen "
         "pots. A crude totem of sticks and feathers marks the warren's heart.",
         {"w": "old_farm"},
-        spawns=[("kobold_scavenger", 2), ("kobold_trapper", 2)], level=(3, 5), max_aggro=1),
+        spawns=[("kobold_scavenger", 2), ("kobold_trapper", 2)], level=(3, 5)),
     "meadow_crossing": R(
         "Willowbrook Crossing", "Greenmeadow",
         "A clear brook chuckles beneath an old stone bridge, its banks shaded by weeping willows. To the "
@@ -122,7 +122,7 @@ ROOMS = {
         "Grey webs as thick as sailcloth drape between the trees, heavy with cocooned shapes. The air "
         "is still and smells of rot. Many-legged shadows shift high in the canopy.",
         {"e": "woods_edge"},
-        spawns=[("giant_spider", 3)], level=(5, 6), max_aggro=1),
+        spawns=[("giant_spider", 3)], level=(5, 6)),
     "woods_deep": R(
         "The Deep Woods", "Whispering Woods",
         "The trees here are vast and gnarled, their roots coiled like sleeping serpents. Little light "
@@ -134,13 +134,13 @@ ROOMS = {
         "A rocky hollow beneath a fallen giant of an oak. Gnawed bones and tufts of black fur are "
         "everywhere. Yellow eyes gleam from the darkness of the den.",
         {"w": "woods_deep"},
-        spawns=[("dire_wolf", 3)], level=(7, 8), max_aggro=1),
+        spawns=[("dire_wolf", 3)], level=(7, 8)),
     "bandit_approach": R(
         "Bandit Palisade", "Whispering Woods",
         "A crude wall of sharpened logs blocks the trail, its gate hanging open. Skulls of deer, and "
         "worse, are spiked along the top. Archers watch from a rickety platform.",
         {"n": "woods_deep", "s": "bandit_camp"},
-        spawns=[("bandit_archer", 2), ("bandit_cutthroat", 1)], level=(7, 9), max_aggro=2),
+        spawns=[("bandit_archer", 2), ("bandit_cutthroat", 1)], level=(7, 9)),
     "bandit_camp": R(
         "The Bandit Camp", "Whispering Woods",
         "Tents of stolen canvas ring a bonfire. Crates bearing the seals of Brightwater merchants are "
@@ -159,7 +159,7 @@ ROOMS = {
         "Leaning headstones and grassy burial mounds cover the hillside. Many graves gape open, the "
         "earth clawed away from within. A cold mist clings to the ground even at midday.",
         {"w": "kings_road", "e": "barrow_chapel"},
-        spawns=[("restless_zombie", 3), ("carrion_ghoul", 1)], level=(9, 10), max_aggro=1),
+        spawns=[("restless_zombie", 3), ("carrion_ghoul", 1)], level=(9, 10)),
     "barrow_chapel": R(
         "The Ruined Chapel", "Barrowfield",
         "A roofless chapel of black stone stands at the top of the hill. Its altar has been defaced with "
@@ -217,13 +217,13 @@ ROOMS = {
         "The road sinks into a land of black water, rotting reeds and twisted, moss-hung trees. "
         "Bubbles rise and burst with a stench of decay. Something large moves beneath the surface.",
         {"e": "crossroads", "w": "mire_deep", "s": "lizard_village"},
-        spawns=[("bog_lurker", 3)], level=(15, 16), max_aggro=1),
+        spawns=[("bog_lurker", 3)], level=(15, 16)),
     "lizard_village": R(
         "Lizardfolk Stilt-Village", "The Mirefen",
         "Huts of reeds and mud perch on tall stilts above the water, connected by swaying rope bridges. "
         "Hissing voices fall silent as you approach, and spears are raised.",
         {"n": "mire_edge"},
-        spawns=[("lizardman_warrior", 4)], level=(16, 17), max_aggro=2),
+        spawns=[("lizardman_warrior", 4)], level=(16, 17)),
     "mire_deep": R(
         "The Drowned Forest", "The Mirefen",
         "Dead trees rise from waist-deep water like the masts of sunken ships. Pale lights drift between "
@@ -235,7 +235,7 @@ ROOMS = {
         "Steaming pools of green water are fringed with giant ferns. Great coils slide just beneath "
         "the surface. On a hummock to the north, smoke rises from a crooked chimney.",
         {"e": "mire_deep", "n": "hag_hut"},
-        spawns=[("mire_serpent", 3)], level=(19, 20), max_aggro=1),
+        spawns=[("mire_serpent", 3)], level=(19, 20)),
     "hag_hut": R(
         "The Hag's Hut", "The Mirefen",
         "A crooked hut of black timber squats on chicken-like legs of twisted root. Inside, a cauldron "
@@ -250,14 +250,14 @@ ROOMS = {
         "The land rises in rocky, heather-covered folds toward the jagged grey peaks of the Ironspine. "
         "A cold wind whistles through the boulders, and you catch the musky scent of a great cat.",
         {"s": "crossroads", "n": "mountain_pass"},
-        spawns=[("mountain_lion", 3)], level=(20, 21), max_aggro=1),
+        spawns=[("mountain_lion", 3)], level=(20, 21)),
     "mountain_pass": R(
         "Ironspine Pass", "Ironspine Mountains",
         "A narrow trail clings to the side of a sheer cliff. Far below, a river glints like a silver "
         "thread. Filthy nests of sticks and bones are wedged into the rock above, and a giant's "
         "footprints are pressed deep into the trail.",
         {"s": "foothills", "n": "giants_plateau", "e": "orc_outpost"},
-        spawns=[("harpy", 3)], level=(21, 22), max_aggro=1),
+        spawns=[("harpy", 3)], level=(21, 22)),
     "giants_plateau": R(
         "The Giant's Plateau", "Ironspine Mountains",
         "A windswept plateau of stone, scattered with the bones of cattle and the remains of huge "
@@ -269,7 +269,7 @@ ROOMS = {
         "A watchtower of lashed timbers and spiked iron overlooks the pass. War-drums thump from "
         "somewhere to the east, where black smoke rises above a great camp.",
         {"w": "mountain_pass", "e": "orc_warcamp"},
-        spawns=[("orc_raider", 3)], level=(24, 25), max_aggro=2),
+        spawns=[("orc_raider", 3)], level=(24, 25)),
     "orc_warcamp": R(
         "The Skullsplitter Warcamp", "Ironspine Mountains",
         "Hundreds of hide tents sprawl across a mountain valley. Orcs sharpen axes, warbeasts snort in "
@@ -308,7 +308,7 @@ ROOMS = {
         "A thick silver mist rolls between the hills. Shapes loom out of it: broken elven arches, "
         "toppled statues, and the faint glimmer of a white city to the east.",
         {"w": "crossroads", "e": "ruins_gate"},
-        spawns=[("ruin_stalker", 2)], level=(32, 34), max_aggro=1),
+        spawns=[("ruin_stalker", 2)], level=(32, 34)),
     "ruins_gate": R(
         "The Moonlit Gate of Elandor", "Ruins of Elandor",
         "A soaring gate of white stone, carved with leaves and stars, still stands though the walls "
@@ -342,13 +342,13 @@ ROOMS = {
         "A blasted landscape of grey ash and black rock stretches beneath a sky the colour of a bruise. "
         "Rivers of lava glow in the distance, and pillars of living flame dance on the plain.",
         {"s": "frost_throne", "n": "cinder_road"},
-        spawns=[("fire_elemental", 3), ("salamander", 1)], level=(41, 42), max_aggro=2),
+        spawns=[("fire_elemental", 3), ("salamander", 1)], level=(41, 42)),
     "cinder_road": R(
         "The Cinder Road", "Ashen Peaks",
         "A road of fused black glass climbs the flank of a smoking volcano. Grey drakes bask on the warm "
         "rocks, and ruined statues of dragon-worshippers line the way.",
         {"s": "ashen_waste", "n": "obsidian_halls"},
-        spawns=[("ash_drake", 2), ("salamander", 2)], level=(42, 44), max_aggro=2),
+        spawns=[("ash_drake", 2), ("salamander", 2)], level=(42, 44)),
     "obsidian_halls": R(
         "The Obsidian Halls", "Ashen Peaks",
         "Halls of polished black glass, carved into the heart of the volcano by the dragon cult. "

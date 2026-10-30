@@ -9,6 +9,7 @@ DIR_ALIASES = {"north": "n", "south": "s", "east": "e", "west": "w", "up": "u", 
                "n": "n", "s": "s", "e": "e", "w": "w", "u": "u", "d": "d"}
 RESPAWN_TICKS = 30
 BOSS_RESPAWN_TICKS = 120
+DEFAULT_MAX_AGGRO = 1  # monsters that attack on sight in a room without a boss
 
 
 class MonsterInstance:
@@ -81,15 +82,20 @@ class Room:
         self.npcs = d["npcs"]
         self.safe = d["safe"]
         self.level = d.get("level")
-        self.max_aggro = d.get("max_aggro")  # None = every aggressive monster here attacks on sight
+        # Boss rooms are fully hostile. Anywhere else at most `max_aggro` monsters (default 1) attack
+        # on sight, and the rest wait until you attack them.
+        self.boss_room = any(MONSTERS[mid]["boss"] for mid, _ in self.spawns)
+        self.max_aggro = d.get("max_aggro") or DEFAULT_MAX_AGGRO
         self.items = list(d["items"])
         self.monsters = []
         self.respawn_at = {}  # monster id -> list of ticks when a replacement appears
 
     def spawn(self, mid):
-        """Add a monster. Past the room's aggressive cap, normally aggressive monsters arrive passive."""
+        """Add a monster, applying the room's aggression rule."""
         m = MonsterInstance(mid)
-        if m.aggro and self.max_aggro is not None:
+        if self.boss_room:
+            m.aggro = True
+        elif m.aggro:
             m.aggro = sum(1 for o in self.living() if o.aggro) < self.max_aggro
         self.monsters.append(m)
         return m

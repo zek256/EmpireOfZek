@@ -258,8 +258,9 @@ class Game:
         ui.out("")
         ui.out(ui.c(r.name, "byellow", "bold") + ui.c("  [{}]".format(r.area), "grey"))
         ui.say(r.desc)
-        exits = ", ".join(DIRECTIONS[d] for d in r.exits)
-        ui.out(ui.c("Exits: " + exits, "bcyan"))
+        ui.out(ui.c("Exits:", "bcyan"))
+        for d, rid in r.exits.items():
+            ui.out(ui.c("{} - {}".format(DIRECTIONS[d], self.world.room(rid).name), "bcyan"))
         for npc in r.npc_list():
             marker = ""
             for qid in npc.get("quests", []):
@@ -317,10 +318,17 @@ class Game:
         self.go(self.room.exits[d])
 
     def go(self, rid, verbose=True):
+        self.leave_room()
         self.room_id = rid
         if verbose:
             self.look()
         self.check_aggro()
+
+    def leave_room(self):
+        """Monsters don't regenerate; instead, everything in a room you leave recovers fully."""
+        for m in self.room.living():
+            m.hp = m.max_hp
+            m.effects = []
 
     def check_aggro(self):
         if self.combat or self.room.safe:
@@ -378,7 +386,8 @@ class Game:
     # ================================================================ combat commands
     def start_combat(self, mon):
         """The player opens a fight: their first action resolves now, the next one a full tick later."""
-        others = [m for m in self.room.living() if m.aggro and m is not mon and m.level >= self.player.level - AGGRO_GAP]
+        # aggressive monsters in the room pile in; passive ones stay out of it
+        others = [m for m in self.room.living() if m is not mon and m.aggro and m.level >= self.player.level - AGGRO_GAP]
         self.combat = Combat(self, [mon] + others)
         self.combat.target = mon
         self.reset_clock()
@@ -512,8 +521,6 @@ class Game:
         chance = (0.45 if boss else 0.7) + min(0.15, self.player.stat("DEX") / 1000)
         if random.random() < chance:
             ui.say("You break away and flee {}!".format(DIRECTIONS[d]), "byellow")
-            for m in self.combat.living():
-                m.effects = []
             self.combat = None
             self.go(exits[d])
         else:
@@ -556,6 +563,7 @@ class Game:
         p.mana = p.max_mana // 2
         if lost_xp or lost_gold:
             ui.say("You lost {} experience and {} gold.".format(lost_xp, lost_gold), "red")
+        self.leave_room()
         self.room_id = RESPAWN_ROOM
         self.look()
 
