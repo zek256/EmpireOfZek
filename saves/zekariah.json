@@ -5,8 +5,8 @@
   "race": "high elf",
   "cls": "wizard",
   "level": 21,
-  "xp": 460,
-  "gold": 2509,
+  "xp": 8155,
+  "gold": 2571,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -107,7 +107,7 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 279,
+  "kills": 284,
   "deaths": 18,
   "hp": 211,
   "mana": 404,
@@ -117,9 +117,9 @@
   },
   "pet": null
  },
- "room": "barrow_chapel",
+ "room": "foothills",
  "world": {
-  "tick": 6865,
+  "tick": 7039,
   "rooms": {
    "town_square": {
     "items": [],
@@ -544,25 +544,39 @@
    },
    "crypt_shrine": {
     "items": [],
-    "monsters": [],
-    "respawn_at": {
-     "crypt_cultist": [
-      6875,
-      6894,
-      6892
+    "monsters": [
+     [
+      "crypt_cultist",
+      242
      ],
-     "wailing_spirit": [
-      6895
+     [
+      "crypt_cultist",
+      242
+     ],
+     [
+      "crypt_cultist",
+      242
+     ],
+     [
+      "wailing_spirit",
+      218
      ]
+    ],
+    "respawn_at": {
+     "crypt_cultist": [],
+     "wailing_spirit": []
     }
    },
    "crypt_sanctum": {
     "items": [],
-    "monsters": [],
-    "respawn_at": {
-     "varnoth": [
-      6932
+    "monsters": [
+     [
+      "varnoth",
+      675
      ]
+    ],
+    "respawn_at": {
+     "varnoth": []
     }
    },
    "crossroads": {
@@ -662,21 +676,14 @@
    },
    "foothills": {
     "items": [],
-    "monsters": [
-     [
-      "mountain_lion",
-      362
-     ],
-     [
-      "mountain_lion",
-      363
-     ],
-     [
-      "mountain_lion",
-      363
+    "monsters": [],
+    "respawn_at": {
+     "mountain_lion": [
+      7043,
+      7046,
+      7062
      ]
-    ],
-    "respawn_at": {}
+    }
    },
    "mountain_pass": {
     "items": [],
