@@ -74,7 +74,9 @@ The world runs on a real-time clock: every **4 seconds** is one game tick.
   combat round happens every tick, and you automatically attack your current target each round.
   A spell, ability, potion or flee you type is queued and replaces the auto-attack on the next round.
   Moving during a fight also tries to flee. Aggressive monsters attack you as soon as you enter
-  their room.
+  their room. In outdoor areas only one or two of a pack attack on sight, and the rest wait until
+  you attack them. Dungeons, enemy camps and boss lairs are fully hostile. `consider` tells you
+  whether a monster will attack on sight.
 - **Sleep:** while asleep you recover 10% of your max HP and mana each tick. You can't move or
   fight, but you can check `stats`, `inventory` and so on. You wake when fully rested, when
   attacked, or when you type `wake`.

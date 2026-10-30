@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 12,
-  "xp": 640,
-  "gold": 634,
+  "level": 13,
+  "xp": 2837,
+  "gold": 991,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -86,6 +86,25 @@
    "minor_mana_potion",
    "wolf_pelt",
    "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "minor_mana_potion",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolfhide_boots",
+   "minor_mana_potion",
+   "wolf_pelt",
+   "minor_healing_potion",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolf_pelt",
+   "minor_healing_potion",
+   "wolf_pelt",
+   "minor_mana_potion",
+   "wolf_pelt",
+   "wolf_pelt",
+   "wolfhide_boots",
    "wolf_pelt"
   ],
   "equipment": {
@@ -115,10 +134,10 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 149,
-  "deaths": 12,
-  "hp": 125,
-  "mana": 180,
+  "kills": 184,
+  "deaths": 14,
+  "hp": 35,
+  "mana": 164,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt"
@@ -127,7 +146,7 @@
  },
  "room": "woods_deep",
  "world": {
-  "tick": 2056,
+  "tick": 5882,
   "rooms": {
    "town_square": {
     "items": [],
@@ -344,16 +363,16 @@
       73
      ],
      [
+      "bandit_scout",
+      101
+     ],
+     [
+      "bandit_scout",
+      101
+     ],
+     [
       "grey_wolf",
       73
-     ],
-     [
-      "bandit_scout",
-      101
-     ],
-     [
-      "bandit_scout",
-      101
      ]
     ],
     "respawn_at": {
@@ -363,12 +382,19 @@
    },
    "wolf_den": {
     "items": [],
-    "monsters": [],
+    "monsters": [
+     [
+      "dire_wolf",
+      141
+     ],
+     [
+      "dire_wolf",
+      141
+     ]
+    ],
     "respawn_at": {
      "dire_wolf": [
-      2070,
-      2069,
-      2079
+      5918
      ]
     }
    },
@@ -376,16 +402,16 @@
     "items": [],
     "monsters": [
      [
+      "bandit_archer",
+      130
+     ],
+     [
+      "bandit_archer",
+      130
+     ],
+     [
       "bandit_cutthroat",
       144
-     ],
-     [
-      "bandit_archer",
-      130
-     ],
-     [
-      "bandit_archer",
-      130
      ]
     ],
     "respawn_at": {

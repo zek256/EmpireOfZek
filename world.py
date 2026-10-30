@@ -81,9 +81,18 @@ class Room:
         self.npcs = d["npcs"]
         self.safe = d["safe"]
         self.level = d.get("level")
+        self.max_aggro = d.get("max_aggro")  # None = every aggressive monster here attacks on sight
         self.items = list(d["items"])
         self.monsters = []
         self.respawn_at = {}  # monster id -> list of ticks when a replacement appears
+
+    def spawn(self, mid):
+        """Add a monster. Past the room's aggressive cap, normally aggressive monsters arrive passive."""
+        m = MonsterInstance(mid)
+        if m.aggro and self.max_aggro is not None:
+            m.aggro = sum(1 for o in self.living() if o.aggro) < self.max_aggro
+        self.monsters.append(m)
+        return m
 
     def count(self, mid):
         return sum(1 for m in self.monsters if m.id == mid and m.alive)
@@ -102,7 +111,7 @@ class World:
         for room in self.rooms.values():
             for mid, n in room.spawns:
                 for _ in range(n):
-                    room.monsters.append(MonsterInstance(mid))
+                    room.spawn(mid)
 
     def room(self, rid):
         return self.rooms[rid]
@@ -127,9 +136,7 @@ class World:
                         continue  # bosses never pop in on top of the player
                     for t in due:
                         times.remove(t)
-                        m = MonsterInstance(mid)
-                        room.monsters.append(m)
-                        spawned.append((room.id, m))
+                        spawned.append((room.id, room.spawn(mid)))
         return spawned
 
     # ------------------------------------------------------------------ persistence
@@ -154,8 +161,7 @@ class World:
             r.monsters = []
             for mid, hp in rd.get("monsters", []):
                 if mid in MONSTERS:
-                    m = MonsterInstance(mid)
+                    m = r.spawn(mid)
                     m.hp = min(hp, m.max_hp)
-                    r.monsters.append(m)
             r.respawn_at = {k: v for k, v in rd.get("respawn_at", {}).items() if k in MONSTERS}
         return w

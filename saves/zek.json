@@ -4,14 +4,29 @@
   "name": "Zek",
   "race": "elf",
   "cls": "warrior",
-  "level": 1,
-  "xp": 0,
-  "gold": 20,
+  "level": 4,
+  "xp": 527,
+  "gold": 86,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
    "minor_healing_potion",
-   "minor_healing_potion"
+   "minor_healing_potion",
+   "rat_tail",
+   "minor_mana_potion",
+   "rat_tail",
+   "rat_tail",
+   "minor_mana_potion",
+   "rat_tail",
+   "minor_mana_potion",
+   "rat_tail",
+   "rat_tail",
+   "rat_tail",
+   "minor_healing_potion",
+   "wolf_pelt",
+   "wolf_pelt",
+   "minor_mana_potion",
+   "minor_mana_potion"
   ],
   "equipment": {
    "weapon": "rusty_shortsword",
@@ -24,19 +39,30 @@
    "neck": null,
    "ring": null
   },
-  "quests": {},
+  "quests": {
+   "cellar_rats": {
+    "status": "active",
+    "count": 6
+   },
+   "wolf_pelts": {
+    "status": "active",
+    "count": 0
+   }
+  },
   "effects": [],
   "cooldowns": {},
-  "aliases": {},
-  "kills": 0,
-  "deaths": 0,
-  "hp": 28,
-  "mana": 16,
+  "aliases": {
+   "1": "cast slam"
+  },
+  "kills": 25,
+  "deaths": 1,
+  "hp": 88,
+  "mana": 19,
   "pet": null
  },
- "room": "town_square",
+ "room": "woods_edge",
  "world": {
-  "tick": 0,
+  "tick": 232,
   "rooms": {
    "town_square": {
     "items": [],
@@ -72,7 +98,10 @@
       35
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "giant_rat": [],
+     "cellar_spider": []
+    }
    },
    "temple": {
     "items": [],
@@ -122,15 +151,18 @@
       35
      ],
      [
-      "field_snake",
-      35
-     ],
-     [
       "giant_rat",
       21
+     ],
+     [
+      "field_snake",
+      35
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "giant_rat": [],
+     "field_snake": []
+    }
    },
    "old_farm": {
     "items": [],
@@ -144,15 +176,17 @@
       59
      ],
      [
-      "kobold_scavenger",
-      59
-     ],
-     [
       "wild_boar",
       65
+     ],
+     [
+      "kobold_scavenger",
+      59
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "kobold_scavenger": []
+    }
    },
    "kobold_warren": {
     "items": [],
@@ -180,19 +214,22 @@
     "items": [],
     "monsters": [
      [
-      "wild_boar",
-      65
-     ],
-     [
-      "wild_boar",
-      65
-     ],
-     [
       "field_snake",
       35
+     ],
+     [
+      "wild_boar",
+      65
+     ],
+     [
+      "wild_boar",
+      65
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "field_snake": [],
+     "wild_boar": []
+    }
    },
    "woods_edge": {
     "items": [],
@@ -200,17 +237,14 @@
      [
       "grey_wolf",
       73
-     ],
-     [
-      "grey_wolf",
-      73
-     ],
-     [
-      "grey_wolf",
-      73
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "grey_wolf": [
+      233,
+      241
+     ]
+    }
    },
    "spider_hollow": {
     "items": [],

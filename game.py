@@ -529,6 +529,10 @@ class Game:
         boss = " It is a mighty foe of legend." if mon.boss else ""
         ui.say("{} (level {}) looks {}.{}".format(mon.short(), mon.level, word, boss), color)
         ui.say("  HP ~{}, hits for {}-{}, armor {}.".format(mon.max_hp, mon.dmg_min, mon.dmg_max, mon.armor), "grey")
+        if mon.aggro:
+            ui.say("  It watches you with hostile intent, and will attack on sight.", "red")
+        else:
+            ui.say("  It seems content to leave you alone, unless you start something.", "grey")
 
     def player_died(self):
         p = self.player
