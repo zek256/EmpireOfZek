@@ -155,7 +155,12 @@ class Character:
             return msgs
         amount = int(amount * self.perk("xp_mult", 1.0))
         self.xp += amount
-        msgs.append(("You gain {} experience.".format(amount), "bcyan"))
+        xp_needed = xp_for_level(self.level)
+        if xp_needed > 0:
+            percent = amount / xp_needed * 100
+            msgs.append(("You gain {} experience. ({:.1f}% of your level)".format(amount, percent), "bcyan"))
+        else:
+            msgs.append(("You gain {} experience.".format(amount), "bcyan"))
         while self.level < MAX_LEVEL and self.xp >= self.xp_needed:
             self.xp -= self.xp_needed
             msgs += self.level_up()

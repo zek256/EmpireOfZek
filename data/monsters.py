@@ -82,7 +82,7 @@ M("bandit_archer", "a bandit archer", 8, "A bandit perched behind a barricade, a
   hp=0.9, dmg=1.15, aggro=True, loot=[("yew_longbow", 0.06), ("iron_helm", 0.05)], gold=1.6)
 M("bandit_chieftain", "Rask the Bandit Chieftain", 10,
   "A towering, one-eyed brute in a stolen noble's coat, his cutlass dark with old blood.",
-  hp=2.4, dmg=1.15, armor=1.3, aggro=True, boss=True, xp=4.0, gold=4.0,
+  hp=2.4, dmg=1.15, armor=1.3, aggro=True, boss=True, xp=2.0, gold=4.0,
   specials=[big("Brutal Slash", 0.25, 1.8, "swings his cutlass in a brutal, two-handed slash!"),
             stun("Pommel Strike", 0.12, 1, "cracks you across the skull with his pommel!")],
   loot=[("bandit_cutlass", 1.0), ("chain_shirt", 0.5), ("ring_of_vigor", 0.4)])
@@ -110,7 +110,7 @@ M("crypt_cultist", "a cultist of Varnoth", 14, "A gaunt man in black robes, his 
   loot=[("grave_shroud", 0.08), ("healing_potion", 0.2)], gold=1.8)
 M("varnoth", "Varnoth the Bone King", 17,
   "A towering lich-lord in a crown of rusted iron, green witchfire burning in his empty eye sockets.",
-  hp=2.3, dmg=1.15, armor=1.6, aggro=True, boss=True, xp=5.0, gold=5.0,
+  hp=2.3, dmg=1.15, armor=1.6, aggro=True, boss=True, xp=2.0, gold=5.0,
   specials=[drain("Soul Rend", 0.2, 1.0, "tears at your very soul with a skeletal hand!"),
             dot("Grave Curse", 0.15, 0.4, 4, "shadow", "curses you with the chill of the grave!"),
             heal("Phylactery Pulse", 0.08, 0.15, "draws power from his hidden phylactery and his bones knit together!")],
@@ -132,7 +132,7 @@ M("mire_serpent", "a mire serpent", 19, "A huge olive-green serpent, thick as a 
   loot=[("serpentfang", 0.06), ("bogwood_staff", 0.05)], gold=0.8)
 M("bog_hag", "Old Mother Gristle", 22,
   "A hunched, warty crone in a shawl of rotting moss, her eyes like lanterns and her teeth like needles.",
-  hp=2.6, dmg=1.2, armor=1.3, aggro=True, boss=True, xp=5.0, gold=5.0,
+  hp=2.6, dmg=1.2, armor=1.3, aggro=True, boss=True, xp=2.0, gold=5.0,
   specials=[dot("Hex of Withering", 0.2, 0.45, 4, "shadow", "cackles and hurls a hex of withering at you!"),
             stun("Evil Eye", 0.12, 1, "fixes you with her evil eye, and your limbs lock!"),
             heal("Drink from the Cauldron", 0.1, 0.12, "slurps from a ladle of bubbling broth and cackles with renewed vigour!")],
@@ -161,7 +161,7 @@ M("orc_warbeast", "an orc warbeast", 28, "A massive armoured boar-beast ridden i
   loot=[("orc_tusk", 0.5)], gold=0.8, xp=1.4)
 M("warlord_gorrak", "Warlord Gorrak Skullsplitter", 31,
   "A mountain of scarred green muscle in blackened plate, wearing a cloak of human scalps.",
-  hp=2.7, dmg=1.25, armor=1.6, aggro=True, boss=True, xp=5.0, gold=5.0,
+  hp=2.7, dmg=1.25, armor=1.6, aggro=True, boss=True, xp=2.0, gold=5.0,
   specials=[big("Skullsplitter", 0.25, 2.0, "brings his warhammer down in a skull-splitting overhead blow!"),
             stun("War Stomp", 0.12, 1, "stomps, and the ground shakes you off your feet!"),
             heal("Bloodlust", 0.08, 0.1, "roars with bloodlust, his wounds forgotten!")],
@@ -194,7 +194,7 @@ M("living_statue", "a living statue", 37, "A marble statue of an elven hero that
   loot=[("elandor_plate", 0.05), ("elven_relic", 0.3)], gold=1.0, xp=1.6)
 M("seluvar", "Seluvar the Hollow Archmage", 41,
   "An elven archmage whose body is long gone. Only robes, a crown of stars and two burning eyes remain.",
-  hp=2.7, dmg=1.25, armor=1.0, aggro=True, boss=True, xp=5.0, gold=5.0,
+  hp=2.7, dmg=1.25, armor=1.0, aggro=True, boss=True, xp=2.0, gold=5.0,
   specials=[dot("Starfire", 0.22, 0.45, 4, "arcane", "calls down a column of starfire upon you!"),
             stun("Temporal Prison", 0.12, 1, "traps you in a prison of frozen time!"),
             drain("Hollowing", 0.15, 1.2, "hollows you out, drinking your essence!")],
@@ -224,7 +224,7 @@ M("magma_titan", "a magma titan", 50, "A colossus of molten rock, each footstep 
   loot=[("ember_ring", 0.08), ("dragon_scale", 0.4), ("ashen_crown", 0.05)], gold=2.5, xp=1.8)
 M("pyraxis", "Pyraxis the Eternal Flame", 52,
   "An ancient red dragon, vast beyond belief, its scales like molten rubies and its eyes like twin suns.",
-  hp=3.5, dmg=1.4, armor=2.0, aggro=True, boss=True, xp=6.0, gold=10.0,
+  hp=3.5, dmg=1.4, armor=2.0, aggro=True, boss=True, xp=2.0, gold=10.0,
   specials=[big("Dragonfire", 0.25, 2.2, "rears back and engulfs you in a torrent of dragonfire!"),
             dot("Searing Wounds", 0.15, 0.5, 4, "fire", "rakes you with claws that leave searing wounds!"),
             stun("Wing Buffet", 0.12, 1, "buffets you to the ground with a mighty wing!")],

@@ -49,8 +49,7 @@ HELP = [
               ("list / buy [n] <item> / sell [n|all] <item>", "trade with a merchant ('sell all rat tail', 'sell junk')")]),
     ("System", [("save / load", "save or load your game"),
                 ("alias <word> <command>", "make a shortcut, e.g. 'alias mm cast magic missile'"),
-                ("alias / unalias <word>", "list your aliases / remove one"),
-                ("help", "show this help"),
+                ("alias / unalias <word>", "list your aliases / remove one"),                ("help", "show this help"),
                 ("quit", "leave the game")]),
 ]
 
@@ -154,14 +153,23 @@ class Game:
     def prompt(self):
         p = self.player
         hpc = "bgreen" if p.hp > p.max_hp * 0.5 else ("byellow" if p.hp > p.max_hp * 0.25 else "bred")
-        tag = ui.c(" [COMBAT]", "bred") if self.combat else (ui.c(" [ASLEEP]", "bblue") if self.sleeping else "")
-        if p.level >= MAX_LEVEL:
-            xp = "L{} MAX".format(p.level)
+        mon = self.combat.current_target() if self.combat else None
+        if mon:
+            tag = ui.c(" TARGET: ", "bred") + ui.c("{:.0f}%".format(max(0, mon.hp) / mon.max_hp * 100), "bred")
+        elif self.combat:
+            tag = ui.c(" [COMBAT]", "bred")
         else:
-            xp = "L{} {}%".format(p.level, int(100 * p.xp / p.xp_needed))
+            tag = ui.c(" [ASLEEP]", "bblue") if self.sleeping else ""
+        if p.level >= MAX_LEVEL:
+            xp = "Lv. 50"
+        else:
+            xp = "EXP: {}%".format(int(100 * p.xp / p.xp_needed))
         # plain (dark) yellow reads as gold and stays distinct from the bright yellow of a wounded HP readout
-        return "\n" + ui.c("<", "grey") + ui.c("{}/{}hp".format(p.hp, p.max_hp), hpc) + " " + \
-            ui.c("{}/{}mp".format(p.mana, p.max_mana), "bblue") + " " + ui.c(xp, "yellow") + \
+        return "\n" + ui.c("<", "grey") + ui.c("{}/{} hp".format(p.hp, p.max_hp), hpc) + " " + \
+            ui.c("({:.0f}%)".format(p.hp / p.max_hp * 100), hpc) + " " + \
+            ui.c("{}/{} mana".format(p.mana, p.max_mana), "bblue") + " " + \
+            ui.c("({:.0f}%)".format(p.mana / p.max_mana * 100), "bblue") + " " + \
+            ui.c(xp, "yellow") + \
             ui.c(">", "grey") + tag + " "
 
     def reset_clock(self):

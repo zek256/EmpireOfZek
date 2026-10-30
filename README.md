@@ -61,8 +61,10 @@ Saves are written as JSON to `saves/<name>.json`.
 | `alias <word> <command>` | create a shortcut: after `alias mm cast magic missile`, typing `mm` casts it (`mm rat` targets the rat). Built-in commands and directions can't be overridden. `alias` lists yours, `unalias <word>` removes one. Aliases are saved with your character. |
 | `save`, `load`, `quit`, `help` | system |
 
-The prompt shows `<hp mp level%>` (e.g. `<25/28hp 16/16mp L1 33%>`, progress toward your next level in gold),
-plus `[COMBAT]` or `[ASLEEP]`. In room listings monsters are coloured by danger relative to your level
+The prompt shows your HP, mana and progress toward your next level in gold
+(e.g. `<192/192 hp (100%) 350/350 mana (100%) EXP: 3%>`). In combat it adds your target's
+remaining health in red `TARGET: 56%`, and `[ASLEEP]` while sleeping.
+In room listings monsters are coloured by danger relative to your level
 (grey/green/blue easy, white even, yellow/red dangerous), and `(!)` / `(?)` mark NPCs with a quest to
 offer or turn in.
 

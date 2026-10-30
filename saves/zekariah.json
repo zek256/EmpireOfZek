@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 18,
-  "xp": 5921,
-  "gold": 1357,
+  "level": 21,
+  "xp": 460,
+  "gold": 2509,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -68,10 +68,20 @@
    "bone_dust",
    "bone_dust",
    "bone_dust",
-   "mana_potion"
+   "mana_potion",
+   "bone_dust",
+   "bone_dust",
+   "bone_dust",
+   "mana_potion",
+   "healing_potion",
+   "healing_potion",
+   "bone_helm",
+   "knights_blade",
+   "willow_staff",
+   "healing_potion"
   ],
   "equipment": {
-   "weapon": "willow_staff",
+   "weapon": "varnoth_scepter",
    "shield": null,
    "head": "spellweave_hood",
    "chest": "spellbinder_robe",
@@ -97,19 +107,19 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 251,
-  "deaths": 17,
-  "hp": 169,
-  "mana": 240,
+  "kills": 279,
+  "deaths": 18,
+  "hp": 211,
+  "mana": 404,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt"
   },
   "pet": null
  },
- "room": "crypt_catacombs",
+ "room": "barrow_chapel",
  "world": {
-  "tick": 6444,
+  "tick": 6865,
   "rooms": {
    "town_square": {
     "items": [],
@@ -463,24 +473,35 @@
      [
       "crypt_bat",
       135
+     ],
+     [
+      "skeleton_warrior",
+      230
      ]
     ],
     "respawn_at": {
      "crypt_bat": [],
-     "skeleton_warrior": [
-      6458
-     ]
+     "skeleton_warrior": []
     }
    },
    "crypt_hall": {
     "items": [],
-    "monsters": [],
-    "respawn_at": {
-     "skeleton_warrior": [
-      6459,
-      6467,
-      6470
+    "monsters": [
+     [
+      "skeleton_warrior",
+      230
+     ],
+     [
+      "skeleton_warrior",
+      230
+     ],
+     [
+      "skeleton_warrior",
+      230
      ]
+    ],
+    "respawn_at": {
+     "skeleton_warrior": []
     }
    },
    "crypt_ossuary": {
@@ -511,28 +532,6 @@
      [
       "wailing_spirit",
       218
-     ]
-    ],
-    "respawn_at": {
-     "wailing_spirit": [
-      6473
-     ]
-    }
-   },
-   "crypt_shrine": {
-    "items": [],
-    "monsters": [
-     [
-      "crypt_cultist",
-      242
-     ],
-     [
-      "crypt_cultist",
-      242
-     ],
-     [
-      "crypt_cultist",
-      242
      ],
      [
       "wailing_spirit",
@@ -540,19 +539,31 @@
      ]
     ],
     "respawn_at": {
-     "crypt_cultist": [],
      "wailing_spirit": []
+    }
+   },
+   "crypt_shrine": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {
+     "crypt_cultist": [
+      6875,
+      6894,
+      6892
+     ],
+     "wailing_spirit": [
+      6895
+     ]
     }
    },
    "crypt_sanctum": {
     "items": [],
-    "monsters": [
-     [
-      "varnoth",
-      69
+    "monsters": [],
+    "respawn_at": {
+     "varnoth": [
+      6932
      ]
-    ],
-    "respawn_at": {}
+    }
    },
    "crossroads": {
     "items": [],
