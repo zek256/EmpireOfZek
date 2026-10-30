@@ -1,0 +1,140 @@
+# Empire of Zek
+
+Offline single-player text MUD in pure Python 3, standard library only (no dependencies, no network).
+`README.md` is the player-facing manual; keep it in sync when gameplay or commands change.
+
+## Running and testing
+
+```
+python main.py                 # play
+python main.py --dev           # adds setlevel <n>, goto <room_id>, addgold <n>, give <item_id>
+python main.py --tick 0.5      # faster game clock (default 4s) for testing
+python main.py --no-color --seed 3
+```
+
+There is no build step and no unit test suite. Verify changes by:
+- **Data check**: `python tools/validate.py` after any edit to `data/`. It checks two-way exits,
+  that every room is reachable, spawns, loot, shops, quests (givers, prereqs, collectable targets),
+  class gear and ability classes, and exits 1 on errors.
+- **Balance**: `python tools/balance_sim.py [fights|endurance|bosses] [--n 30] [--levels 1,12,30]`
+  runs every class through the real `Combat` code with output silenced. The tuning targets are
+  in its docstring. It fights one monster at a time with best-in-slot gear, so it is optimistic.
+  Re-run it after touching combat formulas, monster multipliers or class growth.
+- **Scripted play**: pipe commands into `main.py`. Piped input arrives instantly, so no game ticks
+  pass between lines. Combat rounds and sleep need real time, so for those drive the game with
+  delays between lines (a small `subprocess` script that writes a line, sleeps, writes the next)
+  together with `--tick 0.3`.
+- **Direct calls**: import `game.Game` with a `Character`, stub `ui.say/out/rule` to no-ops, and
+  call methods (`cmd_attack`, `attempt_flee`, `world_tick`) to check logic without the clock.
+
+**Always test in a copy outside this folder** (e.g. `%TEMP%\zektest`, copy `*.py` and `data/`).
+The user plays from this folder, and `saves/` holds their real characters. Never delete,
+overwrite or "clean up" anything in `saves/`. Windows can't launch Python from very long paths,
+so keep the temp path short.
+
+Git: the user commits manually. Don't run `git init`, commit or connect remotes unless asked.
+
+## Architecture
+
+```
+main.py       CLI flags, title menu; starts ui's input thread; sets game.TICK_SECONDS
+game.py       Game: command dispatch, game clock, exploration, quests, find, aliases, shops,
+              sleep, rebirth, save/load, character creation
+character.py  Character (stats, HP/mana, XP, abilities, equipment, rebirth) and Pet
+combat.py     Combat: one round per tick, ability resolution, monster AI, rewards
+world.py      MonsterInstance, Room (spawning + aggression rule), World (respawns, persistence)
+ui.py         colour, wrapping, background stdin reader, prompt tracking
+data/         all content as plain Python data (races, classes, abilities, items, monsters, rooms+NPCs, quests)
+```
+
+### The game clock (game.Game.run)
+- A daemon thread reads stdin into a queue (`ui.start_input`). The main loop waits on that queue
+  until the next tick: either a typed line arrives (`handle`) or the tick fires (`game_tick`).
+- A tick is a combat round (`Combat.round`) when fighting, otherwise `world_tick`: awake regen
+  (2% HP and 3% mana) or sleep (10%), effect and cooldown timers, respawns.
+- **Never call `input()`.** It races the reader thread. Use `game.ask()` / `ui.read_line()`.
+  The clock pauses during `ask()` prompts (menus, quit and rebirth confirmations).
+- Moving does **not** advance time. Only ticks do.
+
+### Combat flow
+- `kill X` or an offensive spell out of combat calls `start_combat`. The first action resolves
+  immediately and `reset_clock()` gives a full tick before round 2.
+- In combat, typed actions don't act right away. `Combat.queue()` stores one action
+  (spell/ability/potion/flee), and the next `round()` runs it in place of the auto-attack.
+  Queued abilities are re-validated when they fire (`ability_round`).
+- `end_round`: player effects tick, pet attacks, aggressive room monsters join, monsters act,
+  monster effects tick, mana regen, cooldowns, world respawn tick, then death/victory checks.
+- Effect timing gotcha: effects the player applies to themselves are created with `fresh: True`
+  so the end-of-round tick doesn't eat a turn. Monster-applied effects must **not** be fresh.
+  Player stuns are applied during the monster phase, after the player tick, so they last
+  into the next round. Monster stuns are consumed when the monster tries to act.
+  Cooldowns are set to `cooldown + 1` in combat for the same reason.
+- `level_gap_mult` scales damage both ways by level difference. Monsters below the player
+  also miss more.
+
+### Aggression rules (deliberately rare, Aardwolf-style)
+- Template flag `aggro` in `data/monsters.py`: only undead, demons, elementals, guards,
+  cultists and bosses. Animals and roaming humanoids are passive.
+- `Room.spawn` enforces the per-room rule: a room containing a boss makes **every** monster
+  aggressive. Any other room allows at most `max_aggro` (default 1) aggressive instances, and
+  extras spawn passive. Aggression is per instance and is not saved; it is recomputed on load.
+- Aggressive monsters ignore players more than `AGGRO_GAP` (6) levels above them.
+- Attacking a passive monster fights only that one. Passive neighbours never join, but
+  aggressive monsters in the room do.
+- `Game.leave_room()` (called from `go()` and `player_died()`) restores every monster in the room
+  being left to full HP and clears its effects. Monsters have no other regeneration.
+
+### Player and progression
+- Stats are **derived, not stored**: race base + class start + class gains x (level-1) + rebirth
+  bonus + gear + buffs. Only level, XP, gear, effects etc. are persisted.
+- HP and mana formulas live in `Character.max_hp/max_mana`. XP per level is
+  `100 * level^1.5`, identical in every life (no rebirth penalty, by the user's choice).
+- Rebirth (level 50): the old class's full stat gains (gains x 49) are appended to `past_lives`
+  and phase in as `total * level / 50`. Abilities of every lived class stay known and unlock
+  at their original level. Gear above level 1 is unequipped.
+- Race perks are keys in `RACES[...]["perks"]` read via `Character.perk()`: hp_mult,
+  mana_mult, dmg_mult, crit, dodge, regen_mult, immune, xp_mult (supported, currently unused).
+- Ability power = `base + lvl*level + scale*stat`. Spell cost scales `cost * (1 + 0.1*(level-1))`.
+
+### Monsters
+Templates only set multipliers. Real HP, damage and armor come from level in `MonsterInstance`
+(`(20 + 15L)` HP etc.). To make a monster tougher, change its multipliers, not raw numbers.
+Specials: big / dot / stun / drain / heal. Bosses respawn after 120 ticks, others after 30.
+
+### Inventory and items
+- Inventory is a flat list of item ids (duplicates = quantity). Equipment is `{slot: id}` over
+  `items.SLOTS` (one ring slot). There are no armor-type or class restrictions, only `level`.
+- Loot and gold go straight into the inventory on kill. Ground items only come from `drop`.
+- Sell price is always `value // 3`. Buy price = `value`.
+
+### Quests, NPCs, find
+- Quests are `kill` (counted in `on_kill`) or `collect` (counted from inventory, removed on
+  turn-in). They are offered and turned in through `talk`. `prereq` and `min_level` gate them.
+- `find` runs a BFS over room exits to the nearest room that *spawns* the target (or the quest
+  giver once ready). It doesn't check whether the monster is currently alive.
+
+### Player aliases
+Stored in `Character.aliases` and saved. They are expanded once at the top of `handle()`,
+with extra words appended. `reserved_words()` (every `cmd_*`, `ALIASES`, directions, `go`)
+can never be aliased, and an alias can't start with another alias.
+
+## Conventions
+
+- New command: add `cmd_<name>(self, args)` to `Game`. It is picked up automatically. Add short
+  forms to `Game.ALIASES`, and add it to `NO_COMBAT` / `SLEEP_OK` if relevant, to the `HELP`
+  table and to the README.
+- Content goes in `data/` via the helper constructors (`weapon()`, `armor()`, `M()`, `R()`,
+  `spell()`, `ability()`). Room exits must be two-way.
+- All output goes through `ui.say` (wrapped), `ui.out` (raw) or `ui.rule`. Never use `print`
+  directly: `ui._emit` tracks the open prompt and starts on a fresh line under it.
+- Combat lines are not indented, and the round shows no HP/mana bar row (user preference).
+  HP, mana and level % live in the prompt.
+- Text tone is high fantasy. Room descriptions are 2-4 sentences.
+- Save format: `saves/<name>.json` = `{version, player, room, world}`. New `Character` fields
+  need a default in `from_dict` (see `aliases`) so old saves still load.
+
+## Balance notes
+
+Tuned with `tools/balance_sim.py`: same-level fights cost roughly 25-55% HP, and bosses are
+beatable at level+3 with potions. Necromancer, with its pet and drain, is the strongest solo
+class. That is intended. Wizards are fragile and get no area spell until Fireball at 16.

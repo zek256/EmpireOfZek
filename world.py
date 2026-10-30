@@ -9,6 +9,7 @@ DIR_ALIASES = {"north": "n", "south": "s", "east": "e", "west": "w", "up": "u", 
                "n": "n", "s": "s", "e": "e", "w": "w", "u": "u", "d": "d"}
 RESPAWN_TICKS = 30
 BOSS_RESPAWN_TICKS = 120
+DEFAULT_MAX_AGGRO = 1  # monsters that attack on sight in a room without a boss
 
 
 class MonsterInstance:
@@ -81,9 +82,23 @@ class Room:
         self.npcs = d["npcs"]
         self.safe = d["safe"]
         self.level = d.get("level")
+        # Boss rooms are fully hostile. Anywhere else at most `max_aggro` monsters (default 1) attack
+        # on sight, and the rest wait until you attack them.
+        self.boss_room = any(MONSTERS[mid]["boss"] for mid, _ in self.spawns)
+        self.max_aggro = d.get("max_aggro") or DEFAULT_MAX_AGGRO
         self.items = list(d["items"])
         self.monsters = []
         self.respawn_at = {}  # monster id -> list of ticks when a replacement appears
+
+    def spawn(self, mid):
+        """Add a monster, applying the room's aggression rule."""
+        m = MonsterInstance(mid)
+        if self.boss_room:
+            m.aggro = True
+        elif m.aggro:
+            m.aggro = sum(1 for o in self.living() if o.aggro) < self.max_aggro
+        self.monsters.append(m)
+        return m
 
     def count(self, mid):
         return sum(1 for m in self.monsters if m.id == mid and m.alive)
@@ -102,7 +117,7 @@ class World:
         for room in self.rooms.values():
             for mid, n in room.spawns:
                 for _ in range(n):
-                    room.monsters.append(MonsterInstance(mid))
+                    room.spawn(mid)
 
     def room(self, rid):
         return self.rooms[rid]
@@ -127,9 +142,7 @@ class World:
                         continue  # bosses never pop in on top of the player
                     for t in due:
                         times.remove(t)
-                        m = MonsterInstance(mid)
-                        room.monsters.append(m)
-                        spawned.append((room.id, m))
+                        spawned.append((room.id, room.spawn(mid)))
         return spawned
 
     # ------------------------------------------------------------------ persistence
@@ -154,8 +167,7 @@ class World:
             r.monsters = []
             for mid, hp in rd.get("monsters", []):
                 if mid in MONSTERS:
-                    m = MonsterInstance(mid)
+                    m = r.spawn(mid)
                     m.hp = min(hp, m.max_hp)
-                    r.monsters.append(m)
             r.respawn_at = {k: v for k, v in rd.get("respawn_at", {}).items() if k in MONSTERS}
         return w

@@ -11,6 +11,7 @@ from combat import AGGRO_GAP, Combat, con_color, resolve_self_effect
 from data.abilities import ABILITIES
 from data.classes import CLASS_ORDER, CLASSES, STATS
 from data.items import ITEMS, SLOTS
+from data.monsters import MONSTERS
 from data.quests import QUESTS
 from data.races import RACE_ORDER, RACES
 from data.rooms import NPCS, RESPAWN_ROOM, START_ROOM
@@ -44,9 +45,11 @@ HELP = [
                ("get / drop <item>", "pick up or drop an item ('get all')")]),
     ("Town", [("talk <person>", "speak with someone (accepts and completes quests)"),
               ("quests / journal", "show your quest log"),
-              ("list / buy <item> / sell <item>", "trade with a merchant")]),
+              ("find <quest|#|monster>", "directions to your quest target, e.g. 'find vermin' -> 'wd'"),
+              ("list / buy [n] <item> / sell [n|all] <item>", "trade with a merchant ('sell all rat tail', 'sell junk')")]),
     ("System", [("save / load", "save or load your game"),
-                ("help", "show this help"),
+                ("alias <word> <command>", "make a shortcut, e.g. 'alias mm cast magic missile'"),
+                ("alias / unalias <word>", "list your aliases / remove one"),                ("help", "show this help"),
                 ("quit", "leave the game")]),
 ]
 
@@ -150,14 +153,23 @@ class Game:
     def prompt(self):
         p = self.player
         hpc = "bgreen" if p.hp > p.max_hp * 0.5 else ("byellow" if p.hp > p.max_hp * 0.25 else "bred")
-        tag = ui.c(" [COMBAT]", "bred") if self.combat else (ui.c(" [ASLEEP]", "bblue") if self.sleeping else "")
-        if p.level >= MAX_LEVEL:
-            xp = "L{} MAX".format(p.level)
+        mon = self.combat.current_target() if self.combat else None
+        if mon:
+            tag = ui.c(" TARGET: ", "bred") + ui.c("{:.0f}%".format(max(0, mon.hp) / mon.max_hp * 100), "bred")
+        elif self.combat:
+            tag = ui.c(" [COMBAT]", "bred")
         else:
-            xp = "L{} {}%".format(p.level, int(100 * p.xp / p.xp_needed))
+            tag = ui.c(" [ASLEEP]", "bblue") if self.sleeping else ""
+        if p.level >= MAX_LEVEL:
+            xp = "Lv. 50"
+        else:
+            xp = "EXP: {}%".format(int(100 * p.xp / p.xp_needed))
         # plain (dark) yellow reads as gold and stays distinct from the bright yellow of a wounded HP readout
-        return "\n" + ui.c("<", "grey") + ui.c("{}/{}hp".format(p.hp, p.max_hp), hpc) + " " + \
-            ui.c("{}/{}mp".format(p.mana, p.max_mana), "bblue") + " " + ui.c(xp, "yellow") + \
+        return "\n" + ui.c("<", "grey") + ui.c("{}/{} hp".format(p.hp, p.max_hp), hpc) + " " + \
+            ui.c("({:.0f}%)".format(p.hp / p.max_hp * 100), hpc) + " " + \
+            ui.c("{}/{} mana".format(p.mana, p.max_mana), "bblue") + " " + \
+            ui.c("({:.0f}%)".format(p.mana / p.max_mana * 100), "bblue") + " " + \
+            ui.c(xp, "yellow") + \
             ui.c(">", "grey") + tag + " "
 
     def reset_clock(self):
@@ -200,12 +212,19 @@ class Game:
             self.world_tick()
 
     SLEEP_OK = {"wake", "sleep", "stats", "level", "inventory", "equipment", "spells", "quests",
-                "help", "save", "load", "quit", "pet", "examine"}
+                "help", "save", "load", "quit", "pet", "examine", "find", "alias", "unalias"}
 
     def handle(self, line):
         parts = line.split(None, 1)
         verb = parts[0].lower()
         args = parts[1].strip() if len(parts) > 1 else ""
+        if verb in self.player.aliases:
+            # expand once (an alias can't start with another alias); extra words are appended,
+            # so with 'alias mm cast magic missile', 'mm rat' casts at the rat
+            line = self.player.aliases[verb] + (" " + args if args else "")
+            parts = line.split(None, 1)
+            verb = parts[0].lower()
+            args = parts[1].strip() if len(parts) > 1 else ""
         if verb in DIR_ALIASES and not args:
             verb, args = "move", DIR_ALIASES[verb]
         elif verb == "go" and args.lower() in DIR_ALIASES:
@@ -232,6 +251,7 @@ class Game:
         "x": "examine", "inspect": "examine", "take": "get", "pick": "get",
         "speak": "talk", "greet": "talk", "ask": "talk",
         "journal": "quests", "j": "quests", "quest": "quests", "shop": "list",
+        "track": "find", "where": "find", "route": "find", "path": "find",
         "rest": "sleep", "stand": "wake", "con": "consider", "h": "help", "?": "help", "q": "quit", "exit": "quit",
         "abilities": "spells", "skills": "spells", "spellbook": "spells", "run": "flee",
     }
@@ -246,8 +266,9 @@ class Game:
         ui.out("")
         ui.out(ui.c(r.name, "byellow", "bold") + ui.c("  [{}]".format(r.area), "grey"))
         ui.say(r.desc)
-        exits = ", ".join(DIRECTIONS[d] for d in r.exits)
-        ui.out(ui.c("Exits: " + exits, "bcyan"))
+        ui.out(ui.c("Exits:", "bcyan"))
+        for d, rid in r.exits.items():
+            ui.out(ui.c("{} - {}".format(DIRECTIONS[d], self.world.room(rid).name), "bcyan"))
         for npc in r.npc_list():
             marker = ""
             for qid in npc.get("quests", []):
@@ -305,10 +326,17 @@ class Game:
         self.go(self.room.exits[d])
 
     def go(self, rid, verbose=True):
+        self.leave_room()
         self.room_id = rid
         if verbose:
             self.look()
         self.check_aggro()
+
+    def leave_room(self):
+        """Monsters don't regenerate; instead, everything in a room you leave recovers fully."""
+        for m in self.room.living():
+            m.hp = m.max_hp
+            m.effects = []
 
     def check_aggro(self):
         if self.combat or self.room.safe:
@@ -366,7 +394,8 @@ class Game:
     # ================================================================ combat commands
     def start_combat(self, mon):
         """The player opens a fight: their first action resolves now, the next one a full tick later."""
-        others = [m for m in self.room.living() if m.aggro and m is not mon and m.level >= self.player.level - AGGRO_GAP]
+        # aggressive monsters in the room pile in; passive ones stay out of it
+        others = [m for m in self.room.living() if m is not mon and m.aggro and m.level >= self.player.level - AGGRO_GAP]
         self.combat = Combat(self, [mon] + others)
         self.combat.target = mon
         self.reset_clock()
@@ -500,8 +529,6 @@ class Game:
         chance = (0.45 if boss else 0.7) + min(0.15, self.player.stat("DEX") / 1000)
         if random.random() < chance:
             ui.say("You break away and flee {}!".format(DIRECTIONS[d]), "byellow")
-            for m in self.combat.living():
-                m.effects = []
             self.combat = None
             self.go(exits[d])
         else:
@@ -517,6 +544,10 @@ class Game:
         boss = " It is a mighty foe of legend." if mon.boss else ""
         ui.say("{} (level {}) looks {}.{}".format(mon.short(), mon.level, word, boss), color)
         ui.say("  HP ~{}, hits for {}-{}, armor {}.".format(mon.max_hp, mon.dmg_min, mon.dmg_max, mon.armor), "grey")
+        if mon.aggro:
+            ui.say("  It watches you with hostile intent, and will attack on sight.", "red")
+        else:
+            ui.say("  It seems content to leave you alone, unless you start something.", "grey")
 
     def player_died(self):
         p = self.player
@@ -527,8 +558,10 @@ class Game:
         ui.say("Darkness takes you. For a long moment there is nothing... and then a distant warmth, "
                "like sunrise through closed eyelids. You awaken upon the cold marble before the "
                "Dawnfather's altar, weak, but alive.", "bwhite")
-        lost_xp = min(p.xp, int(p.xp_needed * 0.1)) if p.level < MAX_LEVEL else 0
-        lost_gold = p.gold // 10
+        #lost_xp = min(p.xp, int(p.xp_needed * 0.1)) if p.level < MAX_LEVEL else 0
+        lost_xp = 0
+        #lost_gold = p.gold // 10
+        lost_gold = 0
         p.xp -= lost_xp
         p.gold -= lost_gold
         p.deaths += 1
@@ -538,6 +571,7 @@ class Game:
         p.mana = p.max_mana // 2
         if lost_xp or lost_gold:
             ui.say("You lost {} experience and {} gold.".format(lost_xp, lost_gold), "red")
+        self.leave_room()
         self.room_id = RESPAWN_ROOM
         self.look()
 
@@ -706,11 +740,11 @@ class Game:
         p.inventory.remove(iid)
         ui.say("You drink {}.".format(it["name"]), "bgreen")
         if it.get("heal"):
-            ui.say("  You are healed for {} HP.".format(p.heal(it["heal"])), "bgreen")
+            ui.say("You are healed for {} HP.".format(p.heal(it["heal"])), "bgreen")
         if it.get("mana"):
             before = p.mana
             p.mana = min(p.max_mana, p.mana + it["mana"])
-            ui.say("  You regain {} mana.".format(p.mana - before), "bblue")
+            ui.say("You regain {} mana.".format(p.mana - before), "bblue")
 
     def cmd_examine(self, args):
         p = self.player
@@ -814,14 +848,25 @@ class Game:
             p.gold += total
             ui.say("You sell {} trophies for {} gold.".format(len(junk), total), "yellow")
             return
+        qty = 1
+        m = re.match(r"^(all|\d+)\s+(.+)$", args, re.I)
+        if m:
+            qty, args = m.group(1).lower(), m.group(2)
         iid = self.find_item(p.inventory, args)
         if not iid:
             ui.say("You aren't carrying that.", "grey")
             return
-        gold = max(1, ITEMS[iid]["value"] // 3)
-        p.inventory.remove(iid)
-        p.gold += gold
-        ui.say("You sell {} for {} gold.".format(ITEMS[iid]["name"], gold), "yellow")
+        have = p.inventory.count(iid)
+        qty = have if qty == "all" else min(int(qty), have)
+        if qty < 1:
+            ui.say("Sell how many?", "grey")
+            return
+        each = max(1, ITEMS[iid]["value"] // 3)
+        for _ in range(qty):
+            p.inventory.remove(iid)
+        p.gold += each * qty
+        ui.say("You sell {}{} for {} gold.".format("{} x ".format(qty) if qty > 1 else "", ITEMS[iid]["name"],
+                                                    each * qty), "yellow")
 
     # ================================================================ quests & NPCs
     def quest_state(self, qid):
@@ -895,20 +940,153 @@ class Game:
         if not p.quests:
             ui.say("Your journal is empty. Speak with the townsfolk of Brightwater to find work.", "grey")
         for qid, st in p.quests.items():
-            q = QUESTS[qid]
             if st["status"] == "done":
-                ui.out(ui.c("  [done] {}".format(q["name"]), "grey"))
+                ui.out(ui.c("  [done] {}".format(QUESTS[qid]["name"]), "grey"))
+        for i, qid in enumerate(self.active_quests(), 1):
+            q = QUESTS[qid]
+            n = self.quest_progress(qid)
+            what = "slay" if q["type"] == "kill" else "collect"
+            ui.out(ui.c("  {}. {} - {} {} ({}/{}), then return to {}.".format(
+                i, q["name"], what, self.quest_target_name(qid), min(n, q["count"]), q["count"],
+                NPCS[q["giver"]]["name"]), "byellow"))
+        if self.active_quests():
+            ui.out(ui.c("  Type 'find <quest name or number>' for directions.", "grey"))
+
+    def active_quests(self):
+        return [qid for qid, st in self.player.quests.items() if st["status"] != "done"]
+
+    @staticmethod
+    def quest_target_name(qid):
+        q = QUESTS[qid]
+        if q["type"] == "collect":
+            return strip_article(ITEMS[q["target"]]["name"])
+        return strip_article(MONSTERS[q["target"]]["name"])
+
+    # ================================================================ find / directions
+    def route_to(self, goals):
+        """Shortest list of directions from here to any room in `goals`, or None if unreachable."""
+        prev = {self.room_id: None}
+        frontier = [self.room_id]
+        while frontier:
+            nxt = []
+            for rid in frontier:
+                if rid in goals:
+                    goal, path = rid, []
+                    while prev[rid]:
+                        rid, d = prev[rid]
+                        path.append(d)
+                    return path[::-1], self.world.room(goal)
+                for d, dest in self.world.room(rid).exits.items():
+                    if dest not in prev:
+                        prev[dest] = (rid, d)
+                        nxt.append(dest)
+            frontier = nxt
+        return None, None
+
+    def quest_goal(self, qid):
+        """(set of room ids, description of what is there) for a quest's next step."""
+        q = QUESTS[qid]
+        if self.quest_state(qid) == "ready":
+            rooms = {rid for rid, r in self.world.rooms.items() if q["giver"] in r.npcs}
+            return rooms, "turn in to " + NPCS[q["giver"]]["name"]
+        if q["type"] == "kill":
+            mids = {q["target"]}
+        else:
+            mids = {mid for mid, m in MONSTERS.items() if any(i == q["target"] for i, _ in m["loot"])}
+        rooms = {rid for rid, r in self.world.rooms.items() if any(mid in mids for mid, _ in r.spawns)}
+        return rooms, self.quest_target_name(qid)
+
+    def cmd_find(self, args):
+        active = self.active_quests()
+        word = args.strip().lower()
+        qid = None
+        if not word:
+            if len(active) == 1:
+                qid = active[0]
             else:
-                n = self.quest_progress(qid)
-                what = "slay" if q["type"] == "kill" else "collect"
-                tname = q["target"].replace("_", " ")
-                if q["type"] == "collect":
-                    tname = strip_article(ITEMS[q["target"]]["name"])
-                else:
-                    from data.monsters import MONSTERS
-                    tname = strip_article(MONSTERS[q["target"]]["name"])
-                ui.out(ui.c("  {} - {} {} ({}/{}), then return to {}.".format(
-                    q["name"], what, tname, min(n, q["count"]), q["count"], NPCS[q["giver"]]["name"]), "byellow"))
+                ui.say("Find what? Give a quest name or number from your journal, or a monster's name.", "grey")
+                for i, a in enumerate(active, 1):
+                    ui.out("  {}. {}".format(i, QUESTS[a]["name"]))
+                return
+        elif word.isdigit() and 1 <= int(word) <= len(active):
+            qid = active[int(word) - 1]
+        else:
+            qid = next((a for a in active if word in QUESTS[a]["name"].lower()), None)
+        if qid:
+            rooms, what = self.quest_goal(qid)
+            title = QUESTS[qid]["name"]
+        else:
+            # not a quest: treat it as a monster name
+            mids = {mid for mid, m in MONSTERS.items()
+                    if word in strip_article(m["name"]).lower() or mid == word.replace(" ", "_")}
+            if not mids:
+                ui.say("You have no active quest called that, and no one has heard of such a creature.", "grey")
+                return
+            rooms = {rid for rid, r in self.world.rooms.items() if any(mid in mids for mid, _ in r.spawns)}
+            title, what = args.strip(), None
+        path, dest = self.route_to(rooms)
+        if what is None and dest:
+            what = strip_article(MONSTERS[next(mid for mid, _ in dest.spawns if mid in mids)]["name"])
+        if path is None:
+            ui.say("You can't find a way to {} from here.".format(what), "grey")
+        elif not path:
+            ui.say("{}: {} - right here!".format(title, what), "byellow")
+        else:
+            ui.say("{}: {} ({}).".format(title, what, dest.name), "byellow")
+            ui.out("  Route: " + ui.c("".join(path), "bwhite", "bold") + ui.c("  ({} steps)".format(len(path)), "grey"))
+
+    # ================================================================ player aliases
+    MAX_ALIASES = 50
+
+    def reserved_words(self):
+        """Every word the game already understands; aliases may not shadow them."""
+        words = {name[4:] for name in dir(self) if name.startswith("cmd_")}
+        return words | set(self.ALIASES) | set(DIR_ALIASES) | {"go"}
+
+    def cmd_alias(self, args):
+        aliases = self.player.aliases
+        parts = args.split(None, 1)
+        if not parts:
+            if not aliases:
+                ui.say("You have no aliases. Create one with 'alias <word> <command>', "
+                       "e.g. 'alias mm cast magic missile'.", "grey")
+                return
+            ui.out(ui.c("Your aliases:", "byellow"))
+            for word, expansion in sorted(aliases.items()):
+                ui.out("  {:<12} {}".format(ui.c(word, "bwhite"), expansion))
+            return
+        word = parts[0].lower()
+        if len(parts) == 1:
+            if word in aliases:
+                ui.out("  {:<12} {}".format(ui.c(word, "bwhite"), aliases[word]))
+            else:
+                ui.say("'{}' is not an alias.".format(word), "grey")
+            return
+        expansion = parts[1].strip()
+        if not re.fullmatch(r"[a-z0-9]{1,15}", word):
+            ui.say("An alias must be a single word of letters or digits (up to 15).", "grey")
+            return
+        if word in self.reserved_words():
+            ui.say("'{}' is already a game command and can't be used as an alias.".format(word), "red")
+            return
+        first = expansion.split()[0].lower()
+        if first in aliases:
+            ui.say("An alias can't start with another alias ('{}').".format(first), "red")
+            return
+        if word not in aliases and len(aliases) >= self.MAX_ALIASES:
+            ui.say("You can have at most {} aliases. Remove one with 'unalias <word>'.".format(self.MAX_ALIASES), "grey")
+            return
+        replaced = word in aliases
+        aliases[word] = expansion[:100]
+        ui.say("Alias {}: '{}' now means '{}'.".format("updated" if replaced else "created", word, aliases[word]), "bgreen")
+
+    def cmd_unalias(self, args):
+        word = args.strip().lower()
+        if word in self.player.aliases:
+            del self.player.aliases[word]
+            ui.say("Alias '{}' removed.".format(word), "bgreen")
+        else:
+            ui.say("'{}' is not an alias. Type 'alias' to list yours.".format(word) if word else "Unalias what?", "grey")
 
     # ================================================================ resting
     def cmd_sleep(self, args):
@@ -954,8 +1132,7 @@ class Game:
         ui.say("You will return to level 1 with XP reset. You keep every ability you have learned (each "
                "becomes usable again when you reach the level you first learned it), and the full stat "
                "gains of your {} life become a permanent bonus that grows as you level. Gear above "
-               "level 1 will be unequipped until you can wield it again. Each rebirth makes levelling "
-               "{}% slower.".format(p.class_name, int(25)), "white")
+               "level 1 will be unequipped until you can wield it again.".format(p.class_name), "white")
         choices = [c for c in CLASS_ORDER if c != p.cls]
         for i, cid in enumerate(choices, 1):
             past = " (lived before)" if cid in p.lived_classes() else ""

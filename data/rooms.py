@@ -8,9 +8,11 @@ START_ROOM = "town_square"
 RESPAWN_ROOM = "temple"
 
 
-def R(name, area, desc, exits, spawns=None, npcs=None, safe=False, items=None, level=None):
+def R(name, area, desc, exits, spawns=None, npcs=None, safe=False, items=None, level=None, max_aggro=None):
+    """max_aggro: how many monsters here may attack on sight (default 1); the rest wait until you
+    attack them. Rooms with a boss ignore it: everything in a boss room attacks."""
     return {"name": name, "area": area, "desc": desc, "exits": exits, "spawns": spawns or [],
-            "npcs": npcs or [], "safe": safe, "items": items or [], "level": level}
+            "npcs": npcs or [], "safe": safe, "items": items or [], "level": level, "max_aggro": max_aggro}
 
 
 ROOMS = {
@@ -69,9 +71,17 @@ ROOMS = {
         {"w": "north_gate"}, npcs=["halvard"], safe=True),
     "south_road": R(
         "The South Road", "Brightwater",
-        "Neat cottages with flower boxes line the road as it runs toward the low southern gate. Beyond "
-        "the town wall, golden fields roll away toward a dark smudge of forest.",
-        {"n": "town_square", "s": "meadow_path"}, safe=True),
+        "Neat cottages with flower boxes line the road as it runs toward the low southern gate. To the "
+        "west, a narrow shopfront of blue-painted wood hangs a silver sign of a needle threading a star. "
+        "Beyond the town wall, golden fields roll away toward a dark smudge of forest.",
+        {"n": "town_square", "s": "meadow_path", "w": "silverthread"}, safe=True),
+    "silverthread": R(
+        "Silverthread Arcana", "Brightwater",
+        "Bolts of shimmering cloth in midnight blue, violet and silver hang from the rafters, and glass "
+        "cases hold wands, orbs and rings that glimmer with faint inner light. The air smells of lavender "
+        "and candle wax. Behind a counter heaped with spellbooks, an elegant woman threads a needle "
+        "that glows like a falling star.",
+        {"e": "south_road"}, npcs=["elowen"], safe=True),
 
     # ================================================================= GREENMEADOW (1-5)
     "meadow_path": R(
@@ -386,6 +396,18 @@ NPCS = {
                  "iron_buckler", "studded_gloves", "chain_shirt", "iron_helm", "chain_leggings",
                  "iron_boots", "knight_breastplate", "steel_kite_shield", "plate_gauntlets",
                  "mithril_sword", "hunters_recurve", "mithril_hauberk"],
+    },
+    "elowen": {
+        "name": "Elowen Silverthread", "keywords": ["elowen", "silverthread", "enchantress", "tailor"],
+        "desc": "A tall, silver-haired high elf in robes of shifting violet, with ink-stained fingers and "
+                "eyes that seem to read the magic in everything they rest upon.",
+        "greeting": "'Steel is for those who cannot think their way out of trouble. For the rest of us, "
+                    "there is silk, starlight and a well-chosen wand. Type LIST to see my wares.'",
+        "shop": ["linen_robe", "apprentice_hood", "silk_gloves", "felt_slippers", "woven_trousers",
+                 "copper_focus_ring", "wand_of_sparks", "moonstone_pendant", "acolyte_robe", "crystal_orb",
+                 "spellweave_hood", "willow_staff", "enchanted_gloves", "mystic_leggings",
+                 "spellbinder_robe", "runebound_slippers", "sapphire_ring", "archivist_robe",
+                 "starsilk_hood", "wand_of_embers", "tome_of_warding"],
     },
     "mirela": {
         "name": "Mirela the alchemist", "keywords": ["mirela", "alchemist", "shopkeeper"],

@@ -7,12 +7,11 @@ from data.items import ITEMS, SLOTS
 from data.races import RACES
 
 MAX_LEVEL = 50
-REBIRTH_XP_PENALTY = 0.25  # each past life makes levelling 25% slower
 
 
-def xp_for_level(level, rebirths=0):
-    """Experience needed to advance from `level` to `level + 1`."""
-    return int(100 * level ** 1.5 * (1 + REBIRTH_XP_PENALTY * rebirths))
+def xp_for_level(level):
+    """Experience needed to advance from `level` to `level + 1` (the same in every life)."""
+    return int(100 * level ** 1.5)
 
 
 class Pet:
@@ -49,6 +48,7 @@ class Character:
         self.effects = []     # buffs, shields, hots, dots, stuns
         self.cooldowns = {}   # ability id -> rounds remaining
         self.pet = None
+        self.aliases = {}     # player-defined shortcut -> command line
         self.kills = 0
         self.deaths = 0
         for iid in CLASSES[cls]["gear"]:
@@ -146,7 +146,7 @@ class Character:
     # ------------------------------------------------------------------ xp
     @property
     def xp_needed(self):
-        return xp_for_level(self.level, len(self.past_lives))
+        return xp_for_level(self.level)
 
     def gain_xp(self, amount):
         """Add experience and handle level-ups. Returns a list of message lines."""
@@ -155,7 +155,12 @@ class Character:
             return msgs
         amount = int(amount * self.perk("xp_mult", 1.0))
         self.xp += amount
-        msgs.append(("You gain {} experience.".format(amount), "bcyan"))
+        xp_needed = xp_for_level(self.level)
+        if xp_needed > 0:
+            percent = amount / xp_needed * 100
+            msgs.append(("You gain {} experience. ({:.1f}% of your level)".format(amount, percent), "bcyan"))
+        else:
+            msgs.append(("You gain {} experience.".format(amount), "bcyan"))
         while self.level < MAX_LEVEL and self.xp >= self.xp_needed:
             self.xp -= self.xp_needed
             msgs += self.level_up()
@@ -300,4 +305,5 @@ class Character:
         ch.pet = Pet.from_dict(d["pet"]) if d.get("pet") else None
         for s in SLOTS:
             ch.equipment.setdefault(s, None)
+        ch.__dict__.setdefault("aliases", {})  # saves from before aliases existed
         return ch

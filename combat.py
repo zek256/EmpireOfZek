@@ -67,18 +67,18 @@ def resolve_self_effect(game, ab, eff):
     t = eff["type"]
     if t == "heal":
         amt = p.heal(p.power(eff) * random.uniform(0.9, 1.1))
-        ui.say("  You are healed for {} HP.".format(amt), "bgreen")
+        ui.say("You are healed for {} HP.".format(amt), "bgreen")
     elif t == "heal_pct":
         amt = p.heal(p.max_hp * eff["pct"])
-        ui.say("  You are healed for {} HP.".format(amt), "bgreen")
+        ui.say("You are healed for {} HP.".format(amt), "bgreen")
     elif t == "hot":
         val = max(1, int(p.power(eff)))
         p.add_effect({"type": "hot", "name": eff["name"], "value": val, "turns": eff["turns"], "fresh": True})
-        ui.say("  {} will heal you for {} HP each round for {} rounds.".format(eff["name"], val, eff["turns"]), "green")
+        ui.say("{} will heal you for {} HP each round for {} rounds.".format(eff["name"], val, eff["turns"]), "green")
     elif t == "shield":
         val = int(p.power(eff))
         p.add_effect({"type": "shield", "name": ab["name"], "value": val, "turns": 10, "fresh": True})
-        ui.say("  A shield absorbs the next {} damage.".format(val), "bcyan")
+        ui.say("A shield absorbs the next {} damage.".format(val), "bcyan")
     elif t == "buff":
         mods = dict(eff["mods"])
         if "armor_lvl" in mods:
@@ -93,16 +93,16 @@ def resolve_self_effect(game, ab, eff):
             parts.append("+{}% dodge".format(int(mods["dodge"] * 100)))
         if mods.get("lifesteal"):
             parts.append("{}% lifesteal".format(int(mods["lifesteal"] * 100)))
-        ui.say("  {}: {} for {} rounds.".format(eff["name"], ", ".join(parts), eff["turns"]), "bcyan")
+        ui.say("{}: {} for {} rounds.".format(eff["name"], ", ".join(parts), eff["turns"]), "bcyan")
     elif t == "summon":
         stat = p.stat(eff["stat"])
         hp = int(eff["hp_base"] + eff["hp_lvl"] * p.level + stat * 0.5)
         lo = int(eff["dmg_base"] + eff["dmg_lvl"] * p.level * 0.6 + stat * 0.08)
         hi = int(lo * 1.5) + 2
         if p.pet:
-            ui.say("  Your {} crumbles away as a new servant takes its place.".format(p.pet.name), "grey")
+            ui.say("Your {} crumbles away as a new servant takes its place.".format(p.pet.name), "grey")
         p.pet = Pet(eff["name"], hp, lo, hi, eff["desc"])
-        ui.say("  {} now fights at your side ({} HP, {}-{} damage).".format(
+        ui.say("{} now fights at your side ({} HP, {}-{} damage).".format(
             eff["name"][0].upper() + eff["name"][1:], hp, lo, hi), "bcyan")
 
 
@@ -188,12 +188,12 @@ class Combat:
 
     def report_hit(self, verb, mon, dmg, crit, color="bgreen"):
         crit_txt = ui.c(" CRITICAL!", "byellow", "bold") if crit else ""
-        ui.out(ui.c("  {} {} for {} damage.".format(verb, mon.name, dmg), color) + crit_txt)
+        ui.out(ui.c("{} {} for {} damage.".format(verb, mon.name, dmg), color) + crit_txt)
 
     # ------------------------------------------------------------------ player actions
     def player_attack(self, mon):
         if random.random() < 0.07:
-            ui.say("  You swing at {} but miss!".format(mon.name), "grey")
+            ui.say("You swing at {} but miss!".format(mon.name), "grey")
         else:
             dmg, crit = self.damage_monster(mon, self.p.roll_weapon(), physical=True)
             self.report_hit("You strike", mon, dmg, crit)
@@ -238,21 +238,21 @@ class Combat:
             healed = p.heal(dmg * eff["frac"])
             self.report_hit("{} drains".format(ab["name"]), mon, dmg, crit, "bmagenta")
             if healed:
-                ui.say("  You absorb {} HP.".format(healed), "bgreen")
+                ui.say("You absorb {} HP.".format(healed), "bgreen")
         elif t == "dot":
             val = max(1, int(p.power(eff) * p.damage_mult))
             mon.add_effect({"type": "dot", "name": eff["name"], "value": val, "turns": eff["turns"]})
-            ui.say("  {} is afflicted by {} ({} per round).".format(mon.short(), eff["name"], val), "magenta")
+            ui.say("{} is afflicted by {} ({} per round).".format(mon.short(), eff["name"], val), "magenta")
         elif t == "stun":
             chance = eff["chance"] * (0.5 if mon.boss else 1.0)
             if random.random() < chance:
                 mon.add_effect({"type": "stun", "name": "stun", "turns": eff["turns"]})
-                ui.say("  {} is stunned!".format(mon.short()), "byellow")
+                ui.say("{} is stunned!".format(mon.short()), "byellow")
             else:
-                ui.say("  {} resists being stunned.".format(mon.short()), "grey")
+                ui.say("{} resists being stunned.".format(mon.short()), "grey")
         elif t == "weaken":
             mon.add_effect({"type": "weaken", "name": eff["name"], "pct": eff["pct"], "turns": eff["turns"]})
-            ui.say("  {} is {} (-{}% damage).".format(mon.short(), eff["name"].lower(), int(eff["pct"] * 100)), "magenta")
+            ui.say("{} is {} (-{}% damage).".format(mon.short(), eff["name"].lower(), int(eff["pct"] * 100)), "magenta")
 
     def pass_turn(self):
         """The player spends the round doing something else (potion, being stunned)."""
@@ -269,7 +269,7 @@ class Combat:
             mon = random.choice(alive)
             raw = random.randint(p.pet.dmg_min, p.pet.dmg_max)
             dmg, crit = self.damage_monster(mon, raw, physical=True, can_crit=False)
-            ui.say("  {} savages {} for {} damage.".format(p.pet.name[0].upper() + p.pet.name[1:], mon.name, dmg), "cyan")
+            ui.say("{} savages {} for {} damage.".format(p.pet.name[0].upper() + p.pet.name[1:], mon.name, dmg), "cyan")
         self.process_deaths()
         # newly arrived aggressive monsters join
         for m in self.room.living():
@@ -312,16 +312,16 @@ class Combat:
                 continue
             if e["type"] == "dot":
                 p.hp -= e["value"]
-                ui.say("  {} burns you for {} damage.".format(e["name"], e["value"]), "red")
+                ui.say("{} burns you for {} damage.".format(e["name"], e["value"]), "red")
             elif e["type"] == "hot":
                 amt = p.heal(e["value"])
                 if amt:
-                    ui.say("  {} heals you for {} HP.".format(e["name"], amt), "green")
+                    ui.say("{} heals you for {} HP.".format(e["name"], amt), "green")
             e["turns"] -= 1
             if e["turns"] > 0:
                 keep.append(e)
             elif e["type"] in ("buff", "shield"):
-                ui.say("  {} fades.".format(e["name"]), "grey")
+                ui.say("{} fades.".format(e["name"]), "grey")
         p.effects = keep
 
     def tick_monster_effects(self, mon):
@@ -329,7 +329,7 @@ class Combat:
         for e in mon.effects:
             if e["type"] == "dot":
                 mon.hp -= e["value"]
-                ui.say("  {} suffers {} damage from {}.".format(mon.short(), e["value"], e["name"]), "magenta")
+                ui.say("{} suffers {} damage from {}.".format(mon.short(), e["value"], e["name"]), "magenta")
             if e["type"] == "stun":
                 keep.append(e)  # stuns are consumed when the monster tries to act
                 continue
@@ -345,7 +345,7 @@ class Combat:
             stun["turns"] -= 1
             if stun["turns"] <= 0:
                 mon.effects.remove(stun)
-            ui.say("  {} is stunned and cannot act.".format(mon.short()), "grey")
+            ui.say("{} is stunned and cannot act.".format(mon.short()), "grey")
             return
         special = None
         for sp in mon.specials:
@@ -355,21 +355,21 @@ class Combat:
         if special and special["type"] == "heal":
             amt = int(mon.max_hp * special["mult"])
             mon.hp = min(mon.max_hp, mon.hp + amt)
-            ui.say("  {} {} (+{} HP)".format(mon.short(), special["msg"], amt), "red")
+            ui.say("{} {} (+{} HP)".format(mon.short(), special["msg"], amt), "red")
             return
         # pets draw some of the attacks
         if p.pet and random.random() < 0.25 and not special:
             dmg = int(random.randint(mon.dmg_min, mon.dmg_max) * mon.weaken_mult())
             p.pet.hp -= dmg
-            ui.say("  {} hits {} for {} damage.".format(mon.short(), p.pet.name, dmg), "yellow")
+            ui.say("{} hits {} for {} damage.".format(mon.short(), p.pet.name, dmg), "yellow")
             if p.pet.hp <= 0:
-                ui.say("  {} is destroyed!".format(p.pet.name[0].upper() + p.pet.name[1:]), "bred")
+                ui.say("{} is destroyed!".format(p.pet.name[0].upper() + p.pet.name[1:]), "bred")
                 p.pet = None
             return
         miss = p.dodge + 0.05 + max(0, (p.level - mon.level) * 0.02)
         if random.random() < miss:
             what = special["name"] if special else "attack"
-            ui.say("  You dodge {}'s {}.".format(mon.name, what.lower() if not special else what), "grey")
+            ui.say("You dodge {}'s {}.".format(mon.name, what.lower() if not special else what), "grey")
             return
         raw = random.randint(mon.dmg_min, mon.dmg_max) * mon.weaken_mult() * level_gap_mult(mon.level, p.level)
         physical = True
@@ -391,22 +391,22 @@ class Combat:
         p.hp -= dmg
         shield_txt = " ({} absorbed)".format(absorbed_before - dmg) if absorbed_before != dmg else ""
         if special:
-            ui.say("  {} {} [{}] {} damage{}.".format(mon.short(), special["msg"], special["name"], dmg, shield_txt), "bred")
+            ui.say("{} {} [{}] {} damage{}.".format(mon.short(), special["msg"], special["name"], dmg, shield_txt), "bred")
             st = special["type"]
             if st == "drain":
                 mon.hp = min(mon.max_hp, mon.hp + dmg)
             elif st == "stun":
                 p.add_effect({"type": "stun", "name": "Stunned", "turns": special["turns"]})
-                ui.say("  You are stunned!", "byellow")
+                ui.say("You are stunned!", "byellow")
             elif st == "dot":
                 if special["element"] in p.perk("immune", []):
-                    ui.say("  Your undead flesh shrugs off the {}.".format(special["element"]), "grey")
+                    ui.say("Your undead flesh shrugs off the {}.".format(special["element"]), "grey")
                 else:
                     val = max(1, int((mon.dmg_min + mon.dmg_max) / 2 * special["mult"]))
                     p.add_effect({"type": "dot", "name": special["name"], "value": val,
                                   "turns": special["turns"]})
         else:
-            ui.say("  {} hits you for {} damage{}.".format(mon.short(), dmg, shield_txt), "red")
+            ui.say("{} hits you for {} damage{}.".format(mon.short(), dmg, shield_txt), "red")
 
     def process_deaths(self):
         for mon in list(self.enemies):
@@ -436,11 +436,8 @@ class Combat:
 
     def status_line(self):
         p = self.p
-        parts = ["HP {} {}/{}".format(ui.bar(p.hp, p.max_hp, 12, "green"), p.hp, p.max_hp),
-                 "MP {} {}/{}".format(ui.bar(p.mana, p.max_mana, 8, "blue"), p.mana, p.max_mana)]
         if p.pet:
-            parts.append("Pet {}/{}".format(p.pet.hp, p.pet.max_hp))
-        ui.out("  [" + "  ".join(parts) + "]")
+            ui.out(ui.c("{} [{}/{}]".format(p.pet.name[0].upper() + p.pet.name[1:], p.pet.hp, p.pet.max_hp), "cyan"))
         for m in self.living():
             flags = " (stunned)" if m.is_stunned() else ""
-            ui.out("  " + ui.c("{} {}{} [{}/{}]".format(m.short(), m.health_word(), flags, m.hp, m.max_hp), "red"))
+            ui.out(ui.c("{} {}{} [{}/{}]".format(m.short(), m.health_word(), flags, m.hp, m.max_hp), "red"))

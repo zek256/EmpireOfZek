@@ -1,5 +1,9 @@
 """Monster templates.
 
+aggro: attacks on sight. Kept rare, in the Aardwolf tradition: only undead, demons, elementals,
+guards, cultists and bosses are aggressive. Animals and roaming humanoids only fight when attacked,
+one at a time.
+
 Base statistics are derived from level in world.MonsterInstance; the per-monster
 multipliers (hp, dmg, armor, xp, gold) adjust that baseline.
 
@@ -57,28 +61,28 @@ M("wild_boar", "a wild boar", 3, "A bristling boar with wicked curved tusks and 
 M("kobold_scavenger", "a kobold scavenger", 3, "A yapping, dog-faced kobold clutching a rusty knife.",
   hp=0.9, dmg=0.9, loot=[("leather_gloves", 0.08), ("leather_leggings", 0.08)], gold=1.2)
 M("kobold_trapper", "a kobold trapper", 4, "A wiry kobold draped in snares and smelling of wet dog.",
-  hp=0.9, dmg=1.0, aggro=True, specials=[stun("Net Toss", 0.15, 1, "hurls a weighted net over you!")],
+  hp=0.9, dmg=1.0, specials=[stun("Net Toss", 0.15, 1, "hurls a weighted net over you!")],
   loot=[("leather_jerkin", 0.08), ("iron_buckler", 0.06)], gold=1.3)
 
 # ------------------------------------------------------------- Whispering Woods (4-10)
 M("grey_wolf", "a grey wolf", 4, "A lean grey wolf with hungry amber eyes.",
   hp=0.9, dmg=1.0, loot=[("wolf_pelt", 0.65)], gold=0.2)
 M("giant_spider", "a giant forest spider", 5, "A hairy black spider as large as a pony, its fangs dripping.",
-  hp=1.0, dmg=1.0, aggro=True, specials=[dot("Venomous Bite", 0.25, 0.35, 3, "poison", "sinks its dripping fangs into you!")],
+  hp=1.0, dmg=1.0, specials=[dot("Venomous Bite", 0.25, 0.35, 3, "poison", "sinks its dripping fangs into you!")],
   loot=[("spider_silk", 0.6)], gold=0.3)
 M("dire_wolf", "a dire wolf", 7, "A massive black wolf, its shoulders as high as a man's chest.",
-  hp=1.1, dmg=1.1, aggro=True, specials=[big("Savage Maul", 0.2, 1.7, "seizes you in its jaws and shakes you savagely!")],
+  hp=1.1, dmg=1.1, specials=[big("Savage Maul", 0.2, 1.7, "seizes you in its jaws and shakes you savagely!")],
   loot=[("wolf_pelt", 0.5), ("wolfhide_boots", 0.06)], gold=0.3)
 M("bandit_scout", "a bandit scout", 6, "A hooded bandit with a short bow and a shifty gaze.",
   hp=0.9, dmg=1.0, loot=[("steel_dagger", 0.06), ("wolfhide_boots", 0.06), ("studded_gloves", 0.06)], gold=1.5)
 M("bandit_cutthroat", "a bandit cutthroat", 8, "A scarred brigand in mismatched leathers, twin knives in hand.",
-  hp=1.0, dmg=1.1, aggro=True, specials=[dot("Bleeding Cut", 0.2, 0.35, 3, "bleed", "opens a deep, bleeding gash across your arm!")],
+  hp=1.0, dmg=1.1, specials=[dot("Bleeding Cut", 0.2, 0.35, 3, "bleed", "opens a deep, bleeding gash across your arm!")],
   loot=[("iron_longsword", 0.05), ("iron_helm", 0.05), ("chain_shirt", 0.04)], gold=1.6)
 M("bandit_archer", "a bandit archer", 8, "A bandit perched behind a barricade, arrow nocked.",
   hp=0.9, dmg=1.15, aggro=True, loot=[("yew_longbow", 0.06), ("iron_helm", 0.05)], gold=1.6)
 M("bandit_chieftain", "Rask the Bandit Chieftain", 10,
   "A towering, one-eyed brute in a stolen noble's coat, his cutlass dark with old blood.",
-  hp=2.4, dmg=1.15, armor=1.3, aggro=True, boss=True, xp=4.0, gold=4.0,
+  hp=2.4, dmg=1.15, armor=1.3, aggro=True, boss=True, xp=2.0, gold=4.0,
   specials=[big("Brutal Slash", 0.25, 1.8, "swings his cutlass in a brutal, two-handed slash!"),
             stun("Pommel Strike", 0.12, 1, "cracks you across the skull with his pommel!")],
   loot=[("bandit_cutlass", 1.0), ("chain_shirt", 0.5), ("ring_of_vigor", 0.4)])
@@ -91,7 +95,7 @@ M("carrion_ghoul", "a carrion ghoul", 10, "A grey-skinned ghoul crouched over an
   hp=1.0, dmg=1.1, specials=[stun("Paralysing Claw", 0.15, 1, "rakes you with paralysing claws!")],
   loot=[("bone_dust", 0.4), ("chain_leggings", 0.05)], gold=1.0)
 M("crypt_bat", "a swarm of crypt bats", 11, "A shrieking cloud of red-eyed bats.",
-  hp=0.7, dmg=0.9, aggro=True, gold=0.2)
+  hp=0.7, dmg=0.9, gold=0.2)
 M("skeleton_warrior", "a skeleton warrior", 12, "A skeleton in corroded mail, still clutching its ancient sword.",
   hp=1.1, dmg=1.05, armor=1.5, aggro=True, loot=[("bone_dust", 0.4), ("iron_boots", 0.05), ("bonecleaver", 0.04)], gold=1.0)
 M("bone_guardian", "a bone guardian", 13, "A hulking construct of fused skeletons that guards the deeper halls.",
@@ -106,7 +110,7 @@ M("crypt_cultist", "a cultist of Varnoth", 14, "A gaunt man in black robes, his 
   loot=[("grave_shroud", 0.08), ("healing_potion", 0.2)], gold=1.8)
 M("varnoth", "Varnoth the Bone King", 17,
   "A towering lich-lord in a crown of rusted iron, green witchfire burning in his empty eye sockets.",
-  hp=2.3, dmg=1.15, armor=1.6, aggro=True, boss=True, xp=5.0, gold=5.0,
+  hp=2.3, dmg=1.15, armor=1.6, aggro=True, boss=True, xp=2.0, gold=5.0,
   specials=[drain("Soul Rend", 0.2, 1.0, "tears at your very soul with a skeletal hand!"),
             dot("Grave Curse", 0.15, 0.4, 4, "shadow", "curses you with the chill of the grave!"),
             heal("Phylactery Pulse", 0.08, 0.15, "draws power from his hidden phylactery and his bones knit together!")],
@@ -114,9 +118,9 @@ M("varnoth", "Varnoth the Bone King", 17,
 
 # ------------------------------------------------------------- Mirefen (15-22)
 M("bog_lurker", "a bog lurker", 15, "A scaly green thing that rises dripping from the black water.",
-  hp=1.1, dmg=1.05, aggro=True, loot=[("mirescale_vest", 0.04), ("bog_pearl", 0.15)], gold=0.5)
+  hp=1.1, dmg=1.05, loot=[("mirescale_vest", 0.04), ("bog_pearl", 0.15)], gold=0.5)
 M("lizardman_warrior", "a lizardman warrior", 16, "A hissing lizardman with a bone-tipped spear and a shield of turtle shell.",
-  hp=1.1, dmg=1.1, armor=1.4, aggro=True, loot=[("steel_kite_shield", 0.05), ("bog_pearl", 0.15)], gold=1.4)
+  hp=1.1, dmg=1.1, armor=1.4, loot=[("steel_kite_shield", 0.05), ("bog_pearl", 0.15)], gold=1.4)
 M("swamp_troll", "a swamp troll", 17, "A hulking, moss-covered troll whose wounds close as you watch.",
   hp=1.5, dmg=1.15, specials=[heal("Regenerate", 0.15, 0.15, "regenerates, its wounds bubbling closed!")],
   loot=[("plate_gauntlets", 0.05), ("bog_pearl", 0.2)], gold=1.3, xp=1.3)
@@ -124,11 +128,11 @@ M("will_o_wisp", "a will-o'-the-wisp", 18, "A drifting, flickering ball of pale 
   hp=0.7, dmg=1.2, armor=0.3, specials=[stun("Bewitching Glow", 0.2, 1, "flares brightly, and you stand transfixed!")],
   loot=[("bog_pearl", 0.3), ("mana_potion", 0.2)], gold=0.6)
 M("mire_serpent", "a mire serpent", 19, "A huge olive-green serpent, thick as a tree trunk, sliding through the reeds.",
-  hp=1.3, dmg=1.15, aggro=True, specials=[dot("Venomous Fangs", 0.25, 0.4, 4, "poison", "strikes like lightning, venom searing through you!")],
+  hp=1.3, dmg=1.15, specials=[dot("Venomous Fangs", 0.25, 0.4, 4, "poison", "strikes like lightning, venom searing through you!")],
   loot=[("serpentfang", 0.06), ("bogwood_staff", 0.05)], gold=0.8)
 M("bog_hag", "Old Mother Gristle", 22,
   "A hunched, warty crone in a shawl of rotting moss, her eyes like lanterns and her teeth like needles.",
-  hp=2.6, dmg=1.2, armor=1.3, aggro=True, boss=True, xp=5.0, gold=5.0,
+  hp=2.6, dmg=1.2, armor=1.3, aggro=True, boss=True, xp=2.0, gold=5.0,
   specials=[dot("Hex of Withering", 0.2, 0.45, 4, "shadow", "cackles and hurls a hex of withering at you!"),
             stun("Evil Eye", 0.12, 1, "fixes you with her evil eye, and your limbs lock!"),
             heal("Drink from the Cauldron", 0.1, 0.12, "slurps from a ladle of bubbling broth and cackles with renewed vigour!")],
@@ -136,20 +140,20 @@ M("bog_hag", "Old Mother Gristle", 22,
 
 # ------------------------------------------------------------- Ironspine Mountains (20-31)
 M("mountain_lion", "a mountain lion", 21, "A tawny great cat crouched on a ledge, tail twitching.",
-  hp=1.0, dmg=1.15, aggro=True, specials=[dot("Rending Claws", 0.2, 0.35, 3, "bleed", "rakes you with rending claws!")], gold=0.4)
+  hp=1.0, dmg=1.15, specials=[dot("Rending Claws", 0.2, 0.35, 3, "bleed", "rakes you with rending claws!")], gold=0.4)
 M("harpy", "a shrieking harpy", 22, "A filthy winged hag with talons of black iron.",
-  hp=0.9, dmg=1.15, aggro=True, specials=[stun("Deafening Shriek", 0.15, 1, "lets loose a deafening shriek!")],
+  hp=0.9, dmg=1.15, specials=[stun("Deafening Shriek", 0.15, 1, "lets loose a deafening shriek!")],
   loot=[("hunters_recurve", 0.04)], gold=1.0)
 M("hill_giant", "a hill giant", 24, "A dull-eyed giant twice the height of a man, carrying a tree trunk as a club.",
   hp=1.7, dmg=1.25, specials=[big("Tree-Trunk Smash", 0.25, 1.8, "brings his tree-trunk club smashing down!")],
   loot=[("tower_shield", 0.05), ("greater_healing_potion", 0.15)], gold=1.5, xp=1.5)
 M("orc_raider", "an orc raider", 24, "A grey-skinned orc in spiked leathers, hungry for loot and glory.",
-  hp=1.1, dmg=1.1, aggro=True, loot=[("orc_tusk", 0.3), ("mithril_sword", 0.04), ("mithril_hauberk", 0.03)], gold=1.5)
+  hp=1.1, dmg=1.1, loot=[("orc_tusk", 0.3), ("mithril_sword", 0.04), ("mithril_hauberk", 0.03)], gold=1.5)
 M("orc_berserker", "an orc berserker", 26, "A foaming, tattooed orc wielding an axe in each hand.",
-  hp=1.2, dmg=1.25, aggro=True, specials=[big("Frenzied Chop", 0.25, 1.7, "screams and chops at you in a frenzy!")],
+  hp=1.2, dmg=1.25, specials=[big("Frenzied Chop", 0.25, 1.7, "screams and chops at you in a frenzy!")],
   loot=[("orc_tusk", 0.3), ("orcish_greataxe", 0.06), ("orcish_helm", 0.05)], gold=1.5)
 M("orc_shaman", "an orc shaman", 27, "A wizened orc draped in bones and feathers, chanting to the storm.",
-  hp=1.0, dmg=1.15, aggro=True, specials=[heal("Spirit Mending", 0.15, 0.2, "chants to the spirits, and his wounds mend!"),
+  hp=1.0, dmg=1.15, specials=[heal("Spirit Mending", 0.15, 0.2, "chants to the spirits, and his wounds mend!"),
                                           dot("Searing Totem", 0.2, 0.4, 3, "fire", "calls down searing spirit-fire upon you!")],
   loot=[("orc_tusk", 0.3), ("greater_mana_potion", 0.2), ("frostweave_staff", 0.04)], gold=1.8)
 M("orc_warbeast", "an orc warbeast", 28, "A massive armoured boar-beast ridden into battle by the orc clans.",
@@ -157,7 +161,7 @@ M("orc_warbeast", "an orc warbeast", 28, "A massive armoured boar-beast ridden i
   loot=[("orc_tusk", 0.5)], gold=0.8, xp=1.4)
 M("warlord_gorrak", "Warlord Gorrak Skullsplitter", 31,
   "A mountain of scarred green muscle in blackened plate, wearing a cloak of human scalps.",
-  hp=2.7, dmg=1.25, armor=1.6, aggro=True, boss=True, xp=5.0, gold=5.0,
+  hp=2.7, dmg=1.25, armor=1.6, aggro=True, boss=True, xp=2.0, gold=5.0,
   specials=[big("Skullsplitter", 0.25, 2.0, "brings his warhammer down in a skull-splitting overhead blow!"),
             stun("War Stomp", 0.12, 1, "stomps, and the ground shakes you off your feet!"),
             heal("Bloodlust", 0.08, 0.1, "roars with bloodlust, his wounds forgotten!")],
@@ -179,7 +183,7 @@ M("frost_giant", "a frost giant", 34, "A blue-skinned giant in rime-crusted mail
 M("phantom_sentinel", "a phantom sentinel", 33, "The ghost of an elven guardsman, still at his post after a thousand years.",
   hp=1.1, dmg=1.2, armor=1.2, aggro=True, loot=[("elven_relic", 0.2), ("elandor_runeblade", 0.03)], gold=1.0)
 M("ruin_stalker", "a ruin stalker", 34, "A sleek, six-legged predator with chitinous plates and mirror-bright eyes.",
-  hp=1.2, dmg=1.25, aggro=True, specials=[dot("Barbed Tail", 0.2, 0.4, 3, "poison", "lashes you with its barbed tail!")],
+  hp=1.2, dmg=1.25, specials=[dot("Barbed Tail", 0.2, 0.4, 3, "poison", "lashes you with its barbed tail!")],
   loot=[("elven_relic", 0.1)], gold=0.8)
 M("spectral_mage", "a spectral mage", 36, "A translucent elven sorcerer in flowing robes, endlessly reading a book of light.",
   hp=0.9, dmg=1.3, armor=0.5, specials=[dot("Arcane Burn", 0.25, 0.45, 3, "arcane", "hurls a bolt of searing arcane fire!"),
@@ -190,7 +194,7 @@ M("living_statue", "a living statue", 37, "A marble statue of an elven hero that
   loot=[("elandor_plate", 0.05), ("elven_relic", 0.3)], gold=1.0, xp=1.6)
 M("seluvar", "Seluvar the Hollow Archmage", 41,
   "An elven archmage whose body is long gone. Only robes, a crown of stars and two burning eyes remain.",
-  hp=2.7, dmg=1.25, armor=1.0, aggro=True, boss=True, xp=5.0, gold=5.0,
+  hp=2.7, dmg=1.25, armor=1.0, aggro=True, boss=True, xp=2.0, gold=5.0,
   specials=[dot("Starfire", 0.22, 0.45, 4, "arcane", "calls down a column of starfire upon you!"),
             stun("Temporal Prison", 0.12, 1, "traps you in a prison of frozen time!"),
             drain("Hollowing", 0.15, 1.2, "hollows you out, drinking your essence!")],
@@ -201,10 +205,10 @@ M("fire_elemental", "a fire elemental", 41, "A roaring pillar of living flame, v
   hp=1.1, dmg=1.25, armor=0.8, aggro=True, specials=[dot("Immolate", 0.25, 0.45, 3, "fire", "engulfs you in roaring flames!")],
   loot=[("supreme_mana_potion", 0.1)], gold=0.8)
 M("salamander", "a magma salamander", 42, "A huge red lizard whose skin glows like coals.",
-  hp=1.2, dmg=1.25, aggro=True, specials=[dot("Burning Bite", 0.2, 0.4, 3, "fire", "bites you with searing jaws!")],
+  hp=1.2, dmg=1.25, specials=[dot("Burning Bite", 0.2, 0.4, 3, "fire", "bites you with searing jaws!")],
   loot=[("drakehide_boots", 0.03)], gold=0.8)
 M("ash_drake", "an ash drake", 44, "A wingless young dragon, grey as cinders, smoke curling from its nostrils.",
-  hp=1.5, dmg=1.3, armor=1.5, aggro=True, specials=[big("Cinder Breath", 0.25, 1.8, "breathes a gout of burning cinders over you!")],
+  hp=1.5, dmg=1.3, armor=1.5, specials=[big("Cinder Breath", 0.25, 1.8, "breathes a gout of burning cinders over you!")],
   loot=[("dragon_scale", 0.2), ("drakehide_boots", 0.06), ("ember_ring", 0.03)], gold=1.5, xp=1.4)
 M("dragonkin_guard", "a dragonkin guard", 45, "A scaled warrior of the dragon cult, wielding an obsidian glaive.",
   hp=1.3, dmg=1.3, armor=1.8, aggro=True, loot=[("obsidian_greaves", 0.05), ("obsidian_blade", 0.04), ("sunforged_mace", 0.03)], gold=2.0)
@@ -220,7 +224,7 @@ M("magma_titan", "a magma titan", 50, "A colossus of molten rock, each footstep 
   loot=[("ember_ring", 0.08), ("dragon_scale", 0.4), ("ashen_crown", 0.05)], gold=2.5, xp=1.8)
 M("pyraxis", "Pyraxis the Eternal Flame", 52,
   "An ancient red dragon, vast beyond belief, its scales like molten rubies and its eyes like twin suns.",
-  hp=3.5, dmg=1.4, armor=2.0, aggro=True, boss=True, xp=6.0, gold=10.0,
+  hp=3.5, dmg=1.4, armor=2.0, aggro=True, boss=True, xp=2.0, gold=10.0,
   specials=[big("Dragonfire", 0.25, 2.2, "rears back and engulfs you in a torrent of dragonfire!"),
             dot("Searing Wounds", 0.15, 0.5, 4, "fire", "rakes you with claws that leave searing wounds!"),
             stun("Wing Buffet", 0.12, 1, "buffets you to the ground with a mighty wing!")],
