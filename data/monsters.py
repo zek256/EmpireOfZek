@@ -507,6 +507,21 @@ M("vhaal", "Vhaal the Dreadmaker", 55,
             big("Nightmare Claw", 0.18, 2.0, "rakes you with claws of solid dark!")],
   loot=[("dreadblade", 0.4), ("mask_of_dread", 0.4), ("planar_shard", 1.0)])
 
+M("chained_penitent", "a chained penitent", 52, "A giant prisoner bound in chains of light, serving a sentence a thousand years long, who swings those chains at anyone who comes near.",
+  hp=3.6, dmg=2.9, armor=2.0, specials=[big("Flail of Chains", 0.2, 1.8, "whirls its chains and brings them crashing down on you!")],
+  loot=[("planar_shard", 0.1)], gold=2.0)
+M("iron_warden", "an iron warden", 53, "A gaoler of the gods in a full suit of black iron, with a ring of keys at its belt and no face behind its visor.",
+  hp=3.8, dmg=2.7, armor=2.6, aggro=True, specials=[stun("Shackle", 0.14, 1, "snaps a shackle of light around your wrists!")],
+  loot=[("planar_shard", 0.15)], gold=2.5)
+M("stalworth", "Stalworth Lightbearer", 55,
+  "The warden of the Plane of Justice, a paladin in white plate who was the first mortal ever judged worthy to serve "
+  "Lord Zek. His sword is engraved with every law of the gods, and his eyes see every crime you have ever committed.",
+  hp=8.0, dmg=3.4, armor=2.4, aggro=True, boss=True, xp=2.0, gold=12.0,
+  specials=[big("Smite the Guilty", 0.22, 2.0, "raises his blazing sword and smites you with the full weight of the law!"),
+            stun("Sentence Passed", 0.12, 1, "pronounces your sentence, and chains of light bind you where you stand!"),
+            heal("Lay on Hands", 0.1, 0.12, "lays a hand on his own wounds, and holy light closes them!")],
+  loot=[("lightbearers_oath", 0.4), ("shield_of_judgement", 0.4), ("planar_shard", 1.0)])
+
 # Second tier (54-58): the elemental planes
 M("efreet", "an efreet", 55, "A towering spirit of fire with brass bracers and a scimitar of white flame.",
   hp=4.3, dmg=3.0, armor=2.0, aggro=True, specials=[dot("Immolation", 0.22, 0.6, 3, "fire", "engulfs you in roaring white flame!")],
@@ -534,7 +549,7 @@ M("storm_elemental", "a storm elemental", 55, "A spinning column of black cloud 
 M("thunderbird", "a thunderbird", 57, "A bird the size of a cloud, whose wingbeats are thunder and whose eyes are lightning.",
   hp=4.6, dmg=3.2, armor=1.8, specials=[big("Thunderstrike", 0.22, 1.9, "screams, and lightning falls from its eyes!")],
   loot=[("planar_shard", 0.25)], gold=3.0, xp=1.3)
-M("lord_fire", "Ignaros, Lord of Flame", 58,
+M("lord_fire", "Rekkn, Lord of Flame", 58,
   "The lord of the Plane of Fire, a giant of white-hot stone with a crown of flame and a hammer that is a captive star.",
   hp=9.5, dmg=3.8, armor=2.2, aggro=True, boss=True, xp=2.0, gold=15.0,
   specials=[big("Starfall Hammer", 0.22, 2.1, "brings down a hammer that burns like a falling star!"),

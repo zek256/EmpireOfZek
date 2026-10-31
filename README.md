@@ -155,9 +155,11 @@ sells dwarven gear for levels 12-24, Silverbough elven gear for levels 24-34, an
 gear for levels 38-44.
 
 **The Planes of the Gods (51-60).** A stair behind the altar of the Temple of the Dawn climbs to
-the Threshold of the Gods, where a herald explains the way. The first tier, the Planes of Sky,
-Growth and Fear, each guarded by a god's champion, leads on to the elemental Planes of Fire,
-Water, Earth and Air, each ruled by an elemental lord. The Door of Time opens only once you have
+the Threshold of the Gods, where a herald explains the way. Four first-tier planes open around it,
+each guarded by a god's champion: Sky to the north, Growth to the west, Fear to the east, and to
+the south Justice, the gods' prison, kept by the paladin Stalworth Lightbearer. Each leads on to
+an elemental plane ruled by an elemental lord: Sky to Air, Growth to Earth, Fear to Fire and
+Justice to Water. Above the Threshold, the Door of Time opens only once you have
 slain all four elemental lords (your character remembers every boss it has killed, across all its
 lives). At the end of the Plane of Time sits Lord Zek, ruler of all, whose throne opens only to a
 character who has lived **every class to level 50** (your current class counts once it reaches 50).
@@ -167,7 +169,7 @@ learned. They drop mythic level-50 gear, and defeating Lord Zek names you Champi
 score sheet. Below level 50, their monsters give a great deal of experience to anyone strong
 enough to survive them.
 
-That is 251 rooms, 137 monster types including 18 bosses, and 197 items. Run
+That is 257 rooms, 140 monster types including 19 bosses, and 199 items. Run
 `python tools/draw_map.py` to draw `map.svg`, a map of every room.
 
 **Quests:** Vermin in the Cellar (Bram, inn), Wolves at the Gate, The Bandit Chieftain, Trouble in
