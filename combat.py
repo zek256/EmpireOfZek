@@ -113,6 +113,7 @@ class Combat:
         self.over = False
         self.target = None
         self.queued = None  # the player's action for the next round; auto-attack if none
+        self.held = None    # (ability, target word): one cooling ability, fired the round it is ready
         for e in enemies:
             self.add(e)
 
@@ -120,6 +121,25 @@ class Combat:
     def queue(self, desc, action):
         self.queued = action
         ui.say(desc, "cyan")
+
+    def hold(self, ab, target_word):
+        """Keep a cooling ability until it is ready. It takes priority over the queued action that round."""
+        self.held = (ab, target_word)
+        ui.say("{} is not ready yet. You will use it as soon as it is ({} round{}).".format(
+            ab["name"], self.p.cooldowns[ab["id"]], "" if self.p.cooldowns[ab["id"]] == 1 else "s"), "cyan")
+
+    def fire_held(self):
+        """Use the held ability if it is ready this round. Returns True if it took the round."""
+        ab, target_word = self.held
+        if ab["id"] in self.p.cooldowns:
+            return False
+        self.held = None
+        err = self.game.ability_error(ab)
+        if err:
+            ui.say("{} You let it go.".format(err), "grey")
+            return False
+        self.game.ability_round(ab, target_word)
+        return True
 
     def current_target(self):
         if self.target is None or not self.target.alive or self.target not in self.enemies:
@@ -138,8 +158,10 @@ class Combat:
         """One combat round, fired by the game clock."""
         if self.p.has_effect("stun"):
             ui.say("You are stunned and can do nothing but reel!", "byellow")
-            self.pass_turn()  # a queued action waits until you recover
+            self.pass_turn()  # queued and held actions wait until you recover
             return
+        if self.held and self.fire_held():
+            return  # the queued action, if any, waits for the next round
         if self.queued:
             action, self.queued = self.queued, None
             action()

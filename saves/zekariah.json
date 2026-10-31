@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 27,
-  "xp": 7287,
-  "gold": 2840,
+  "level": 28,
+  "xp": 10678,
+  "gold": 2701,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -59,7 +59,9 @@
    "greater_healing_potion",
    "mana_potion",
    "greater_healing_potion",
-   "greater_mana_potion"
+   "greater_mana_potion",
+   "stag_antler",
+   "stag_antler"
   ],
   "equipment": {
    "weapon": "wand_of_embers",
@@ -88,10 +90,10 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 325,
-  "deaths": 20,
-  "hp": 266,
-  "mana": 585,
+  "kills": 332,
+  "deaths": 21,
+  "hp": 238,
+  "mana": 615,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt",
@@ -102,7 +104,7 @@
  },
  "room": "briar_maze",
  "world": {
-  "tick": 10340,
+  "tick": 10435,
   "rooms": {
    "town_square": {
     "items": [],
@@ -1981,13 +1983,18 @@
      [
       "thorn_sprite",
       304
+     ],
+     [
+      "thorn_sprite",
+      304
+     ],
+     [
+      "thorn_sprite",
+      304
      ]
     ],
     "respawn_at": {
-     "thorn_sprite": [
-      10347,
-      10345
-     ]
+     "thorn_sprite": []
     }
    },
    "stag_walk": {
@@ -2006,7 +2013,10 @@
       304
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "greatstag": [],
+     "thorn_sprite": []
+    }
    },
    "weeping_pines": {
     "items": [],
@@ -2020,7 +2030,10 @@
       633
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "blighted_treant": [],
+     "greatstag": []
+    }
    },
    "rotting_brake": {
     "items": [],
@@ -2034,7 +2047,9 @@
       847
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "blighted_treant": []
+    }
    },
    "druids_ring": {
     "items": [],

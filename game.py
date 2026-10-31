@@ -27,6 +27,7 @@ HELP = [
     ("Combat", [("attack / k <target>", "start a fight (or switch targets); you then auto-attack every round"),
                 ("cast <spell> [target]", "cast a spell; in a fight it replaces your next round's attack"),
                 ("ability / ab <name> [target]", "use a class ability (e.g. 'ab slam'), also queued for next round"),
+                ("(on cooldown)", "in a fight, a cooling spell or ability is held and used the moment it's ready"),
                 ("consider / con <target>", "judge how dangerous a monster is"),
                 ("flee [direction]", "try to escape from combat"),
                 ("spells / abilities", "list your spells and abilities")]),
@@ -474,12 +475,16 @@ class Game:
             ui.say("You know no {} by that name. Type 'spells' to see what you know.".format(kind), "grey")
             return
         err = self.ability_error(ab)
-        if err:
+        cooling = ab["id"] in p.cooldowns and ab["level"] <= p.level
+        if err and not (self.combat and cooling):
             ui.say(err, "grey")
             return
         if self.combat:
             if ab["target"] == "enemy" and rest and not self.combat.find_target(rest):
                 ui.say("You don't see that here.", "grey")
+                return
+            if cooling:  # held until ready; mana is checked when it fires
+                self.combat.hold(ab, rest)
                 return
             self.combat.queue("You prepare {}.".format(ab["name"]), lambda: self.ability_round(ab, rest))
             return

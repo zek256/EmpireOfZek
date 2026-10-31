@@ -70,6 +70,10 @@ data/rooms/   one module per region, each with a ROOMS dict, merged in __init__ 
 - In combat, typed actions don't act right away. `Combat.queue()` stores one action
   (spell/ability/potion/flee), and the next `round()` runs it in place of the auto-attack.
   Queued abilities are re-validated when they fire (`ability_round`).
+- A second slot, `Combat.held`, keeps one ability that was used while still cooling down
+  (`use_ability` calls `Combat.hold` instead of refusing). Each `round()` first tries
+  `fire_held()`: once off cooldown it fires and takes the round, leaving `queued` for the next
+  round; if `ability_error` fails then (usually mana) it is dropped. Stuns delay both slots.
 - `end_round`: player effects tick, pet attacks, aggressive room monsters join, monsters act,
   monster effects tick, mana regen, cooldowns, world respawn tick, then death/victory checks.
 - Effect timing gotcha: effects the player applies to themselves are created with `fresh: True`

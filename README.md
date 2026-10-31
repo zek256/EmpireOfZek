@@ -76,6 +76,12 @@ The world runs on a real-time clock: every **4 seconds** is one game tick.
   combat round happens every tick, and you automatically attack your current target each round.
   A spell, ability, potion or flee you type is queued and replaces the auto-attack on the next round.
   Moving during a fight also tries to flee.
+- **Holding a cooling ability:** in a fight, a spell or ability that is still on cooldown is not
+  refused; it is held and used the moment it is ready. You can hold one at a time (a new one
+  replaces it). On the round it fires it takes priority, and whatever else you queued waits one
+  round. So a wizard can type `cast fireball` once and keep casting Magic Missile, and Fireball goes
+  off every time it is ready. If you can't afford the mana when it is ready, it is dropped. Held
+  abilities clear when the fight ends, and outside a fight cooldowns still refuse as before.
 - **Who attacks on sight:** aggressive monsters are rare. Only undead, demons, elementals, guards,
   cultists and bosses attack you as soon as you enter their room, and outside boss rooms at most
   one monster per room does. In a boss room, everything attacks. Animals and roaming humanoids
