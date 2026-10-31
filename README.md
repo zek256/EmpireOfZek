@@ -3,9 +3,9 @@
 An offline, single-player, text-based fantasy MUD/RPG in pure Python 3 (standard library only).
 
 Begin in the town of Brightwater, clear rats from the inn cellar, hunt wolves in the Whispering
-Woods, break the bandit chieftain, descend into the Crypt of Varnoth, and fight your way through
-the Mirefen, the Ironspine Mountains and the haunted Ruins of Elandor to the lair of Pyraxis the
-Eternal Flame. At level 50, be **reborn** as a new class and carry your past lives with you.
+Woods, break the bandit chieftain, descend into the Crypt of Varnoth, aid the dwarves of Hearthdeep
+in the snowbound west, and fight your way through the Mirefen, the Ironspine Mountains and the
+haunted Ruins of Elandor to the lair of Pyraxis the Eternal Flame. At level 50, be **reborn** as a new class and carry your past lives with you.
 
 ## Running
 
@@ -139,15 +139,25 @@ At level 50, `rebirth` lets you choose any other class:
 
 ## World
 
-Town of Brightwater (inn, temple, smithy, alchemist, Silverthread Arcana caster shop, barracks),
-Greenmeadow (1-5), Whispering Woods and the bandit camp (4-10), Barrowfield and the Crypt of Varnoth
-dungeon (9-17), the Mirefen (15-22), the Ironspine Mountains with the orc warcamp and frost caverns
-(20-34), the Ruins of Elandor (32-41), and the Ashen Peaks up to the dragon's lair (41-52).
-That is 55 rooms, 51 monster types including 6 bosses, and 108 items.
+Town of Brightwater (inn, temple, smithy, alchemist, Silverthread Arcana caster shop, barracks,
+and the North and West Gates), Greenmeadow (1-5), Whispering Woods and the bandit camp (4-10),
+the Westmarch farms and goblin quarry (3-10), Barrowfield and the Crypt of Varnoth dungeon (9-17),
+the snowy Rimefells (10-20) around the dwarven city of **Hearthdeep** (smith, rune-carver, alehouse
+with potions) and the Deepdelve Mine below it (18-21), the Mirefen (15-22), the ancient Eldergrove
+(20-34) around the elven city of **Silverbough** (bladesmith, moonweaver, inn with potions), reached
+south through the Whispering Woods or from the Westmarch quarry, the Ironspine Mountains with the
+orc warcamp, the giants and the frost caverns (20-34), the Ruins of Elandor (32-41), and the Ashen
+Peaks up to the dragon's lair (37-52). Brightwater's shops sell gear up to level 20; Hearthdeep
+sells dwarven gear for levels 12-24 and Silverbough elven gear for levels 24-34.
+That is 145 rooms, 91 monster types including 8 bosses, and 152 items. Run
+`python tools/draw_map.py` to draw `map.svg`, a map of every room.
 
-**Quests:** Vermin in the Cellar (Bram, inn), Wolves at the Gate, The Bandit Chieftain, The
-Skullsplitter Horde (Captain Halvard, barracks), The Bone King and The Hag of the Mirefen (Sister
-Aveline, temple).
+**Quests:** Vermin in the Cellar (Bram, inn), Wolves at the Gate, The Bandit Chieftain, Trouble in
+the Rimefells, The Skullsplitter Horde (Captain Halvard, barracks), The Bone King and The Hag of the
+Mirefen (Sister Aveline, temple), The Blight Spreads (Elowen, Silverthread Arcana), Goblins in the
+Henhouse (Farmer Haverick, Thornbury), Fur for the Gatewatch (Captain Orla, Hearthdeep), The
+Stonewake (Thane Hargrim, Hearthdeep), The Sacred Herd and The Rotwood Circle (Warden-Captain
+Faelan, Silverbough) and The Heart of the Blight (Speaker Saelwyn, Silverbough).
 
 Dying returns you to the temple with half HP, losing 10% of the XP needed for your level and 10% of
 your gold.
@@ -166,9 +176,11 @@ data/classes.py  classes, stat growth, starting gear
 data/abilities.py  all spells and abilities
 data/items.py    weapons, armor, caster gear, potions, trophies
 data/monsters.py monster templates, special attacks, loot tables
-data/rooms.py    the world map and NPCs
+data/rooms/      the world map, one file per region, plus npcs.py
 data/quests.py   quests
+tools/           validate.py (data check), balance_sim.py, draw_map.py (draws map.svg)
 ```
 
-Adding content is data-only: add a room to `data/rooms.py`, a monster to `data/monsters.py`, an
-ability with `spell(...)` / `ability(...)` in `data/abilities.py`, and so on.
+Adding content is data-only: add a room to its region's file in `data/rooms/`, a monster to
+`data/monsters.py`, an ability with `spell(...)` / `ability(...)` in `data/abilities.py`, and so on.
+A new region file must also be listed in `REGIONS` in `data/rooms/__init__.py`.

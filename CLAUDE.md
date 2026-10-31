@@ -20,6 +20,12 @@ There is no build step and no unit test suite. Verify changes by:
   runs every class through the real `Combat` code with output silenced. The tuning targets are
   in its docstring. It fights one monster at a time with best-in-slot gear, so it is optimistic.
   Re-run it after touching combat formulas, monster multipliers or class growth.
+- **Map**: `python tools/draw_map.py [out.svg]` redraws `map.svg` (every room, exits, areas, levels,
+  bosses) after room changes. It lays rooms on a grid from their exits and exits with an error if
+  two rooms land on the same square, so it doubles as a geography check for new regions. Areas
+  that would overlap the surface (dungeons below, realms above) go in its `INSETS` list and are
+  drawn as separate boxes. New areas need a colour in its `COLORS` table.
+- **World expansion**: `EXPANSION_PLAN.md` holds the agreed plan (regions, level ranges, phases).
 - **Scripted play**: pipe commands into `main.py`. Piped input arrives instantly, so no game ticks
   pass between lines. Combat rounds and sleep need real time, so for those drive the game with
   delays between lines (a small `subprocess` script that writes a line, sleeps, writes the next)
@@ -44,7 +50,9 @@ character.py  Character (stats, HP/mana, XP, abilities, equipment, rebirth) and 
 combat.py     Combat: one round per tick, ability resolution, monster AI, rewards
 world.py      MonsterInstance, Room (spawning + aggression rule), World (respawns, persistence)
 ui.py         colour, wrapping, background stdin reader, prompt tracking
-data/         all content as plain Python data (races, classes, abilities, items, monsters, rooms+NPCs, quests)
+data/         all content as plain Python data (races, classes, abilities, items, monsters, quests)
+data/rooms/   one module per region, each with a ROOMS dict, merged in __init__ (REGIONS list,
+              duplicate ids raise); NPCs in npcs.py; START_ROOM/RESPAWN_ROOM in __init__
 ```
 
 ### The game clock (game.Game.run)

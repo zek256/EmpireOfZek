@@ -58,6 +58,18 @@ QUESTS = {
         "complete": "'The children have come home! Bless you. The temple's coffers are yours to share.'",
         "reward": {"xp": 30000, "gold": 1200, "items": ["greater_healing_potion", "greater_healing_potion", "greater_mana_potion"]},
     },
+    "frost_goblins": {
+        "name": "Trouble in the Rimefells", "giver": "halvard", "type": "kill", "target": "frost_goblin", "count": 8,
+        "min_level": 11, "prereq": None,
+        "offer": "'A rider came down from the dwarves of Hearthdeep. Frost goblins are raiding their road "
+                 "and the Thane has asked Brightwater for help. Head out the West Gate, through the "
+                 "Westmarch and north past the old watchtower into the Rimefells. Kill eight of the "
+                 "little devils, and make yourself known to the dwarves while you're there.'",
+        "progress": "'The dwarves still count goblin raids. ({n}/{count} frost goblins slain)'",
+        "complete": "'The Thane sends his thanks, and so do I. Take this dwarven mail, it came down with "
+                    "the rider.'",
+        "reward": {"xp": 6000, "gold": 200, "items": ["dwarven_chainmail", "healing_potion", "healing_potion"]},
+    },
     "orc_warlord": {
         "name": "The Skullsplitter Horde", "giver": "halvard", "type": "kill", "target": "warlord_gorrak", "count": 1,
         "min_level": 25, "prereq": "bandit_chief",
@@ -67,5 +79,96 @@ QUESTS = {
         "progress": "'The war-drums still sound in the mountains. Gorrak lives.'",
         "complete": "'Gorrak is slain and the horde is scattering! The King himself will hear of this.'",
         "reward": {"xp": 90000, "gold": 3000, "items": ["greater_healing_potion", "greater_healing_potion", "tower_shield"]},
+    },
+
+    # ------------------------------------------------------------------ Westmarch
+    "goblin_raiders": {
+        "name": "Goblins in the Henhouse", "giver": "haverick", "type": "kill", "target": "hill_goblin", "count": 6,
+        "min_level": 5, "prereq": None,
+        "offer": "'Goblins! Out of the old quarry, every night, stealing hens, pigs, washing off the line, "
+                 "my second-best boots. I've had enough. Go up to the quarry west of here and thin them "
+                 "out, six of the hill goblins at least, and I'll see you right.'",
+        "progress": "'Still hearing them up at the quarry of a night. ({n}/{count} hill goblins slain)'",
+        "complete": "'Quiet as a churchyard last night! Here, take this helm, my grandad wore it at the "
+                    "Battle of the Ford and never needed it once.'",
+        "reward": {"xp": 1500, "gold": 60, "items": ["iron_helm", "healing_potion"]},
+    },
+
+    "blight_spreads": {
+        "name": "The Blight Spreads", "giver": "elowen", "type": "kill", "target": "blighted_treant", "count": 6,
+        "min_level": 24, "prereq": None,
+        "offer": "'A letter came from my kin in Silverbough, the elven city deep in the Eldergrove. A blight "
+                 "is eating the forest from the south, and the trees themselves walk now, rotten and "
+                 "angry. Go south past the Dire Wolf Den and take the Old South Way. Fell six of the "
+                 "blighted treants, and tell the Speaker that Elowen sent you.'",
+        "progress": "'The grove still sickens. ({n}/{count} blighted treants felled)'",
+        "complete": "'My sister writes that the wardens speak of you already. Take this, woven in "
+                    "Silverbough, and go back to them. They need you more than I do.'",
+        "reward": {"xp": 15000, "gold": 400, "items": ["silverleaf_pendant", "greater_healing_potion"]},
+    },
+
+    # ------------------------------------------------------------------ Hearthdeep
+    "yeti_menace": {
+        "name": "Fur for the Gatewatch", "giver": "orla", "type": "collect", "target": "yeti_fur", "count": 6,
+        "min_level": 15, "prereq": None,
+        "offer": "'Yetis have come down out of the high caves, bold as you like, and my sentries are "
+                 "freezing at their posts. Two birds, one axe: go north of the Rimewood to the yeti caves "
+                 "and bring me six hanks of yeti fur. We'll line the sentries' cloaks with it.'",
+        "progress": "'Six hanks, and the Gatewatch will stop complaining. You have {n}.'",
+        "complete": "'Ha! Good thick fur. My sentries will sing your name, badly. Take these boots, "
+                    "they'll keep your feet on the rock.'",
+        "reward": {"xp": 12000, "gold": 350, "items": ["dwarven_boots", "healing_potion", "healing_potion"]},
+    },
+    "stonewake": {
+        "name": "The Stonewake", "giver": "hargrim", "type": "kill", "target": "ghaldrek", "count": 1,
+        "min_level": 18, "prereq": None,
+        "offer": "'Our miners dug too deep in Deepdelve. They broke into a vault no dwarf ever cut, and "
+                 "something woke. The miners came back grey and silent and went down again, and none "
+                 "have come up since. The old songs call it the Stonewake. Take the lift down, find what "
+                 "they woke, and put it back to sleep. Forever.'",
+        "progress": "'The mountain still groans in the night. The Stonewake lives.'",
+        "complete": "'The groaning has stopped. By my beard, you did it. The lost miners can rest now, "
+                    "and Hearthdeep owes you a debt. Take these greaves from my own armoury.'",
+        "reward": {"xp": 25000, "gold": 1000, "items": ["dwarven_greaves", "greater_healing_potion",
+                                                        "greater_healing_potion"]},
+    },
+
+    # ------------------------------------------------------------------ Silverbough
+    "stag_antlers": {
+        "name": "The Sacred Herd", "giver": "faelan", "type": "collect", "target": "stag_antler", "count": 5,
+        "min_level": 24, "prereq": None,
+        "offer": "'The blight is creeping into the greatstags. Once it takes them, they turn on the herd. "
+                 "The Speaker has given leave to cull the sick ones before it spreads. Bring me five "
+                 "antlers from the stags of the Stag Walk or the Whitestag Glade. It is a sad duty, but "
+                 "a necessary one.'",
+        "progress": "'Five antlers, and the herd may yet survive. You have {n}.'",
+        "complete": "'It is done, then. The herd will remember, even if we would rather forget. Take "
+                    "these boots, and walk the grove as a warden does.'",
+        "reward": {"xp": 15000, "gold": 400, "items": ["wardens_boots", "greater_healing_potion"]},
+    },
+    "rotwood_druids": {
+        "name": "The Rotwood Circle", "giver": "faelan", "type": "kill", "target": "rotwood_druid", "count": 8,
+        "min_level": 27, "prereq": "stag_antlers",
+        "offer": "'The blight does not spread on its own. Druids who have given themselves to it are "
+                 "tending it, feeding it, singing the treants awake. They gather at the Druids' Ring, "
+                 "the Fungal Barrows and beyond the Thornward Gate. Kill eight of them.'",
+        "progress": "'The rotwood circle still sings. ({n}/{count} rotwood druids slain)'",
+        "complete": "'Eight fewer voices singing the rot. The grove is quieter. Take these gauntlets, "
+                    "the wardens' own.'",
+        "reward": {"xp": 25000, "gold": 800, "items": ["wardens_gauntlets", "greater_healing_potion",
+                                                       "greater_healing_potion"]},
+    },
+    "heart_of_blight": {
+        "name": "The Heart of the Blight", "giver": "saelwyn", "type": "kill", "target": "rotheart", "count": 1,
+        "min_level": 30, "prereq": None,
+        "offer": "'The blight has a heart. It is Rotheart, the oldest tree in the world, who sheltered "
+                 "our people when Elandor fell. Something has poisoned him, and his rot flows out through "
+                 "every root in the grove. It grieves me past words to ask it. Go through the Thornward "
+                 "Gate, past the Gloaming Mere, and end him.'",
+        "progress": "'Rotheart still burns at the heart of the blight. The grove is dying.'",
+        "complete": "'I felt him go. The green is already coming back into the leaves. You have saved "
+                    "the Eldergrove, and Silverbough will not forget your name while a single tree stands.'",
+        "reward": {"xp": 70000, "gold": 2500, "items": ["moonstone_ring", "greater_healing_potion",
+                                                        "greater_healing_potion"]},
     },
 }

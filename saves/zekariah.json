@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 21,
-  "xp": 8155,
-  "gold": 2571,
+  "level": 24,
+  "xp": 3710,
+  "gold": 1971,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -41,50 +41,27 @@
    "minor_healing_potion",
    "minor_mana_potion",
    "minor_healing_potion",
-   "bone_dust",
-   "bone_dust",
    "healing_potion",
-   "bone_dust",
-   "bone_dust",
-   "bone_dust",
-   "chain_leggings",
-   "bone_dust",
-   "mana_potion",
-   "bone_dust",
-   "chain_leggings",
-   "bone_dust",
-   "bone_dust",
-   "bone_dust",
-   "healing_potion",
-   "healing_potion",
-   "healing_potion",
-   "grave_shroud",
-   "healing_potion",
-   "grave_shroud",
-   "healing_potion",
-   "healing_potion",
-   "copper_focus_ring",
-   "felt_slippers",
-   "bone_dust",
-   "bone_dust",
-   "bone_dust",
-   "mana_potion",
-   "bone_dust",
-   "bone_dust",
-   "bone_dust",
    "mana_potion",
    "healing_potion",
    "healing_potion",
-   "bone_helm",
-   "knights_blade",
-   "willow_staff",
+   "healing_potion",
+   "healing_potion",
+   "healing_potion",
+   "healing_potion",
+   "mana_potion",
+   "mana_potion",
+   "healing_potion",
+   "healing_potion",
+   "healing_potion",
+   "healing_potion",
    "healing_potion"
   ],
   "equipment": {
-   "weapon": "varnoth_scepter",
+   "weapon": "wand_of_embers",
    "shield": null,
-   "head": "spellweave_hood",
-   "chest": "spellbinder_robe",
+   "head": "starsilk_hood",
+   "chest": "archivist_robe",
    "hands": "enchanted_gloves",
    "legs": "mystic_leggings",
    "feet": "runebound_slippers",
@@ -107,19 +84,19 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 284,
-  "deaths": 18,
-  "hp": 211,
-  "mana": 404,
+  "kills": 301,
+  "deaths": 20,
+  "hp": 240,
+  "mana": 497,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt"
   },
   "pet": null
  },
- "room": "foothills",
+ "room": "crossroads",
  "world": {
-  "tick": 7039,
+  "tick": 8972,
   "rooms": {
    "town_square": {
     "items": [],
@@ -589,7 +566,7 @@
     "monsters": [
      [
       "bog_lurker",
-      281
+      285
      ],
      [
       "bog_lurker",
@@ -676,12 +653,19 @@
    },
    "foothills": {
     "items": [],
-    "monsters": [],
+    "monsters": [
+     [
+      "mountain_lion",
+      363
+     ],
+     [
+      "mountain_lion",
+      363
+     ]
+    ],
     "respawn_at": {
      "mountain_lion": [
-      7043,
-      7046,
-      7062
+      8975
      ]
     }
    },
@@ -695,13 +679,13 @@
      [
       "harpy",
       342
-     ],
-     [
-      "harpy",
-      342
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "harpy": [
+      8993
+     ]
+    }
    },
    "giants_plateau": {
     "items": [],
