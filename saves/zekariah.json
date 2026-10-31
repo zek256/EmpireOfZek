@@ -5,8 +5,8 @@
   "race": "high elf",
   "cls": "wizard",
   "level": 27,
-  "xp": 3197,
-  "gold": 2758,
+  "xp": 7287,
+  "gold": 2840,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -58,7 +58,8 @@
    "healing_potion",
    "greater_healing_potion",
    "mana_potion",
-   "greater_healing_potion"
+   "greater_healing_potion",
+   "greater_mana_potion"
   ],
   "equipment": {
    "weapon": "wand_of_embers",
@@ -87,9 +88,9 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 323,
+  "kills": 325,
   "deaths": 20,
-  "hp": 269,
+  "hp": 266,
   "mana": 585,
   "aliases": {
    "1": "cast magic",
@@ -101,7 +102,7 @@
  },
  "room": "briar_maze",
  "world": {
-  "tick": 10310,
+  "tick": 10340,
   "rooms": {
    "town_square": {
     "items": [],
@@ -1980,18 +1981,13 @@
      [
       "thorn_sprite",
       304
-     ],
-     [
-      "thorn_sprite",
-      304
-     ],
-     [
-      "thorn_sprite",
-      304
      ]
     ],
     "respawn_at": {
-     "thorn_sprite": []
+     "thorn_sprite": [
+      10347,
+      10345
+     ]
     }
    },
    "stag_walk": {
@@ -3059,6 +3055,98 @@
    "threshold_court": {
     "items": [],
     "monsters": [],
+    "respawn_at": {}
+   },
+   "justice_gate": {
+    "items": [],
+    "monsters": [
+     [
+      "chained_penitent",
+      3479
+     ],
+     [
+      "chained_penitent",
+      3479
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "justice_cellblock": {
+    "items": [],
+    "monsters": [
+     [
+      "iron_warden",
+      3753
+     ],
+     [
+      "chained_penitent",
+      3479
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "justice_oubliette": {
+    "items": [],
+    "monsters": [
+     [
+      "chained_penitent",
+      3479
+     ],
+     [
+      "chained_penitent",
+      3479
+     ],
+     [
+      "chained_penitent",
+      3479
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "justice_wardens_walk": {
+    "items": [],
+    "monsters": [
+     [
+      "iron_warden",
+      3753
+     ],
+     [
+      "iron_warden",
+      3753
+     ],
+     [
+      "chained_penitent",
+      3479
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "justice_chain_yard": {
+    "items": [],
+    "monsters": [
+     [
+      "iron_warden",
+      3753
+     ],
+     [
+      "iron_warden",
+      3753
+     ],
+     [
+      "chained_penitent",
+      3479
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "justice_hall": {
+    "items": [],
+    "monsters": [
+     [
+      "stalworth",
+      8247
+     ]
+    ],
     "respawn_at": {}
    },
    "sky_gate": {

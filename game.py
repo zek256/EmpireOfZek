@@ -578,10 +578,10 @@ class Game:
         ui.say("Darkness takes you. For a long moment there is nothing... and then a distant warmth, "
                "like sunrise through closed eyelids. You awaken upon the cold marble before the "
                "Dawnfather's altar, weak, but alive.", "bwhite")
-        #lost_xp = min(p.xp, int(p.xp_needed * 0.1)) if p.level < MAX_LEVEL else 0
-        lost_xp = 0
-        #lost_gold = p.gold // 10
-        lost_gold = 0
+        lost_xp = min(p.xp, int(p.xp_needed * 0.1)) if p.level < MAX_LEVEL else 0
+        #lost_xp = 0
+        lost_gold = p.gold // 10
+        #lost_gold = 0
         p.xp -= lost_xp
         p.gold -= lost_gold
         p.deaths += 1
