@@ -323,7 +323,27 @@ class Game:
         if d not in self.room.exits:
             ui.say("You can't go that way.", "grey")
             return
+        blocked = self.gate_block(self.room.exits[d])
+        if blocked:
+            ui.say(blocked, "bmagenta")
+            return
         self.go(self.room.exits[d])
+
+    def gate_block(self, rid):
+        """Why the player may not enter room `rid` (see the `gate` field of data.rooms.common.R), or None."""
+        gate, p = self.world.room(rid).gate, self.player
+        if not gate:
+            return None
+        if "kills" in gate:
+            missing = [MONSTERS[m]["name"] for m in gate["kills"] if m not in p.boss_kills]
+            if missing:
+                return "{} (Still undefeated: {}.)".format(gate["msg"], ", ".join(missing))
+        if gate.get("all_classes"):
+            missing = [CLASSES[c]["name"] for c in CLASS_ORDER if c not in p.mastered_classes()]
+            if missing:
+                return "{} (Paths you have yet to walk to level {}: {}.)".format(
+                    gate["msg"], MAX_LEVEL, ", ".join(missing))
+        return None
 
     def go(self, rid, verbose=True):
         self.leave_room()
@@ -517,14 +537,14 @@ class Game:
         self.queue_flee(DIR_ALIASES.get(args.lower()) if args else None)
 
     def queue_flee(self, d):
-        if d and d not in self.room.exits:
+        if d and (d not in self.room.exits or self.gate_block(self.room.exits[d])):
             ui.say("You can't flee that way!", "grey")
             return
         self.combat.queue("You look for a chance to escape...", lambda: self.attempt_flee(d))
 
     def attempt_flee(self, d):
         exits = self.room.exits
-        d = d or random.choice(list(exits))
+        d = d or random.choice([x for x in exits if not self.gate_block(exits[x])] or list(exits))
         boss = any(m.boss for m in self.combat.living())
         chance = (0.45 if boss else 0.7) + min(0.15, self.player.stat("DEX") / 1000)
         if random.random() < chance:
@@ -584,6 +604,8 @@ class Game:
             lives = "  Past lives: " + ", ".join(CLASSES[l["cls"]]["name"] for l in p.past_lives)
         ui.out("{} {}, level {}{}".format(ui.c(p.race_name, "bcyan"), ui.c(p.class_name, "bcyan"),
                                           ui.c(p.level, "byellow"), lives))
+        if "lord_zek" in p.boss_kills:
+            ui.out(ui.c("Champion of Zek, recognised by the ruler of all", "bmagenta"))
         ui.out("HP   {} {}/{}".format(ui.bar(p.hp, p.max_hp, 24, "green"), p.hp, p.max_hp))
         ui.out("Mana {} {}/{}".format(ui.bar(p.mana, p.max_mana, 24, "blue"), p.mana, p.max_mana))
         if p.level < MAX_LEVEL:
@@ -889,6 +911,8 @@ class Game:
         return p.quests.get(qid, {}).get("count", 0)
 
     def on_kill(self, mid):
+        if MONSTERS[mid]["boss"] and mid not in self.player.boss_kills:
+            self.player.boss_kills.append(mid)
         for qid, st in self.player.quests.items():
             q = QUESTS[qid]
             if st["status"] == "active" and q["type"] == "kill" and q["target"] == mid:

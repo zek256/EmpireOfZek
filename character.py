@@ -51,6 +51,7 @@ class Character:
         self.aliases = {}     # player-defined shortcut -> command line
         self.kills = 0
         self.deaths = 0
+        self.boss_kills = []  # boss ids this character has ever slain (across all lives)
         for iid in CLASSES[cls]["gear"]:
             self.equipment[ITEMS[iid]["slot"]] = iid
         self.inventory += ["minor_healing_potion"] * 3
@@ -306,4 +307,12 @@ class Character:
         for s in SLOTS:
             ch.equipment.setdefault(s, None)
         ch.__dict__.setdefault("aliases", {})  # saves from before aliases existed
+        ch.__dict__.setdefault("boss_kills", [])
         return ch
+
+    def mastered_classes(self):
+        """Classes lived all the way to the level cap: every past life, plus this one if it is maxed."""
+        done = {life["cls"] for life in self.past_lives}
+        if self.level >= MAX_LEVEL:
+            done.add(self.cls)
+        return done

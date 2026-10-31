@@ -161,6 +161,126 @@ armor("starsilk_hood", "a starsilk hood", "head", 22, 7, 550, "A hood of midnigh
 weapon("wand_of_embers", "a wand of embers", 22, (13, 22), 650, "A wand of charred oak with a glowing coal set in its tip.", INT=7, WIS=4, CHA=3)
 armor("tome_of_warding", "a tome of warding", "shield", 24, 5, 800, "A heavy spellbook chained to the wrist, its pages humming with protective wards.", INT=6, WIS=6, CON=2)
 
+# ------------------------------------------------------------------ Hearthdeep (dwarven gear, levels 10-24)
+# Sold by Brakka Ironhand (arms and armour) and Tamsin Runecutter (rune-gear for casters).
+weapon("dwarven_war_axe", "a dwarven war axe", 12, (9, 16), 160,
+       "A broad-bladed axe of dark dwarven steel, its haft wrapped in braided leather.", STR=3, CON=1)
+weapon("dwarven_crossbow", "a dwarven crossbow", 14, (10, 17), 240,
+       "A compact crossbow with a steel prod and a crank of polished brass.", DEX=4)
+weapon("runeforged_hammer", "a runeforged hammer", 16, (11, 19), 320,
+       "A warhammer whose head is cut with a single glowing rune of striking.", STR=3, CON=2, WIS=1)
+weapon("runecarved_staff", "a runecarved staff", 16, (9, 16), 300,
+       "A staff of black mountain ash, carved from end to end with dwarven runes of warding.", INT=5, WIS=5)
+weapon("dwarven_greataxe", "a dwarven greataxe", 20, (13, 24), 520,
+       "A two-handed axe heavy enough to split a boulder, edged with a strip of mithril.", STR=5, CON=2)
+weapon("stonewake_hammer", "the Stonewake Hammer", 21, (15, 25), 700,
+       "A maul of living granite torn from the Stonewake itself. It hums when it strikes stone.", STR=5, CON=4)
+armor("dwarven_chainmail", "dwarven chainmail", "chest", 12, 12, 220, "Fine, heavy mail of tiny riveted rings.", CON=2)
+armor("runestone_ring", "a runestone ring", "ring", 14, 0, 240, "A band of grey stone set with a single carved rune.", INT=3, WIS=3)
+armor("dwarven_helm", "a dwarven helm", "head", 16, 8, 260, "A round steel helm with cheek-guards and a braided crest.", CON=2)
+armor("dwarven_boots", "dwarven iron boots", "feet", 18, 8, 380, "Heavy hobnailed boots with steel toecaps, made for mountain rock.", CON=2)
+armor("runecutter_gloves", "runecutter's gloves", "hands", 18, 4, 380, "Thick gloves whose fingertips are stitched with tiny runes of focus.", INT=4, WIS=3)
+armor("deepwool_robe", "a deepwool robe", "chest", 18, 11, 450, "A heavy robe of grey mountain wool, lined with rune-stitched silk.", INT=5, WIS=5)
+armor("dwarven_greaves", "dwarven greaves", "legs", 20, 12, 500, "Overlapping plates of dwarven steel that guard the legs.", CON=3)
+armor("deepheart_amulet", "the Deepheart Amulet", "neck", 21, 4, 700,
+      "A crystal from the deepest seam of Deepdelve, glowing faintly on an iron chain.", CON=4, STR=3, WIS=2)
+armor("dwarven_plate", "dwarven plate", "chest", 22, 22, 800, "A full suit of dwarven plate, every rivet stamped with a maker's rune.", CON=4, STR=1)
+armor("runed_shield", "a runed dwarven shield", "shield", 22, 15, 700, "A round steel shield with a rune of warding at its boss.", CON=3)
+armor("rune_amulet", "a rune amulet", "neck", 22, 3, 650, "A disc of silver-veined stone carved with a rune of the deep.", INT=4, WIS=4, CON=2)
+armor("runecutter_boots", "runecutter's boots", "feet", 22, 6, 550, "Soft boots whose soles are carved with runes of sure footing.", INT=3, WIS=3, DEX=2)
+
+# ------------------------------------------------------------------ Silverbough (elven gear, levels 24-36)
+# Sold by Ilyra Leafsong (arms and armour) and Caelum Moonweave (caster gear).
+weapon("elven_saber", "an elven saber", 24, (17, 28), 750,
+       "A slender curved blade of leafsteel, so light it seems to move on its own.", STR=3, DEX=5)
+weapon("silverleaf_bow", "a silverleaf bow", 26, (18, 30), 850,
+       "A recurved bow of pale wood inlaid with silver leaves along its limbs.", DEX=7, WIS=2)
+weapon("dawnwood_staff", "a dawnwood staff", 28, (15, 26), 1050,
+       "A staff cut from a tree that only grows where the first light of morning falls.", INT=8, WIS=8)
+weapon("elven_glaive", "an elven glaive", 32, (24, 40), 1500,
+       "A long-hafted blade of the Silverbough wardens, edged like a crescent moon.", STR=6, DEX=4)
+weapon("thornheart", "Thornheart", 33, (25, 42), 1700,
+       "A greatsword of living blackwood grown from Rotheart's core. Thorns still sprout along its back.", STR=7, CON=4)
+armor("elven_mail", "elven mail", "chest", 26, 22, 900, "A coat of fine leafsteel scales that whispers when you move.", DEX=3, CON=2)
+armor("moonweave_robe", "a moonweave robe", "chest", 26, 14, 950, "A robe of silver-grey silk that shimmers like moonlight on water.", INT=6, WIS=6, CHA=2)
+armor("leafsteel_helm", "a leafsteel helm", "head", 28, 12, 950, "A tall, narrow elven helm with cheek-guards shaped like leaves.", DEX=2, CON=2)
+armor("moonweave_gloves", "moonweave gloves", "hands", 28, 5, 900, "Fingerless gloves of moonweave silk, cool to the touch.", INT=5, WIS=4)
+armor("wardens_boots", "warden's boots", "feet", 30, 10, 1200, "Soft-soled boots of the Silverbough wardens, made to walk without a sound.", DEX=4)
+armor("silverbark_shield", "a silverbark shield", "shield", 30, 20, 1300, "A kite shield of silver bark over leafsteel, light and very hard.", CON=3, DEX=2)
+armor("starleaf_circlet", "a starleaf circlet", "head", 30, 9, 1200, "A circlet of woven silver leaves with a tiny star caught at its brow.", INT=6, WIS=5)
+armor("moonweave_leggings", "moonweave leggings", "legs", 30, 8, 1100, "Leggings of silver-grey silk stitched with tiny crescent moons.", INT=5, WIS=5)
+armor("wardens_gauntlets", "warden's gauntlets", "hands", 32, 12, 1500, "Leafsteel gauntlets that flex like a second skin.", DEX=4, STR=2)
+armor("silverleaf_pendant", "a silverleaf pendant", "neck", 32, 4, 1500, "A single silver leaf that never tarnishes, on a chain of fine elven links.", INT=5, WIS=5, CHA=3)
+armor("crown_of_thorns", "the Crown of Thorns", "head", 33, 14, 1800, "A circlet of black thorns cut from Rotheart's crown. It does not draw blood, quite.", CON=4, WIS=4, STR=3)
+armor("eldergrove_amulet", "the Amulet of the Eldergrove", "neck", 33, 5, 1900, "An acorn of green crystal that pulses slowly, like a sleeping heart.", CON=3, WIS=5, DEX=3)
+armor("leafsteel_greaves", "leafsteel greaves", "legs", 34, 22, 1700, "Elven leg-plates of leafsteel, etched with climbing vines.", DEX=3, CON=3)
+armor("moonweave_slippers", "moonweave slippers", "feet", 34, 7, 1500, "Slippers of moonweave that leave no footprints at all.", INT=5, WIS=4, DEX=3)
+armor("moonstone_ring", "a Silverbough moonstone ring", "ring", 34, 0, 1600, "A ring of white gold set with a moonstone that glows at dusk.", INT=6, WIS=6)
+
+# ------------------------------------------------------------------ The east: Badlands drops and Sunspire gear (levels 36-48)
+# Sunspire gear is sold by Zahir the Bladewright (arms and armour) and Amsa Silkwind (caster gear).
+weapon("yellowtooth_flail", "Yellowtooth's Flail", 26, (19, 32), 900,
+       "A gnoll warlord's flail: three iron balls on chains, each crusted with old teeth.", STR=6, CON=2)
+armor("gnoll_bone_necklace", "a gnoll warlord's necklace", "neck", 26, 4, 950,
+      "A necklace of finger bones and yellowed fangs, strung by a gnoll who counted his victims.", STR=3, CON=3, DEX=2)
+weapon("sunsteel_scimitar", "a sunsteel scimitar", 38, (28, 47), 2200,
+       "A deeply curved blade of golden sunsteel, folded a thousand times in the forges of Sunspire.", STR=5, DEX=7)
+armor("desert_silk_robe", "a desert silk robe", "chest", 38, 20, 2100, "Layered robes of saffron and indigo silk, cool in the worst of the sun.", INT=8, WIS=8, CHA=3)
+armor("silkwind_turban", "a silkwind turban", "head", 38, 10, 2000, "A turban of fine silk pinned with a sapphire that glows when spells are cast.", INT=7, WIS=6)
+armor("oasis_pearl_ring", "an oasis pearl ring", "ring", 38, 0, 2200, "A ring of pale gold set with a pearl from the sacred oasis.", INT=7, WIS=7)
+weapon("dune_recurve", "a dune recurve bow", 40, (29, 48), 2400,
+       "A short, powerful bow of horn and desert ash, made to be shot from the saddle.", DEX=10, WIS=3)
+weapon("sunfire_staff", "a sunfire staff", 40, (21, 35), 2500,
+       "A staff of black wood capped with a sun-disc of gold that blazes when it is raised.", INT=11, WIS=11)
+armor("sunsteel_mail", "sunsteel mail", "chest", 40, 36, 2500, "Golden scale mail that turns blades and throws back the desert sun.", CON=6, DEX=3)
+armor("sunsteel_helm", "a sunsteel helm", "head", 40, 18, 2200, "A spired helm of sunsteel with a veil of fine mail to keep out the sand.", CON=4, STR=2)
+armor("sunsteel_greaves", "sunsteel greaves", "legs", 40, 26, 2300, "Greaves of sunsteel engraved with the rays of the sun.", CON=5, STR=2)
+armor("sand_strider_boots", "sand-strider boots", "feet", 40, 13, 2200, "Wide-soled boots that carry you over soft sand without sinking.", DEX=5)
+armor("silkwind_gloves", "silkwind gloves", "hands", 40, 6, 2100, "Gloves of silk so fine they seem to be made of breeze.", INT=6, WIS=6)
+armor("silkwind_trousers", "silkwind trousers", "legs", 40, 10, 2100, "Loose trousers of layered silk, embroidered with stars.", INT=6, WIS=6)
+armor("obelisk_amulet", "an amulet of the obelisk", "neck", 40, 6, 2600, "A tiny golden obelisk on a chain, said to be cut from the great obelisk itself.", INT=5, WIS=5, CON=4)
+armor("sunsteel_gauntlets", "sunsteel gauntlets", "hands", 42, 15, 2400, "Gauntlets of sunsteel with knuckles shaped like rising suns.", STR=4, DEX=3)
+armor("sunburst_shield", "a sunburst shield", "shield", 42, 24, 2500, "A round shield of polished sunsteel that flashes blindingly in the light.", CON=5)
+armor("silkwind_slippers", "silkwind slippers", "feet", 42, 8, 2300, "Pointed slippers of embroidered silk that never fill with sand.", INT=6, WIS=5, DEX=3)
+armor("sunstone_ring", "a sunstone ring", "ring", 42, 0, 2600, "A heavy gold ring set with an orange stone that is always warm.", STR=4, DEX=4, CON=4)
+weapon("crescent_greatsword", "a crescent greatsword", 44, (33, 55), 3200,
+       "A huge curved blade of sunsteel, worn across the back by the Sun Guard of Sunspire.", STR=9, DEX=4)
+weapon("khopesh_of_ussreth", "the Khopesh of Ussreth", 48, (38, 62), 5500,
+       "The hooked sword of the last Sand King, its bronze blade still sharp after three thousand years.", STR=11, DEX=8, CON=5)
+weapon("scepter_of_the_sand_kings", "the Scepter of the Sand Kings", 48, (27, 44), 5000,
+       "A sceptre of gold and lapis topped with a scarab of black glass, heavy with old and patient magic.", INT=17, WIS=15, CHA=8)
+armor("burial_mask", "the Burial Mask of Ussreth", "head", 48, 26, 4800,
+      "A golden death-mask with eyes of lapis. Wearing it, you hear the desert wind.", CON=6, STR=4, INT=4, WIS=4)
+
+# ------------------------------------------------------------------ Mythic gear from the Planes of the Gods (level 50)
+# Dropped only by the plane bosses and Lord Zek. Stronger than anything else in the world.
+weapon("stormcaller_bow", "Stormcaller", 50, (46, 74), 12000,
+       "A bow strung with a thread of lightning, taken from the Sky-Warden's own hand.", DEX=16, WIS=6, CON=6)
+armor("cloudsilk_robes", "cloudsilk robes", "chest", 50, 30, 11000, "Robes woven from the clouds of the high heavens, weightless and cool.", INT=14, WIS=14, CHA=6)
+weapon("wildmother_staff", "the Wildmother's Staff", 50, (30, 50), 12000,
+       "A staff of living wood that still puts out leaves in spring.", INT=20, WIS=20, CHA=8)
+armor("living_bark_greaves", "living bark greaves", "legs", 50, 36, 11000, "Greaves of bark that grows back over every scratch.", CON=10, STR=6)
+weapon("dreadblade", "the Dreadblade", 50, (48, 78), 12500,
+       "A black sword that whispers your worst fears to whoever it is pointed at.", STR=14, DEX=10)
+armor("mask_of_dread", "the Mask of Dread", "head", 50, 28, 11000, "A faceless mask of black iron. Your enemies see in it whatever they fear most.", STR=6, DEX=6, CON=6)
+weapon("flameheart_hammer", "Flameheart", 50, (50, 80), 13000,
+       "A hammer forged in the heart of the Plane of Fire, its head a captive star.", STR=16, CON=8)
+armor("gauntlets_of_the_pyre", "gauntlets of the pyre", "hands", 50, 22, 11000, "Gauntlets of red-gold that burn without heat.", STR=8, DEX=6, CON=4)
+weapon("tidecaller", "Tidecaller", 50, (46, 74), 12500,
+       "A trident of white coral and pearl. The tide turns when it is raised.", STR=10, DEX=10, WIS=6)
+armor("pearl_of_the_deep", "the Pearl of the Deep", "ring", 50, 0, 11000, "A black pearl as big as an eye, set in a ring of sea-silver.", INT=12, WIS=12, CON=4)
+armor("mountainheart_shield", "the Mountainheart Shield", "shield", 50, 40, 12000, "A shield cut from the living rock of the Plane of Earth.", CON=12, STR=4)
+armor("stonestride_boots", "stonestride boots", "feet", 50, 22, 11000, "Boots of grey stone that weigh nothing on your feet and everything on your enemies'.", CON=8, STR=4)
+armor("windwalker_boots", "windwalker boots", "feet", 50, 16, 11000, "Boots of silver feathers. Your feet barely touch the ground.", DEX=12, INT=4, WIS=4)
+armor("band_of_four_winds", "the Band of the Four Winds", "ring", 50, 0, 11000, "A ring of four twisted strands of silver, each humming a different wind.", DEX=10, STR=6, CON=6)
+weapon("eternity", "Eternity", 50, (55, 88), 20000,
+       "The sword of Lord Zek, ruler of all. Its blade shows every moment it has ever cut.",
+       STR=12, DEX=12, CON=12, INT=12, WIS=12, CHA=12)
+armor("crown_of_zek", "the Crown of Zek", "head", 50, 32, 18000, "A crown of white gold that weighs nothing and holds the light of every dawn.",
+      STR=10, DEX=10, CON=10, INT=10, WIS=10, CHA=10)
+armor("hourglass_amulet", "the Hourglass Amulet", "neck", 50, 12, 18000, "A tiny hourglass of crystal whose sand runs upward.",
+      STR=12, DEX=12, CON=12, INT=12, WIS=12, CHA=12)
+
 # ------------------------------------------------------------------ Consumables
 potion("minor_healing_potion", "a minor healing potion", 1, 10, "A small vial of red liquid.", heal=45)
 potion("minor_mana_potion", "a minor mana potion", 1, 12, "A small vial of shimmering blue liquid.", mana=30)
@@ -178,6 +298,17 @@ misc("spider_silk", "a bundle of spider silk", 8, "Strong, sticky silk from a gi
 misc("bone_dust", "a pouch of bone dust", 15, "Fine grey dust ground from ancient bones.")
 misc("bog_pearl", "a bog pearl", 60, "A murky green pearl found in the Mirefen.")
 misc("orc_tusk", "an orc tusk", 40, "A yellowed tusk, prized by bone-carvers.")
+misc("yeti_fur", "a hank of yeti fur", 50, "Coarse white fur, warm enough to sleep in a snowdrift.")
+misc("deep_crystal", "a deep crystal", 80, "A cloudy crystal from the depths of Deepdelve, faintly warm.")
+misc("stag_antler", "a greatstag antler", 60, "A branching antler as wide as your outstretched arms.", kind="quest")
+misc("blight_heartwood", "a lump of blighted heartwood", 120, "Black, oozing wood that is warm to the touch and smells of rot.")
+misc("hyena_hide", "a spotted hyena hide", 20, "A coarse spotted hide that still smells of carrion.")
+misc("scorpion_stinger", "a scorpion stinger", 120, "A curved stinger as long as a dagger, its venom sac dried hard.")
+misc("desert_glass", "a shard of desert glass", 220, "Green glass fused from sand by some terrible heat, smooth as water.", kind="quest")
+misc("ancient_scarab", "an ancient scarab", 400, "A carved scarab of lapis and gold from the tombs of the Sand Kings.")
+misc("planar_shard", "a planar shard", 500, "A splinter of another world, humming with a power that does not belong here.")
+misc("griffon_feather", "a griffon feather", 70, "A great barred flight feather, longer than your arm.")
+misc("winter_wolf_pelt", "a winter wolf pelt", 110, "A thick white pelt that stays cold to the touch.")
 misc("frost_shard", "a frost shard", 90, "A shard of ice that never melts.")
 misc("elven_relic", "an elven relic", 160, "A small silver figurine of exquisite elven make.")
 misc("dragon_scale", "a dragon scale", 300, "A scale the size of a dinner plate, red as embers.")

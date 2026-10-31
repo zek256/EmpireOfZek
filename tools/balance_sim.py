@@ -4,13 +4,16 @@
     python tools/balance_sim.py fights          # win% / rounds / HP left vs same-level monsters
     python tools/balance_sim.py endurance       # consecutive fights survived without resting
     python tools/balance_sim.py bosses          # boss win% at boss level and boss level +3
+    python tools/balance_sim.py endgame         # Planes of the Gods vs level-50 characters with 1/6/11 lives
     options: --n 40 (fights per cell), --levels 1,5,10,20,30,40,50, --seed 3
 
 The simulated player is a human with best-in-slot gear for their level (including boss drops,
 so results are optimistic) and a simple AI: heal when low, buff early, otherwise use the
 ability with the best expected value. Bosses are fought with 5 healing potions.
 Targets the game was tuned to: same-level fights cost ~25-55% HP; endurance 2-6 for most
-classes; bosses mostly beatable at level +3.
+classes; bosses mostly beatable at level +3. Endgame (monsters above level 50): plane monsters and
+plane bosses beatable with 6+ lives; Lord Zek won most of the time (not always) with 11 lives, and
+almost never with 6.
 """
 import argparse
 import os
@@ -23,9 +26,9 @@ import ui  # noqa: E402
 
 ui.say = ui.out = ui.rule = lambda *a, **k: None  # silence the game
 
-from character import Character  # noqa: E402
+from character import MAX_LEVEL, Character  # noqa: E402
 from combat import Combat, potion_drop, resolve_self_effect  # noqa: E402
-from data.classes import CLASS_ORDER  # noqa: E402
+from data.classes import CLASS_ORDER, CLASSES  # noqa: E402
 from data.items import ITEMS, SLOTS  # noqa: E402
 from data.monsters import MONSTERS  # noqa: E402
 from game import Game  # noqa: E402
@@ -173,7 +176,7 @@ def report_endurance(levels, n, cap=8):
 def report_bosses(n):
     print("boss win% with 5 healing potions: at boss level / at boss level +3")
     print("{:<30}".format("") + " ".join("{:>9}".format(c[:9]) for c in CLASS_ORDER))
-    for b in (m for m in MONSTERS.values() if m["boss"]):
+    for b in (m for m in MONSTERS.values() if m["boss"] and m["level"] <= MAX_LEVEL + 2):
         row = []
         for cls in CLASS_ORDER:
             rates = []
@@ -188,9 +191,44 @@ def report_bosses(n):
         print("{:<30}".format(b["name"][:29]) + " ".join("{:>9}".format(x) for x in row))
 
 
+ENDGAME_LIVES = (1, 6, 11)
+
+
+def setup_lives(cls, lives):
+    """A level-50 character in `cls` who has lived `lives` classes in all (this one included)."""
+    g, p = setup(cls, MAX_LEVEL)
+    for other in [c for c in CLASS_ORDER if c != cls][:lives - 1]:
+        p.past_lives.append({"cls": other, "gains": {s: v * (MAX_LEVEL - 1)
+                                                     for s, v in CLASSES[other]["gains"].items()}})
+    best_gear(p)
+    p.hp, p.mana = p.max_hp, p.max_mana
+    return g, p
+
+
+def report_endgame(n):
+    """Planes of the Gods (monsters above level 50): win% for characters with 1, 6 and 11 lives."""
+    print("level-50 win% vs the planes, averaged over classes (bosses with 5 potions): "
+          + " / ".join("{} li{}".format(x, "fe" if x == 1 else "ves") for x in ENDGAME_LIVES)
+          + "   [worst class at 11 lives]")
+    mids = sorted((m for m in MONSTERS.values() if m["level"] > MAX_LEVEL), key=lambda m: (m["boss"], m["level"]))
+    for m in mids:
+        rates, worst = [], 100
+        for lives in ENDGAME_LIVES:
+            total = 0
+            for cls in CLASS_ORDER:
+                wins = sum(fight(*setup_lives(cls, lives), m["id"], potions=5 if m["boss"] else 0)[0]
+                           for _ in range(n))
+                total += wins
+                if lives == ENDGAME_LIVES[-1]:
+                    worst = min(worst, 100 * wins / n)
+            rates.append(100 * total / (n * len(CLASS_ORDER)))
+        print("{:<34} L{}  ".format(m["name"][:33], m["level"])
+              + " / ".join("{:>3.0f}%".format(r) for r in rates) + "   [{:.0f}%]".format(worst))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("report", nargs="?", default="all", choices=["all", "fights", "endurance", "bosses"])
+    ap.add_argument("report", nargs="?", default="all", choices=["all", "fights", "endurance", "bosses", "endgame"])
     ap.add_argument("--n", type=int, default=30, help="simulated fights per table cell")
     ap.add_argument("--levels", default=",".join(map(str, DEFAULT_LEVELS)), help="comma-separated levels")
     ap.add_argument("--seed", type=int, default=3)
@@ -205,6 +243,9 @@ def main():
         print()
     if opts.report in ("all", "bosses"):
         report_bosses(opts.n)
+        print()
+    if opts.report in ("all", "endgame"):
+        report_endgame(opts.n)
 
 
 if __name__ == "__main__":

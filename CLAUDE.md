@@ -20,6 +20,12 @@ There is no build step and no unit test suite. Verify changes by:
   runs every class through the real `Combat` code with output silenced. The tuning targets are
   in its docstring. It fights one monster at a time with best-in-slot gear, so it is optimistic.
   Re-run it after touching combat formulas, monster multipliers or class growth.
+- **Map**: `python tools/draw_map.py [out.svg]` redraws `map.svg` (every room, exits, areas, levels,
+  bosses) after room changes. It lays rooms on a grid from their exits and exits with an error if
+  two rooms land on the same square, so it doubles as a geography check for new regions. Areas
+  that would overlap the surface (dungeons below, realms above) go in its `INSETS` list and are
+  drawn as separate boxes. New areas need a colour in its `COLORS` table.
+- **World expansion**: `EXPANSION_PLAN.md` holds the agreed plan (regions, level ranges, phases).
 - **Scripted play**: pipe commands into `main.py`. Piped input arrives instantly, so no game ticks
   pass between lines. Combat rounds and sleep need real time, so for those drive the game with
   delays between lines (a small `subprocess` script that writes a line, sleeps, writes the next)
@@ -44,7 +50,9 @@ character.py  Character (stats, HP/mana, XP, abilities, equipment, rebirth) and 
 combat.py     Combat: one round per tick, ability resolution, monster AI, rewards
 world.py      MonsterInstance, Room (spawning + aggression rule), World (respawns, persistence)
 ui.py         colour, wrapping, background stdin reader, prompt tracking
-data/         all content as plain Python data (races, classes, abilities, items, monsters, rooms+NPCs, quests)
+data/         all content as plain Python data (races, classes, abilities, items, monsters, quests)
+data/rooms/   one module per region, each with a ROOMS dict, merged in __init__ (REGIONS list,
+              duplicate ids raise); NPCs in npcs.py; START_ROOM/RESPAWN_ROOM in __init__
 ```
 
 ### The game clock (game.Game.run)
@@ -100,6 +108,18 @@ data/         all content as plain Python data (races, classes, abilities, items
 Templates only set multipliers. Real HP, damage and armor come from level in `MonsterInstance`
 (`(20 + 15L)` HP etc.). To make a monster tougher, change its multipliers, not raw numbers.
 Specials: big / dot / stun / drain / heal. Bosses respawn after 120 ticks, others after 30.
+Monsters above level 50 (the Planes of the Gods) use far larger multipliers (hp 3.3-5.5, dmg
+2.6-3.6 for regulars; 7.5-11 / 3.3-3.9 for plane bosses; Lord Zek 15 / 5.3) because past-life
+stat bonuses make multi-life characters enormously strong.
+
+### Gates and boss kills
+- A room may carry `gate` (see `data/rooms/common.R`): `{"kills": [boss ids], "msg"}` or
+  `{"all_classes": True, "msg"}`. `Game.gate_block(rid)` checks it in `cmd_move` and when
+  fleeing; `goto` ignores it. `validate.py` checks gate kills are bosses.
+- `Character.boss_kills` records every boss id ever slain (set in `Game.on_kill`, kept across
+  rebirths). `Character.mastered_classes()` = past lives + the current class once at level 50.
+- The Door of Time needs the four elemental lords; Lord Zek's throne needs every class mastered.
+  Killing `lord_zek` shows the "Champion of Zek" title on the score sheet.
 
 ### Inventory and items
 - Inventory is a flat list of item ids (duplicates = quantity). Equipment is `{slot: id}` over
@@ -138,3 +158,9 @@ can never be aliased, and an alias can't start with another alias.
 Tuned with `tools/balance_sim.py`: same-level fights cost roughly 25-55% HP, and bosses are
 beatable at level+3 with potions. Necromancer, with its pet and drain, is the strongest solo
 class. That is intended. Wizards are fragile and get no area spell until Fireball at 16.
+
+Endgame (`balance_sim.py endgame`, level-50 characters with 1/6/11 lives, best-in-slot gear):
+first-tier plane monsters beat a 1-life character about half the time and are trivial with 6
+lives; plane champions are ~90-100% with 6 lives; elemental lords ~30-65% with 6 lives and 100%
+with 11; Lord Zek ~0% with 6 lives and ~65-75% with 11 (every class 50-90%), about 60% without
+any mythic gear. The user asked for Zek to need a full every-class character with good gear.
