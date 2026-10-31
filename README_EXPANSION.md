@@ -171,7 +171,7 @@ first-tier plane.
 - **The Door of Time:** a bronze door at the top of a stair of light above the Threshold. It opens
   only once the character has killed all four elemental lords. If it is still shut, it tells you
   which lords remain.
-- **Lord Zek's throne:** it opens only for a character who has lived every class to level 50. The
+- **Lord Zek's throne:** it opens only for a character who has leveled every class to level 50. The
   current class counts once it reaches 50. The door lists the classes still missing.
 - **The rest of the planes:** open to anyone who can survive them.
 - **Rewards:**
