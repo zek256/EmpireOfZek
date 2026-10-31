@@ -4,9 +4,9 @@
   "name": "Zek",
   "race": "elf",
   "cls": "warrior",
-  "level": 4,
-  "xp": 748,
-  "gold": 57,
+  "level": 5,
+  "xp": 383,
+  "gold": 20,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -31,10 +31,13 @@
    "minor_mana_potion",
    "spider_silk",
    "minor_healing_potion",
-   "wooden_shield"
+   "wooden_shield",
+   "wolf_pelt",
+   "wolf_pelt",
+   "minor_healing_potion"
   ],
   "equipment": {
-   "weapon": "rusty_shortsword",
+   "weapon": "iron_longsword",
    "shield": "iron_buckler",
    "head": null,
    "chest": "padded_tunic",
@@ -55,22 +58,20 @@
    }
   },
   "effects": [],
-  "cooldowns": {
-   "slam": 2
-  },
+  "cooldowns": {},
   "aliases": {
    "1": "cast slam"
   },
-  "kills": 29,
+  "kills": 33,
   "deaths": 2,
-  "hp": 56,
-  "mana": 19,
+  "hp": 110,
+  "mana": 20,
   "boss_kills": [],
   "pet": null
  },
- "room": "meadow_path",
+ "room": "woods_edge",
  "world": {
-  "tick": 357,
+  "tick": 445,
   "rooms": {
    "town_square": {
     "items": [],
@@ -100,13 +101,15 @@
      [
       "giant_rat",
       21
+     ],
+     [
+      "cellar_spider",
+      35
      ]
     ],
     "respawn_at": {
      "giant_rat": [],
-     "cellar_spider": [
-      362
-     ]
+     "cellar_spider": []
     }
    },
    "temple": {
@@ -236,13 +239,15 @@
      [
       "wild_boar",
       65
+     ],
+     [
+      "wild_boar",
+      65
      ]
     ],
     "respawn_at": {
      "field_snake": [],
-     "wild_boar": [
-      389
-     ]
+     "wild_boar": []
     }
    },
    "willow_mill": {
@@ -273,14 +278,12 @@
      [
       "grey_wolf",
       73
-     ],
-     [
-      "grey_wolf",
-      73
      ]
     ],
     "respawn_at": {
-     "grey_wolf": []
+     "grey_wolf": [
+      470
+     ]
     }
    },
    "spider_hollow": {

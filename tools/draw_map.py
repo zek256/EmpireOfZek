@@ -2,32 +2,21 @@
 
 Writes map.svg in the game folder by default; open it in any web browser.
 Rooms are placed on a grid by following exits from the town square (north is up,
-up/down are drawn diagonally). Areas listed in INSETS (dungeons below the surface, realms
+up/down are drawn diagonally). Areas listed in mapview.INSETS (dungeons below the surface, realms
 above it) would sit on top of surface rooms, so each is laid out on its own grid and drawn
 in a framed box to the right of the surface map.
 """
 import os
 import sys
 import textwrap
-from collections import deque
 from html import escape
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 sys.path.insert(0, ROOT)
 
+import mapview  # noqa: E402  (the grid layout and INSETS list, shared with the in-game map)
 from data.monsters import MONSTERS  # noqa: E402
-from data.rooms import ROOMS, START_ROOM  # noqa: E402
-
-STEP = {"n": (0, -1), "s": (0, 1), "e": (1, 0), "w": (-1, 0), "u": (1, -1), "d": (-1, 1)}
-INSETS = [  # (label, areas drawn together, the room that leads in from the surface)
-    ("Crypt of Varnoth", {"Crypt of Varnoth"}, "crypt_entry"),
-    ("Deepdelve Mine", {"Deepdelve Mine"}, "deepdelve_foot"),
-    ("Tomb of the Sand Kings", {"Tomb of the Sand Kings"}, "tomb_antechamber"),
-    ("Planes of the Gods", {"Threshold of the Gods", "Plane of Sky", "Plane of Growth", "Plane of Fear",
-                            "Plane of Justice", "Plane of Fire", "Plane of Water", "Plane of Earth",
-                            "Plane of Air"}, "threshold_stair"),
-    ("Plane of Time", {"Plane of Time"}, "time_gate"),  # above the Threshold, so drawn on its own
-]
+from data.rooms import ROOMS  # noqa: E402
 
 COLORS = {  # area: (fill, border)
     "Brightwater": ("#3a3a46", "#c9b67a"), "Greenmeadow": ("#2f4a2a", "#8fc46a"),
@@ -53,46 +42,11 @@ BW, BH = 140, 60           # room box size
 PAD, LEGEND_W = 40, 260
 
 
-def walk(start, areas):
-    """Grid positions of every room reachable from `start` without leaving `areas`."""
-    pos = {start: (0, 0)}
-    q = deque([start])
-    while q:
-        r = q.popleft()
-        x, y = pos[r]
-        for d, t in ROOMS[r]["exits"].items():
-            if t not in pos and ROOMS[t]["area"] in areas:
-                dx, dy = STEP[d]
-                pos[t] = (x + dx, y + dy)
-                q.append(t)
-    taken = {}
-    for r, p in pos.items():
-        if p in taken:
-            sys.exit("Rooms {} and {} land on the same grid square; adjust the layout.".format(taken[p], r))
-        taken[p] = r
-    return pos
-
-
 def layout():
-    """Returns {room: (x, y)} and a list of (label, rooms, entry, surface room) for the insets."""
-    inset_areas = set().union(*(areas for _, areas, _ in INSETS))
-    pos = walk(START_ROOM, {r["area"] for r in ROOMS.values()} - inset_areas)
-    next_x = max(x for x, _ in pos.values()) + 2
-    insets = []
-    for label, areas, entry in INSETS:
-        local = walk(entry, areas)
-        outside = next(t for t in ROOMS[entry]["exits"].values() if ROOMS[t]["area"] not in areas)
-        # line the entry up with the surface room it hangs from, to the right of everything so far
-        dx = next_x - min(x for x, _ in local.values())
-        dy = pos[outside][1] - local[entry][1]
-        for r, (x, y) in local.items():
-            pos[r] = (x + dx, y + dy)
-        next_x += max(x for x, _ in local.values()) - min(x for x, _ in local.values()) + 2
-        insets.append((label, set(local), entry, outside))
-    missing = set(ROOMS) - set(pos)
-    if missing:
-        sys.exit("Rooms not reached: " + ", ".join(sorted(missing)))
-    return pos, insets
+    try:
+        return mapview.layout()
+    except ValueError as exc:
+        sys.exit(str(exc))
 
 
 def draw(pos, insets):

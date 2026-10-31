@@ -23,8 +23,10 @@ There is no build step and no unit test suite. Verify changes by:
 - **Map**: `python tools/draw_map.py [out.svg]` redraws `map.svg` (every room, exits, areas, levels,
   bosses) after room changes. It lays rooms on a grid from their exits and exits with an error if
   two rooms land on the same square, so it doubles as a geography check for new regions. Areas
-  that would overlap the surface (dungeons below, realms above) go in its `INSETS` list and are
-  drawn as separate boxes. New areas need a colour in its `COLORS` table.
+  that would overlap the surface (dungeons below, realms above) go in the `INSETS` list in
+  `mapview.py` and are drawn as separate boxes. New areas need a colour in its `COLORS` table.
+  The same layout drives the in-game `map` / `automap` (`mapview.py`), which shows one layer
+  (the surface or one inset) at a time.
 - **World expansion**: `EXPANSION_PLAN.md` holds the agreed plan (regions, level ranges, phases).
 - **Scripted play**: pipe commands into `main.py`. Piped input arrives instantly, so no game ticks
   pass between lines. Combat rounds and sleep need real time, so for those drive the game with
@@ -50,6 +52,7 @@ character.py  Character (stats, HP/mana, XP, abilities, equipment, rebirth) and 
 combat.py     Combat: one round per tick, ability resolution, monster AI, rewards
 world.py      MonsterInstance, Room (spawning + aggression rule), World (respawns, persistence)
 ui.py         colour, wrapping, background stdin reader, prompt tracking
+mapview.py    room grid layout (shared with tools/draw_map.py), text map and automap rendering
 data/         all content as plain Python data (races, classes, abilities, items, monsters, quests)
 data/rooms/   one module per region, each with a ROOMS dict, merged in __init__ (REGIONS list,
               duplicate ids raise); NPCs in npcs.py; START_ROOM/RESPAWN_ROOM in __init__

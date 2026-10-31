@@ -49,6 +49,7 @@ class Character:
         self.cooldowns = {}   # ability id -> rounds remaining
         self.pet = None
         self.aliases = {}     # player-defined shortcut -> command line
+        self.automap = False  # show a small map under every room description
         self.kills = 0
         self.deaths = 0
         self.boss_kills = []  # boss ids this character has ever slain (across all lives)
@@ -308,6 +309,7 @@ class Character:
             ch.equipment.setdefault(s, None)
         ch.__dict__.setdefault("aliases", {})  # saves from before aliases existed
         ch.__dict__.setdefault("boss_kills", [])
+        ch.__dict__.setdefault("automap", False)
         return ch
 
     def mastered_classes(self):

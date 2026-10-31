@@ -35,6 +35,8 @@ Saves are written as JSON to `saves/<name>.json`.
 | `look` / `l` [thing] | describe the room, or look at a monster, person or item |
 | `n` `s` `e` `w` `u` `d` (or `north`, `go north`...) | move |
 | `exits` | list exits and where they lead |
+| `map` | a text map of the area around you: `#` you, `$` shop, `!` quest to take, `?` quest to hand in, `*` a living boss, `^` `v` stairs up/down. Rooms of neighbouring areas are grey |
+| `automap` [on\|off] | show a small map (two rooms in every direction) under each room description. Saved with your character |
 | `attack` / `k` / `kill` <target> | start a fight (`k rat`, `k 2.wolf` for the second wolf); during a fight, switch targets |
 | `cast` / `c` <spell> [target] | cast a spell (`cast magic missile rat`, `c fireball`); in a fight it is used on the next round |
 | `ability` / `ab` <name> [target] | use a class ability (`ab slam`, `ab cleave`); in a fight it is used on the next round |
@@ -200,6 +202,7 @@ character.py     Character (stats, HP/mana, levelling, abilities, equipment, reb
 combat.py        tick-based combat rounds, ability resolution, monster AI, XP/loot rewards
 world.py         rooms, monster instances, respawning, world persistence
 ui.py            colour, word wrap, background input reader
+mapview.py       room grid layout and the in-game map / automap (the layout is shared with draw_map.py)
 data/races.py    races and racial perks
 data/classes.py  classes, stat growth, starting gear
 data/abilities.py  all spells and abilities

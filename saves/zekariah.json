@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 28,
-  "xp": 10678,
-  "gold": 2701,
+  "level": 30,
+  "xp": 3081,
+  "gold": 2175,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -61,14 +61,17 @@
    "greater_healing_potion",
    "greater_mana_potion",
    "stag_antler",
-   "stag_antler"
+   "stag_antler",
+   "blight_heartwood",
+   "greater_healing_potion",
+   "greater_healing_potion"
   ],
   "equipment": {
    "weapon": "wand_of_embers",
    "shield": null,
    "head": "starsilk_hood",
    "chest": "archivist_robe",
-   "hands": "enchanted_gloves",
+   "hands": "moonweave_gloves",
    "legs": "mystic_leggings",
    "feet": "runebound_slippers",
    "neck": "moonstone_pendant",
@@ -90,10 +93,10 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 332,
-  "deaths": 21,
-  "hp": 238,
-  "mana": 615,
+  "kills": 341,
+  "deaths": 22,
+  "hp": 298,
+  "mana": 685,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt",
@@ -104,7 +107,7 @@
  },
  "room": "briar_maze",
  "world": {
-  "tick": 10435,
+  "tick": 10637,
   "rooms": {
    "town_square": {
     "items": [],
@@ -2037,33 +2040,25 @@
    },
    "rotting_brake": {
     "items": [],
-    "monsters": [
-     [
-      "blighted_treant",
-      847
-     ],
-     [
-      "blighted_treant",
-      847
-     ]
-    ],
+    "monsters": [],
     "respawn_at": {
-     "blighted_treant": []
+     "blighted_treant": [
+      10640,
+      10648
+     ]
     }
    },
    "druids_ring": {
     "items": [],
-    "monsters": [
-     [
-      "rotwood_druid",
-      558
+    "monsters": [],
+    "respawn_at": {
+     "rotwood_druid": [
+      10651
      ],
-     [
-      "blighted_treant",
-      847
+     "blighted_treant": [
+      10657
      ]
-    ],
-    "respawn_at": {}
+    }
    },
    "silver_approach": {
     "items": [],

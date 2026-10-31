@@ -5,6 +5,7 @@ import random
 import re
 import time
 
+import mapview
 import ui
 from character import MAX_LEVEL, Character
 from combat import AGGRO_GAP, Combat, con_color, resolve_self_effect
@@ -23,7 +24,9 @@ SAVE_VERSION = 1
 HELP = [
     ("Movement", [("n, s, e, w, u, d", "move north/south/east/west/up/down (or type the full word)"),
                   ("look / l [thing]", "look at the room, or at a monster, person or item"),
-                  ("exits", "list the exits from this room")]),
+                  ("exits", "list the exits from this room"),
+                  ("map", "a map of the area around you ($ shop, ! quest, * boss, ^ v stairs)"),
+                  ("automap on|off", "show a small map under every room description")]),
     ("Combat", [("attack / k <target>", "start a fight (or switch targets); you then auto-attack every round"),
                 ("cast <spell> [target]", "cast a spell; in a fight it replaces your next round's attack"),
                 ("ability / ab <name> [target]", "use a class ability (e.g. 'ab slam'), also queued for next round"),
@@ -213,7 +216,7 @@ class Game:
             self.world_tick()
 
     SLEEP_OK = {"wake", "sleep", "stats", "level", "inventory", "equipment", "spells", "quests",
-                "help", "save", "load", "quit", "pet", "examine", "find", "alias", "unalias"}
+                "help", "save", "load", "quit", "pet", "examine", "find", "alias", "unalias", "map", "automap"}
 
     def handle(self, line):
         parts = line.split(None, 1)
@@ -261,12 +264,15 @@ class Game:
     DEV_CMDS = {"setlevel", "goto", "addgold", "give"}
 
     # ================================================================ exploration
-    def look(self):
+    def look(self, automap=True):
         r = self.room
         p = self.player
         ui.out("")
         ui.out(ui.c(r.name, "byellow", "bold") + ui.c("  [{}]".format(r.area), "grey"))
         ui.say(r.desc)
+        if automap and p.automap:
+            for line in mapview.mini_map(self):
+                ui.out("  " + line)
         ui.out(ui.c("Exits:", "bcyan"))
         for d, rid in r.exits.items():
             ui.out(ui.c("{} - {}".format(DIRECTIONS[d], self.world.room(rid).name), "bcyan"))
@@ -313,6 +319,27 @@ class Game:
         for d, rid in self.room.exits.items():
             ui.out("  {:<6} - {}".format(DIRECTIONS[d], self.world.room(rid).name))
 
+    def cmd_map(self, args):
+        ui.out("")
+        ui.out(ui.c(self.room.area, "byellow", "bold"))
+        for line in mapview.full_map(self):
+            ui.out("  " + line)
+        ui.out("")
+        ui.out("  " + mapview.legend())
+
+    def cmd_automap(self, args):
+        p = self.player
+        word = args.lower()
+        if word in ("on", "off"):
+            p.automap = word == "on"
+        elif not word:
+            p.automap = not p.automap
+        else:
+            ui.say("Usage: automap on|off", "grey")
+            return
+        ui.say("Automap is now {}.".format("on: a small map follows every room description" if p.automap
+                                           else "off"), "bgreen")
+
     def cmd_move(self, args):
         d = DIR_ALIASES.get(args.lower())
         if not d:
@@ -346,11 +373,11 @@ class Game:
                     gate["msg"], MAX_LEVEL, ", ".join(missing))
         return None
 
-    def go(self, rid, verbose=True):
+    def go(self, rid, verbose=True, automap=True):
         self.leave_room()
         self.room_id = rid
         if verbose:
-            self.look()
+            self.look(automap)
         self.check_aggro()
 
     def leave_room(self):
@@ -555,7 +582,7 @@ class Game:
         if random.random() < chance:
             ui.say("You break away and flee {}!".format(DIRECTIONS[d]), "byellow")
             self.combat = None
-            self.go(exits[d])
+            self.go(exits[d], automap=False)  # keep the escape short; 'map' is still there
         else:
             ui.say("You try to flee, but your foes cut off your escape!", "bred")
             self.combat.pass_turn()
