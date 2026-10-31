@@ -96,11 +96,12 @@
    "2": "cast frost bolt",
    "3": "cast lightning lance"
   },
+  "boss_kills": [],
   "pet": null
  },
  "room": "briar_maze",
  "world": {
-  "tick": 9333,
+  "tick": 9435,
   "rooms": {
    "town_square": {
     "items": [],
@@ -3046,6 +3047,687 @@
      [
       "ussreth",
       2646
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "threshold_stair": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "threshold_court": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "sky_gate": {
+    "items": [],
+    "monsters": [
+     [
+      "storm_eagle",
+      3591
+     ],
+     [
+      "storm_eagle",
+      3591
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "sky_isles": {
+    "items": [],
+    "monsters": [
+     [
+      "storm_eagle",
+      3591
+     ],
+     [
+      "cloud_sentinel",
+      3753
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "sky_aerie": {
+    "items": [],
+    "monsters": [
+     [
+      "storm_eagle",
+      3591
+     ],
+     [
+      "storm_eagle",
+      3591
+     ],
+     [
+      "storm_eagle",
+      3591
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "sky_storm": {
+    "items": [],
+    "monsters": [
+     [
+      "cloud_sentinel",
+      3753
+     ],
+     [
+      "cloud_sentinel",
+      3753
+     ],
+     [
+      "storm_eagle",
+      3591
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "sky_thunder": {
+    "items": [],
+    "monsters": [
+     [
+      "cloud_sentinel",
+      3753
+     ],
+     [
+      "cloud_sentinel",
+      3753
+     ],
+     [
+      "storm_eagle",
+      3591
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "sky_hall": {
+    "items": [],
+    "monsters": [
+     [
+      "caelestra",
+      8247
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "growth_gate": {
+    "items": [],
+    "monsters": [
+     [
+      "wild_hunt_hound",
+      3479
+     ],
+     [
+      "wild_hunt_hound",
+      3479
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "growth_garden": {
+    "items": [],
+    "monsters": [
+     [
+      "wild_hunt_hound",
+      3479
+     ],
+     [
+      "wild_hunt_hound",
+      3479
+     ],
+     [
+      "ancient_treant",
+      4238
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "growth_thicket": {
+    "items": [],
+    "monsters": [
+     [
+      "ancient_treant",
+      4238
+     ],
+     [
+      "ancient_treant",
+      4238
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "growth_orchard": {
+    "items": [],
+    "monsters": [
+     [
+      "ancient_treant",
+      4238
+     ],
+     [
+      "wild_hunt_hound",
+      3479
+     ],
+     [
+      "wild_hunt_hound",
+      3479
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "growth_canopy": {
+    "items": [],
+    "monsters": [
+     [
+      "wild_hunt_hound",
+      3479
+     ],
+     [
+      "ancient_treant",
+      4238
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "growth_heart": {
+    "items": [],
+    "monsters": [
+     [
+      "verdis",
+      8762
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fear_gate": {
+    "items": [],
+    "monsters": [
+     [
+      "nightmare_steed",
+      3479
+     ],
+     [
+      "nightmare_steed",
+      3479
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fear_road": {
+    "items": [],
+    "monsters": [
+     [
+      "nightmare_steed",
+      3479
+     ],
+     [
+      "nightmare_steed",
+      3479
+     ],
+     [
+      "dread_wraith",
+      3633
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fear_halls": {
+    "items": [],
+    "monsters": [
+     [
+      "dread_wraith",
+      3633
+     ],
+     [
+      "dread_wraith",
+      3633
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fear_mirrors": {
+    "items": [],
+    "monsters": [
+     [
+      "dread_wraith",
+      3633
+     ],
+     [
+      "dread_wraith",
+      3633
+     ],
+     [
+      "nightmare_steed",
+      3479
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fear_crossing": {
+    "items": [],
+    "monsters": [
+     [
+      "nightmare_steed",
+      3479
+     ],
+     [
+      "nightmare_steed",
+      3479
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fear_throne": {
+    "items": [],
+    "monsters": [
+     [
+      "vhaal",
+      7731
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fire_gate": {
+    "items": [],
+    "monsters": [
+     [
+      "efreet",
+      4432
+     ],
+     [
+      "efreet",
+      4432
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fire_lava": {
+    "items": [],
+    "monsters": [
+     [
+      "efreet",
+      4432
+     ],
+     [
+      "pyre_phoenix",
+      4835
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fire_cinders": {
+    "items": [],
+    "monsters": [
+     [
+      "efreet",
+      4432
+     ],
+     [
+      "efreet",
+      4432
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fire_pyre": {
+    "items": [],
+    "monsters": [
+     [
+      "pyre_phoenix",
+      4835
+     ],
+     [
+      "pyre_phoenix",
+      4835
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fire_furnace": {
+    "items": [],
+    "monsters": [
+     [
+      "pyre_phoenix",
+      4835
+     ],
+     [
+      "efreet",
+      4432
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fire_throne": {
+    "items": [],
+    "monsters": [
+     [
+      "lord_fire",
+      10416
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "water_gate": {
+    "items": [],
+    "monsters": [
+     [
+      "tide_elemental",
+      4639
+     ],
+     [
+      "tide_elemental",
+      4639
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "water_shallows": {
+    "items": [],
+    "monsters": [
+     [
+      "tide_elemental",
+      4639
+     ],
+     [
+      "abyssal_kraken",
+      5372
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "water_reef": {
+    "items": [],
+    "monsters": [
+     [
+      "tide_elemental",
+      4639
+     ],
+     [
+      "tide_elemental",
+      4639
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "water_kelp": {
+    "items": [],
+    "monsters": [
+     [
+      "abyssal_kraken",
+      5372
+     ],
+     [
+      "tide_elemental",
+      4639
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "water_abyss": {
+    "items": [],
+    "monsters": [
+     [
+      "abyssal_kraken",
+      5372
+     ],
+     [
+      "abyssal_kraken",
+      5372
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "water_throne": {
+    "items": [],
+    "monsters": [
+     [
+      "lord_water",
+      12061
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "earth_gate": {
+    "items": [],
+    "monsters": [
+     [
+      "granite_elemental",
+      5154
+     ],
+     [
+      "granite_elemental",
+      5154
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "earth_caverns": {
+    "items": [],
+    "monsters": [
+     [
+      "granite_elemental",
+      5154
+     ],
+     [
+      "crystal_basilisk",
+      4942
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "earth_crystal": {
+    "items": [],
+    "monsters": [
+     [
+      "crystal_basilisk",
+      4942
+     ],
+     [
+      "crystal_basilisk",
+      4942
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "earth_root": {
+    "items": [],
+    "monsters": [
+     [
+      "granite_elemental",
+      5154
+     ],
+     [
+      "granite_elemental",
+      5154
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "earth_deeps": {
+    "items": [],
+    "monsters": [
+     [
+      "crystal_basilisk",
+      4942
+     ],
+     [
+      "crystal_basilisk",
+      4942
+     ],
+     [
+      "granite_elemental",
+      5154
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "earth_throne": {
+    "items": [],
+    "monsters": [
+     [
+      "lord_earth",
+      12061
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "air_gate": {
+    "items": [],
+    "monsters": [
+     [
+      "storm_elemental",
+      4329
+     ],
+     [
+      "storm_elemental",
+      4329
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "air_cyclone": {
+    "items": [],
+    "monsters": [
+     [
+      "storm_elemental",
+      4329
+     ],
+     [
+      "thunderbird",
+      4942
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "air_vortex": {
+    "items": [],
+    "monsters": [
+     [
+      "storm_elemental",
+      4329
+     ],
+     [
+      "storm_elemental",
+      4329
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "air_spires": {
+    "items": [],
+    "monsters": [
+     [
+      "thunderbird",
+      4942
+     ],
+     [
+      "thunderbird",
+      4942
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "air_heights": {
+    "items": [],
+    "monsters": [
+     [
+      "thunderbird",
+      4942
+     ],
+     [
+      "thunderbird",
+      4942
+     ],
+     [
+      "storm_elemental",
+      4329
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "air_throne": {
+    "items": [],
+    "monsters": [
+     [
+      "lord_air",
+      9868
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "time_gate": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "time_hourglass": {
+    "items": [],
+    "monsters": [
+     [
+      "chronal_sentinel",
+      5372
+     ],
+     [
+      "chronal_sentinel",
+      5372
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "time_past": {
+    "items": [],
+    "monsters": [
+     [
+      "hourglass_golem",
+      6030
+     ],
+     [
+      "hourglass_golem",
+      6030
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "time_future": {
+    "items": [],
+    "monsters": [
+     [
+      "paradox",
+      5369
+     ],
+     [
+      "paradox",
+      5369
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "time_eternity": {
+    "items": [],
+    "monsters": [
+     [
+      "chronal_sentinel",
+      5372
+     ],
+     [
+      "hourglass_golem",
+      6030
+     ],
+     [
+      "paradox",
+      5369
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "zek_throne": {
+    "items": [],
+    "monsters": [
+     [
+      "lord_zek",
+      17112
      ]
     ],
     "respawn_at": {}
