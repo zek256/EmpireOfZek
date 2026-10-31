@@ -16,7 +16,7 @@ There is no build step and no unit test suite. Verify changes by:
 - **Data check**: `python tools/validate.py` after any edit to `data/`. It checks two-way exits,
   that every room is reachable, spawns, loot, shops, quests (givers, prereqs, collectable targets),
   class gear and ability classes, and exits 1 on errors.
-- **Balance**: `python tools/balance_sim.py [fights|endurance|bosses] [--n 30] [--levels 1,12,30]`
+- **Balance**: `python tools/balance_sim.py [fights|endurance|bosses|endgame|unlock|gear] [--n 30] [--levels 1,12,30]`
   runs every class through the real `Combat` code with output silenced. The tuning targets are
   in its docstring. It fights one monster at a time with best-in-slot gear, so it is optimistic.
   Re-run it after touching combat formulas, monster multipliers or class growth.
@@ -136,7 +136,14 @@ stat bonuses make multi-life characters enormously strong.
 
 ### Inventory and items
 - Inventory is a flat list of item ids (duplicates = quantity). Equipment is `{slot: id}` over
-  `items.SLOTS` (one ring slot). There are no armor-type or class restrictions, only `level`.
+  `items.SLOTS` (one ring slot).
+- Armor and weapon training: every weapon and armor item has a `kind` (a `WEAPON_KINDS` family,
+  an `ARMOR_TIERS` tier, `shield`, or the free kinds `offhand`, `jewelry`, `any`). Classes set
+  `armor` (heaviest tier), `shield` and `weapons`. `Character.trained_for` takes the union over
+  `lived_classes()`, so training survives rebirth (the user wants that as a reason to live a plate
+  class). `load_game` moves untrained gear from old saves into the pack. `validate.py` checks kinds
+  fit slots and that starting gear is allowed; `balance_sim.py gear` shows each tier's best
+  armor by level (look for gaps when adding items), and `unlock` measures a plate past life.
 - Loot and gold go straight into the inventory on kill. Ground items only come from `drop`.
 - Sell price is always `value // 3`. Buy price = `value`.
 
@@ -171,6 +178,12 @@ can never be aliased, and an alias can't start with another alias.
 Tuned with `tools/balance_sim.py`: same-level fights cost roughly 25-55% HP, and bosses are
 beatable at level+3 with potions. Necromancer, with its pet and drain, is the strongest solo
 class. That is intended. Wizards are fragile and get no area spell until Fireball at 16.
+With armor training, wizards rely on Mana Shield (strengthened to 15 + 4.5/level + 1.3 INT when
+cloth-only gear went in); they now clear ordinary fights with lots of HP to spare but are 70-90%
+against bosses at the boss's own level. Bards used to be too slow to kill bosses (30+ rounds);
+Discordant Note was raised to 10 + 2.4/level + 0.8 CHA and their unused INT gain became DEX.
+They now win 55-100% of boss fights at the boss's own level (the Bog Hag, about 40%, is the
+hardest) and essentially all at +3.
 
 Endgame (`balance_sim.py endgame`, level-50 characters with 1/6/11 lives, best-in-slot gear):
 first-tier plane monsters beat a 1-life character about half the time and are trivial with 6

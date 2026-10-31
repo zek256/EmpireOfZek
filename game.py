@@ -803,6 +803,10 @@ class Game:
             req = " L{}".format(lvl)
             if lvl > self.player.level:
                 req = ui.c(req, "red")
+            if it["kind"] not in ("any", "jewelry"):
+                # armor tier or weapon family; red when the character isn't trained for it
+                req += ui.c(" " + it["kind"].replace("offhand", "off-hand"),
+                            "grey" if self.player.trained_for(iid)[0] else "red")
         return "{}{}{}".format(it["name"], req, " " + ui.c("(" + ", ".join(bits) + ")", "grey") if bits else "")
 
     def cmd_inventory(self, args):
@@ -890,6 +894,9 @@ class Game:
         ui.say(it["desc"])
         ui.out("  " + self.item_line(iid))
         if it["type"] in ("weapon", "armor"):
+            ok, why = p.trained_for(iid)
+            if not ok:
+                ui.out(ui.c("  " + why, "red"))
             cur = p.equipment.get(it["slot"])
             if cur and cur != iid:
                 ui.out(ui.c("  Currently equipped: ", "grey") + self.item_line(cur))
@@ -1384,6 +1391,9 @@ def load_game(path, dev=False):
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
     player = Character.from_dict(data["player"])
+    for iid in player.drop_untrained():  # saves from before armor and weapon training existed
+        ui.say("Your {} training doesn't cover {}; it goes into your pack.".format(
+            CLASSES[player.cls]["name"], ITEMS[iid]["name"]), "byellow")
     world = World.from_dict(data.get("world", {}))
     room = data.get("room", START_ROOM)
     if room not in world.rooms:

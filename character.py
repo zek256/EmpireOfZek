@@ -3,7 +3,7 @@ import random
 
 from data.abilities import ABILITIES
 from data.classes import CLASSES, STATS
-from data.items import ITEMS, SLOTS
+from data.items import ARMOR_TIERS, FREE_KINDS, ITEMS, SLOTS
 from data.races import RACES
 
 MAX_LEVEL = 50
@@ -241,13 +241,47 @@ class Character:
         return dmg
 
     # ------------------------------------------------------------------ items
+    def armor_tier(self):
+        """Index into ARMOR_TIERS of the heaviest armor any of this character's lives could wear."""
+        return max(ARMOR_TIERS.index(CLASSES[c]["armor"]) for c in self.lived_classes())
+
+    def trained_for(self, iid):
+        """Whether the current class or a past life could use this item (level aside). Returns (ok, why)."""
+        it = ITEMS[iid]
+        kind, lived = it["kind"], self.lived_classes()
+        if kind in FREE_KINDS:
+            return True, ""
+        if it["type"] == "weapon":
+            if any(kind in CLASSES[c]["weapons"] for c in lived):
+                return True, ""
+            return False, "You have no training with {} weapons.".format(
+                "two-handed" if kind == "two-handed" else kind)
+        if kind == "shield":
+            if any(CLASSES[c]["shield"] for c in lived):
+                return True, ""
+            return False, "You have no training with shields."
+        if ARMOR_TIERS.index(kind) <= self.armor_tier():
+            return True, ""
+        return False, "You have no training in {} armor.".format(kind)
+
     def can_equip(self, iid):
         it = ITEMS[iid]
         if it["type"] not in ("weapon", "armor"):
             return False, "You can't equip that."
+        ok, why = self.trained_for(iid)
+        if not ok:
+            return False, why
         if it["level"] > self.level:
             return False, "You must be level {} to use {}.".format(it["level"], it["name"])
         return True, ""
+
+    def drop_untrained(self):
+        """Move equipped items this character isn't trained for into the inventory (older saves).
+        Returns the item ids moved."""
+        moved = [iid for iid in self.equipment.values() if iid and not self.trained_for(iid)[0]]
+        for iid in moved:
+            self.unequip(ITEMS[iid]["slot"])
+        return moved
 
     def equip(self, iid):
         ok, why = self.can_equip(iid)

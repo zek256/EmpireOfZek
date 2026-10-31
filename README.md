@@ -46,7 +46,7 @@ Saves are written as JSON to `saves/<name>.json`.
 | `flee` [dir] | try to escape combat (moving during combat also attempts to flee) |
 | `inventory` / `i` | what you carry |
 | `equipment` / `eq` | what you wear |
-| `wear` / `wield` / `equip` <item> | equip an item (level requirements apply) |
+| `wear` / `wield` / `equip` <item> | equip an item (level and armor/weapon training apply, see below) |
 | `remove` <item or slot> | take something off |
 | `use` / `drink` <potion> | drink a potion (in a fight it replaces your next round's attack) |
 | `examine` / `x` <item> | item details, compared with what you have equipped |
@@ -124,6 +124,32 @@ gains, and 6-7 spells/abilities unlocked between levels 1 and 48:
 Spells cost mana, and the cost scales with level. Abilities are free but have cooldowns. Both are
 learned automatically on level up.
 
+### Armor and weapon training
+
+Each class is trained in one armor tier (and every lighter one), in some weapon families, and
+perhaps in shields:
+
+| class | armor | shield | weapons |
+|---|---|---|---|
+| Warrior | plate | yes | dagger, sword, axe, blunt, two-handed, bow |
+| Paladin | plate | yes | sword, blunt, two-handed |
+| Shadow Knight | plate | yes | sword, axe, two-handed |
+| Cleric | mail | yes | blunt, staff |
+| Shaman | mail | yes | blunt, staff, axe |
+| Ranger | mail | yes | sword, dagger, axe, bow |
+| Rogue | leather | no | dagger, sword, bow |
+| Bard | leather | no | dagger, sword, blunt, wand |
+| Druid | leather | no | staff, blunt, dagger |
+| Wizard | cloth | no | staff, wand, dagger |
+| Necromancer | cloth | no | staff, wand, dagger |
+
+Armor tiers run cloth < leather < mail < plate. Item lines show each piece's tier or weapon family,
+in red when you aren't trained for it, and `examine` says why. Orbs and tomes held in the off hand
+are not shields and anyone may carry them; so may rings, necklaces and the mythic artifacts
+(Fang of Pyraxis, Eternity, the Ashen Crown, the Crown of Zek). **Training is kept through
+rebirth**: a character may use anything any of its lives was trained for, so a wizard who was once
+a warrior may fight in plate with an axe, trading INT for toughness.
+
 ## Character maths
 
 - **HP** = 10 + (class HP + 3) x level + CON x level x 0.2 (x racial modifier)
@@ -143,6 +169,7 @@ At level 50, `rebirth` lets you choose any other class:
   Slam back at level 1, Cleave at 12, Avatar of War at 42).
 - The **full stat gains of each previous class at level 50** become a permanent bonus. It phases
   in as you level (bonus x level / 50), so it stacks across rebirths and reaches full strength at 50.
+- You keep the **armor and weapon training** of every class you have lived (see above).
 - Gear above level 1 is unequipped until you can wield it again, so you climb back up with your
   new class's starting gear. Experience needed per level is exactly the same as in your first life.
 

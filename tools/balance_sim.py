@@ -5,10 +5,12 @@
     python tools/balance_sim.py endurance       # consecutive fights survived without resting
     python tools/balance_sim.py bosses          # boss win% at boss level and boss level +3
     python tools/balance_sim.py endgame         # Planes of the Gods vs level-50 characters with 1/6/11 lives
+    python tools/balance_sim.py unlock          # what a plate-wearing past life is worth to each class
+    python tools/balance_sim.py gear            # best armor and HP each armor tier can reach, level by level
     options: --n 40 (fights per cell), --levels 1,5,10,20,30,40,50, --seed 3
 
 The simulated player is a human with best-in-slot gear for their level (including boss drops,
-so results are optimistic) and a simple AI: heal when low, buff early, otherwise use the
+so results are optimistic) among the items its class is trained for, and a simple AI: heal when low, buff early, otherwise use the
 ability with the best expected value. Bosses are fought with 5 healing potions.
 Targets the game was tuned to: same-level fights cost ~25-55% HP; endurance 2-6 for most
 classes; bosses mostly beatable at level +3. Endgame (monsters above level 50): plane monsters and
@@ -28,8 +30,9 @@ ui.say = ui.out = ui.rule = lambda *a, **k: None  # silence the game
 
 from character import MAX_LEVEL, Character  # noqa: E402
 from combat import Combat, potion_drop, resolve_self_effect  # noqa: E402
+from data.abilities import ABILITIES  # noqa: E402
 from data.classes import CLASS_ORDER, CLASSES  # noqa: E402
-from data.items import ITEMS, SLOTS  # noqa: E402
+from data.items import ARMOR_TIERS, ITEMS, SLOTS  # noqa: E402
 from data.monsters import MONSTERS  # noqa: E402
 from game import Game  # noqa: E402
 from world import MonsterInstance  # noqa: E402
@@ -47,7 +50,8 @@ def best_gear(p):
         return sc
 
     for slot in SLOTS:
-        cands = [i for i in ITEMS.values() if i.get("slot") == slot and i["level"] <= p.level]
+        cands = [i for i in ITEMS.values() if i.get("slot") == slot and i["level"] <= p.level
+                 and p.trained_for(i["id"])[0]]
         if cands:
             p.equipment[slot] = max(cands, key=score)["id"]
 
@@ -226,9 +230,78 @@ def report_endgame(n):
               + " / ".join("{:>3.0f}%".format(r) for r in rates) + "   [{:.0f}%]".format(worst))
 
 
+def training_only_life(p, cls):
+    """Give `p` a past life in `cls` that grants its armor and weapon training but no stats or abilities,
+    so the report measures the gear unlock alone."""
+    p.past_lives.append({"cls": cls, "gains": {}})
+    mine = p.cls
+    p.known_abilities = lambda: sorted((a for a in ABILITIES.values() if a["cls"] == mine),
+                                       key=lambda a: a["level"])
+    best_gear(p)
+    p.hp, p.mana = p.max_hp, p.max_mana
+
+
+def report_unlock(levels, n):
+    print("same-level fights: own training / with a warrior's armor and weapon training (no stats)")
+    print("cells: HP% left after a win, then max HP and armor; endurance = fights in a row")
+    print("lvl  {:<14}{:>22}{:>22}{:>16}".format("class", "own", "+plate", "endurance"))
+    for L in levels:
+        mids = nearby_monsters(L)
+        for cls in CLASS_ORDER:
+            if CLASSES[cls]["armor"] == "plate":
+                continue
+            cells, endure = [], []
+            for unlock in (False, True):
+                def make():
+                    g, p = setup(cls, L)
+                    if unlock:
+                        training_only_life(p, "warrior")
+                    return g, p
+                res = [fight(*make(), random.choice(mids)) for _ in range(n)]
+                wins = [r for r in res if r[0]]
+                g, p = make()
+                cells.append("{:>3.0f}%w {:>3.0f}%hp {:>4}/{:<3}".format(
+                    100 * len(wins) / n, 100 * sum(r[2] for r in wins) / max(1, len(wins)), p.max_hp, p.armor))
+                total = 0
+                for _ in range(n):
+                    g, p = make()
+                    survived = 0
+                    while survived < 8 and fight(g, p, random.choice(mids))[0] and p.hp > 0:
+                        survived += 1
+                        for _ in range(3):
+                            g.world_tick()
+                    total += survived
+                endure.append(total / n)
+            print("{:>3}  {:<14}{:>22}{:>22}{:>9.1f} /{:>4.1f}".format(L, cls[:14], cells[0], cells[1], *endure))
+        print()
+
+
+def report_gear(levels):
+    """For each armor tier: the most armor and HP a character limited to that tier can wear at each level.
+    Big jumps between neighbouring levels, or a tier far behind the one below it, show gaps in the items."""
+    body = ["head", "chest", "hands", "legs", "feet"]
+    rep = {"cloth": "wizard", "leather": "rogue", "mail": "cleric", "plate": "warrior"}
+    print("best body-armor total per tier (head+chest+hands+legs+feet), with that tier's best piece level per slot")
+    for L in levels:
+        row = []
+        for tier in ARMOR_TIERS:
+            p = Character("Sim", "human", rep[tier])
+            p.level = L
+            parts, total = [], 0
+            for slot in body:
+                cands = [i for i in ITEMS.values() if i.get("slot") == slot and i["level"] <= L
+                         and i["kind"] == tier]
+                best = max(cands, key=lambda i: i["armor"], default=None)
+                total += best["armor"] if best else 0
+                parts.append(str(best["level"]) if best else "-")
+            row.append("{:<7} {:>3} ({})".format(tier, total, ",".join(parts)))
+        print("{:>3}  ".format(L) + "   ".join(row))
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("report", nargs="?", default="all", choices=["all", "fights", "endurance", "bosses", "endgame"])
+    ap.add_argument("report", nargs="?", default="all",
+                    choices=["all", "fights", "endurance", "bosses", "endgame", "unlock", "gear"])
     ap.add_argument("--n", type=int, default=30, help="simulated fights per table cell")
     ap.add_argument("--levels", default=",".join(map(str, DEFAULT_LEVELS)), help="comma-separated levels")
     ap.add_argument("--seed", type=int, default=3)
@@ -246,6 +319,10 @@ def main():
         print()
     if opts.report in ("all", "endgame"):
         report_endgame(opts.n)
+    if opts.report == "unlock":
+        report_unlock(levels, opts.n)
+    if opts.report == "gear":
+        report_gear(levels)
 
 
 if __name__ == "__main__":

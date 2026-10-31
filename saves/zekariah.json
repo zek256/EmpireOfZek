@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 36,
-  "xp": 811,
-  "gold": 478,
+  "level": 38,
+  "xp": 7835,
+  "gold": 3109,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -60,25 +60,23 @@
    "mana_potion",
    "greater_healing_potion",
    "greater_mana_potion",
-   "blight_heartwood",
    "greater_healing_potion",
    "greater_healing_potion",
-   "blight_heartwood",
    "greater_mana_potion",
-   "bandit_cutlass",
-   "chain_shirt",
-   "chain_shirt",
    "healing_potion",
    "healing_potion",
    "greater_healing_potion",
-   "wardens_boots",
    "greater_healing_potion",
-   "blight_heartwood",
-   "greater_mana_potion"
+   "greater_mana_potion",
+   "scorpion_stinger",
+   "scorpion_stinger",
+   "healing_potion",
+   "crown_of_thorns",
+   "silverbark_shield"
   ],
   "equipment": {
-   "weapon": "wand_of_embers",
-   "shield": "silverbark_shield",
+   "weapon": "gristles_hexrod",
+   "shield": null,
    "head": "starsilk_hood",
    "chest": "archivist_robe",
    "hands": "moonweave_gloves",
@@ -107,24 +105,27 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 378,
+  "kills": 390,
   "deaths": 26,
-  "hp": 377,
-  "mana": 907,
+  "hp": 374,
+  "mana": 987,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt",
-   "3": "cast lightning lance"
+   "3": "cast lightning lance",
+   "mana": "cast mana shield"
   },
   "boss_kills": [
-   "bandit_chieftain"
+   "bandit_chieftain",
+   "bog_hag",
+   "rotheart"
   ],
   "automap": true,
   "pet": null
  },
- "room": "last_mesa",
+ "room": "south_road",
  "world": {
-  "tick": 11513,
+  "tick": 12088,
   "rooms": {
    "town_square": {
     "items": [],
@@ -793,7 +794,9 @@
       990
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "bog_hag": []
+    }
    },
    "foothills": {
     "items": [],
@@ -2279,13 +2282,12 @@
    },
    "heart_of_blight": {
     "items": [],
-    "monsters": [
-     [
-      "rotheart",
-      1574
+    "monsters": [],
+    "respawn_at": {
+     "rotheart": [
+      12124
      ]
-    ],
-    "respawn_at": {}
+    }
    },
    "sb_rootgate": {
     "items": [],
@@ -2642,19 +2644,22 @@
     "items": [],
     "monsters": [
      [
-      "dune_scorpion",
-      951
-     ],
-     [
-      "dune_scorpion",
-      951
-     ],
-     [
       "desert_raider",
       704
+     ],
+     [
+      "dune_scorpion",
+      951
+     ],
+     [
+      "dune_scorpion",
+      951
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "dune_scorpion": [],
+     "desert_raider": []
+    }
    },
    "caravan_road": {
     "items": [],

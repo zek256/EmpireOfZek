@@ -10,7 +10,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 
 from data.abilities import ABILITIES  # noqa: E402
 from data.classes import CLASSES  # noqa: E402
-from data.items import ITEMS, SLOTS  # noqa: E402
+from data.items import ARMOR_TIERS, FREE_KINDS, ITEMS, SLOTS, WEAPON_KINDS  # noqa: E402
 from data.monsters import MONSTERS  # noqa: E402
 from data.quests import QUESTS  # noqa: E402
 from data.races import RACES  # noqa: E402
@@ -94,10 +94,36 @@ def main():
                 errs.append(f"quest {qid}: reward item '{iid}' missing")
         if q["type"] == "collect" and not any(i == q["target"] for m in MONSTERS.values() for i, _ in m["loot"]):
             errs.append(f"quest {qid}: no monster drops '{q['target']}'")
+    # item kinds: who may use each weapon and armor piece
+    for iid, it in ITEMS.items():
+        if it["type"] not in ("weapon", "armor"):
+            continue
+        kind, slot = it.get("kind"), it["slot"]
+        if slot == "weapon":
+            ok = kind in WEAPON_KINDS or kind == "any"
+        elif slot == "shield":
+            ok = kind in ("shield", "offhand")
+        elif slot in ("neck", "ring"):
+            ok = kind == "jewelry"
+        else:
+            ok = kind in ARMOR_TIERS or kind == "any"
+        if not ok:
+            errs.append(f"item {iid}: kind '{kind}' doesn't fit slot '{slot}'")
     for cid, c in CLASSES.items():
+        if c.get("armor") not in ARMOR_TIERS:
+            errs.append(f"class {cid}: bad armor tier '{c.get('armor')}'")
+        for w in c.get("weapons", []):
+            if w not in WEAPON_KINDS:
+                errs.append(f"class {cid}: unknown weapon family '{w}'")
         for iid in c["gear"]:
             if iid not in ITEMS:
                 errs.append(f"class {cid}: starting gear '{iid}' missing")
+                continue
+            kind = ITEMS[iid]["kind"]
+            trained = (kind in FREE_KINDS or kind in c["weapons"] or (kind == "shield" and c["shield"])
+                       or (kind in ARMOR_TIERS and ARMOR_TIERS.index(kind) <= ARMOR_TIERS.index(c["armor"])))
+            if not trained:
+                errs.append(f"class {cid}: not trained for its starting gear '{iid}' ({kind})")
     for aid, a in ABILITIES.items():
         if a["cls"] not in CLASSES:
             errs.append(f"ability {aid}: unknown class '{a['cls']}'")
