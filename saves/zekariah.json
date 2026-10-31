@@ -101,7 +101,7 @@
  },
  "room": "briar_maze",
  "world": {
-  "tick": 9435,
+  "tick": 10310,
   "rooms": {
    "town_square": {
     "items": [],

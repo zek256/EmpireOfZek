@@ -1,15 +1,16 @@
 # The world expansion: design and testing
 
-The world of Empire of Zek grew from 55 rooms to 251 in five phases. This file records what each
+The world of Empire of Zek grew from 55 rooms to 257 in five phases, plus a later addition, the Plane of Justice. This file
+records what each
 phase added, the code that changed, how the new content was balanced, and how it was tested. The
 original plan and the decisions behind it are in `EXPANSION_PLAN.md`.
 
 | | Before | Now |
 |---|---|---|
-| Rooms | 55 | 251 |
-| Monster types | 51 | 137 |
-| Bosses | 6 | 18 |
-| Items | 108 | 197 |
+| Rooms | 55 | 257 |
+| Monster types | 51 | 140 |
+| Bosses | 6 | 19 |
+| Items | 108 | 199 |
 | Quests | 6 | 20 |
 | Cities | 1 | 4 (Brightwater, Hearthdeep, Silverbough, Sunspire) |
 
@@ -133,35 +134,55 @@ fill the old jump from level 34 straight to 41.
 - **How players find it:** Sister Aveline's quest The Thirsting Dead (level 36) sends players to
   Sunspire.
 
-## Phase 5: the Planes of the Gods (201 to 251 rooms)
+## Phase 5: the Planes of the Gods (201 to 257 rooms)
 
-### What was added: 50 rooms, levels 51-60
+### What was added: 56 rooms, levels 51-60
+
+Phase 5 added 50 rooms. The Plane of Justice (6 more rooms) was added afterwards as a fourth
+first-tier plane.
 
 | Tier | Plane | Levels | Boss |
 |---|---|---|---|
 | - | Threshold of the Gods (2 safe rooms, with the Herald, who explains the way) | safe | - |
-| 1 | Sky, Growth, Fear | 51-55 | Caelestra the Sky-Warden, Verdis the Wildmother, Vhaal the Dreadmaker (55) |
-| 2 | Fire, Water, Earth, Air | 54-58 | Ignaros, Nerevos, Ulmathra, Zephyrion (58) |
+| 1 | Sky, Growth, Fear, Justice | 51-55 | Caelestra the Sky-Warden, Verdis the Wildmother, Vhaal the Dreadmaker, Stalworth Lightbearer (55) |
+| 2 | Fire, Water, Earth, Air | 54-58 | Rekkn, Nerevos, Ulmathra, Zephyrion (58) |
 | 3 | Time | 57-60 | **Lord Zek, Ruler of All (60)** |
 
 - **Getting there:** a stair behind the altar of the Temple of the Dawn in Brightwater climbs up
   to the Threshold.
-- **The second tier:** each first-tier plane leads on to its elements. Sky leads to Air, Growth
-  to Earth and Water, and Fear to Fire.
-- **The Door of Time:** it opens only once the character has killed all four elemental lords. If
-  it is still shut, it tells you which lords remain.
+- **Layout:** the Threshold of the Gods is the hub, and the planes are laid out symmetrically
+  around it. Each first-tier plane leads straight on to one elemental plane:
+
+  | Direction from the Threshold | First tier | Leads on to |
+  |---|---|---|
+  | North | Sky | Air |
+  | West | Growth | Earth |
+  | East | Fear | Fire |
+  | South | Justice | Water |
+  | Up | the Door of Time | the Plane of Time |
+
+- **The Plane of Justice:** the gods' own prison, through the Threshold's southern gate. It is all
+  white stone, black bars and chains of light: the Gaol Gate, the
+  Endless Cellblock, the Oubliette, the Warden's Walk and the Chain Yard, where chained penitents
+  and iron wardens keep the gods' prisoners. At its heart is the Hall of Judgement, where
+  **Stalworth Lightbearer** waits: a paladin in white plate, the first mortal Lord Zek ever judged
+  worthy to serve him. He drops the Lightbearer's Oath (a longsword) and the Shield of Judgement.
+  From the Chain Yard, the prison's sluice gate opens south onto the Plane of Water.
+- **The Door of Time:** a bronze door at the top of a stair of light above the Threshold. It opens
+  only once the character has killed all four elemental lords. If it is still shut, it tells you
+  which lords remain.
 - **Lord Zek's throne:** it opens only for a character who has lived every class to level 50. The
   current class counts once it reaches 50. The door lists the classes still missing.
 - **The rest of the planes:** open to anyone who can survive them.
 - **Rewards:**
-  - The plane bosses and Lord Zek drop 17 mythic level-50 items, including Zek's sword Eternity,
+  - The plane bosses and Lord Zek drop 19 mythic level-50 items, including Zek's sword Eternity,
     the Crown of Zek and the Hourglass Amulet.
   - Killing Lord Zek adds the title **"Champion of Zek"** to the score sheet.
   - Characters below level 50 in later lives get large amounts of XP from plane monsters, if they
     are strong enough to survive them.
 
-Files: `data/rooms/planes.py` (rooms), the end of `data/monsters.py` (monsters and bosses), the
-"Mythic gear" section of `data/items.py`, and the Herald in `data/rooms/npcs.py`.
+Files: `data/rooms/planes.py` (rooms, including Justice), the end of `data/monsters.py` (monsters
+and bosses), the "Mythic gear" section of `data/items.py`, and the Herald in `data/rooms/npcs.py`.
 
 ### Code changes
 
@@ -182,7 +203,9 @@ Phases 1-4 were data only. Phase 5 was the first to need game code.
   characters with 1, 6 and 11 lives lived, using best-in-slot gear.
 - **Data check:** `tools/validate.py` now checks that gates only require bosses and that every
   gate has a refusal message.
-- **Map:** `tools/draw_map.py` draws all the planes together in one box on the right of the map.
+- **Map:** `tools/draw_map.py` draws the Threshold and the eight first- and second-tier planes
+  together in one box on the right of the map, and the Plane of Time in a box of its own, since it
+  lies above the Threshold.
 
 ## Balance
 
@@ -213,7 +236,7 @@ fights use 5 potions.
 | Fight | 1 life | 6 lives | 11 lives |
 |---|---|---|---|
 | First-tier monsters | about 50% (they kill you half the time) | trivial | trivial |
-| Plane champions | 0% | 89-98% | 100% |
+| Plane champions (including Stalworth) | 0% | 89-100% | 100% |
 | Elemental lords | 0% | 27-65% | 100% |
 | Lord Zek | 0% | **0%** | **68-75%** (every class 50-90%) |
 
@@ -230,6 +253,9 @@ fights use 5 potions.
   | Lord Zek | 15 | 5.3 |
 
   This is also recorded in `CLAUDE.md`.
+- **The Plane of Justice** was tested the same way when it was added. Its chained penitents and
+  iron wardens beat a 1-life character 25-41% of the time, like the other first-tier monsters, and
+  Stalworth is about as hard as Caelestra and Vhaal.
 - **Tuning changes during testing:**
   - Lord Zek was too hard at first (41% with 11 lives). His HP went from 18 to 15 and his damage
     from 5.6 to 5.3.
@@ -246,13 +272,13 @@ was never touched.
 
 | Check | Result |
 |---|---|
-| Data check (`python tools/validate.py`) | Passes after every phase. Final: 251 rooms, 137 monsters (18 bosses), 197 items, 20 quests |
+| Data check (`python tools/validate.py`) | Passes after every phase. Final: 257 rooms, 140 monsters (19 bosses), 199 items, 20 quests |
 | Map (`python tools/draw_map.py`) | No rooms overlap, so the geography is consistent in every region |
 | Room split (phase 1) | The world data was identical before and after splitting `data/rooms.py` |
 | New monsters | Compared with existing monsters of the same level for every class |
 | Walks | Every new room and loop walked in the real game, including all four cities and the boss rooms |
 | NPCs | Every new NPC's quest or shop list checked |
-| Your saves | Copies of both characters (Zek and Zekariah) loaded after every phase, finally with all 251 rooms |
+| Your saves | Copies of both characters (Zek and Zekariah) loaded after every phase, finally with all 257 rooms |
 
 ### The Planes (phase 5)
 
@@ -263,7 +289,8 @@ was never touched.
 | Kill record | Bosses are recorded on kill; ordinary monsters are not |
 | Title | "Champion of Zek" appears on the score sheet after killing Lord Zek |
 | Saves | The kill record survives a save round trip; old saves without it load with an empty list |
-| Rooms | All 50 plane rooms are reachable by walking from the temple with the game's own movement |
+| Rooms | All 56 plane rooms are reachable by walking from the temple with the game's own movement, checked again after the planes were reorganized around the Threshold |
+| Stalworth | His kill is recorded like the other plane bosses |
 | Live game | A scripted run through the real game loop (temple, stair, Threshold, the Herald, the Door of Time) worked |
 
 ### Re-running the checks

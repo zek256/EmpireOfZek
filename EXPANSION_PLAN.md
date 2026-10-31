@@ -267,13 +267,22 @@ Both doors tell the player what they want when they're refused, so the goals are
   - The Temple of the Dawn has a stair up to the Threshold of the Gods (2 safe rooms, the Herald).
   - Planes of Sky, Growth and Fear (6 rooms each, 51-55), each with a champion boss at 55:
     Caelestra, Verdis, Vhaal.
-  - Planes of Fire, Water, Earth and Air (6 each, 54-58), each with a lord at 58: Ignaros,
+  - Planes of Fire, Water, Earth and Air (6 each, 54-58), each with a lord at 58: Rekkn,
     Nerevos, Ulmathra, Zephyrion. Reached from Fear, Growth (Earth and Water) and Sky.
   - Plane of Time (6, 57-60): the Door of Time (needs all four lords killed) and Lord Zek's
     throne (needs every class lived to 50).
   - Code: room gates, `Character.boss_kills` (saved, defaulted for old saves),
     `mastered_classes()`, the Champion of Zek title, `balance_sim.py endgame`, gate checks in
     `validate.py`, one map inset for all the planes.
+- **Addition: the Plane of Justice** (251 to 257 rooms). A fourth first-tier plane, the gods'
+  prison, reached by an iron stair down from the Threshold of the Gods (levels 51-55). Chained
+  penitents and iron wardens; boss Stalworth Lightbearer (paladin, L55), who drops the
+  Lightbearer's Oath and the Shield of Judgement.
+- **Reorganized the planes around the Threshold** for symmetry, now that there are four first-tier
+  and four second-tier planes: Sky (north) to Air, Growth (west) to Earth, Fear (east) to Fire,
+  Justice (south) to Water, and the Plane of Time up through the Door of Time. The Stair of Dawn now
+  sits below the Threshold, between it and the temple. Growth no longer leads to Water. On the map,
+  the Plane of Time is its own inset and Justice joins the main planes box.
 
 ## Decisions
 

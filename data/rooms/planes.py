@@ -1,8 +1,10 @@
 """The Planes of the Gods, above the Temple of the Dawn (51-60).
 
-Tier one (Sky, Growth, Fear) opens from the Threshold. Each leads on to elemental planes: Sky to Air,
-Growth to Earth and Water, Fear to Fire. The Door of Time opens once all four elemental lords are
-slain, and Lord Zek's throne only for a character who has lived every class to level 50.
+The Threshold of the Gods is the hub. Tier one opens on its four sides, and each leads straight on to
+one elemental plane: Sky (north) to Air, Growth (west) to Earth, Fear (east) to Fire, and Justice
+(south) to Water. The Plane of Time lies above the Threshold, through the Door of Time, which opens
+once all four elemental lords are slain. Lord Zek's throne opens only for a character who has lived
+every class to level 50.
 """
 from data.rooms.common import R
 
@@ -13,16 +15,65 @@ ROOMS = {
     "threshold_stair": R(
         "The Stair of Dawn", "Threshold of the Gods",
         "A stair of white light climbs from behind the altar of the Temple of the Dawn into a sky with "
-        "no ground beneath it. Far below, Brightwater is a toy town. Above, gates of light stand open "
-        "on worlds that are not this one, and to the south a single door of bronze stands shut.",
-        {"d": "temple", "n": "threshold_court", "s": "time_gate"}, safe=True),
+        "no ground beneath it. Far below, Brightwater is a toy town. Above, the stair ends at a court "
+        "of white stone where gates of light stand open on worlds that are not this one.",
+        {"d": "temple", "u": "threshold_court"}, safe=True),
     "threshold_court": R(
         "The Threshold of the Gods", "Threshold of the Gods",
-        "A court of white stone floats in an endless golden sky. Three gates stand open around it: "
-        "north onto a storm of clouds, west onto a forest older than the world, and east onto a "
-        "darkness that whispers your name. A herald in white waits beside a fountain of light.",
-        {"s": "threshold_stair", "n": "sky_gate", "w": "growth_gate", "e": "fear_gate"},
+        "A court of white stone floats in an endless golden sky. Four gates stand open around it: "
+        "north onto a storm of clouds, west onto a forest older than the world, east onto a darkness "
+        "that whispers your name, and south onto a wall of white stone and black bars. High above, a "
+        "door of bronze hangs in the sky at the top of a stair of light. A herald in white waits "
+        "beside a fountain of light.",
+        {"d": "threshold_stair", "n": "sky_gate", "w": "growth_gate", "e": "fear_gate", "s": "justice_gate",
+         "u": "time_gate"},
         npcs=["herald"], safe=True),
+
+    # ================================================================= PLANE OF JUSTICE (51-55)
+    "justice_gate": R(
+        "Plane of Justice: The Gaol Gate", "Plane of Justice",
+        "The southern gate of the Threshold opens onto a gate of black bars twenty feet high, set in a "
+        "wall of white stone that runs left and right forever. Above it, letters of light spell out "
+        "THE LAW IS ETERNAL. The gate stands open, and somewhere within, chains are dragging on stone.",
+        {"n": "threshold_court", "s": "justice_cellblock"},
+        spawns=[("chained_penitent", 2)], level=(51, 52)),
+    "justice_cellblock": R(
+        "Plane of Justice: The Endless Cellblock", "Plane of Justice",
+        "Tiers of cells rise above you into a haze of light, row upon row, more than can be counted. "
+        "Every door is barred with light, and behind each one sits a god, a giant or a spirit serving a "
+        "sentence measured in ages. Iron wardens walk the galleries, keys ringing at their belts.",
+        {"n": "justice_gate", "w": "justice_oubliette", "e": "justice_wardens_walk", "s": "justice_chain_yard"},
+        spawns=[("iron_warden", 1), ("chained_penitent", 1)], level=(52, 53)),
+    "justice_oubliette": R(
+        "Plane of Justice: The Oubliette", "Plane of Justice",
+        "A round pit in the floor drops into darkness so deep that the light of the plane cannot reach "
+        "it, covered by a grate of white iron. The prisoners down there were forgotten on purpose. Some "
+        "of them have climbed out, still wearing their chains.",
+        {"e": "justice_cellblock"},
+        spawns=[("chained_penitent", 3)], level=(51, 52)),
+    "justice_wardens_walk": R(
+        "Plane of Justice: The Warden's Walk", "Plane of Justice",
+        "A narrow gallery runs along the top of the cell tiers, lined with racks of shackles and iron "
+        "keys. The wardens patrol it without rest, and their visored heads turn as one toward the "
+        "sound of your footsteps.",
+        {"w": "justice_cellblock"},
+        spawns=[("iron_warden", 2), ("chained_penitent", 1)], level=(53, 54)),
+    "justice_chain_yard": R(
+        "Plane of Justice: The Chain Yard", "Plane of Justice",
+        "An open yard of white flagstones, where the prisoners are brought out in chains to walk in "
+        "endless circles under the eyes of the wardens. The chains are anchored to a pillar at the "
+        "centre, carved with the scales of justice. East, great doors stand open on a hall of judgement. "
+        "To the south, the prison's great sluice gate opens onto a bright and endless sea.",
+        {"n": "justice_cellblock", "e": "justice_hall", "s": "water_gate"},
+        spawns=[("iron_warden", 2), ("chained_penitent", 1)], level=(53, 54)),
+    "justice_hall": R(
+        "Plane of Justice: The Hall of Judgement", "Plane of Justice",
+        "A courtroom vast enough to try a god, with a judge's bench of white marble beneath a pair of "
+        "golden scales that hang from nothing. Before the bench stands a paladin in shining plate, his "
+        "sword engraved with every law ever written. 'I am Stalworth Lightbearer, warden of this "
+        "place,' he says. 'Lord Zek judged me worthy. Now I judge you.'",
+        {"w": "justice_chain_yard"},
+        spawns=[("stalworth", 1)], level=(55, 55)),
 
     # ================================================================= PLANE OF SKY (51-55)
     "sky_gate": R(
@@ -91,10 +142,10 @@ ROOMS = {
         spawns=[("ancient_treant", 2)], level=(53, 54)),
     "growth_orchard": R(
         "Plane of Growth: The Endless Orchard", "Plane of Growth",
-        "Rows of fruit trees run to the horizon, their branches heavy with golden apples. To the west, "
-        "the orchard ends at a shore of bright water that stretches into another world: the Plane "
-        "of Water.",
-        {"e": "growth_thicket", "s": "growth_canopy", "w": "water_gate"},
+        "Rows of fruit trees run to the horizon, their branches heavy with golden apples that ripen, "
+        "fall and grow again in the space of a breath. Hounds of the wild hunt doze in the shade, and "
+        "an ancient oak tends the trees like a gardener.",
+        {"e": "growth_thicket", "s": "growth_canopy"},
         spawns=[("ancient_treant", 1), ("wild_hunt_hound", 2)], level=(53, 54)),
     "growth_canopy": R(
         "Plane of Growth: The Root Canopy", "Plane of Growth",
@@ -186,7 +237,7 @@ ROOMS = {
     "fire_throne": R(
         "Plane of Fire: The Throne of Flame", "Plane of Fire",
         "At the heart of the Great Furnace, on a throne of white-hot stone, sits a giant with a crown "
-        "of fire and a hammer that is a captive star. Ignaros rises. 'Burn bright,' he says, 'and I "
+        "of fire and a hammer that is a captive star. Rekkn rises. 'Burn bright,' he says, 'and I "
         "will remember your light.'",
         {"n": "fire_furnace"},
         spawns=[("lord_fire", 1)], level=(58, 58)),
@@ -194,43 +245,43 @@ ROOMS = {
     # ================================================================= PLANE OF WATER (54-58)
     "water_gate": R(
         "Plane of Water: The Bright Shore", "Plane of Water",
-        "The orchard ends at a shore of white sand, and the sea beyond is the Plane of Water: an "
+        "Beyond the prison's sluice gate, a shore of white sand runs down to the Plane of Water: an "
         "ocean without a bottom or a far shore, where you can somehow breathe. Waves with cold eyes "
-        "roll in toward you.",
-        {"e": "growth_orchard", "w": "water_shallows"},
+        "roll in toward you, as if the sea itself were the last guard of the gaol.",
+        {"n": "justice_chain_yard", "s": "water_shallows"},
         spawns=[("tide_elemental", 2)], level=(54, 55)),
     "water_shallows": R(
         "Plane of Water: The Endless Shallows", "Plane of Water",
-        "Blue-green water stretches in every direction, waist-deep and warm. Reefs rise to the north, "
-        "kelp forests sway to the south, and to the west the sea floor drops away into a blackness "
+        "Blue-green water stretches in every direction, waist-deep and warm. Reefs rise to the west, "
+        "kelp forests sway to the east, and to the south the sea floor drops away into a blackness "
         "that goes down forever.",
-        {"e": "water_gate", "w": "water_abyss", "n": "water_reef", "s": "water_kelp"},
+        {"n": "water_gate", "s": "water_abyss", "w": "water_reef", "e": "water_kelp"},
         spawns=[("tide_elemental", 1), ("abyssal_kraken", 1)], level=(55, 56)),
     "water_reef": R(
         "Plane of Water: The Coral Cathedral", "Plane of Water",
         "A reef has grown into the shape of a vast cathedral, with spires of coral and windows of "
         "living fish. Tide elementals move through its aisles like a congregation.",
-        {"s": "water_shallows"},
+        {"e": "water_shallows"},
         spawns=[("tide_elemental", 2)], level=(55, 56)),
     "water_kelp": R(
         "Plane of Water: The Kelp Forest", "Plane of Water",
         "Kelp as tall as the trees of the Eldergrove sways in a slow current, dimming the light to "
         "green. Tentacles as thick as towers coil between the stalks.",
-        {"n": "water_shallows"},
+        {"w": "water_shallows"},
         spawns=[("abyssal_kraken", 1), ("tide_elemental", 1)], level=(56, 57)),
     "water_abyss": R(
         "Plane of Water: The Abyss", "Plane of Water",
         "You sink into the lightless deep, where the cold is crushing and the only light comes from "
         "the eyes of things that should not exist. Krakens drift past like thunderclouds. Further "
-        "west, a palace of green sea-glass glows on the edge of the abyss.",
-        {"e": "water_shallows", "w": "water_throne"},
+        "down, a palace of green sea-glass glows on the edge of the abyss.",
+        {"n": "water_shallows", "s": "water_throne"},
         spawns=[("abyssal_kraken", 2)], level=(56, 57)),
     "water_throne": R(
         "Plane of Water: The Palace of the Tides", "Plane of Water",
         "A palace of green sea-glass stands on the brink of the abyss, its halls flooded with silver "
         "light. On a throne of pearl sits a crowned giant with a trident of coral. 'The tide takes "
         "all things,' says Nerevos. 'Let us see if it takes you.'",
-        {"e": "water_abyss"},
+        {"n": "water_abyss"},
         spawns=[("lord_water", 1)], level=(58, 58)),
 
     # ================================================================= PLANE OF EARTH (54-58)
@@ -317,10 +368,10 @@ ROOMS = {
     # ================================================================= PLANE OF TIME (57-60)
     "time_gate": R(
         "The Door of Time", "Plane of Time",
-        "Beyond the bronze door lies a hall of silence where every clock that was ever made hangs on "
-        "the walls, each telling a different hour. The door shuts behind you without a sound. South, "
-        "the Plane of Time turns like a great wheel.",
-        {"n": "threshold_stair", "s": "time_hourglass"}, safe=True,
+        "At the top of the stair of light, beyond the bronze door, lies a hall of silence where every "
+        "clock that was ever made hangs on the walls, each telling a different hour. The door shuts "
+        "behind you without a sound. South, the Plane of Time turns like a great wheel.",
+        {"d": "threshold_court", "s": "time_hourglass"}, safe=True,
         gate={"kills": ELEMENTAL_LORDS,
               "msg": "The bronze door is carved with four sigils: a flame, a wave, a mountain and a "
                      "whirlwind. It will not open until the four elemental lords have fallen to you."}),

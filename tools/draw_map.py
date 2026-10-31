@@ -24,8 +24,9 @@ INSETS = [  # (label, areas drawn together, the room that leads in from the surf
     ("Deepdelve Mine", {"Deepdelve Mine"}, "deepdelve_foot"),
     ("Tomb of the Sand Kings", {"Tomb of the Sand Kings"}, "tomb_antechamber"),
     ("Planes of the Gods", {"Threshold of the Gods", "Plane of Sky", "Plane of Growth", "Plane of Fear",
-                            "Plane of Fire", "Plane of Water", "Plane of Earth", "Plane of Air",
-                            "Plane of Time"}, "threshold_stair"),
+                            "Plane of Justice", "Plane of Fire", "Plane of Water", "Plane of Earth",
+                            "Plane of Air"}, "threshold_stair"),
+    ("Plane of Time", {"Plane of Time"}, "time_gate"),  # above the Threshold, so drawn on its own
 ]
 
 COLORS = {  # area: (fill, border)
@@ -44,7 +45,7 @@ COLORS = {  # area: (fill, border)
     "Plane of Growth": ("#1e3a1e", "#8cf08c"), "Plane of Fear": ("#2a1e2e", "#c080d0"),
     "Plane of Fire": ("#4a1e14", "#ff8050"), "Plane of Water": ("#14304a", "#60b0ff"),
     "Plane of Earth": ("#3a3020", "#c8a060"), "Plane of Air": ("#30384a", "#e0f0ff"),
-    "Plane of Time": ("#3a3424", "#ffd870"),
+    "Plane of Time": ("#3a3424", "#ffd870"), "Plane of Justice": ("#2e2e34", "#f4f4ff"),
 }
 BOSS_RED = "#ff5a4a"
 CW, CH = 170, 92           # grid cell size

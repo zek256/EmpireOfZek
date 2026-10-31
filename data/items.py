@@ -263,6 +263,11 @@ armor("living_bark_greaves", "living bark greaves", "legs", 50, 36, 11000, "Grea
 weapon("dreadblade", "the Dreadblade", 50, (48, 78), 12500,
        "A black sword that whispers your worst fears to whoever it is pointed at.", STR=14, DEX=10)
 armor("mask_of_dread", "the Mask of Dread", "head", 50, 28, 11000, "A faceless mask of black iron. Your enemies see in it whatever they fear most.", STR=6, DEX=6, CON=6)
+weapon("lightbearers_oath", "the Lightbearer's Oath", 50, (48, 76), 12500,
+       "Stalworth's longsword, its blade engraved with every law of the gods. It shines brightest on the guilty.",
+       STR=12, WIS=10, CON=6)
+armor("shield_of_judgement", "the Shield of Judgement", "shield", 50, 38, 12000,
+      "A tower shield of white steel bearing the scales of justice. Blows that strike it feel judged.", CON=10, WIS=6)
 weapon("flameheart_hammer", "Flameheart", 50, (50, 80), 13000,
        "A hammer forged in the heart of the Plane of Fire, its head a captive star.", STR=16, CON=8)
 armor("gauntlets_of_the_pyre", "gauntlets of the pyre", "hands", 50, 22, 11000, "Gauntlets of red-gold that burn without heat.", STR=8, DEX=6, CON=4)
