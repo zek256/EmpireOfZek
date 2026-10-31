@@ -34,6 +34,7 @@ Saves are written as JSON to `saves/<name>.json`.
 |---|---|
 | `look` / `l` [thing] | describe the room, or look at a monster, person or item |
 | `n` `s` `e` `w` `u` `d` (or `north`, `go north`...) | move |
+| `run` <path>, or just the path | speedwalk: `nnes` or `run 3n2e` walks every step in one go (paste a `find` route straight in). Only the last room is described; it stops early at a missing exit, a sealed gate, or a monster that attacks. In a fight, only the first step counts, as a flee |
 | `exits` | list exits and where they lead |
 | `map` | a text map of the area around you: `#` you, `$` shop, `!` quest to take, `?` quest to hand in, `*` a living boss, `^` `v` stairs up/down. Rooms of neighbouring areas are grey |
 | `automap` [on\|off] | show a small map (two rooms in every direction) under each room description. Saved with your character |

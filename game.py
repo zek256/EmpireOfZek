@@ -23,6 +23,7 @@ SAVE_VERSION = 1
 
 HELP = [
     ("Movement", [("n, s, e, w, u, d", "move north/south/east/west/up/down (or type the full word)"),
+                  ("[run] <path>", "walk a path in one go, e.g. 'nnes' or 'run 3n2e'; stops if attacked"),
                   ("look / l [thing]", "look at the room, or at a monster, person or item"),
                   ("exits", "list the exits from this room"),
                   ("map", "a map of the area around you ($ shop, ! quest, * boss, ^ v stairs)"),
@@ -235,6 +236,8 @@ class Game:
             verb, args = "move", DIR_ALIASES[args.lower()]
         cmd = self.ALIASES.get(verb, verb)
         fn = getattr(self, "cmd_" + cmd, None)
+        if fn is None and not args and self.parse_path(verb):
+            cmd, fn, args = "run", self.cmd_run, verb  # a bare path such as 'nnes' or '3n2e'
         if fn is None or (cmd in self.DEV_CMDS and not self.dev):
             ui.say("Huh? Type 'help' for a list of commands.", "grey")
             return
@@ -257,7 +260,7 @@ class Game:
         "journal": "quests", "j": "quests", "quest": "quests", "shop": "list",
         "track": "find", "where": "find", "route": "find", "path": "find",
         "rest": "sleep", "stand": "wake", "con": "consider", "h": "help", "?": "help", "q": "quit", "exit": "quit",
-        "abilities": "spells", "skills": "spells", "spellbook": "spells", "run": "flee",
+        "abilities": "spells", "skills": "spells", "spellbook": "spells",
     }
     NO_COMBAT = {"sleep", "save", "load", "talk", "buy", "sell", "list", "get", "drop",
                  "wear", "remove", "rebirth"}
@@ -357,6 +360,45 @@ class Game:
             return
         self.go(self.room.exits[d])
 
+    MAX_PATH = 50
+
+    @classmethod
+    def parse_path(cls, text):
+        """'3n2e' -> ['n', 'n', 'n', 'e', 'e']; None if `text` isn't a path."""
+        text = text.replace(" ", "").lower()
+        if not re.fullmatch(r"(\d*[nsewud])+", text):
+            return None
+        steps = []
+        for n, d in re.findall(r"(\d*)([nsewud])", text):
+            steps += [d] * int(n or 1)
+        return steps[:cls.MAX_PATH] if steps else None
+
+    def cmd_run(self, args):
+        steps = self.parse_path(args)
+        if not steps:
+            ui.say("Run where? Give a path of directions, e.g. 'run nnes' or 'run 3n2e'.", "grey")
+            return
+        if self.combat:
+            self.queue_flee(steps[0])  # in a fight only the first step counts, as an escape
+            return
+        for i, d in enumerate(steps):
+            rid = self.room.exits.get(d)
+            blocked = self.gate_block(rid) if rid else None
+            if not rid or blocked:
+                ui.say(blocked or "You can't go {} from here.".format(DIRECTIONS[d]), "bmagenta" if blocked else "grey")
+                if i:
+                    self.look()
+                return
+            self.leave_room()
+            self.room_id = rid
+            if i == len(steps) - 1 or self.hostiles():
+                self.look()
+                self.check_aggro()
+                if self.combat:
+                    return
+            else:
+                ui.say("You pass through {}.".format(self.room.name), "grey")
+
     def gate_block(self, rid):
         """Why the player may not enter room `rid` (see the `gate` field of data.rooms.common.R), or None."""
         gate, p = self.world.room(rid).gate, self.player
@@ -386,11 +428,16 @@ class Game:
             m.hp = m.max_hp
             m.effects = []
 
+    def hostiles(self):
+        """Monsters here that will attack the player on sight."""
+        if self.room.safe:
+            return []
+        return [m for m in self.room.living() if m.aggro and m.level >= self.player.level - AGGRO_GAP]
+
     def check_aggro(self):
-        if self.combat or self.room.safe:
+        if self.combat:
             return
-        p = self.player
-        hostile = [m for m in self.room.living() if m.aggro and m.level >= p.level - AGGRO_GAP]
+        hostile = self.hostiles()
         if hostile:
             if self.sleeping:
                 self.sleeping = False

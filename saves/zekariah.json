@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 35,
-  "xp": 17428,
-  "gold": 322,
+  "level": 36,
+  "xp": 811,
+  "gold": 478,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -107,10 +107,10 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 377,
+  "kills": 378,
   "deaths": 26,
-  "hp": 367,
-  "mana": 871,
+  "hp": 377,
+  "mana": 907,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt",
@@ -122,9 +122,9 @@
   "automap": true,
   "pet": null
  },
- "room": "town_square",
+ "room": "dune_edge",
  "world": {
-  "tick": 11465,
+  "tick": 11477,
   "rooms": {
    "town_square": {
     "items": [],
@@ -2628,14 +2628,12 @@
      [
       "desert_raider",
       704
-     ],
-     [
-      "desert_raider",
-      704
      ]
     ],
     "respawn_at": {
-     "desert_raider": []
+     "desert_raider": [
+      11510
+     ]
     }
    },
    "dune_sea": {
