@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 30,
-  "xp": 3081,
-  "gold": 2175,
+  "level": 35,
+  "xp": 17428,
+  "gold": 322,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -60,22 +60,32 @@
    "mana_potion",
    "greater_healing_potion",
    "greater_mana_potion",
-   "stag_antler",
-   "stag_antler",
    "blight_heartwood",
    "greater_healing_potion",
-   "greater_healing_potion"
+   "greater_healing_potion",
+   "blight_heartwood",
+   "greater_mana_potion",
+   "bandit_cutlass",
+   "chain_shirt",
+   "chain_shirt",
+   "healing_potion",
+   "healing_potion",
+   "greater_healing_potion",
+   "wardens_boots",
+   "greater_healing_potion",
+   "blight_heartwood",
+   "greater_mana_potion"
   ],
   "equipment": {
    "weapon": "wand_of_embers",
-   "shield": null,
+   "shield": "silverbark_shield",
    "head": "starsilk_hood",
    "chest": "archivist_robe",
    "hands": "moonweave_gloves",
    "legs": "mystic_leggings",
-   "feet": "runebound_slippers",
+   "feet": "moonweave_slippers",
    "neck": "moonstone_pendant",
-   "ring": "sapphire_ring"
+   "ring": "moonstone_ring"
   },
   "quests": {
    "cellar_rats": {
@@ -87,27 +97,34 @@
     "count": 0
    },
    "bandit_chief": {
-    "status": "active",
+    "status": "done",
+    "count": 1
+   },
+   "stag_antlers": {
+    "status": "done",
     "count": 0
    }
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 341,
-  "deaths": 22,
-  "hp": 298,
-  "mana": 685,
+  "kills": 377,
+  "deaths": 26,
+  "hp": 367,
+  "mana": 871,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt",
    "3": "cast lightning lance"
   },
-  "boss_kills": [],
+  "boss_kills": [
+   "bandit_chieftain"
+  ],
+  "automap": true,
   "pet": null
  },
- "room": "briar_maze",
+ "room": "town_square",
  "world": {
-  "tick": 10637,
+  "tick": 11465,
   "rooms": {
    "town_square": {
     "items": [],
@@ -447,7 +464,7 @@
     "monsters": [
      [
       "bandit_cutthroat",
-      39
+      144
      ],
      [
       "bandit_cutthroat",
@@ -458,7 +475,9 @@
       424
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "bandit_chieftain": []
+    }
    },
    "kings_road": {
     "items": [],
@@ -1967,12 +1986,12 @@
     "items": [],
     "monsters": [
      [
-      "wood_troll",
-      624
-     ],
-     [
       "dusk_owl",
       398
+     ],
+     [
+      "wood_troll",
+      624
      ]
     ],
     "respawn_at": {
@@ -2004,16 +2023,16 @@
     "items": [],
     "monsters": [
      [
-      "greatstag",
-      633
-     ],
-     [
-      "greatstag",
-      633
-     ],
-     [
       "thorn_sprite",
       304
+     ],
+     [
+      "greatstag",
+      633
+     ],
+     [
+      "greatstag",
+      633
      ]
     ],
     "respawn_at": {
@@ -2040,24 +2059,35 @@
    },
    "rotting_brake": {
     "items": [],
-    "monsters": [],
-    "respawn_at": {
-     "blighted_treant": [
-      10640,
-      10648
+    "monsters": [
+     [
+      "blighted_treant",
+      847
+     ],
+     [
+      "blighted_treant",
+      847
      ]
+    ],
+    "respawn_at": {
+     "blighted_treant": []
     }
    },
    "druids_ring": {
     "items": [],
-    "monsters": [],
-    "respawn_at": {
-     "rotwood_druid": [
-      10651
+    "monsters": [
+     [
+      "blighted_treant",
+      847
      ],
-     "blighted_treant": [
-      10657
+     [
+      "rotwood_druid",
+      558
      ]
+    ],
+    "respawn_at": {
+     "rotwood_druid": [],
+     "blighted_treant": []
     }
    },
    "silver_approach": {
@@ -2072,7 +2102,9 @@
       633
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "greatstag": []
+    }
    },
    "fungal_barrows": {
     "items": [],
@@ -2180,25 +2212,30 @@
       558
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "rotwood_druid": [],
+     "blighted_treant": []
+    }
    },
    "withered_hollow": {
     "items": [],
     "monsters": [
      [
-      "blight_wolf",
-      654
-     ],
-     [
-      "blight_wolf",
-      654
-     ],
-     [
       "blighted_treant",
       847
+     ],
+     [
+      "blight_wolf",
+      654
+     ],
+     [
+      "blight_wolf",
+      654
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "blight_wolf": []
+    }
    },
    "wolfrot_den": {
     "items": [],
@@ -2216,7 +2253,9 @@
       654
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "blight_wolf": []
+    }
    },
    "gloaming_mere": {
     "items": [],
@@ -2234,7 +2273,9 @@
       558
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "rotwood_druid": []
+    }
    },
    "heart_of_blight": {
     "items": [],
@@ -2593,7 +2634,9 @@
       704
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "desert_raider": []
+    }
    },
    "dune_sea": {
     "items": [],
@@ -2629,7 +2672,9 @@
       704
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "desert_raider": []
+    }
    },
    "sunward_approach": {
     "items": [],
@@ -2643,7 +2688,9 @@
       704
      ]
     ],
-    "respawn_at": {}
+    "respawn_at": {
+     "desert_raider": []
+    }
    },
    "raiders_wash": {
     "items": [],

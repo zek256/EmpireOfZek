@@ -187,7 +187,7 @@ NPCS = {
         "name": "the Herald of the Gods", "keywords": ["herald", "messenger"],
         "desc": "A tall figure in white with folded wings of gold and a face too calm to read.",
         "greeting": "'Welcome, mortal, to the Threshold. Beyond these gates lie the realms of the gods "
-                    "who serve Lord Zek, ruler of all. Four trials open around us: the Sky to the north, "
+                    "who serve Lord Zek. Four trials open around us: the Sky to the north, "
                     "the Wild to the west, the Dread to the east, and to the south the gods' own prison, "
                     "where Stalworth Lightbearer keeps the law. Beyond each lies one of the four "
                     "elements: Air beyond the Sky, Earth beyond the Wild, Fire beyond the Dread, and "

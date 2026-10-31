@@ -279,7 +279,7 @@ armor("stonestride_boots", "stonestride boots", "feet", 50, 22, 11000, "Boots of
 armor("windwalker_boots", "windwalker boots", "feet", 50, 16, 11000, "Boots of silver feathers. Your feet barely touch the ground.", DEX=12, INT=4, WIS=4)
 armor("band_of_four_winds", "the Band of the Four Winds", "ring", 50, 0, 11000, "A ring of four twisted strands of silver, each humming a different wind.", DEX=10, STR=6, CON=6)
 weapon("eternity", "Eternity", 50, (55, 88), 20000,
-       "The sword of Lord Zek, ruler of all. Its blade shows every moment it has ever cut.",
+       "The sword of Lord Zek. Its blade shows every moment it has ever cut.",
        STR=12, DEX=12, CON=12, INT=12, WIS=12, CHA=12)
 armor("crown_of_zek", "the Crown of Zek", "head", 50, 32, 18000, "A crown of white gold that weighs nothing and holds the light of every dawn.",
       STR=10, DEX=10, CON=10, INT=10, WIS=10, CHA=10)

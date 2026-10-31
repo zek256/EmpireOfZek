@@ -169,7 +169,7 @@ the south Justice, the gods' prison, kept by the paladin Stalworth Lightbearer. 
 an elemental plane ruled by an elemental lord: Sky to Air, Growth to Earth, Fear to Fire and
 Justice to Water. Above the Threshold, the Door of Time opens only once you have
 slain all four elemental lords (your character remembers every boss it has killed, across all its
-lives). At the end of the Plane of Time sits Lord Zek, ruler of all, whose throne opens only to a
+lives). At the end of the Plane of Time sits Lord Zek, whose throne opens only to a
 character who has leveled **every class to level 50** (your current class counts once it reaches 50).
 The planes are built for reborn characters: with one life their monsters will kill you, with six
 the plane champions and lords are hard but fair, and Lord Zek needs every class you have ever

@@ -146,7 +146,7 @@ first-tier plane.
 | - | Threshold of the Gods (2 safe rooms, with the Herald, who explains the way) | safe | - |
 | 1 | Sky, Growth, Fear, Justice | 51-55 | Caelestra the Sky-Warden, Verdis the Wildmother, Vhaal the Dreadmaker, Stalworth Lightbearer (55) |
 | 2 | Fire, Water, Earth, Air | 54-58 | Rekkn, Nerevos, Ulmathra, Zephyrion (58) |
-| 3 | Time | 57-60 | **Lord Zek, Ruler of All (60)** |
+| 3 | Time | 57-60 | **Lord Zek (60)** |
 
 - **Getting there:** a stair behind the altar of the Temple of the Dawn in Brightwater climbs up
   to the Threshold.

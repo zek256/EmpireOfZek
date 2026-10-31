@@ -637,7 +637,7 @@ class Game:
         ui.out("{} {}, level {}{}".format(ui.c(p.race_name, "bcyan"), ui.c(p.class_name, "bcyan"),
                                           ui.c(p.level, "byellow"), lives))
         if "lord_zek" in p.boss_kills:
-            ui.out(ui.c("Champion of Zek, recognised by the ruler of all", "bmagenta"))
+            ui.out(ui.c("Champion of Zek", "bmagenta"))
         ui.out("HP   {} {}/{}".format(ui.bar(p.hp, p.max_hp, 24, "green"), p.hp, p.max_hp))
         ui.out("Mana {} {}/{}".format(ui.bar(p.mana, p.max_mana, 24, "blue"), p.mana, p.max_mana))
         if p.level < MAX_LEVEL:

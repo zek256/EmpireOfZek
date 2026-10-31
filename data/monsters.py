@@ -589,7 +589,7 @@ M("paradox", "a paradox", 59, "A figure that is you, from a moment that has not 
   hp=4.8, dmg=3.6, armor=2.0, aggro=True, specials=[drain("Unmaking", 0.22, 1.3, "unmakes a moment of your past, and you feel yourself fade!"),
                                                     dot("Entropy", 0.15, 0.6, 3, "arcane", "touches you, and you begin to come undone!")],
   loot=[("planar_shard", 0.4)], gold=3.5)
-M("lord_zek", "Lord Zek, Ruler of All", 60,
+M("lord_zek", "Lord Zek", 60,
   "The king of the gods, older than the stars, seated on a throne carved from the first moment of time. His face is every "
   "face, his eyes hold every dawn, and his sword is named Eternity.",
   hp=15.0, dmg=5.3, armor=3.0, aggro=True, boss=True, xp=2.0, gold=40.0,
