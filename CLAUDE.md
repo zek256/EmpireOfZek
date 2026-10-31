@@ -66,9 +66,12 @@ data/rooms/   one module per region, each with a ROOMS dict, merged in __init__ 
 - **Never call `input()`.** It races the reader thread. Use `game.ask()` / `ui.read_line()`.
   The clock pauses during `ask()` prompts (menus, quit and rebirth confirmations).
 - Moving does **not** advance time. Only ticks do.
-- Speedwalking (`cmd_run`, `parse_path`): `run nnes` or a bare path word like `3n2e` that isn't a
-  command or alias. It stops when `hostiles()` finds an attacker; in combat only the first step
-  is used, as a flee. `run` is not a flee alias (by the user's choice).
+- Speedwalking (`cmd_run`, `parse_path`, `walk_step`): `run nnes` or a bare path word like `3n2e`
+  that isn't a command or alias. The first step is immediate; the rest sit in `Game.walk` and
+  the main loop takes one every `WALK_SECONDS` (0.5), a second timer beside the tick. Any typed
+  line stops it ("You stop."), as does `check_aggro` finding an attacker; in combat only the
+  first step is used, as a flee. `run` is not a flee alias (by the user's choice). Direct
+  `handle()` calls only take the first step: call `walk_step()` yourself for the rest.
 
 ### Combat flow
 - `kill X` or an offensive spell out of combat calls `start_combat`. The first action resolves

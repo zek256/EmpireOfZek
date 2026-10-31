@@ -122,9 +122,9 @@
   "automap": true,
   "pet": null
  },
- "room": "dune_edge",
+ "room": "last_mesa",
  "world": {
-  "tick": 11477,
+  "tick": 11513,
   "rooms": {
    "town_square": {
     "items": [],
@@ -2628,12 +2628,14 @@
      [
       "desert_raider",
       704
+     ],
+     [
+      "desert_raider",
+      704
      ]
     ],
     "respawn_at": {
-     "desert_raider": [
-      11510
-     ]
+     "desert_raider": []
     }
    },
    "dune_sea": {

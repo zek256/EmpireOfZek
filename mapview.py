@@ -105,9 +105,10 @@ def marker(game, rid):
     return " ", None
 
 
-def render(game, cols, rows):
-    """Lines of a map centred on the player, at most `cols` x `rows` rooms. Rooms of the current
-    area are drawn in green, other areas on the same layer in grey."""
+def render(game, cols, rows, centred=False):
+    """Lines of a map around the player, at most `cols` x `rows` rooms. Rooms of the current
+    area are drawn in green, other areas on the same layer in grey. Normally it frames the
+    current area; `centred` puts the player in the middle whatever the area's shape."""
     pos, layer, at = grid()
     here = game.room_id
     px, py = pos[here]
@@ -115,6 +116,9 @@ def render(game, cols, rows):
     area = [pos[r] for r in pos if ROOMS[r]["area"] == ROOMS[here]["area"] and layer[r] == layer[here]]
     x0, x1 = min(x for x, _ in area) - 1, max(x for x, _ in area) + 1
     y0, y1 = min(y for _, y in area) - 1, max(y for _, y in area) + 1
+    if centred:
+        x0, x1 = px - cols // 2, px + cols // 2
+        y0, y1 = py - rows // 2, py + rows // 2
     if x1 - x0 + 1 > cols:
         x0 = min(max(x0, px - cols // 2), x1 - cols + 1)
         x1 = x0 + cols - 1
@@ -168,4 +172,4 @@ def full_map(game):
 
 def mini_map(game):
     """The automap under a room description: two rooms in every direction."""
-    return render(game, 5, 5)
+    return render(game, 5, 5, centred=True)

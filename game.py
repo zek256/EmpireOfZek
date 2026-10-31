@@ -23,7 +23,7 @@ SAVE_VERSION = 1
 
 HELP = [
     ("Movement", [("n, s, e, w, u, d", "move north/south/east/west/up/down (or type the full word)"),
-                  ("[run] <path>", "walk a path in one go, e.g. 'nnes' or 'run 3n2e'; stops if attacked"),
+                  ("[run] <path>", "walk a path, e.g. 'nnes' or 'run 3n2e'; typing anything or an attack stops you"),
                   ("look / l [thing]", "look at the room, or at a monster, person or item"),
                   ("exits", "list the exits from this room"),
                   ("map", "a map of the area around you ($ shop, ! quest, * boss, ^ v stairs)"),
@@ -68,6 +68,7 @@ def cap(s):
 
 
 TICK_SECONDS = 4.0     # one game tick: a combat round, a step of regeneration or sleep
+WALK_SECONDS = 0.5     # pause between the steps of a speedwalk
 SLEEP_RECOVERY = 0.10  # share of max HP and mana restored per tick while asleep
 AWAKE_HP_REGEN = 0.02
 AWAKE_MANA_REGEN = 0.03
@@ -89,6 +90,9 @@ class Game:
         self.dev = dev
         self.sleeping = False
         self.next_tick = 0.0
+        self.walk = []        # directions still to go on a speedwalk ('run nnes')
+        self.walk_moved = False
+        self.next_step = 0.0
 
     @property
     def room(self):
@@ -186,7 +190,13 @@ class Game:
         self.reset_clock()
         ui.write(self.prompt())
         while self.running:
-            line = ui.read_line(max(0.0, self.next_tick - time.monotonic()))
+            wake = min(self.next_tick, self.next_step) if self.walk else self.next_tick
+            line = ui.read_line(max(0.0, wake - time.monotonic()))
+            if line is None and self.walk and time.monotonic() >= self.next_step:
+                self.guarded(self.walk_step)  # the prompt returns once the walk ends
+                if self.running and not self.walk:
+                    ui.write(self.prompt())
+                continue
             if line is None:  # the clock struck: one game tick
                 self.reset_clock()
                 before = ui.lines_printed
@@ -195,9 +205,12 @@ class Game:
                     ui.write(self.prompt())
                 continue
             line = line.strip()
+            if self.walk:
+                self.walk = []  # typing anything stops a speedwalk
+                ui.say("You stop.", "grey")
             if line:
                 self.guarded(lambda: self.handle(line))
-            if self.running:
+            if self.running and not self.walk:
                 ui.write(self.prompt())
 
     @staticmethod
@@ -267,15 +280,15 @@ class Game:
     DEV_CMDS = {"setlevel", "goto", "addgold", "give"}
 
     # ================================================================ exploration
-    def look(self, automap=True):
+    def look(self, automap=None):
+        """Describe the room. `automap`: None follows the player's setting, True/False force it."""
         r = self.room
         p = self.player
         ui.out("")
         ui.out(ui.c(r.name, "byellow", "bold") + ui.c("  [{}]".format(r.area), "grey"))
         ui.say(r.desc)
-        if automap and p.automap:
-            for line in mapview.mini_map(self):
-                ui.out("  " + line)
+        if p.automap if automap is None else automap:
+            self.show_mini_map()
         ui.out(ui.c("Exits:", "bcyan"))
         for d, rid in r.exits.items():
             ui.out(ui.c("{} - {}".format(DIRECTIONS[d], self.world.room(rid).name), "bcyan"))
@@ -298,6 +311,10 @@ class Game:
             ui.out(ui.c("On the ground: " + ", ".join(ITEMS[i]["name"] for i in r.items), "bwhite"))
         if p.pet:
             ui.out(ui.c("{} waits loyally at your side.".format(cap(p.pet.name)), "cyan"))
+
+    def show_mini_map(self):
+        for line in mapview.mini_map(self):
+            ui.out("  " + line)
 
     def cmd_look(self, args):
         if not args:
@@ -381,23 +398,36 @@ class Game:
         if self.combat:
             self.queue_flee(steps[0])  # in a fight only the first step counts, as an escape
             return
-        for i, d in enumerate(steps):
-            rid = self.room.exits.get(d)
-            blocked = self.gate_block(rid) if rid else None
-            if not rid or blocked:
-                ui.say(blocked or "You can't go {} from here.".format(DIRECTIONS[d]), "bmagenta" if blocked else "grey")
-                if i:
-                    self.look()
-                return
-            self.leave_room()
-            self.room_id = rid
-            if i == len(steps) - 1 or self.hostiles():
-                self.look()
-                self.check_aggro()
-                if self.combat:
-                    return
-            else:
-                ui.say("You pass through {}.".format(self.room.name), "grey")
+        self.walk = steps
+        self.walk_moved = False
+        self.walk_step()  # the first step is taken at once; the main loop paces the rest
+
+    def walk_step(self):
+        """Take the next step of a speedwalk. Ends the walk (with a full look) at its last room,
+        at a missing exit or sealed gate, or when something attacks."""
+        if self.combat or self.sleeping:
+            self.walk = []
+            return
+        d = self.walk.pop(0)
+        rid = self.room.exits.get(d)
+        blocked = self.gate_block(rid) if rid else None
+        if not rid or blocked:
+            self.walk = []
+            ui.say(blocked or "You can't go {} from here.".format(DIRECTIONS[d]), "bmagenta" if blocked else "grey")
+            if self.walk_moved:
+                self.look(automap=True)
+            return
+        self.leave_room()
+        self.room_id = rid
+        self.walk_moved = True
+        if not self.walk or self.hostiles():
+            self.walk = []
+            self.look(automap=True)
+            self.check_aggro()
+        else:
+            ui.say("You pass through {}.".format(self.room.name), "grey")
+            self.show_mini_map()  # a run always shows the map, automap or not
+            self.next_step = time.monotonic() + WALK_SECONDS
 
     def gate_block(self, rid):
         """Why the player may not enter room `rid` (see the `gate` field of data.rooms.common.R), or None."""
@@ -415,7 +445,7 @@ class Game:
                     gate["msg"], MAX_LEVEL, ", ".join(missing))
         return None
 
-    def go(self, rid, verbose=True, automap=True):
+    def go(self, rid, verbose=True, automap=None):
         self.leave_room()
         self.room_id = rid
         if verbose:
@@ -439,6 +469,7 @@ class Game:
             return
         hostile = self.hostiles()
         if hostile:
+            self.walk = []
             if self.sleeping:
                 self.sleeping = False
                 ui.say("You are jolted awake!", "byellow")
