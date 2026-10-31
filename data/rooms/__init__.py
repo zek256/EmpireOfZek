@@ -5,7 +5,7 @@ npcs [npc_id], safe (no combat / free resting), items [item_id] lying on the gro
 Add a new region by writing a module with a ROOMS dict and listing it in REGIONS below.
 """
 from data.rooms import (ashen_peaks, badlands, barrowfield, brightwater, deepdelve, dustway, eldergrove,
-                        elandor, greenmeadow, hearthdeep, ironspine, mirefen, northlands, rimefells,
+                        elandor, greenmeadow, hearthdeep, ironspine, mirefen, northlands, planes, rimefells,
                         sand_tomb, scorchsands, silverbough, sunspire, westmarch, whispering_woods)
 from data.rooms.npcs import NPCS  # noqa: F401
 
@@ -14,7 +14,7 @@ RESPAWN_ROOM = "temple"
 
 REGIONS = [brightwater, greenmeadow, whispering_woods, northlands, barrowfield, mirefen, ironspine,
            elandor, ashen_peaks, westmarch, rimefells, hearthdeep, deepdelve, eldergrove, silverbough,
-           dustway, badlands, scorchsands, sunspire, sand_tomb]
+           dustway, badlands, scorchsands, sunspire, sand_tomb, planes]
 
 ROOMS = {}
 for _region in REGIONS:

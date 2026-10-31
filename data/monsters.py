@@ -460,3 +460,127 @@ M("pyraxis", "Pyraxis the Eternal Flame", 52,
             dot("Searing Wounds", 0.15, 0.5, 4, "fire", "rakes you with claws that leave searing wounds!"),
             stun("Wing Buffet", 0.12, 1, "buffets you to the ground with a mighty wing!")],
   loot=[("pyraxis_fang", 0.7), ("dragonscale_mail", 0.7), ("heart_of_flame", 0.5), ("dragon_scale", 1.0)])
+
+# ------------------------------------------------------------- The Planes of the Gods (51-60)
+# Tuned for reborn characters: with one life these kill you; with six they are a hard fight; Lord Zek
+# needs every class lived. Check with `python tools/balance_sim.py endgame`.
+
+# First tier (51-55): the Planes of Sky, Growth and Fear
+M("storm_eagle", "a storm eagle", 51, "An eagle with a wingspan wider than a ship, lightning crackling along its pinions.",
+  hp=3.8, dmg=2.9, armor=2.0, specials=[big("Lightning Dive", 0.2, 1.8, "folds its wings and strikes like a thunderbolt!")],
+  loot=[("planar_shard", 0.1)], gold=2.0)
+M("cloud_sentinel", "a cloud sentinel", 53, "A towering knight of white marble and silver, set to guard the halls of the sky for all time.",
+  hp=3.8, dmg=2.6, armor=2.5, aggro=True, specials=[stun("Thunderclap", 0.12, 1, "claps its gauntlets, and thunder knocks you senseless!")],
+  loot=[("planar_shard", 0.15)], gold=2.5)
+M("wild_hunt_hound", "a hound of the wild hunt", 52, "A white hound with red ears, as big as a horse, that has hunted since the first forest grew.",
+  hp=3.6, dmg=2.9, armor=2.0, specials=[dot("Savage Bite", 0.2, 0.5, 3, "bleed", "runs you down and tears at you!")],
+  loot=[("planar_shard", 0.1)], gold=2.0)
+M("ancient_treant", "an ancient treant", 54, "A walking oak older than the mountains, its bark carved with the names of forgotten gods.",
+  hp=4.2, dmg=2.6, armor=2.5, specials=[heal("Deep Roots", 0.12, 0.12, "sinks its roots into the living ground and heals!"),
+                                        big("Crushing Limbs", 0.2, 1.9, "brings its limbs down on you like falling trees!")],
+  loot=[("planar_shard", 0.15)], gold=2.0, xp=1.3)
+M("nightmare_steed", "a nightmare", 52, "A black horse with a mane of cold fire, whose hoofbeats sound like screams.",
+  hp=3.6, dmg=2.9, armor=2.0, aggro=True, specials=[stun("Terror", 0.14, 1, "rears and screams, and terror roots you to the spot!")],
+  loot=[("planar_shard", 0.1)], gold=2.0)
+M("dread_wraith", "a dread wraith", 54, "A tall figure of shadow wearing the face of whatever you fear most.",
+  hp=3.6, dmg=2.8, armor=1.5, aggro=True, specials=[drain("Feed on Fear", 0.22, 1.2, "drinks your fear, and your strength with it!")],
+  loot=[("planar_shard", 0.15)], gold=2.5)
+M("caelestra", "Caelestra, the Sky-Warden", 55,
+  "The guardian of the Plane of Sky, a woman of storm and silver with wings of cloud, and a bow of lightning in her hand.",
+  hp=8.0, dmg=3.5, armor=2.0, aggro=True, boss=True, xp=2.0, gold=12.0,
+  specials=[big("Thunderbolt", 0.22, 2.0, "draws her bow, and a bolt of lightning strikes you!"),
+            stun("Gale", 0.12, 1, "beats her wings, and a gale hurls you to the floor!"),
+            heal("Rain of Heaven", 0.08, 0.1, "lifts her face to the rain, and her wounds wash away!")],
+  loot=[("stormcaller_bow", 0.4), ("cloudsilk_robes", 0.4), ("planar_shard", 1.0)])
+M("verdis", "Verdis, the Wildmother", 55,
+  "The guardian of the Plane of Growth, a vast green woman crowned with antlers, her hair a forest and her voice the wind in the leaves.",
+  hp=8.5, dmg=3.3, armor=2.0, aggro=True, boss=True, xp=2.0, gold=12.0,
+  specials=[dot("Strangling Vines", 0.2, 0.6, 4, "nature", "calls up thorned vines that coil around you!"),
+            stun("Roots of the World", 0.12, 1, "roots burst from the ground and pin you!"),
+            heal("Bloom", 0.1, 0.12, "blossoms, and her wounds close over with green!")],
+  loot=[("wildmother_staff", 0.4), ("living_bark_greaves", 0.4), ("planar_shard", 1.0)])
+M("vhaal", "Vhaal the Dreadmaker", 55,
+  "The guardian of the Plane of Fear, a shape of shadow with a hundred faces, every one of them someone you have lost.",
+  hp=7.5, dmg=3.6, armor=1.8, aggro=True, boss=True, xp=2.0, gold=12.0,
+  specials=[drain("Despair", 0.2, 1.4, "whispers your worst memory, and despair drains your life!"),
+            stun("Paralysing Terror", 0.14, 1, "shows you your death, and you cannot move!"),
+            big("Nightmare Claw", 0.18, 2.0, "rakes you with claws of solid dark!")],
+  loot=[("dreadblade", 0.4), ("mask_of_dread", 0.4), ("planar_shard", 1.0)])
+
+# Second tier (54-58): the elemental planes
+M("efreet", "an efreet", 55, "A towering spirit of fire with brass bracers and a scimitar of white flame.",
+  hp=4.3, dmg=3.0, armor=2.0, aggro=True, specials=[dot("Immolation", 0.22, 0.6, 3, "fire", "engulfs you in roaring white flame!")],
+  loot=[("planar_shard", 0.2)], gold=3.0)
+M("pyre_phoenix", "a pyre phoenix", 57, "A bird of living fire whose every wingbeat scatters burning feathers.",
+  hp=4.5, dmg=3.2, armor=1.8, specials=[big("Phoenix Dive", 0.2, 1.9, "dives at you in a blaze of fire!"),
+                                        heal("Rebirth Flame", 0.1, 0.15, "bursts into flame and rises renewed!")],
+  loot=[("planar_shard", 0.25)], gold=3.0, xp=1.3)
+M("tide_elemental", "a tide elemental", 55, "A towering wave that never breaks, with two cold eyes deep in its heart.",
+  hp=4.5, dmg=2.9, armor=2.0, aggro=True, specials=[stun("Undertow", 0.14, 1, "crashes over you and drags you under!")],
+  loot=[("planar_shard", 0.2)], gold=3.0)
+M("abyssal_kraken", "an abyssal kraken", 57, "A kraken from the lightless deeps, its tentacles as thick as towers.",
+  hp=5.0, dmg=3.1, armor=2.2, specials=[big("Crushing Coils", 0.22, 1.9, "wraps you in its coils and squeezes!")],
+  loot=[("planar_shard", 0.25)], gold=3.0, xp=1.3)
+M("granite_elemental", "a granite elemental", 55, "A hulking shape of grey stone that walks through rock as if it were water.",
+  hp=5.0, dmg=2.9, armor=3.0, aggro=True, specials=[big("Landslide", 0.2, 1.9, "becomes a landslide that rolls over you!")],
+  loot=[("planar_shard", 0.2)], gold=3.0)
+M("crystal_basilisk", "a crystal basilisk", 57, "An eight-legged lizard of living crystal whose gaze turns flesh to glass.",
+  hp=4.6, dmg=3.1, armor=2.5, specials=[stun("Petrifying Gaze", 0.15, 1, "meets your eyes, and your limbs turn to stone!"),
+                                        dot("Shard Bite", 0.15, 0.5, 3, "bleed", "bites you with teeth of jagged crystal!")],
+  loot=[("planar_shard", 0.25)], gold=3.0, xp=1.3)
+M("storm_elemental", "a storm elemental", 55, "A spinning column of black cloud and lightning that howls like a hurricane.",
+  hp=4.2, dmg=3.1, armor=1.6, aggro=True, specials=[dot("Static", 0.2, 0.5, 3, "lightning", "crackles, and lightning arcs through you!")],
+  loot=[("planar_shard", 0.2)], gold=3.0)
+M("thunderbird", "a thunderbird", 57, "A bird the size of a cloud, whose wingbeats are thunder and whose eyes are lightning.",
+  hp=4.6, dmg=3.2, armor=1.8, specials=[big("Thunderstrike", 0.22, 1.9, "screams, and lightning falls from its eyes!")],
+  loot=[("planar_shard", 0.25)], gold=3.0, xp=1.3)
+M("lord_fire", "Ignaros, Lord of Flame", 58,
+  "The lord of the Plane of Fire, a giant of white-hot stone with a crown of flame and a hammer that is a captive star.",
+  hp=9.5, dmg=3.8, armor=2.2, aggro=True, boss=True, xp=2.0, gold=15.0,
+  specials=[big("Starfall Hammer", 0.22, 2.1, "brings down a hammer that burns like a falling star!"),
+            dot("Inferno", 0.18, 0.7, 4, "fire", "breathes, and the world becomes fire!"),
+            stun("Heatstroke", 0.1, 1, "flares so brightly that you reel, blinded!")],
+  loot=[("flameheart_hammer", 0.4), ("gauntlets_of_the_pyre", 0.4), ("planar_shard", 1.0)])
+M("lord_water", "Nerevos, Lord of the Tides", 58,
+  "The lord of the Plane of Water, a crowned giant of green sea-glass with a trident of coral, whose voice is the roar of surf.",
+  hp=11.0, dmg=3.8, armor=2.2, aggro=True, boss=True, xp=2.0, gold=15.0,
+  specials=[stun("Drowning Wave", 0.14, 1, "raises a wave that crashes down and drowns you!"),
+            big("Trident Thrust", 0.2, 2.0, "drives his coral trident into you!"),
+            heal("Tidal Renewal", 0.1, 0.1, "draws in the tide, and his wounds wash away!")],
+  loot=[("tidecaller", 0.4), ("pearl_of_the_deep", 0.4), ("planar_shard", 1.0)])
+M("lord_earth", "Ulmathra, Lord of Stone", 58,
+  "The lord of the Plane of Earth, a mountain that stands and walks, with crystal eyes and a voice like the grinding of continents.",
+  hp=11.0, dmg=3.7, armor=3.0, aggro=True, boss=True, xp=2.0, gold=15.0,
+  specials=[big("Mountainfall", 0.22, 2.1, "falls on you like a mountain!"),
+            stun("Earthquake", 0.14, 1, "stamps, and the plane itself shakes you off your feet!"),
+            heal("Stone Skin", 0.08, 0.1, "draws the plane's stone over his wounds!")],
+  loot=[("mountainheart_shield", 0.4), ("stonestride_boots", 0.4), ("planar_shard", 1.0)])
+M("lord_air", "Zephyrion, Lord of the Winds", 58,
+  "The lord of the Plane of Air, a shape of silver wind and storm with a crown of lightning, never still and never solid.",
+  hp=9.0, dmg=3.9, armor=1.8, aggro=True, boss=True, xp=2.0, gold=15.0,
+  specials=[big("Hurricane", 0.22, 2.0, "becomes a hurricane that tears at you!"),
+            dot("Lightning Storm", 0.18, 0.6, 4, "lightning", "calls down a storm of lightning on you!"),
+            stun("Breathless", 0.12, 1, "steals the air from your lungs!")],
+  loot=[("windwalker_boots", 0.4), ("band_of_four_winds", 0.4), ("planar_shard", 1.0)])
+
+# Third tier (57-60): the Plane of Time
+M("chronal_sentinel", "a chronal sentinel", 57, "A knight of brass and crystal whose every movement leaves a trail of afterimages.",
+  hp=5.0, dmg=3.4, armor=2.5, aggro=True, specials=[stun("Time Lock", 0.15, 1, "touches you, and time stops for you alone!")],
+  loot=[("planar_shard", 0.3)], gold=3.5)
+M("hourglass_golem", "an hourglass golem", 58, "A colossus of glass and bronze with a storm of golden sand turning in its chest.",
+  hp=5.5, dmg=3.4, armor=3.0, specials=[big("Sands of Ages", 0.22, 2.0, "pours a torrent of ageing sand over you!")],
+  loot=[("planar_shard", 0.3)], gold=3.5, xp=1.3)
+M("paradox", "a paradox", 59, "A figure that is you, from a moment that has not happened yet, wearing a smile you have never worn.",
+  hp=4.8, dmg=3.6, armor=2.0, aggro=True, specials=[drain("Unmaking", 0.22, 1.3, "unmakes a moment of your past, and you feel yourself fade!"),
+                                                    dot("Entropy", 0.15, 0.6, 3, "arcane", "touches you, and you begin to come undone!")],
+  loot=[("planar_shard", 0.4)], gold=3.5)
+M("lord_zek", "Lord Zek, Ruler of All", 60,
+  "The king of the gods, older than the stars, seated on a throne carved from the first moment of time. His face is every "
+  "face, his eyes hold every dawn, and his sword is named Eternity.",
+  hp=15.0, dmg=5.3, armor=3.0, aggro=True, boss=True, xp=2.0, gold=40.0,
+  specials=[big("Eternity", 0.22, 2.2, "swings Eternity, and you feel every moment of your life at once!"),
+            dot("The Long Night", 0.15, 0.8, 4, "shadow", "unmakes the dawn, and cold darkness eats at you!"),
+            stun("Stop Time", 0.12, 1, "raises a hand, and time stops for everyone but him!"),
+            drain("Tithe of Ages", 0.12, 1.3, "takes the years from you as tribute!"),
+            heal("The First Dawn", 0.06, 0.08, "calls the first dawn of the world, and it heals him!")],
+  loot=[("eternity", 0.5), ("crown_of_zek", 0.5), ("hourglass_amulet", 0.5), ("planar_shard", 1.0)])

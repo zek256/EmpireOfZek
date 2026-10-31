@@ -25,8 +25,9 @@ ROOMS = {
         "The Temple of the Dawn", "Brightwater",
         "Sunlight pours through tall windows of stained glass, painting the white marble floor in gold "
         "and rose. Incense curls before a great altar where an eternal flame burns. Robed acolytes move "
-        "softly between the pews. Those who fall in battle awaken here, under the Dawnfather's grace.",
-        {"w": "town_square"}, npcs=["aveline"], safe=True),
+        "softly between the pews. Those who fall in battle awaken here, under the Dawnfather's grace. "
+        "Behind the altar, a stair of white light climbs up into nothing.",
+        {"w": "town_square", "u": "threshold_stair"}, npcs=["aveline"], safe=True),
     "market_street": R(
         "Market Street", "Brightwater",
         "A bustling lane of timber-framed shops leans over the street. The ring of a hammer on an anvil "

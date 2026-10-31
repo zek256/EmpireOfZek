@@ -182,4 +182,15 @@ NPCS = {
         "shop": ["healing_potion", "mana_potion", "greater_healing_potion", "greater_mana_potion",
                  "supreme_healing_potion", "supreme_mana_potion"],
     },
+    # ------------------------------------------------------------------- Planes of the Gods
+    "herald": {
+        "name": "the Herald of the Gods", "keywords": ["herald", "messenger"],
+        "desc": "A tall figure in white with folded wings of gold and a face too calm to read.",
+        "greeting": "'Welcome, mortal, to the Threshold. Beyond these gates lie the realms of the gods "
+                    "who serve Lord Zek, ruler of all. The Sky, the Wild and the Dread are the first "
+                    "trials; beyond them lie the four elements. When the four elemental lords have "
+                    "fallen to you, the Door of Time will open. And before the throne of Zek may stand "
+                    "only one who has walked every path to its end. Go carefully. These realms were "
+                    "not made for those who have lived only once.'",
+    },
 }

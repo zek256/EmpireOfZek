@@ -40,6 +40,12 @@ def main():
         for iid in r["items"]:
             if iid not in ITEMS:
                 errs.append(f"room {rid}: ground item '{iid}' missing")
+        gate = r.get("gate") or {}
+        for mid in gate.get("kills", []):
+            if not MONSTERS.get(mid, {}).get("boss"):
+                errs.append(f"room {rid}: gate needs '{mid}', which is not a boss (only bosses are recorded)")
+        if gate and "msg" not in gate:
+            errs.append(f"room {rid}: gate has no refusal message")
         if r["safe"] and any(MONSTERS.get(mid, {}).get("aggro") for mid, _ in r["spawns"]):
             warns.append(f"room {rid}: safe room spawns aggressive monsters")
     for special in (START_ROOM, RESPAWN_ROOM):

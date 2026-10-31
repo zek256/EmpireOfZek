@@ -252,6 +252,35 @@ weapon("scepter_of_the_sand_kings", "the Scepter of the Sand Kings", 48, (27, 44
 armor("burial_mask", "the Burial Mask of Ussreth", "head", 48, 26, 4800,
       "A golden death-mask with eyes of lapis. Wearing it, you hear the desert wind.", CON=6, STR=4, INT=4, WIS=4)
 
+# ------------------------------------------------------------------ Mythic gear from the Planes of the Gods (level 50)
+# Dropped only by the plane bosses and Lord Zek. Stronger than anything else in the world.
+weapon("stormcaller_bow", "Stormcaller", 50, (46, 74), 12000,
+       "A bow strung with a thread of lightning, taken from the Sky-Warden's own hand.", DEX=16, WIS=6, CON=6)
+armor("cloudsilk_robes", "cloudsilk robes", "chest", 50, 30, 11000, "Robes woven from the clouds of the high heavens, weightless and cool.", INT=14, WIS=14, CHA=6)
+weapon("wildmother_staff", "the Wildmother's Staff", 50, (30, 50), 12000,
+       "A staff of living wood that still puts out leaves in spring.", INT=20, WIS=20, CHA=8)
+armor("living_bark_greaves", "living bark greaves", "legs", 50, 36, 11000, "Greaves of bark that grows back over every scratch.", CON=10, STR=6)
+weapon("dreadblade", "the Dreadblade", 50, (48, 78), 12500,
+       "A black sword that whispers your worst fears to whoever it is pointed at.", STR=14, DEX=10)
+armor("mask_of_dread", "the Mask of Dread", "head", 50, 28, 11000, "A faceless mask of black iron. Your enemies see in it whatever they fear most.", STR=6, DEX=6, CON=6)
+weapon("flameheart_hammer", "Flameheart", 50, (50, 80), 13000,
+       "A hammer forged in the heart of the Plane of Fire, its head a captive star.", STR=16, CON=8)
+armor("gauntlets_of_the_pyre", "gauntlets of the pyre", "hands", 50, 22, 11000, "Gauntlets of red-gold that burn without heat.", STR=8, DEX=6, CON=4)
+weapon("tidecaller", "Tidecaller", 50, (46, 74), 12500,
+       "A trident of white coral and pearl. The tide turns when it is raised.", STR=10, DEX=10, WIS=6)
+armor("pearl_of_the_deep", "the Pearl of the Deep", "ring", 50, 0, 11000, "A black pearl as big as an eye, set in a ring of sea-silver.", INT=12, WIS=12, CON=4)
+armor("mountainheart_shield", "the Mountainheart Shield", "shield", 50, 40, 12000, "A shield cut from the living rock of the Plane of Earth.", CON=12, STR=4)
+armor("stonestride_boots", "stonestride boots", "feet", 50, 22, 11000, "Boots of grey stone that weigh nothing on your feet and everything on your enemies'.", CON=8, STR=4)
+armor("windwalker_boots", "windwalker boots", "feet", 50, 16, 11000, "Boots of silver feathers. Your feet barely touch the ground.", DEX=12, INT=4, WIS=4)
+armor("band_of_four_winds", "the Band of the Four Winds", "ring", 50, 0, 11000, "A ring of four twisted strands of silver, each humming a different wind.", DEX=10, STR=6, CON=6)
+weapon("eternity", "Eternity", 50, (55, 88), 20000,
+       "The sword of Lord Zek, ruler of all. Its blade shows every moment it has ever cut.",
+       STR=12, DEX=12, CON=12, INT=12, WIS=12, CHA=12)
+armor("crown_of_zek", "the Crown of Zek", "head", 50, 32, 18000, "A crown of white gold that weighs nothing and holds the light of every dawn.",
+      STR=10, DEX=10, CON=10, INT=10, WIS=10, CHA=10)
+armor("hourglass_amulet", "the Hourglass Amulet", "neck", 50, 12, 18000, "A tiny hourglass of crystal whose sand runs upward.",
+      STR=12, DEX=12, CON=12, INT=12, WIS=12, CHA=12)
+
 # ------------------------------------------------------------------ Consumables
 potion("minor_healing_potion", "a minor healing potion", 1, 10, "A small vial of red liquid.", heal=45)
 potion("minor_mana_potion", "a minor mana potion", 1, 12, "A small vial of shimmering blue liquid.", mana=30)
@@ -277,6 +306,7 @@ misc("hyena_hide", "a spotted hyena hide", 20, "A coarse spotted hide that still
 misc("scorpion_stinger", "a scorpion stinger", 120, "A curved stinger as long as a dagger, its venom sac dried hard.")
 misc("desert_glass", "a shard of desert glass", 220, "Green glass fused from sand by some terrible heat, smooth as water.", kind="quest")
 misc("ancient_scarab", "an ancient scarab", 400, "A carved scarab of lapis and gold from the tombs of the Sand Kings.")
+misc("planar_shard", "a planar shard", 500, "A splinter of another world, humming with a power that does not belong here.")
 misc("griffon_feather", "a griffon feather", 70, "A great barred flight feather, longer than your arm.")
 misc("winter_wolf_pelt", "a winter wolf pelt", 110, "A thick white pelt that stays cold to the touch.")
 misc("frost_shard", "a frost shard", 90, "A shard of ice that never melts.")

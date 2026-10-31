@@ -262,7 +262,18 @@ Both doors tell the player what they want when they're refused, so the goals are
     the Bladewright, Amsa Silkwind and Nadim the Caravan-Master (shops).
   - Tomb of the Sand Kings +6 (45-48), drawn as an inset.
   - Sister Aveline's new quest The Thirsting Dead (min level 36) points players to Sunspire.
-- Next: phase 5 (the Planes of the Gods, levels 51-60, with Lord Zek).
+- **Phase 5 done** (201 to 251 rooms, 25 new monsters incl. 7 plane bosses and Lord Zek L60,
+  18 new items incl. 17 mythic level-50 pieces). **The expansion is complete.**
+  - The Temple of the Dawn has a stair up to the Threshold of the Gods (2 safe rooms, the Herald).
+  - Planes of Sky, Growth and Fear (6 rooms each, 51-55), each with a champion boss at 55:
+    Caelestra, Verdis, Vhaal.
+  - Planes of Fire, Water, Earth and Air (6 each, 54-58), each with a lord at 58: Ignaros,
+    Nerevos, Ulmathra, Zephyrion. Reached from Fear, Growth (Earth and Water) and Sky.
+  - Plane of Time (6, 57-60): the Door of Time (needs all four lords killed) and Lord Zek's
+    throne (needs every class lived to 50).
+  - Code: room gates, `Character.boss_kills` (saved, defaulted for old saves),
+    `mastered_classes()`, the Champion of Zek title, `balance_sim.py endgame`, gate checks in
+    `validate.py`, one map inset for all the planes.
 
 ## Decisions
 
