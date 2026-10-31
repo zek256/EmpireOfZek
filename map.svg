@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="3740" height="2604" viewBox="0 0 3740 2604" font-family="Georgia, serif">
+<svg xmlns="http://www.w3.org/2000/svg" width="5440" height="2604" viewBox="0 0 5440 2604" font-family="Georgia, serif">
 <rect width="100%" height="100%" fill="#16161c"/>
 <text x="40" y="34" fill="#e8d9a8" font-size="24">Empire of Zek</text>
 <line x1="1485.0" y1="1414.0" x2="1485.0" y2="1322.0" stroke="#77736a" stroke-width="2"/>
@@ -16,6 +16,8 @@
 <line x1="1315.0" y1="1230.0" x2="1145.0" y2="1230.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1485.0" y1="1506.0" x2="1485.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1485.0" y1="1506.0" x2="1315.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
+<line x1="1485.0" y1="1506.0" x2="1655.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
+<line x1="1655.0" y1="1506.0" x2="1825.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1485.0" y1="1598.0" x2="1485.0" y2="1690.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1485.0" y1="1598.0" x2="1655.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1655.0" y1="1598.0" x2="1825.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
@@ -35,11 +37,11 @@
 <line x1="1485.0" y1="1046.0" x2="1485.0" y2="954.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1485.0" y1="1046.0" x2="1655.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1655.0" y1="1138.0" x2="1825.0" y2="1138.0" stroke="#77736a" stroke-width="2"/>
-<line x1="2505.0" y1="1138.0" x2="2505.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
-<line x1="2505.0" y1="1046.0" x2="2675.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
-<line x1="2505.0" y1="1046.0" x2="2505.0" y2="954.0" stroke="#77736a" stroke-width="2"/>
-<line x1="2505.0" y1="954.0" x2="2505.0" y2="862.0" stroke="#77736a" stroke-width="2"/>
-<line x1="2505.0" y1="862.0" x2="2505.0" y2="770.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3525.0" y1="1138.0" x2="3525.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3525.0" y1="1046.0" x2="3695.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3525.0" y1="1046.0" x2="3525.0" y2="954.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3525.0" y1="954.0" x2="3525.0" y2="862.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3525.0" y1="862.0" x2="3525.0" y2="770.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1315.0" y1="1046.0" x2="1145.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1315.0" y1="1046.0" x2="1315.0" y2="1138.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1315.0" y1="1138.0" x2="1145.0" y2="1138.0" stroke="#77736a" stroke-width="2"/>
@@ -77,6 +79,7 @@
 <line x1="1995.0" y1="1046.0" x2="1995.0" y2="954.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1995.0" y1="1046.0" x2="2165.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1995.0" y1="1046.0" x2="1995.0" y2="1138.0" stroke="#77736a" stroke-width="2"/>
+<line x1="1995.0" y1="1138.0" x2="1995.0" y2="1230.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1995.0" y1="954.0" x2="2165.0" y2="954.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1485.0" y1="494.0" x2="1485.0" y2="402.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1485.0" y1="402.0" x2="1485.0" y2="310.0" stroke="#77736a" stroke-width="2"/>
@@ -122,11 +125,11 @@
 <line x1="465.0" y1="862.0" x2="465.0" y2="770.0" stroke="#77736a" stroke-width="2"/>
 <line x1="295.0" y1="862.0" x2="295.0" y2="770.0" stroke="#77736a" stroke-width="2"/>
 <line x1="465.0" y1="770.0" x2="465.0" y2="678.0" stroke="#77736a" stroke-width="2"/>
-<line x1="3185.0" y1="678.0" x2="3185.0" y2="586.0" stroke="#77736a" stroke-width="2"/>
-<line x1="3185.0" y1="586.0" x2="3015.0" y2="586.0" stroke="#77736a" stroke-width="2"/>
-<line x1="3185.0" y1="586.0" x2="3355.0" y2="586.0" stroke="#77736a" stroke-width="2"/>
-<line x1="3185.0" y1="586.0" x2="3185.0" y2="494.0" stroke="#77736a" stroke-width="2"/>
-<line x1="3185.0" y1="494.0" x2="3185.0" y2="402.0" stroke="#77736a" stroke-width="2"/>
+<line x1="4205.0" y1="678.0" x2="4205.0" y2="586.0" stroke="#77736a" stroke-width="2"/>
+<line x1="4205.0" y1="586.0" x2="4035.0" y2="586.0" stroke="#77736a" stroke-width="2"/>
+<line x1="4205.0" y1="586.0" x2="4375.0" y2="586.0" stroke="#77736a" stroke-width="2"/>
+<line x1="4205.0" y1="586.0" x2="4205.0" y2="494.0" stroke="#77736a" stroke-width="2"/>
+<line x1="4205.0" y1="494.0" x2="4205.0" y2="402.0" stroke="#77736a" stroke-width="2"/>
 <line x1="635.0" y1="1414.0" x2="635.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
 <line x1="635.0" y1="1506.0" x2="635.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
 <line x1="635.0" y1="1598.0" x2="805.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
@@ -160,10 +163,71 @@
 <line x1="1145.0" y1="2150.0" x2="1145.0" y2="2058.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1145.0" y1="2150.0" x2="1145.0" y2="2242.0" stroke="#77736a" stroke-width="2"/>
 <line x1="1145.0" y1="2058.0" x2="1145.0" y2="1966.0" stroke="#77736a" stroke-width="2"/>
-<rect x="2421.0" y="710.0" width="338.0" height="472.0" rx="12" fill="none" stroke="#a98bd0" stroke-dasharray="4 4"/>
-<text x="2431.0" y="728.0" fill="#a98bd0" font-size="13">Crypt of Varnoth (below Ruined Chapel)</text>
-<rect x="2931.0" y="342.0" width="508.0" height="380.0" rx="12" fill="none" stroke="#6fc7c0" stroke-dasharray="4 4"/>
-<text x="2941.0" y="360.0" fill="#6fc7c0" font-size="13">Deepdelve Mine (below Deepdelve Lift)</text>
+<line x1="1825.0" y1="1506.0" x2="1995.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
+<line x1="1995.0" y1="1506.0" x2="2165.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
+<line x1="1995.0" y1="1506.0" x2="1995.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
+<line x1="1995.0" y1="1598.0" x2="2165.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2165.0" y1="1506.0" x2="2335.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2165.0" y1="1506.0" x2="2165.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2335.0" y1="1506.0" x2="2505.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2505.0" y1="1506.0" x2="2675.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2675.0" y1="1506.0" x2="2845.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2675.0" y1="1506.0" x2="2675.0" y2="1414.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2675.0" y1="1506.0" x2="2675.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2675.0" y1="1414.0" x2="2845.0" y2="1414.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1506.0" x2="3015.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1506.0" x2="2845.0" y2="1414.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1506.0" x2="2845.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2675.0" y1="1598.0" x2="2845.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1598.0" x2="3015.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3015.0" y1="1506.0" x2="3015.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3015.0" y1="1506.0" x2="3185.0" y2="1506.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3015.0" y1="1598.0" x2="3185.0" y2="1598.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3185.0" y1="1506.0" x2="3185.0" y2="1414.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3185.0" y1="1414.0" x2="3185.0" y2="1322.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3185.0" y1="1322.0" x2="3015.0" y2="1322.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3015.0" y1="1322.0" x2="2845.0" y2="1322.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1322.0" x2="2675.0" y2="1322.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1322.0" x2="2845.0" y2="1230.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2675.0" y1="1322.0" x2="2505.0" y2="1322.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2505.0" y1="1322.0" x2="2505.0" y2="1230.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2505.0" y1="1230.0" x2="2335.0" y2="1230.0" stroke="#77736a" stroke-width="2"/>
+<line x1="1995.0" y1="1230.0" x2="2165.0" y2="1230.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2165.0" y1="1230.0" x2="2335.0" y2="1230.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2335.0" y1="1230.0" x2="2335.0" y2="1138.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2335.0" y1="1138.0" x2="2335.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2335.0" y1="1046.0" x2="2505.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2335.0" y1="1046.0" x2="2335.0" y2="954.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2335.0" y1="954.0" x2="2335.0" y2="862.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="770.0" x2="2845.0" y2="862.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="770.0" x2="3015.0" y2="770.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="770.0" x2="2675.0" y2="770.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3015.0" y1="770.0" x2="3015.0" y2="678.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2675.0" y1="770.0" x2="2675.0" y2="678.0" stroke="#77736a" stroke-width="2"/>
+<line x1="3015.0" y1="678.0" x2="2845.0" y2="678.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2675.0" y1="678.0" x2="2845.0" y2="678.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1230.0" x2="2845.0" y2="1138.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1138.0" x2="2845.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1138.0" x2="2675.0" y2="1138.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1138.0" x2="3015.0" y2="1138.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1046.0" x2="2845.0" y2="954.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1046.0" x2="2675.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="1046.0" x2="3015.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2675.0" y1="1046.0" x2="2505.0" y2="1046.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="954.0" x2="2845.0" y2="862.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="954.0" x2="2675.0" y2="954.0" stroke="#77736a" stroke-width="2"/>
+<line x1="2845.0" y1="954.0" x2="3015.0" y2="954.0" stroke="#77736a" stroke-width="2"/>
+<line x1="4885.0" y1="678.0" x2="4885.0" y2="586.0" stroke="#77736a" stroke-width="2"/>
+<line x1="4885.0" y1="586.0" x2="4715.0" y2="586.0" stroke="#77736a" stroke-width="2"/>
+<line x1="4885.0" y1="586.0" x2="5055.0" y2="586.0" stroke="#77736a" stroke-width="2"/>
+<line x1="4885.0" y1="586.0" x2="4885.0" y2="494.0" stroke="#77736a" stroke-width="2"/>
+<line x1="4885.0" y1="494.0" x2="4885.0" y2="402.0" stroke="#77736a" stroke-width="2"/>
+<rect x="3441.0" y="710.0" width="338.0" height="472.0" rx="12" fill="none" stroke="#a98bd0" stroke-dasharray="4 4"/>
+<text x="3451.0" y="728.0" fill="#a98bd0" font-size="13">Crypt of Varnoth (below Ruined Chapel)</text>
+<rect x="3951.0" y="342.0" width="508.0" height="380.0" rx="12" fill="none" stroke="#6fc7c0" stroke-dasharray="4 4"/>
+<text x="3961.0" y="360.0" fill="#6fc7c0" font-size="13">Deepdelve Mine (below Deepdelve Lift)</text>
+<rect x="4631.0" y="342.0" width="508.0" height="380.0" rx="12" fill="none" stroke="#c9a0e0" stroke-dasharray="4 4"/>
+<text x="4641.0" y="360.0" fill="#c9a0e0" font-size="13">Tomb of the Sand Kings (below Sunken Pyramid)</text>
 <rect x="1415.0" y="1384.0" width="140" height="60" rx="6" fill="#3a3a46" stroke="#c9b67a" stroke-width="1.2"/>
 <text x="1485.0" y="1404.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Brightwater Town</text>
 <text x="1485.0" y="1418.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Square</text>
@@ -201,6 +265,9 @@
 <rect x="1415.0" y="1476.0" width="140" height="60" rx="6" fill="#3a3a46" stroke="#c9b67a" stroke-width="1.2"/>
 <text x="1485.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The South Road</text>
 <text x="1485.0" y="1518.0" fill="#c9b67a" font-size="11" text-anchor="middle">safe</text>
+<rect x="1585.0" y="1476.0" width="140" height="60" rx="6" fill="#3a3a46" stroke="#c9b67a" stroke-width="1.2"/>
+<text x="1655.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The East Gate</text>
+<text x="1655.0" y="1518.0" fill="#c9b67a" font-size="11" text-anchor="middle">safe</text>
 <rect x="1245.0" y="1476.0" width="140" height="60" rx="6" fill="#3a3a46" stroke="#c9b67a" stroke-width="1.2"/>
 <text x="1315.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Silverthread Arcana</text>
 <text x="1315.0" y="1518.0" fill="#c9b67a" font-size="11" text-anchor="middle">safe</text>
@@ -260,30 +327,30 @@
 <text x="1825.0" y="1128.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Ruined Chapel</text>
 <text x="1825.0" y="1143.0" fill="#a89380" font-size="11" text-anchor="middle">Lv 10-11</text>
 <text x="1825.0" y="1157.0" fill="#a98bd0" font-size="11" text-anchor="middle">↓ Crypt of Varnoth</text>
-<rect x="2435.0" y="1108.0" width="140" height="60" rx="6" fill="#33293d" stroke="#a98bd0" stroke-width="1.2"/>
-<text x="2505.0" y="1128.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
-<text x="2505.0" y="1142.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Entry Stair</text>
-<text x="2505.0" y="1157.0" fill="#a98bd0" font-size="11" text-anchor="middle">Lv 11-12</text>
-<rect x="2435.0" y="1016.0" width="140" height="60" rx="6" fill="#33293d" stroke="#a98bd0" stroke-width="1.2"/>
-<text x="2505.0" y="1036.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
-<text x="2505.0" y="1050.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Hall of the Fallen</text>
-<text x="2505.0" y="1065.0" fill="#a98bd0" font-size="11" text-anchor="middle">Lv 12-13</text>
-<rect x="2605.0" y="1016.0" width="140" height="60" rx="6" fill="#33293d" stroke="#a98bd0" stroke-width="1.2"/>
-<text x="2675.0" y="1036.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
-<text x="2675.0" y="1050.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Ossuary</text>
-<text x="2675.0" y="1065.0" fill="#a98bd0" font-size="11" text-anchor="middle">Lv 13-14</text>
-<rect x="2435.0" y="924.0" width="140" height="60" rx="6" fill="#33293d" stroke="#a98bd0" stroke-width="1.2"/>
-<text x="2505.0" y="944.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
-<text x="2505.0" y="958.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Weeping</text>
-<text x="2505.0" y="973.0" fill="#a98bd0" font-size="11" text-anchor="middle">Lv 14-15</text>
-<rect x="2435.0" y="832.0" width="140" height="60" rx="6" fill="#33293d" stroke="#a98bd0" stroke-width="1.2"/>
-<text x="2505.0" y="852.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
-<text x="2505.0" y="866.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Shrine of the Bone</text>
-<text x="2505.0" y="881.0" fill="#a98bd0" font-size="11" text-anchor="middle">Lv 14-16</text>
-<rect x="2435.0" y="740.0" width="140" height="60" rx="6" fill="#33293d" stroke="#ff5a4a" stroke-width="3"/>
-<text x="2505.0" y="760.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
-<text x="2505.0" y="774.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Bone Throne</text>
-<text x="2505.0" y="789.0" fill="#ff8a7a" font-size="11" text-anchor="middle">Boss Lv 17</text>
+<rect x="3455.0" y="1108.0" width="140" height="60" rx="6" fill="#33293d" stroke="#a98bd0" stroke-width="1.2"/>
+<text x="3525.0" y="1128.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
+<text x="3525.0" y="1142.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Entry Stair</text>
+<text x="3525.0" y="1157.0" fill="#a98bd0" font-size="11" text-anchor="middle">Lv 11-12</text>
+<rect x="3455.0" y="1016.0" width="140" height="60" rx="6" fill="#33293d" stroke="#a98bd0" stroke-width="1.2"/>
+<text x="3525.0" y="1036.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
+<text x="3525.0" y="1050.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Hall of the Fallen</text>
+<text x="3525.0" y="1065.0" fill="#a98bd0" font-size="11" text-anchor="middle">Lv 12-13</text>
+<rect x="3625.0" y="1016.0" width="140" height="60" rx="6" fill="#33293d" stroke="#a98bd0" stroke-width="1.2"/>
+<text x="3695.0" y="1036.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
+<text x="3695.0" y="1050.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Ossuary</text>
+<text x="3695.0" y="1065.0" fill="#a98bd0" font-size="11" text-anchor="middle">Lv 13-14</text>
+<rect x="3455.0" y="924.0" width="140" height="60" rx="6" fill="#33293d" stroke="#a98bd0" stroke-width="1.2"/>
+<text x="3525.0" y="944.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
+<text x="3525.0" y="958.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Weeping</text>
+<text x="3525.0" y="973.0" fill="#a98bd0" font-size="11" text-anchor="middle">Lv 14-15</text>
+<rect x="3455.0" y="832.0" width="140" height="60" rx="6" fill="#33293d" stroke="#a98bd0" stroke-width="1.2"/>
+<text x="3525.0" y="852.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
+<text x="3525.0" y="866.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Shrine of the Bone</text>
+<text x="3525.0" y="881.0" fill="#a98bd0" font-size="11" text-anchor="middle">Lv 14-16</text>
+<rect x="3455.0" y="740.0" width="140" height="60" rx="6" fill="#33293d" stroke="#ff5a4a" stroke-width="3"/>
+<text x="3525.0" y="760.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crypt of Varnoth:</text>
+<text x="3525.0" y="774.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Bone Throne</text>
+<text x="3525.0" y="789.0" fill="#ff8a7a" font-size="11" text-anchor="middle">Boss Lv 17</text>
 <rect x="1245.0" y="1016.0" width="140" height="60" rx="6" fill="#2e3b33" stroke="#7fa58c" stroke-width="1.2"/>
 <text x="1315.0" y="1043.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Edge of the Mirefen</text>
 <text x="1315.0" y="1058.0" fill="#7fa58c" font-size="11" text-anchor="middle">Lv 15-16</text>
@@ -516,30 +583,30 @@
 <text x="465.0" y="668.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Deepdelve Lift</text>
 <text x="465.0" y="683.0" fill="#e0a070" font-size="11" text-anchor="middle">safe</text>
 <text x="465.0" y="697.0" fill="#6fc7c0" font-size="11" text-anchor="middle">↓ Deepdelve Mine</text>
-<rect x="3115.0" y="648.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#6fc7c0" stroke-width="1.2"/>
-<text x="3185.0" y="668.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The Lift</text>
-<text x="3185.0" y="682.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Foot</text>
-<text x="3185.0" y="697.0" fill="#6fc7c0" font-size="11" text-anchor="middle">Lv 18-19</text>
-<rect x="3115.0" y="556.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#6fc7c0" stroke-width="1.2"/>
-<text x="3185.0" y="576.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The Long</text>
-<text x="3185.0" y="590.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Gallery</text>
-<text x="3185.0" y="605.0" fill="#6fc7c0" font-size="11" text-anchor="middle">Lv 19-20</text>
-<rect x="2945.0" y="556.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#6fc7c0" stroke-width="1.2"/>
-<text x="3015.0" y="576.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The</text>
-<text x="3015.0" y="590.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Flooded Shaft</text>
-<text x="3015.0" y="605.0" fill="#6fc7c0" font-size="11" text-anchor="middle">Lv 19-20</text>
-<rect x="3285.0" y="556.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#6fc7c0" stroke-width="1.2"/>
-<text x="3355.0" y="576.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The</text>
-<text x="3355.0" y="590.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crystal Seam</text>
-<text x="3355.0" y="605.0" fill="#6fc7c0" font-size="11" text-anchor="middle">Lv 20-21</text>
-<rect x="3115.0" y="464.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#6fc7c0" stroke-width="1.2"/>
-<text x="3185.0" y="484.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The</text>
-<text x="3185.0" y="498.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Delvers&#x27; Camp</text>
-<text x="3185.0" y="513.0" fill="#6fc7c0" font-size="11" text-anchor="middle">Lv 20-21</text>
-<rect x="3115.0" y="372.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#ff5a4a" stroke-width="3"/>
-<text x="3185.0" y="392.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The</text>
-<text x="3185.0" y="406.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Stonewake Vault</text>
-<text x="3185.0" y="421.0" fill="#ff8a7a" font-size="11" text-anchor="middle">Boss Lv 21</text>
+<rect x="4135.0" y="648.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#6fc7c0" stroke-width="1.2"/>
+<text x="4205.0" y="668.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The Lift</text>
+<text x="4205.0" y="682.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Foot</text>
+<text x="4205.0" y="697.0" fill="#6fc7c0" font-size="11" text-anchor="middle">Lv 18-19</text>
+<rect x="4135.0" y="556.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#6fc7c0" stroke-width="1.2"/>
+<text x="4205.0" y="576.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The Long</text>
+<text x="4205.0" y="590.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Gallery</text>
+<text x="4205.0" y="605.0" fill="#6fc7c0" font-size="11" text-anchor="middle">Lv 19-20</text>
+<rect x="3965.0" y="556.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#6fc7c0" stroke-width="1.2"/>
+<text x="4035.0" y="576.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The</text>
+<text x="4035.0" y="590.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Flooded Shaft</text>
+<text x="4035.0" y="605.0" fill="#6fc7c0" font-size="11" text-anchor="middle">Lv 19-20</text>
+<rect x="4305.0" y="556.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#6fc7c0" stroke-width="1.2"/>
+<text x="4375.0" y="576.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The</text>
+<text x="4375.0" y="590.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Crystal Seam</text>
+<text x="4375.0" y="605.0" fill="#6fc7c0" font-size="11" text-anchor="middle">Lv 20-21</text>
+<rect x="4135.0" y="464.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#6fc7c0" stroke-width="1.2"/>
+<text x="4205.0" y="484.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The</text>
+<text x="4205.0" y="498.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Delvers&#x27; Camp</text>
+<text x="4205.0" y="513.0" fill="#6fc7c0" font-size="11" text-anchor="middle">Lv 20-21</text>
+<rect x="4135.0" y="372.0" width="140" height="60" rx="6" fill="#243a3a" stroke="#ff5a4a" stroke-width="3"/>
+<text x="4205.0" y="392.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Deepdelve: The</text>
+<text x="4205.0" y="406.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Stonewake Vault</text>
+<text x="4205.0" y="421.0" fill="#ff8a7a" font-size="11" text-anchor="middle">Boss Lv 21</text>
 <rect x="565.0" y="1384.0" width="140" height="60" rx="6" fill="#1b3324" stroke="#6fcf86" stroke-width="1.2"/>
 <text x="635.0" y="1411.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Westwood Verge</text>
 <text x="635.0" y="1426.0" fill="#6fcf86" font-size="11" text-anchor="middle">Lv 20-21</text>
@@ -647,42 +714,240 @@
 <text x="1145.0" y="2232.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Silverbough: The</text>
 <text x="1145.0" y="2246.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Thornward Gate</text>
 <text x="1145.0" y="2261.0" fill="#f0e2a0" font-size="11" text-anchor="middle">safe</text>
-<text x="3520" y="90" fill="#e8d9a8" font-size="15">Areas</text>
-<rect x="3520" y="106" width="22" height="16" rx="3" fill="#3a3a46" stroke="#c9b67a"/>
-<text x="3550" y="118" fill="#ddd6c4" font-size="12">Brightwater</text>
-<rect x="3520" y="130" width="22" height="16" rx="3" fill="#2f4a2a" stroke="#8fc46a"/>
-<text x="3550" y="142" fill="#ddd6c4" font-size="12">Greenmeadow</text>
-<rect x="3520" y="154" width="22" height="16" rx="3" fill="#1f3d2c" stroke="#5fae7a"/>
-<text x="3550" y="166" fill="#ddd6c4" font-size="12">Whispering Woods</text>
-<rect x="3520" y="178" width="22" height="16" rx="3" fill="#3b3f47" stroke="#a7b0bd"/>
-<text x="3550" y="190" fill="#ddd6c4" font-size="12">The Northlands</text>
-<rect x="3520" y="202" width="22" height="16" rx="3" fill="#3d3530" stroke="#a89380"/>
-<text x="3550" y="214" fill="#ddd6c4" font-size="12">Barrowfield</text>
-<rect x="3520" y="226" width="22" height="16" rx="3" fill="#33293d" stroke="#a98bd0"/>
-<text x="3550" y="238" fill="#ddd6c4" font-size="12">Crypt of Varnoth</text>
-<rect x="3520" y="250" width="22" height="16" rx="3" fill="#2e3b33" stroke="#7fa58c"/>
-<text x="3550" y="262" fill="#ddd6c4" font-size="12">The Mirefen</text>
-<rect x="3520" y="274" width="22" height="16" rx="3" fill="#363c45" stroke="#8fb3d9"/>
-<text x="3550" y="286" fill="#ddd6c4" font-size="12">Ironspine Mountains</text>
-<rect x="3520" y="298" width="22" height="16" rx="3" fill="#2c3445" stroke="#9fb0e8"/>
-<text x="3550" y="310" fill="#ddd6c4" font-size="12">Ruins of Elandor</text>
-<rect x="3520" y="322" width="22" height="16" rx="3" fill="#47271f" stroke="#e88a5a"/>
-<text x="3550" y="334" fill="#ddd6c4" font-size="12">Ashen Peaks</text>
-<rect x="3520" y="346" width="22" height="16" rx="3" fill="#3d3a26" stroke="#d2b55b"/>
-<text x="3550" y="358" fill="#ddd6c4" font-size="12">Westmarch</text>
-<rect x="3520" y="370" width="22" height="16" rx="3" fill="#3a4048" stroke="#dde6ee"/>
-<text x="3550" y="382" fill="#ddd6c4" font-size="12">Rimefells</text>
-<rect x="3520" y="394" width="22" height="16" rx="3" fill="#45332a" stroke="#e0a070"/>
-<text x="3550" y="406" fill="#ddd6c4" font-size="12">Hearthdeep</text>
-<rect x="3520" y="418" width="22" height="16" rx="3" fill="#243a3a" stroke="#6fc7c0"/>
-<text x="3550" y="430" fill="#ddd6c4" font-size="12">Deepdelve Mine</text>
-<rect x="3520" y="442" width="22" height="16" rx="3" fill="#1b3324" stroke="#6fcf86"/>
-<text x="3550" y="454" fill="#ddd6c4" font-size="12">Eldergrove</text>
-<rect x="3520" y="466" width="22" height="16" rx="3" fill="#38362a" stroke="#f0e2a0"/>
-<text x="3550" y="478" fill="#ddd6c4" font-size="12">Silverbough</text>
-<rect x="3520" y="500" width="22" height="16" rx="3" fill="none" stroke="#ff5a4a" stroke-width="3"/>
-<text x="3550" y="512" fill="#ddd6c4" font-size="12">Boss room</text>
-<line x1="3520" y1="534" x2="3542" y2="534" stroke="#77736a" stroke-width="2" stroke-dasharray="6 5"/>
-<text x="3550" y="538" fill="#ddd6c4" font-size="12">Up / down</text>
-<text x="3520" y="562" fill="#9a958a" font-size="11">North is up. Lv = monster levels.</text>
+<rect x="1755.0" y="1476.0" width="140" height="60" rx="6" fill="#3f3a33" stroke="#c8b89a" stroke-width="1.2"/>
+<text x="1825.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Dustway</text>
+<text x="1825.0" y="1518.0" fill="#c8b89a" font-size="11" text-anchor="middle">Lv 8-9</text>
+<rect x="1925.0" y="1476.0" width="140" height="60" rx="6" fill="#3f3a33" stroke="#c8b89a" stroke-width="1.2"/>
+<text x="1995.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Dry Ford</text>
+<text x="1995.0" y="1518.0" fill="#c8b89a" font-size="11" text-anchor="middle">Lv 9-10</text>
+<rect x="1925.0" y="1568.0" width="140" height="60" rx="6" fill="#3f3a33" stroke="#c8b89a" stroke-width="1.2"/>
+<text x="1995.0" y="1588.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Dustway</text>
+<text x="1995.0" y="1602.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Waystation</text>
+<text x="1995.0" y="1617.0" fill="#c8b89a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2095.0" y="1476.0" width="140" height="60" rx="6" fill="#3f3a33" stroke="#c8b89a" stroke-width="1.2"/>
+<text x="2165.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Gallows Hill</text>
+<text x="2165.0" y="1518.0" fill="#c8b89a" font-size="11" text-anchor="middle">Lv 10-12</text>
+<rect x="2095.0" y="1568.0" width="140" height="60" rx="6" fill="#3f3a33" stroke="#c8b89a" stroke-width="1.2"/>
+<text x="2165.0" y="1595.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Gnoll Scrub</text>
+<text x="2165.0" y="1610.0" fill="#c8b89a" font-size="11" text-anchor="middle">Lv 11-12</text>
+<rect x="2265.0" y="1476.0" width="140" height="60" rx="6" fill="#3f3a33" stroke="#c8b89a" stroke-width="1.2"/>
+<text x="2335.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Broken Tollhouse</text>
+<text x="2335.0" y="1518.0" fill="#c8b89a" font-size="11" text-anchor="middle">Lv 13-14</text>
+<rect x="2435.0" y="1476.0" width="140" height="60" rx="6" fill="#3f3a33" stroke="#c8b89a" stroke-width="1.2"/>
+<text x="2505.0" y="1496.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Edge of the</text>
+<text x="2505.0" y="1510.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Badlands</text>
+<text x="2505.0" y="1525.0" fill="#c8b89a" font-size="11" text-anchor="middle">Lv 14-15</text>
+<rect x="2605.0" y="1476.0" width="140" height="60" rx="6" fill="#4a2a22" stroke="#e07a5a" stroke-width="1.2"/>
+<text x="2675.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Redrock Canyon Mouth</text>
+<text x="2675.0" y="1518.0" fill="#e07a5a" font-size="11" text-anchor="middle">Lv 18-19</text>
+<rect x="2605.0" y="1384.0" width="140" height="60" rx="6" fill="#4a2a22" stroke="#e07a5a" stroke-width="1.2"/>
+<text x="2675.0" y="1411.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Harpy Spires</text>
+<text x="2675.0" y="1426.0" fill="#e07a5a" font-size="11" text-anchor="middle">Lv 21-22</text>
+<rect x="2775.0" y="1476.0" width="140" height="60" rx="6" fill="#4a2a22" stroke="#e07a5a" stroke-width="1.2"/>
+<text x="2845.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Scorpion Flats</text>
+<text x="2845.0" y="1518.0" fill="#e07a5a" font-size="11" text-anchor="middle">Lv 20-21</text>
+<rect x="2775.0" y="1384.0" width="140" height="60" rx="6" fill="#4a2a22" stroke="#e07a5a" stroke-width="1.2"/>
+<text x="2845.0" y="1411.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Shattered Mesa</text>
+<text x="2845.0" y="1426.0" fill="#e07a5a" font-size="11" text-anchor="middle">Lv 24-25</text>
+<rect x="2605.0" y="1568.0" width="140" height="60" rx="6" fill="#4a2a22" stroke="#e07a5a" stroke-width="1.2"/>
+<text x="2675.0" y="1595.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Bone Pits</text>
+<text x="2675.0" y="1610.0" fill="#e07a5a" font-size="11" text-anchor="middle">Lv 22-23</text>
+<rect x="2775.0" y="1568.0" width="140" height="60" rx="6" fill="#4a2a22" stroke="#e07a5a" stroke-width="1.2"/>
+<text x="2845.0" y="1595.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Gnoll Warcamp</text>
+<text x="2845.0" y="1610.0" fill="#e07a5a" font-size="11" text-anchor="middle">Lv 24-25</text>
+<rect x="2945.0" y="1476.0" width="140" height="60" rx="6" fill="#4a2a22" stroke="#e07a5a" stroke-width="1.2"/>
+<text x="3015.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Wyvern Ledges</text>
+<text x="3015.0" y="1518.0" fill="#e07a5a" font-size="11" text-anchor="middle">Lv 23-24</text>
+<rect x="2945.0" y="1568.0" width="140" height="60" rx="6" fill="#4a2a22" stroke="#e07a5a" stroke-width="1.2"/>
+<text x="3015.0" y="1595.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Howling Pit</text>
+<text x="3015.0" y="1610.0" fill="#e07a5a" font-size="11" text-anchor="middle">Lv 25-26</text>
+<rect x="3115.0" y="1568.0" width="140" height="60" rx="6" fill="#4a2a22" stroke="#ff5a4a" stroke-width="3"/>
+<text x="3185.0" y="1595.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Yellowtooth&#x27;s Den</text>
+<text x="3185.0" y="1610.0" fill="#ff8a7a" font-size="11" text-anchor="middle">Boss Lv 26</text>
+<rect x="3115.0" y="1476.0" width="140" height="60" rx="6" fill="#4a2a22" stroke="#e07a5a" stroke-width="1.2"/>
+<text x="3185.0" y="1503.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Last Mesa</text>
+<text x="3185.0" y="1518.0" fill="#e07a5a" font-size="11" text-anchor="middle">Lv 26-27</text>
+<rect x="3115.0" y="1384.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="3185.0" y="1411.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Dune Edge</text>
+<text x="3185.0" y="1426.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 35-36</text>
+<rect x="3115.0" y="1292.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="3185.0" y="1319.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Dune Sea</text>
+<text x="3185.0" y="1334.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 37-38</text>
+<rect x="2945.0" y="1292.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="3015.0" y="1319.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Caravan Road</text>
+<text x="3015.0" y="1334.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 37-38</text>
+<rect x="2775.0" y="1292.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2845.0" y="1319.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Sunward Approach</text>
+<text x="2845.0" y="1334.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 36-37</text>
+<rect x="2605.0" y="1292.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2675.0" y="1319.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Raiders&#x27; Wash</text>
+<text x="2675.0" y="1334.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 38-39</text>
+<rect x="2435.0" y="1292.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2505.0" y="1319.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Glass Waste</text>
+<text x="2505.0" y="1334.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 39-40</text>
+<rect x="2435.0" y="1200.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2505.0" y="1227.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Mirage Flats</text>
+<text x="2505.0" y="1242.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 40-41</text>
+<rect x="1925.0" y="1200.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="1995.0" y="1227.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Sunken Stair</text>
+<text x="1995.0" y="1242.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 36-37</text>
+<rect x="2095.0" y="1200.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2165.0" y="1227.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Buried Colonnade</text>
+<text x="2165.0" y="1242.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 36-37</text>
+<rect x="2265.0" y="1200.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2335.0" y="1220.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Edge of the Sand</text>
+<text x="2335.0" y="1234.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sea</text>
+<text x="2335.0" y="1249.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 37-38</text>
+<rect x="2265.0" y="1108.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2335.0" y="1135.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Glassed Dunes</text>
+<text x="2335.0" y="1150.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 38-39</text>
+<rect x="2265.0" y="1016.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2335.0" y="1043.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Palm Oasis</text>
+<text x="2335.0" y="1058.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 38-39</text>
+<rect x="2265.0" y="924.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2335.0" y="951.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Salt Flats</text>
+<text x="2335.0" y="966.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 41-42</text>
+<rect x="2265.0" y="832.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2335.0" y="859.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Salt Pans</text>
+<text x="2335.0" y="874.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 42-43</text>
+<rect x="2775.0" y="740.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2845.0" y="767.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Northern Dunes</text>
+<text x="2845.0" y="782.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 43-44</text>
+<rect x="2945.0" y="740.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="3015.0" y="767.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Whirling Sands</text>
+<text x="3015.0" y="782.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 44-45</text>
+<rect x="2605.0" y="740.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2675.0" y="767.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Giants&#x27; Causeway</text>
+<text x="2675.0" y="782.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 46-47</text>
+<rect x="2945.0" y="648.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="3015.0" y="668.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Valley of the</text>
+<text x="3015.0" y="682.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Kings</text>
+<text x="3015.0" y="697.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 46-47</text>
+<rect x="2605.0" y="648.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2675.0" y="675.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Sandworm Deeps</text>
+<text x="2675.0" y="690.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 48-49</text>
+<rect x="2775.0" y="648.0" width="140" height="60" rx="6" fill="#463c22" stroke="#f2c45a" stroke-width="1.2"/>
+<text x="2845.0" y="668.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">The Sunken Pyramid</text>
+<text x="2845.0" y="683.0" fill="#f2c45a" font-size="11" text-anchor="middle">Lv 45-46</text>
+<text x="2845.0" y="697.0" fill="#c9a0e0" font-size="11" text-anchor="middle">↓ Tomb of the Sand Kings</text>
+<rect x="2775.0" y="1200.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="2845.0" y="1220.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The</text>
+<text x="2845.0" y="1234.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunward Gate</text>
+<text x="2845.0" y="1249.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2775.0" y="1108.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="2845.0" y="1128.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The Spice</text>
+<text x="2845.0" y="1142.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Market</text>
+<text x="2845.0" y="1157.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2605.0" y="1108.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="2675.0" y="1128.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The Silk</text>
+<text x="2675.0" y="1142.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Bazaar</text>
+<text x="2675.0" y="1157.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2945.0" y="1108.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="3015.0" y="1128.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The Wells</text>
+<text x="3015.0" y="1142.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">of Sunspire</text>
+<text x="3015.0" y="1157.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2775.0" y="1016.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="2845.0" y="1036.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The</text>
+<text x="2845.0" y="1050.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Obelisk Square</text>
+<text x="2845.0" y="1065.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2605.0" y="1016.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="2675.0" y="1036.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The Street</text>
+<text x="2675.0" y="1050.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">of Smiths</text>
+<text x="2675.0" y="1065.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2435.0" y="1016.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="2505.0" y="1036.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The West</text>
+<text x="2505.0" y="1050.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Gate</text>
+<text x="2505.0" y="1065.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2945.0" y="1016.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="3015.0" y="1036.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The Great</text>
+<text x="3015.0" y="1050.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Caravanserai</text>
+<text x="3015.0" y="1065.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2775.0" y="924.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="2845.0" y="944.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The Palace</text>
+<text x="2845.0" y="958.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">of the Sun</text>
+<text x="2845.0" y="973.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2605.0" y="924.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="2675.0" y="944.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The</text>
+<text x="2675.0" y="958.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Archive of Sand</text>
+<text x="2675.0" y="973.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2945.0" y="924.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="3015.0" y="944.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The</text>
+<text x="3015.0" y="958.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Barracks of the Sun</text>
+<text x="3015.0" y="973.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="2775.0" y="832.0" width="140" height="60" rx="6" fill="#40372a" stroke="#ffe08a" stroke-width="1.2"/>
+<text x="2845.0" y="852.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Sunspire: The North</text>
+<text x="2845.0" y="866.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Gate</text>
+<text x="2845.0" y="881.0" fill="#ffe08a" font-size="11" text-anchor="middle">safe</text>
+<rect x="4815.0" y="648.0" width="140" height="60" rx="6" fill="#2a2630" stroke="#c9a0e0" stroke-width="1.2"/>
+<text x="4885.0" y="668.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Tomb: The Sealed</text>
+<text x="4885.0" y="682.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Antechamber</text>
+<text x="4885.0" y="697.0" fill="#c9a0e0" font-size="11" text-anchor="middle">Lv 45-46</text>
+<rect x="4815.0" y="556.0" width="140" height="60" rx="6" fill="#2a2630" stroke="#c9a0e0" stroke-width="1.2"/>
+<text x="4885.0" y="576.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Tomb: The Hall of</text>
+<text x="4885.0" y="590.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Embalmers</text>
+<text x="4885.0" y="605.0" fill="#c9a0e0" font-size="11" text-anchor="middle">Lv 46-47</text>
+<rect x="4645.0" y="556.0" width="140" height="60" rx="6" fill="#2a2630" stroke="#c9a0e0" stroke-width="1.2"/>
+<text x="4715.0" y="576.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Tomb: The Scarab</text>
+<text x="4715.0" y="590.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Pits</text>
+<text x="4715.0" y="605.0" fill="#c9a0e0" font-size="11" text-anchor="middle">Lv 45-46</text>
+<rect x="4985.0" y="556.0" width="140" height="60" rx="6" fill="#2a2630" stroke="#c9a0e0" stroke-width="1.2"/>
+<text x="5055.0" y="576.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Tomb: The Treasury</text>
+<text x="5055.0" y="590.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">of the Kings</text>
+<text x="5055.0" y="605.0" fill="#c9a0e0" font-size="11" text-anchor="middle">Lv 47-48</text>
+<rect x="4815.0" y="464.0" width="140" height="60" rx="6" fill="#2a2630" stroke="#c9a0e0" stroke-width="1.2"/>
+<text x="4885.0" y="484.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Tomb: The Gallery of</text>
+<text x="4885.0" y="498.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">the Dead Kings</text>
+<text x="4885.0" y="513.0" fill="#c9a0e0" font-size="11" text-anchor="middle">Lv 47-48</text>
+<rect x="4815.0" y="372.0" width="140" height="60" rx="6" fill="#2a2630" stroke="#ff5a4a" stroke-width="3"/>
+<text x="4885.0" y="392.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Tomb: The Burial</text>
+<text x="4885.0" y="406.0" fill="#f1ead6" font-size="12.5" text-anchor="middle">Chamber of Ussreth</text>
+<text x="4885.0" y="421.0" fill="#ff8a7a" font-size="11" text-anchor="middle">Boss Lv 48</text>
+<text x="5220" y="90" fill="#e8d9a8" font-size="15">Areas</text>
+<rect x="5220" y="106" width="22" height="16" rx="3" fill="#3a3a46" stroke="#c9b67a"/>
+<text x="5250" y="118" fill="#ddd6c4" font-size="12">Brightwater</text>
+<rect x="5220" y="130" width="22" height="16" rx="3" fill="#2f4a2a" stroke="#8fc46a"/>
+<text x="5250" y="142" fill="#ddd6c4" font-size="12">Greenmeadow</text>
+<rect x="5220" y="154" width="22" height="16" rx="3" fill="#1f3d2c" stroke="#5fae7a"/>
+<text x="5250" y="166" fill="#ddd6c4" font-size="12">Whispering Woods</text>
+<rect x="5220" y="178" width="22" height="16" rx="3" fill="#3b3f47" stroke="#a7b0bd"/>
+<text x="5250" y="190" fill="#ddd6c4" font-size="12">The Northlands</text>
+<rect x="5220" y="202" width="22" height="16" rx="3" fill="#3d3530" stroke="#a89380"/>
+<text x="5250" y="214" fill="#ddd6c4" font-size="12">Barrowfield</text>
+<rect x="5220" y="226" width="22" height="16" rx="3" fill="#33293d" stroke="#a98bd0"/>
+<text x="5250" y="238" fill="#ddd6c4" font-size="12">Crypt of Varnoth</text>
+<rect x="5220" y="250" width="22" height="16" rx="3" fill="#2e3b33" stroke="#7fa58c"/>
+<text x="5250" y="262" fill="#ddd6c4" font-size="12">The Mirefen</text>
+<rect x="5220" y="274" width="22" height="16" rx="3" fill="#363c45" stroke="#8fb3d9"/>
+<text x="5250" y="286" fill="#ddd6c4" font-size="12">Ironspine Mountains</text>
+<rect x="5220" y="298" width="22" height="16" rx="3" fill="#2c3445" stroke="#9fb0e8"/>
+<text x="5250" y="310" fill="#ddd6c4" font-size="12">Ruins of Elandor</text>
+<rect x="5220" y="322" width="22" height="16" rx="3" fill="#47271f" stroke="#e88a5a"/>
+<text x="5250" y="334" fill="#ddd6c4" font-size="12">Ashen Peaks</text>
+<rect x="5220" y="346" width="22" height="16" rx="3" fill="#3d3a26" stroke="#d2b55b"/>
+<text x="5250" y="358" fill="#ddd6c4" font-size="12">Westmarch</text>
+<rect x="5220" y="370" width="22" height="16" rx="3" fill="#3a4048" stroke="#dde6ee"/>
+<text x="5250" y="382" fill="#ddd6c4" font-size="12">Rimefells</text>
+<rect x="5220" y="394" width="22" height="16" rx="3" fill="#45332a" stroke="#e0a070"/>
+<text x="5250" y="406" fill="#ddd6c4" font-size="12">Hearthdeep</text>
+<rect x="5220" y="418" width="22" height="16" rx="3" fill="#243a3a" stroke="#6fc7c0"/>
+<text x="5250" y="430" fill="#ddd6c4" font-size="12">Deepdelve Mine</text>
+<rect x="5220" y="442" width="22" height="16" rx="3" fill="#1b3324" stroke="#6fcf86"/>
+<text x="5250" y="454" fill="#ddd6c4" font-size="12">Eldergrove</text>
+<rect x="5220" y="466" width="22" height="16" rx="3" fill="#38362a" stroke="#f0e2a0"/>
+<text x="5250" y="478" fill="#ddd6c4" font-size="12">Silverbough</text>
+<rect x="5220" y="490" width="22" height="16" rx="3" fill="#3f3a33" stroke="#c8b89a"/>
+<text x="5250" y="502" fill="#ddd6c4" font-size="12">Dustway</text>
+<rect x="5220" y="514" width="22" height="16" rx="3" fill="#4a2a22" stroke="#e07a5a"/>
+<text x="5250" y="526" fill="#ddd6c4" font-size="12">Redrock Badlands</text>
+<rect x="5220" y="538" width="22" height="16" rx="3" fill="#463c22" stroke="#f2c45a"/>
+<text x="5250" y="550" fill="#ddd6c4" font-size="12">Scorchsands</text>
+<rect x="5220" y="562" width="22" height="16" rx="3" fill="#40372a" stroke="#ffe08a"/>
+<text x="5250" y="574" fill="#ddd6c4" font-size="12">Sunspire</text>
+<rect x="5220" y="586" width="22" height="16" rx="3" fill="#2a2630" stroke="#c9a0e0"/>
+<text x="5250" y="598" fill="#ddd6c4" font-size="12">Tomb of the Sand Kings</text>
+<rect x="5220" y="620" width="22" height="16" rx="3" fill="none" stroke="#ff5a4a" stroke-width="3"/>
+<text x="5250" y="632" fill="#ddd6c4" font-size="12">Boss room</text>
+<line x1="5220" y1="654" x2="5242" y2="654" stroke="#77736a" stroke-width="2" stroke-dasharray="6 5"/>
+<text x="5250" y="658" fill="#ddd6c4" font-size="12">Up / down</text>
+<text x="5220" y="682" fill="#9a958a" font-size="11">North is up. Lv = monster levels.</text>
 </svg>

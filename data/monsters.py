@@ -103,6 +103,19 @@ M("goblin_brute", "a goblin brute", 9, "A goblin half again as big as its kin, a
   hp=1.3, dmg=1.1, specials=[big("Nail-Club Swing", 0.2, 1.7, "swings its nail-studded club into your ribs!")],
   loot=[("chain_shirt", 0.04), ("iron_longsword", 0.05)], gold=1.6, xp=1.2)
 
+# ------------------------------------------------------------- Dustway (8-15)
+M("dust_hyena", "a dust hyena", 9, "A mangy spotted hyena that giggles horribly as it circles you.",
+  hp=1.0, dmg=1.05, specials=[dot("Ragged Bite", 0.2, 0.3, 3, "bleed", "darts in and tears a ragged bite from your leg!")],
+  loot=[("hyena_hide", 0.5)], gold=0.2)
+M("highwayman", "a highwayman", 10, "A masked rider in a long coat, with a crossbow across his saddle and a cudgel at his belt.",
+  hp=1.0, dmg=1.1, specials=[stun("Cudgel Blow", 0.12, 1, "clubs you behind the ear!")],
+  loot=[("chain_leggings", 0.05), ("iron_longsword", 0.05), ("healing_potion", 0.1)], gold=2.0)
+M("gnoll_scavenger", "a gnoll scavenger", 12, "A hunched, hyena-headed gnoll in rags, gnawing on something it would rather you did not see.",
+  hp=1.1, dmg=1.05, loot=[("hyena_hide", 0.3), ("iron_boots", 0.05)], gold=1.2)
+M("gnoll_raider", "a gnoll raider", 14, "A tall gnoll in a patchwork of stolen armour, howling as it swings a notched axe.",
+  hp=1.1, dmg=1.15, specials=[big("Rending Axe", 0.2, 1.7, "howls and brings its notched axe down on you!")],
+  loot=[("dwarven_war_axe", 0.04), ("knights_blade", 0.03)], gold=1.6)
+
 # ------------------------------------------------------------- Barrowfield & Crypt (9-17)
 M("restless_zombie", "a restless zombie", 9, "A shambling corpse in a rotted burial shroud, moaning softly.",
   hp=1.2, dmg=0.95, aggro=True, specials=[dot("Grave Rot", 0.2, 0.3, 4, "disease", "claws you with filthy, rotting nails!")],
@@ -245,6 +258,33 @@ M("rotheart", "Rotheart, the Blighted Oak", 33,
             heal("Drink the Earth", 0.08, 0.1, "sinks its roots deep and drinks the life of the grove!")],
   loot=[("thornheart", 0.6), ("crown_of_thorns", 0.6), ("eldergrove_amulet", 0.5), ("blight_heartwood", 1.0)])
 
+# ------------------------------------------------------------- Redrock Badlands (18-27)
+M("gnoll_warrior", "a gnoll warrior", 18, "A broad gnoll in a coat of rusted scales, its spear hung with the tails of its kills.",
+  hp=1.2, dmg=1.15, armor=1.3, specials=[big("Spear Thrust", 0.2, 1.7, "lunges and drives its spear into you!")],
+  loot=[("hyena_hide", 0.3), ("dwarven_chainmail", 0.04)], gold=1.5)
+M("giant_scorpion", "a giant scorpion", 20, "A red-brown scorpion the size of a cart, its stinger poised high over its back.",
+  hp=1.3, dmg=1.15, armor=1.8, specials=[dot("Venomous Sting", 0.22, 0.4, 3, "poison", "lashes down with its stinger, and venom burns through you!")],
+  loot=[("scorpion_stinger", 0.4)], gold=0.4, xp=1.2)
+M("gnoll_bonecaller", "a gnoll bonecaller", 22, "A gnoll shaman draped in hyena skulls, who calls the spirits of the pack with a whistle of human bone.",
+  hp=1.0, dmg=1.15, aggro=True, specials=[heal("Pack Spirits", 0.15, 0.2, "whistles, and ghostly hyenas lick its wounds closed!"),
+                                          dot("Bone Curse", 0.2, 0.35, 3, "shadow", "rattles its skulls and howls a curse at you!")],
+  loot=[("rune_amulet", 0.03), ("greater_mana_potion", 0.1)], gold=1.8)
+M("canyon_wyvern", "a canyon wyvern", 23, "A rust-red wyvern with leathery wings and a barbed tail, shrieking from the canyon ledges.",
+  hp=1.3, dmg=1.15, specials=[dot("Barbed Tail", 0.2, 0.4, 3, "poison", "whips its barbed tail into you!"),
+                              big("Diving Talons", 0.15, 1.7, "dives out of the sun, talons first!")],
+  loot=[("dragon_scale", 0.05), ("hunters_recurve", 0.03)], gold=0.6, xp=1.3)
+M("dust_devil", "a dust devil", 25, "A whirling column of red sand and grit with a pair of burning eyes in its heart.",
+  hp=1.0, dmg=1.2, armor=0.6, aggro=True, specials=[stun("Blinding Sand", 0.15, 1, "whips stinging sand into your eyes!")],
+  loot=[("greater_mana_potion", 0.1)], gold=0.6)
+M("yellowtooth", "Yellowtooth, Gnoll Warlord", 26,
+  "The biggest gnoll in the Badlands, grey-muzzled and one-eared, in a coat of overlapping shields and a crown of human teeth. "
+  "He laughs constantly, and it is the worst sound you have ever heard.",
+  hp=2.6, dmg=1.25, armor=1.5, aggro=True, boss=True, xp=2.0, gold=5.0,
+  specials=[big("Teeth-Flail", 0.25, 1.9, "swings his flail of tooth-crusted iron balls into you!"),
+            dot("Hyena's Grin", 0.15, 0.4, 4, "bleed", "laughs and tears at you with his own yellowed fangs!"),
+            heal("Feast", 0.08, 0.12, "tears a chunk from a carcass and gulps it down, laughing!")],
+  loot=[("yellowtooth_flail", 0.6), ("gnoll_bone_necklace", 0.6), ("dwarven_plate", 0.3), ("scorpion_stinger", 0.5)])
+
 # ------------------------------------------------------------- Ironspine Mountains (20-31)
 M("mountain_lion", "a mountain lion", 21, "A tawny great cat crouched on a ledge, tail twitching.",
   hp=1.0, dmg=1.15, specials=[dot("Rending Claws", 0.2, 0.35, 3, "bleed", "rakes you with rending claws!")], gold=0.4)
@@ -330,6 +370,52 @@ M("seluvar", "Seluvar the Hollow Archmage", 41,
             stun("Temporal Prison", 0.12, 1, "traps you in a prison of frozen time!"),
             drain("Hollowing", 0.15, 1.2, "hollows you out, drinking your essence!")],
   loot=[("seluvars_wand", 0.6), ("archmage_ring", 0.6), ("elandor_robes", 0.4), ("starlight_circlet", 0.4), ("elven_longbow", 0.3)])
+
+# ------------------------------------------------------------- Scorchsands (35-49)
+M("desert_raider", "a desert raider", 36, "A veiled rider of the deep desert, all in black, with a scimitar and eyes that never blink.",
+  hp=1.1, dmg=1.25, specials=[dot("Curved Cut", 0.2, 0.4, 3, "bleed", "wheels and slashes you with a curved blade!")],
+  loot=[("sunsteel_scimitar", 0.03), ("sand_strider_boots", 0.02)], gold=2.0)
+M("dune_scorpion", "a dune scorpion", 38, "A pale scorpion longer than a camel, buried in the sand until it strikes.",
+  hp=1.4, dmg=1.25, armor=1.8, specials=[dot("Deathstalker Venom", 0.22, 0.45, 3, "poison", "erupts from the sand and stings you!")],
+  loot=[("scorpion_stinger", 0.5), ("desert_glass", 0.15)], gold=0.5, xp=1.3)
+M("salt_wraith", "a salt wraith", 40, "The dried, white husk of a traveller who died on the salt flats, drifting on the hot wind.",
+  hp=1.0, dmg=1.3, armor=0.6, aggro=True, specials=[drain("Thirst", 0.25, 1.0, "touches you, and the water is drawn from your body!")],
+  loot=[("supreme_healing_potion", 0.08), ("desert_glass", 0.1)], gold=0.8)
+M("mirage_stalker", "a mirage stalker", 42, "A lean desert cat whose hide bends the light, so that you only see it when it moves.",
+  hp=1.2, dmg=1.3, specials=[big("Ambush", 0.22, 1.8, "appears out of a shimmer of heat and pounces!")],
+  loot=[("desert_glass", 0.25), ("silkwind_gloves", 0.03)], gold=0.6)
+M("wild_djinn", "a wild djinn", 44, "A towering figure of smoke and fire with burning eyes, bound to no lamp and no master.",
+  hp=1.2, dmg=1.3, armor=0.9, aggro=True, specials=[dot("Sirocco", 0.22, 0.5, 3, "fire", "spins into a howling wind of burning sand!"),
+                                                    stun("Bewitch", 0.1, 1, "laughs, and the desert spins around you!")],
+  loot=[("obelisk_amulet", 0.03), ("sunfire_staff", 0.03), ("supreme_mana_potion", 0.15)], gold=1.5)
+M("sand_giant", "a sand giant", 46, "A giant with skin like sandstone and a beard of dried grass, carrying a pillar from some ruined temple.",
+  hp=1.9, dmg=1.3, armor=1.6, specials=[big("Pillar Smash", 0.25, 1.9, "swings a stone pillar into you like a club!")],
+  loot=[("sunsteel_greaves", 0.04), ("crescent_greatsword", 0.03), ("ancient_scarab", 0.1)], gold=2.0, xp=1.6)
+M("great_sandworm", "a great sandworm", 49, "A worm as wide as a house, ringed with plates of yellow chitin, its round mouth lined with teeth.",
+  hp=2.2, dmg=1.35, armor=1.8, specials=[big("Engulf", 0.22, 2.0, "rises from the sand beneath you and engulfs you!"),
+                                         stun("Quake", 0.1, 1, "thrashes, and the sand heaves you off your feet!")],
+  loot=[("desert_glass", 0.4), ("sunstone_ring", 0.04)], gold=1.5, xp=1.8)
+
+# ------------------------------------------------------------- Tomb of the Sand Kings (45-48)
+M("scarab_swarm", "a scarab swarm", 45, "A clicking, glittering tide of black and gold beetles that pours across the floor.",
+  hp=1.1, dmg=1.3, armor=1.0, specials=[dot("Devour", 0.25, 0.45, 3, "bleed", "pours over you, biting everywhere at once!")],
+  loot=[("ancient_scarab", 0.3)], gold=0.4)
+M("tomb_guardian", "a tomb guardian", 46, "A jackal-headed statue of black basalt, ten feet tall, that steps down from its plinth.",
+  hp=2.0, dmg=1.3, armor=2.5, aggro=True, specials=[big("Basalt Halberd", 0.22, 1.9, "sweeps a halberd of black stone into you!")],
+  loot=[("ancient_scarab", 0.3), ("sunsteel_mail", 0.03)], gold=1.5, xp=1.6)
+M("mummy_priest", "a mummy priest", 47, "A withered priest in rotting linen and a collar of gold, still chanting the funeral rites of a dead empire.",
+  hp=1.3, dmg=1.3, aggro=True, specials=[dot("Curse of the Tomb", 0.22, 0.5, 4, "shadow", "points at you and speaks a curse in a dead tongue!"),
+                                         heal("Embalming Rite", 0.12, 0.15, "chants, and its wrappings draw tight over its wounds!")],
+  loot=[("ancient_scarab", 0.4), ("scepter_of_the_sand_kings", 0.01), ("silkwind_slippers", 0.04)], gold=2.0)
+M("ussreth", "Ussreth, the Last Sand King", 48,
+  "The last king of the sand-empire, three thousand years dead, in a burial mask of gold and robes of rotted purple. "
+  "Sand pours from the joints of his armour, and his eyes are two points of blue fire.",
+  hp=3.0, dmg=1.35, armor=1.8, aggro=True, boss=True, xp=2.0, gold=8.0,
+  specials=[big("Khopesh of the Kings", 0.22, 2.0, "sweeps his bronze khopesh through you!"),
+            dot("Plague of Ages", 0.18, 0.5, 4, "shadow", "breathes a cloud of ancient dust that rots your flesh!"),
+            stun("Command", 0.12, 1, "speaks a word of command, and you kneel!"),
+            drain("Eternity's Thirst", 0.12, 1.2, "seizes you, and three thousand years of hunger drink your life!")],
+  loot=[("khopesh_of_ussreth", 0.5), ("scepter_of_the_sand_kings", 0.5), ("burial_mask", 0.6), ("ancient_scarab", 1.0)])
 
 # ------------------------------------------------------------- Ashen Peaks & Dragon's Lair (37-52)
 M("steam_wraith", "a steam wraith", 38, "A writhing column of scalding vapour where meltwater meets the mountain's fire.",

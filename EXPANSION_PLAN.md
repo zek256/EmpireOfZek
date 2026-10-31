@@ -250,7 +250,19 @@ Both doors tell the player what they want when they're refused, so the goals are
     (elven arms and armour), Caelum Moonweave (caster gear), Merewyn (inn, potions).
   - Elowen in Brightwater gives The Blight Spreads (min level 24), pointing players south.
   - No shop moves needed: Brightwater already stops at level 20 and nothing overlaps.
-- Next: phase 4 (the east: Dustway, Redrock Badlands, Scorchsands, Sunspire, Tomb of the Sand Kings).
+- **Phase 4 done** (145 to 201 rooms, 21 new monsters incl. bosses Yellowtooth the Gnoll Warlord
+  L26 and Ussreth the Last Sand King L48, 27 new items, 6 new quests).
+  - Brightwater +1: the East Gate, off the South Road.
+  - Dustway +7 (8-15), including the Dustway Waystation (safe, Old Marta's two quests).
+  - Redrock Badlands +10 (18-27), gnolls, scorpions, wyverns, dust devils; Yellowtooth's Den.
+  - Scorchsands +20 (35-49): southern dunes from the Badlands, western sands from Elandor's Sunken
+    Amphitheatre (the planned east-north link), deep desert north of the city, and the Sunken
+    Pyramid.
+  - Sunspire +12 (safe): Emira Zahrin, Sun-Captain Idrisa and Archivist Mehrun (quests), Zahir
+    the Bladewright, Amsa Silkwind and Nadim the Caravan-Master (shops).
+  - Tomb of the Sand Kings +6 (45-48), drawn as an inset.
+  - Sister Aveline's new quest The Thirsting Dead (min level 36) points players to Sunspire.
+- Next: phase 5 (the Planes of the Gods, levels 51-60, with Lord Zek).
 
 ## Decisions
 

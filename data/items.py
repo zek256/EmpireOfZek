@@ -217,6 +217,41 @@ armor("leafsteel_greaves", "leafsteel greaves", "legs", 34, 22, 1700, "Elven leg
 armor("moonweave_slippers", "moonweave slippers", "feet", 34, 7, 1500, "Slippers of moonweave that leave no footprints at all.", INT=5, WIS=4, DEX=3)
 armor("moonstone_ring", "a Silverbough moonstone ring", "ring", 34, 0, 1600, "A ring of white gold set with a moonstone that glows at dusk.", INT=6, WIS=6)
 
+# ------------------------------------------------------------------ The east: Badlands drops and Sunspire gear (levels 36-48)
+# Sunspire gear is sold by Zahir the Bladewright (arms and armour) and Amsa Silkwind (caster gear).
+weapon("yellowtooth_flail", "Yellowtooth's Flail", 26, (19, 32), 900,
+       "A gnoll warlord's flail: three iron balls on chains, each crusted with old teeth.", STR=6, CON=2)
+armor("gnoll_bone_necklace", "a gnoll warlord's necklace", "neck", 26, 4, 950,
+      "A necklace of finger bones and yellowed fangs, strung by a gnoll who counted his victims.", STR=3, CON=3, DEX=2)
+weapon("sunsteel_scimitar", "a sunsteel scimitar", 38, (28, 47), 2200,
+       "A deeply curved blade of golden sunsteel, folded a thousand times in the forges of Sunspire.", STR=5, DEX=7)
+armor("desert_silk_robe", "a desert silk robe", "chest", 38, 20, 2100, "Layered robes of saffron and indigo silk, cool in the worst of the sun.", INT=8, WIS=8, CHA=3)
+armor("silkwind_turban", "a silkwind turban", "head", 38, 10, 2000, "A turban of fine silk pinned with a sapphire that glows when spells are cast.", INT=7, WIS=6)
+armor("oasis_pearl_ring", "an oasis pearl ring", "ring", 38, 0, 2200, "A ring of pale gold set with a pearl from the sacred oasis.", INT=7, WIS=7)
+weapon("dune_recurve", "a dune recurve bow", 40, (29, 48), 2400,
+       "A short, powerful bow of horn and desert ash, made to be shot from the saddle.", DEX=10, WIS=3)
+weapon("sunfire_staff", "a sunfire staff", 40, (21, 35), 2500,
+       "A staff of black wood capped with a sun-disc of gold that blazes when it is raised.", INT=11, WIS=11)
+armor("sunsteel_mail", "sunsteel mail", "chest", 40, 36, 2500, "Golden scale mail that turns blades and throws back the desert sun.", CON=6, DEX=3)
+armor("sunsteel_helm", "a sunsteel helm", "head", 40, 18, 2200, "A spired helm of sunsteel with a veil of fine mail to keep out the sand.", CON=4, STR=2)
+armor("sunsteel_greaves", "sunsteel greaves", "legs", 40, 26, 2300, "Greaves of sunsteel engraved with the rays of the sun.", CON=5, STR=2)
+armor("sand_strider_boots", "sand-strider boots", "feet", 40, 13, 2200, "Wide-soled boots that carry you over soft sand without sinking.", DEX=5)
+armor("silkwind_gloves", "silkwind gloves", "hands", 40, 6, 2100, "Gloves of silk so fine they seem to be made of breeze.", INT=6, WIS=6)
+armor("silkwind_trousers", "silkwind trousers", "legs", 40, 10, 2100, "Loose trousers of layered silk, embroidered with stars.", INT=6, WIS=6)
+armor("obelisk_amulet", "an amulet of the obelisk", "neck", 40, 6, 2600, "A tiny golden obelisk on a chain, said to be cut from the great obelisk itself.", INT=5, WIS=5, CON=4)
+armor("sunsteel_gauntlets", "sunsteel gauntlets", "hands", 42, 15, 2400, "Gauntlets of sunsteel with knuckles shaped like rising suns.", STR=4, DEX=3)
+armor("sunburst_shield", "a sunburst shield", "shield", 42, 24, 2500, "A round shield of polished sunsteel that flashes blindingly in the light.", CON=5)
+armor("silkwind_slippers", "silkwind slippers", "feet", 42, 8, 2300, "Pointed slippers of embroidered silk that never fill with sand.", INT=6, WIS=5, DEX=3)
+armor("sunstone_ring", "a sunstone ring", "ring", 42, 0, 2600, "A heavy gold ring set with an orange stone that is always warm.", STR=4, DEX=4, CON=4)
+weapon("crescent_greatsword", "a crescent greatsword", 44, (33, 55), 3200,
+       "A huge curved blade of sunsteel, worn across the back by the Sun Guard of Sunspire.", STR=9, DEX=4)
+weapon("khopesh_of_ussreth", "the Khopesh of Ussreth", 48, (38, 62), 5500,
+       "The hooked sword of the last Sand King, its bronze blade still sharp after three thousand years.", STR=11, DEX=8, CON=5)
+weapon("scepter_of_the_sand_kings", "the Scepter of the Sand Kings", 48, (27, 44), 5000,
+       "A sceptre of gold and lapis topped with a scarab of black glass, heavy with old and patient magic.", INT=17, WIS=15, CHA=8)
+armor("burial_mask", "the Burial Mask of Ussreth", "head", 48, 26, 4800,
+      "A golden death-mask with eyes of lapis. Wearing it, you hear the desert wind.", CON=6, STR=4, INT=4, WIS=4)
+
 # ------------------------------------------------------------------ Consumables
 potion("minor_healing_potion", "a minor healing potion", 1, 10, "A small vial of red liquid.", heal=45)
 potion("minor_mana_potion", "a minor mana potion", 1, 12, "A small vial of shimmering blue liquid.", mana=30)
@@ -238,6 +273,10 @@ misc("yeti_fur", "a hank of yeti fur", 50, "Coarse white fur, warm enough to sle
 misc("deep_crystal", "a deep crystal", 80, "A cloudy crystal from the depths of Deepdelve, faintly warm.")
 misc("stag_antler", "a greatstag antler", 60, "A branching antler as wide as your outstretched arms.", kind="quest")
 misc("blight_heartwood", "a lump of blighted heartwood", 120, "Black, oozing wood that is warm to the touch and smells of rot.")
+misc("hyena_hide", "a spotted hyena hide", 20, "A coarse spotted hide that still smells of carrion.")
+misc("scorpion_stinger", "a scorpion stinger", 120, "A curved stinger as long as a dagger, its venom sac dried hard.")
+misc("desert_glass", "a shard of desert glass", 220, "Green glass fused from sand by some terrible heat, smooth as water.", kind="quest")
+misc("ancient_scarab", "an ancient scarab", 400, "A carved scarab of lapis and gold from the tombs of the Sand Kings.")
 misc("griffon_feather", "a griffon feather", 70, "A great barred flight feather, longer than your arm.")
 misc("winter_wolf_pelt", "a winter wolf pelt", 110, "A thick white pelt that stays cold to the touch.")
 misc("frost_shard", "a frost shard", 90, "A shard of ice that never melts.")

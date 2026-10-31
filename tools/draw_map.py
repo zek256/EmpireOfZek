@@ -22,6 +22,7 @@ STEP = {"n": (0, -1), "s": (0, 1), "e": (1, 0), "w": (-1, 0), "u": (1, -1), "d":
 INSETS = [  # (label, areas drawn together, the room that leads in from the surface)
     ("Crypt of Varnoth", {"Crypt of Varnoth"}, "crypt_entry"),
     ("Deepdelve Mine", {"Deepdelve Mine"}, "deepdelve_foot"),
+    ("Tomb of the Sand Kings", {"Tomb of the Sand Kings"}, "tomb_antechamber"),
 ]
 
 COLORS = {  # area: (fill, border)
@@ -33,6 +34,9 @@ COLORS = {  # area: (fill, border)
     "Westmarch": ("#3d3a26", "#d2b55b"), "Rimefells": ("#3a4048", "#dde6ee"),
     "Hearthdeep": ("#45332a", "#e0a070"), "Deepdelve Mine": ("#243a3a", "#6fc7c0"),
     "Eldergrove": ("#1b3324", "#6fcf86"), "Silverbough": ("#38362a", "#f0e2a0"),
+    "Dustway": ("#3f3a33", "#c8b89a"), "Redrock Badlands": ("#4a2a22", "#e07a5a"),
+    "Scorchsands": ("#463c22", "#f2c45a"), "Sunspire": ("#40372a", "#ffe08a"),
+    "Tomb of the Sand Kings": ("#2a2630", "#c9a0e0"),
 }
 BOSS_RED = "#ff5a4a"
 CW, CH = 170, 92           # grid cell size

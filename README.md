@@ -140,21 +140,28 @@ At level 50, `rebirth` lets you choose any other class:
 ## World
 
 Town of Brightwater (inn, temple, smithy, alchemist, Silverthread Arcana caster shop, barracks,
-and the North and West Gates), Greenmeadow (1-5), Whispering Woods and the bandit camp (4-10),
+and the North, West and East Gates), Greenmeadow (1-5), Whispering Woods and the bandit camp (4-10),
 the Westmarch farms and goblin quarry (3-10), Barrowfield and the Crypt of Varnoth dungeon (9-17),
 the snowy Rimefells (10-20) around the dwarven city of **Hearthdeep** (smith, rune-carver, alehouse
 with potions) and the Deepdelve Mine below it (18-21), the Mirefen (15-22), the ancient Eldergrove
 (20-34) around the elven city of **Silverbough** (bladesmith, moonweaver, inn with potions), reached
 south through the Whispering Woods or from the Westmarch quarry, the Ironspine Mountains with the
-orc warcamp, the giants and the frost caverns (20-34), the Ruins of Elandor (32-41), and the Ashen
-Peaks up to the dragon's lair (37-52). Brightwater's shops sell gear up to level 20; Hearthdeep
-sells dwarven gear for levels 12-24 and Silverbough elven gear for levels 24-34.
-That is 145 rooms, 91 monster types including 8 bosses, and 152 items. Run
+orc warcamp, the giants and the frost caverns (20-34), the Ruins of Elandor (32-41), the Ashen
+Peaks up to the dragon's lair (37-52), and to the east the Dustway caravan road (8-15), the gnoll
+canyons of the Redrock Badlands (18-27), and the Scorchsands desert (35-49) around the golden city
+of **Sunspire** (bladewright, silk bazaar, caravanserai with potions), with the Tomb of the Sand
+Kings beneath a sunken pyramid (45-48). Brightwater's shops sell gear up to level 20; Hearthdeep
+sells dwarven gear for levels 12-24, Silverbough elven gear for levels 24-34, and Sunspire desert
+gear for levels 38-44.
+That is 201 rooms, 112 monster types including 10 bosses, and 179 items. Run
 `python tools/draw_map.py` to draw `map.svg`, a map of every room.
 
 **Quests:** Vermin in the Cellar (Bram, inn), Wolves at the Gate, The Bandit Chieftain, Trouble in
 the Rimefells, The Skullsplitter Horde (Captain Halvard, barracks), The Bone King and The Hag of the
-Mirefen (Sister Aveline, temple), The Blight Spreads (Elowen, Silverthread Arcana), Goblins in the
+Mirefen and The Thirsting Dead (Sister Aveline, temple), The Blight Spreads (Elowen, Silverthread
+Arcana), Highway Robbery and The Laughing Warlord (Old Marta, Dustway Waystation), Glass from the
+Sands (Archivist Mehrun), Giants on the Causeway (Sun-Captain Idrisa) and The Last Sand King (Emira
+Zahrin, all in Sunspire), Goblins in the
 Henhouse (Farmer Haverick, Thornbury), Fur for the Gatewatch (Captain Orla, Hearthdeep), The
 Stonewake (Thane Hargrim, Hearthdeep), The Sacred Herd and The Rotwood Circle (Warden-Captain
 Faelan, Silverbough) and The Heart of the Blight (Speaker Saelwyn, Silverbough).

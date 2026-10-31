@@ -4,9 +4,9 @@
   "name": "Zekariah",
   "race": "high elf",
   "cls": "wizard",
-  "level": 24,
-  "xp": 3710,
-  "gold": 1971,
+  "level": 25,
+  "xp": 4965,
+  "gold": 2294,
   "past_lives": [],
   "inventory": [
    "minor_healing_potion",
@@ -55,7 +55,8 @@
    "healing_potion",
    "healing_potion",
    "healing_potion",
-   "healing_potion"
+   "healing_potion",
+   "greater_healing_potion"
   ],
   "equipment": {
    "weapon": "wand_of_embers",
@@ -84,19 +85,19 @@
   },
   "effects": [],
   "cooldowns": {},
-  "kills": 301,
+  "kills": 310,
   "deaths": 20,
-  "hp": 240,
-  "mana": 497,
+  "hp": 250,
+  "mana": 526,
   "aliases": {
    "1": "cast magic",
    "2": "cast frost bolt"
   },
   "pet": null
  },
- "room": "crossroads",
+ "room": "westwood_verge",
  "world": {
-  "tick": 8972,
+  "tick": 9091,
   "rooms": {
    "town_square": {
     "items": [],
@@ -158,6 +159,11 @@
     "respawn_at": {}
    },
    "north_gate": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "west_gate": {
     "items": [],
     "monsters": [],
     "respawn_at": {}
@@ -265,6 +271,24 @@
      "field_snake": []
     }
    },
+   "willow_mill": {
+    "items": [],
+    "monsters": [
+     [
+      "giant_rat",
+      21
+     ],
+     [
+      "giant_rat",
+      21
+     ],
+     [
+      "kobold_scavenger",
+      59
+     ]
+    ],
+    "respawn_at": {}
+   },
    "woods_edge": {
     "items": [],
     "monsters": [
@@ -350,6 +374,38 @@
      "dire_wolf": []
     }
    },
+   "fern_gully": {
+    "items": [],
+    "monsters": [
+     [
+      "dire_wolf",
+      141
+     ],
+     [
+      "brown_bear",
+      224
+     ],
+     [
+      "brown_bear",
+      224
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "old_south_way": {
+    "items": [],
+    "monsters": [
+     [
+      "brown_bear",
+      224
+     ],
+     [
+      "brown_bear",
+      224
+     ]
+    ],
+    "respawn_at": {}
+   },
    "bandit_approach": {
     "items": [],
     "monsters": [
@@ -390,6 +446,11 @@
     "respawn_at": {}
    },
    "kings_road": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "crossroads": {
     "items": [],
     "monsters": [],
     "respawn_at": {}
@@ -556,11 +617,6 @@
      "varnoth": []
     }
    },
-   "crossroads": {
-    "items": [],
-    "monsters": [],
-    "respawn_at": {}
-   },
    "mire_edge": {
     "items": [],
     "monsters": [
@@ -601,6 +657,24 @@
     ],
     "respawn_at": {}
    },
+   "spawning_grounds": {
+    "items": [],
+    "monsters": [
+     [
+      "lizardman_shaman",
+      310
+     ],
+     [
+      "lizardman_shaman",
+      310
+     ],
+     [
+      "lizardman_warrior",
+      304
+     ]
+    ],
+    "respawn_at": {}
+   },
    "mire_deep": {
     "items": [],
     "monsters": [
@@ -623,6 +697,24 @@
     ],
     "respawn_at": {}
    },
+   "bogwood_hollow": {
+    "items": [],
+    "monsters": [
+     [
+      "fen_crocodile",
+      508
+     ],
+     [
+      "fen_crocodile",
+      508
+     ],
+     [
+      "will_o_wisp",
+      217
+     ]
+    ],
+    "respawn_at": {}
+   },
    "serpent_pools": {
     "items": [],
     "monsters": [
@@ -633,6 +725,24 @@
      [
       "mire_serpent",
       426
+     ],
+     [
+      "mire_serpent",
+      426
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "leech_fens": {
+    "items": [],
+    "monsters": [
+     [
+      "giant_leech",
+      449
+     ],
+     [
+      "giant_leech",
+      449
      ],
      [
       "mire_serpent",
@@ -661,12 +771,14 @@
      [
       "mountain_lion",
       363
+     ],
+     [
+      "mountain_lion",
+      363
      ]
     ],
     "respawn_at": {
-     "mountain_lion": [
-      8975
-     ]
+     "mountain_lion": []
     }
    },
    "mountain_pass": {
@@ -679,13 +791,33 @@
      [
       "harpy",
       342
+     ],
+     [
+      "harpy",
+      342
      ]
     ],
     "respawn_at": {
-     "harpy": [
-      8993
-     ]
+     "harpy": []
     }
+   },
+   "eagle_crag": {
+    "items": [],
+    "monsters": [
+     [
+      "griffon",
+      438
+     ],
+     [
+      "griffon",
+      438
+     ],
+     [
+      "harpy",
+      342
+     ]
+    ],
+    "respawn_at": {}
    },
    "giants_plateau": {
     "items": [],
@@ -701,6 +833,42 @@
      [
       "orc_raider",
       458
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "ogre_quarry": {
+    "items": [],
+    "monsters": [
+     [
+      "mountain_ogre",
+      695
+     ],
+     [
+      "mountain_ogre",
+      695
+     ],
+     [
+      "hill_giant",
+      708
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "giant_steading": {
+    "items": [],
+    "monsters": [
+     [
+      "hill_giant",
+      708
+     ],
+     [
+      "hill_giant",
+      708
+     ],
+     [
+      "mountain_ogre",
+      695
      ]
     ],
     "respawn_at": {}
@@ -763,12 +931,48 @@
     ],
     "respawn_at": {}
    },
+   "blood_circle": {
+    "items": [],
+    "monsters": [
+     [
+      "orc_bloodguard",
+      660
+     ],
+     [
+      "orc_bloodguard",
+      660
+     ],
+     [
+      "orc_shaman",
+      470
+     ]
+    ],
+    "respawn_at": {}
+   },
    "warlord_tent": {
     "items": [],
     "monsters": [
      [
       "warlord_gorrak",
       1471
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "rimeglass_gorge": {
+    "items": [],
+    "monsters": [
+     [
+      "winter_wolf",
+      558
+     ],
+     [
+      "winter_wolf",
+      558
+     ],
+     [
+      "winter_wolf",
+      558
      ]
     ],
     "respawn_at": {}
@@ -791,6 +995,42 @@
      [
       "frost_troll",
       846
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "rime_glacier": {
+    "items": [],
+    "monsters": [
+     [
+      "rime_drake",
+      763
+     ],
+     [
+      "rime_drake",
+      763
+     ],
+     [
+      "ice_wraith",
+      526
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "jarls_mead_hall": {
+    "items": [],
+    "monsters": [
+     [
+      "frost_giant",
+      1083
+     ],
+     [
+      "frost_giant",
+      1083
+     ],
+     [
+      "winter_wolf",
+      558
      ]
     ],
     "respawn_at": {}
@@ -845,6 +1085,24 @@
     ],
     "respawn_at": {}
    },
+   "silvered_gardens": {
+    "items": [],
+    "monsters": [
+     [
+      "ruin_stalker",
+      722
+     ],
+     [
+      "ruin_stalker",
+      722
+     ],
+     [
+      "phantom_sentinel",
+      641
+     ]
+    ],
+    "respawn_at": {}
+   },
    "ruins_plaza": {
     "items": [],
     "monsters": [
@@ -859,6 +1117,24 @@
      [
       "ruin_stalker",
       722
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "sunken_amphitheatre": {
+    "items": [],
+    "monsters": [
+     [
+      "moonblade_revenant",
+      815
+     ],
+     [
+      "moonblade_revenant",
+      815
+     ],
+     [
+      "living_statue",
+      1320
      ]
     ],
     "respawn_at": {}
@@ -881,12 +1157,66 @@
     ],
     "respawn_at": {}
    },
+   "moon_court": {
+    "items": [],
+    "monsters": [
+     [
+      "arcane_sentinel",
+      1258
+     ],
+     [
+      "arcane_sentinel",
+      1258
+     ],
+     [
+      "moonblade_revenant",
+      815
+     ]
+    ],
+    "respawn_at": {}
+   },
    "ruins_tower": {
     "items": [],
     "monsters": [
      [
       "seluvar",
       1995
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "meltwater_gorge": {
+    "items": [],
+    "monsters": [
+     [
+      "steam_wraith",
+      679
+     ],
+     [
+      "steam_wraith",
+      679
+     ],
+     [
+      "steam_wraith",
+      679
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "smoking_scree": {
+    "items": [],
+    "monsters": [
+     [
+      "cinder_hound",
+      769
+     ],
+     [
+      "cinder_hound",
+      769
+     ],
+     [
+      "lava_troll",
+      1150
      ]
     ],
     "respawn_at": {}
@@ -913,6 +1243,24 @@
     ],
     "respawn_at": {}
    },
+   "burning_fields": {
+    "items": [],
+    "monsters": [
+     [
+      "salamander",
+      911
+     ],
+     [
+      "salamander",
+      911
+     ],
+     [
+      "cinder_hound",
+      769
+     ]
+    ],
+    "respawn_at": {}
+   },
    "cinder_road": {
     "items": [],
     "monsters": [
@@ -935,6 +1283,24 @@
     ],
     "respawn_at": {}
    },
+   "drake_roost": {
+    "items": [],
+    "monsters": [
+     [
+      "ash_drake",
+      1199
+     ],
+     [
+      "ash_drake",
+      1199
+     ],
+     [
+      "ash_drake",
+      1199
+     ]
+    ],
+    "respawn_at": {}
+   },
    "obsidian_halls": {
     "items": [],
     "monsters": [
@@ -949,6 +1315,24 @@
      [
       "dragonkin_guard",
       1066
+     ],
+     [
+      "obsidian_golem",
+      1681
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "cult_forge": {
+    "items": [],
+    "monsters": [
+     [
+      "cult_flamecaller",
+      1119
+     ],
+     [
+      "cult_flamecaller",
+      1119
      ],
      [
       "obsidian_golem",
@@ -983,6 +1367,904 @@
       3382
      ]
     ],
+    "respawn_at": {}
+   },
+   "westmarch_road": {
+    "items": [],
+    "monsters": [
+     [
+      "wild_boar",
+      65
+     ],
+     [
+      "wild_boar",
+      65
+     ],
+     [
+      "field_snake",
+      35
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "haverick_farm": {
+    "items": [],
+    "monsters": [
+     [
+      "goblin_sneak",
+      87
+     ],
+     [
+      "goblin_sneak",
+      87
+     ],
+     [
+      "wild_boar",
+      65
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "thornbury": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "quarry_rim": {
+    "items": [],
+    "monsters": [
+     [
+      "hill_goblin",
+      128
+     ],
+     [
+      "hill_goblin",
+      128
+     ],
+     [
+      "goblin_sneak",
+      87
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "goblin_quarry": {
+    "items": [],
+    "monsters": [
+     [
+      "hill_goblin",
+      128
+     ],
+     [
+      "hill_goblin",
+      128
+     ],
+     [
+      "goblin_shaman",
+      130
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "quarry_depths": {
+    "items": [],
+    "monsters": [
+     [
+      "goblin_brute",
+      208
+     ],
+     [
+      "goblin_brute",
+      208
+     ],
+     [
+      "goblin_shaman",
+      130
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "hill_road": {
+    "items": [],
+    "monsters": [
+     [
+      "dire_wolf",
+      141
+     ],
+     [
+      "dire_wolf",
+      141
+     ],
+     [
+      "hill_goblin",
+      128
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "old_watchtower": {
+    "items": [],
+    "monsters": [
+     [
+      "goblin_brute",
+      208
+     ],
+     [
+      "snow_wolf",
+      176
+     ],
+     [
+      "snow_wolf",
+      176
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "frostfoot_trail": {
+    "items": [],
+    "monsters": [
+     [
+      "snow_wolf",
+      176
+     ],
+     [
+      "snow_wolf",
+      176
+     ],
+     [
+      "snow_wolf",
+      176
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "snowbound_meadow": {
+    "items": [],
+    "monsters": [
+     [
+      "snow_wolf",
+      176
+     ],
+     [
+      "frost_goblin",
+      209
+     ],
+     [
+      "frost_goblin",
+      209
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "frost_goblin_warren": {
+    "items": [],
+    "monsters": [
+     [
+      "frost_goblin",
+      209
+     ],
+     [
+      "frost_goblin",
+      209
+     ],
+     [
+      "frost_goblin",
+      209
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "icefall": {
+    "items": [],
+    "monsters": [
+     [
+      "ice_spider",
+      242
+     ],
+     [
+      "ice_spider",
+      242
+     ],
+     [
+      "ice_spider",
+      242
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "rimewood": {
+    "items": [],
+    "monsters": [
+     [
+      "ice_spider",
+      242
+     ],
+     [
+      "ice_spider",
+      242
+     ],
+     [
+      "frost_goblin",
+      209
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "yeti_caves": {
+    "items": [],
+    "monsters": [
+     [
+      "yeti",
+      414
+     ],
+     [
+      "yeti",
+      414
+     ],
+     [
+      "yeti",
+      414
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "frozen_tarn": {
+    "items": [],
+    "monsters": [
+     [
+      "frost_wisp",
+      234
+     ],
+     [
+      "frost_wisp",
+      234
+     ],
+     [
+      "ice_spider",
+      242
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "howling_heights": {
+    "items": [],
+    "monsters": [
+     [
+      "yeti",
+      414
+     ],
+     [
+      "yeti",
+      414
+     ],
+     [
+      "frost_wisp",
+      234
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "giantstep_ridge": {
+    "items": [],
+    "monsters": [
+     [
+      "snow_troll",
+      492
+     ],
+     [
+      "snow_troll",
+      492
+     ],
+     [
+      "yeti",
+      414
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "cairn_saddle": {
+    "items": [],
+    "monsters": [
+     [
+      "snow_troll",
+      492
+     ],
+     [
+      "snow_troll",
+      492
+     ],
+     [
+      "frost_wisp",
+      234
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "high_pass": {
+    "items": [],
+    "monsters": [
+     [
+      "snow_troll",
+      492
+     ],
+     [
+      "snow_troll",
+      492
+     ],
+     [
+      "yeti",
+      414
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fenward_pass": {
+    "items": [],
+    "monsters": [
+     [
+      "snow_troll",
+      492
+     ],
+     [
+      "will_o_wisp",
+      217
+     ],
+     [
+      "will_o_wisp",
+      217
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "hearthdeep_gate": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "hearthdeep_gatewatch": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "lantern_terraces": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "hearthdeep_east_door": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "hall_of_hearths": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "ironhand_forge": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "stone_flagon": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "runecutters": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "thanes_hall": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "deepdelve_lift": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "deepdelve_foot": {
+    "items": [],
+    "monsters": [
+     [
+      "rockgnasher",
+      459
+     ],
+     [
+      "rockgnasher",
+      459
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "deepdelve_gallery": {
+    "items": [],
+    "monsters": [
+     [
+      "deepkin_delver",
+      380
+     ],
+     [
+      "deepkin_delver",
+      380
+     ],
+     [
+      "rockgnasher",
+      459
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "deepdelve_flooded": {
+    "items": [],
+    "monsters": [
+     [
+      "giant_leech",
+      449
+     ],
+     [
+      "giant_leech",
+      449
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "deepdelve_seam": {
+    "items": [],
+    "monsters": [
+     [
+      "crystal_golem",
+      653
+     ],
+     [
+      "crystal_golem",
+      653
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "deepdelve_camp": {
+    "items": [],
+    "monsters": [
+     [
+      "deepkin_delver",
+      380
+     ],
+     [
+      "deepkin_delver",
+      380
+     ],
+     [
+      "deepkin_delver",
+      380
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "stonewake_vault": {
+    "items": [],
+    "monsters": [
+     [
+      "ghaldrek",
+      907
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "westwood_verge": {
+    "items": [],
+    "monsters": [
+     [
+      "thornback_boar",
+      414
+     ]
+    ],
+    "respawn_at": {
+     "thornback_boar": [
+      9092
+     ],
+     "centaur_outrider": [
+      9094
+     ]
+    }
+   },
+   "old_greenway": {
+    "items": [],
+    "monsters": [
+     [
+      "centaur_outrider",
+      418
+     ],
+     [
+      "centaur_outrider",
+      418
+     ]
+    ],
+    "respawn_at": {
+     "centaur_outrider": [
+      9109
+     ]
+    }
+   },
+   "owlwood": {
+    "items": [],
+    "monsters": [
+     [
+      "dusk_owl",
+      398
+     ],
+     [
+      "dusk_owl",
+      398
+     ],
+     [
+      "centaur_outrider",
+      418
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "centaur_run": {
+    "items": [],
+    "monsters": [
+     [
+      "centaur_outrider",
+      418
+     ],
+     [
+      "centaur_outrider",
+      418
+     ],
+     [
+      "centaur_outrider",
+      418
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "troll_hollow": {
+    "items": [],
+    "monsters": [
+     [
+      "wood_troll",
+      624
+     ],
+     [
+      "wood_troll",
+      624
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "mossy_stones": {
+    "items": [],
+    "monsters": [
+     [
+      "wood_troll",
+      624
+     ],
+     [
+      "dusk_owl",
+      398
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "briar_maze": {
+    "items": [],
+    "monsters": [
+     [
+      "thorn_sprite",
+      304
+     ],
+     [
+      "thorn_sprite",
+      304
+     ],
+     [
+      "thorn_sprite",
+      304
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "stag_walk": {
+    "items": [],
+    "monsters": [
+     [
+      "greatstag",
+      633
+     ],
+     [
+      "greatstag",
+      633
+     ],
+     [
+      "thorn_sprite",
+      304
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "weeping_pines": {
+    "items": [],
+    "monsters": [
+     [
+      "blighted_treant",
+      847
+     ],
+     [
+      "greatstag",
+      633
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "rotting_brake": {
+    "items": [],
+    "monsters": [
+     [
+      "blighted_treant",
+      847
+     ],
+     [
+      "blighted_treant",
+      847
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "druids_ring": {
+    "items": [],
+    "monsters": [
+     [
+      "rotwood_druid",
+      558
+     ],
+     [
+      "blighted_treant",
+      847
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "silver_approach": {
+    "items": [],
+    "monsters": [
+     [
+      "greatstag",
+      633
+     ],
+     [
+      "greatstag",
+      633
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "fungal_barrows": {
+    "items": [],
+    "monsters": [
+     [
+      "rotwood_druid",
+      558
+     ],
+     [
+      "rotwood_druid",
+      558
+     ],
+     [
+      "blight_wolf",
+      654
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "grove_verge": {
+    "items": [],
+    "monsters": [
+     [
+      "thornback_boar",
+      414
+     ],
+     [
+      "thornback_boar",
+      414
+     ],
+     [
+      "centaur_outrider",
+      418
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "silver_road": {
+    "items": [],
+    "monsters": [
+     [
+      "centaur_outrider",
+      418
+     ],
+     [
+      "centaur_outrider",
+      418
+     ],
+     [
+      "dusk_owl",
+      398
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "sprite_dells": {
+    "items": [],
+    "monsters": [
+     [
+      "thorn_sprite",
+      304
+     ],
+     [
+      "thorn_sprite",
+      304
+     ],
+     [
+      "wood_troll",
+      624
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "whitestag_glade": {
+    "items": [],
+    "monsters": [
+     [
+      "greatstag",
+      633
+     ],
+     [
+      "greatstag",
+      633
+     ],
+     [
+      "blighted_treant",
+      847
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "blighted_glade": {
+    "items": [],
+    "monsters": [
+     [
+      "blighted_treant",
+      847
+     ],
+     [
+      "blighted_treant",
+      847
+     ],
+     [
+      "rotwood_druid",
+      558
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "withered_hollow": {
+    "items": [],
+    "monsters": [
+     [
+      "blight_wolf",
+      654
+     ],
+     [
+      "blight_wolf",
+      654
+     ],
+     [
+      "blighted_treant",
+      847
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "wolfrot_den": {
+    "items": [],
+    "monsters": [
+     [
+      "blight_wolf",
+      654
+     ],
+     [
+      "blight_wolf",
+      654
+     ],
+     [
+      "blight_wolf",
+      654
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "gloaming_mere": {
+    "items": [],
+    "monsters": [
+     [
+      "gloom_dryad",
+      641
+     ],
+     [
+      "gloom_dryad",
+      641
+     ],
+     [
+      "rotwood_druid",
+      558
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "heart_of_blight": {
+    "items": [],
+    "monsters": [
+     [
+      "rotheart",
+      1574
+     ]
+    ],
+    "respawn_at": {}
+   },
+   "sb_rootgate": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "sb_dawnbridge": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "sb_court": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "sb_speaker": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "sb_starwatch": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "sb_leafsong": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "sb_moonweave": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "sb_inn": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "sb_wardens": {
+    "items": [],
+    "monsters": [],
+    "respawn_at": {}
+   },
+   "sb_thornward": {
+    "items": [],
+    "monsters": [],
     "respawn_at": {}
    }
   }

@@ -65,8 +65,15 @@ ROOMS = {
         "The South Road", "Brightwater",
         "Neat cottages with flower boxes line the road as it runs toward the low southern gate. To the "
         "west, a narrow shopfront of blue-painted wood hangs a silver sign of a needle threading a star. "
-        "Beyond the town wall, golden fields roll away toward a dark smudge of forest.",
-        {"n": "town_square", "s": "meadow_path", "w": "silverthread"}, safe=True),
+        "A lane runs east to the East Gate. Beyond the town wall, golden fields roll away toward a "
+        "dark smudge of forest.",
+        {"n": "town_square", "s": "meadow_path", "w": "silverthread", "e": "east_gate"}, safe=True),
+    "east_gate": R(
+        "The East Gate", "Brightwater",
+        "A narrow gate in the eastern wall opens onto the Dustway, a pale road that runs arrow-straight "
+        "toward a hazy, reddish horizon. Caravan drivers water their mules at a trough here, swapping "
+        "stories of gnolls, highwaymen, and a city of gold beyond the sands.",
+        {"w": "south_road", "e": "dustway_road"}, safe=True),
     "silverthread": R(
         "Silverthread Arcana", "Brightwater",
         "Bolts of shimmering cloth in midnight blue, violet and silver hang from the rafters, and glass "

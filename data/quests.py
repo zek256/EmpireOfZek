@@ -94,6 +94,18 @@ QUESTS = {
         "reward": {"xp": 1500, "gold": 60, "items": ["iron_helm", "healing_potion"]},
     },
 
+    "salt_wraiths": {
+        "name": "The Thirsting Dead", "giver": "aveline", "type": "kill", "target": "salt_wraith", "count": 8,
+        "min_level": 36, "prereq": None,
+        "offer": "'A plea has reached the temple from the Emira of Sunspire, the golden city beyond the "
+                 "Badlands. The dead are rising on the salt flats north of her city's western oasis, "
+                 "and her people dare not fetch water. Take the Dustway east from the East Gate, cross "
+                 "the Badlands, and lay eight of the salt wraiths to rest.'",
+        "progress": "'The dead still thirst on the salt flats. ({n}/{count} salt wraiths laid to rest)'",
+        "complete": "'The Emira has written to thank the temple, and you. Take this from our treasury, "
+                    "and go to Sunspire again; I think they have need of you still.'",
+        "reward": {"xp": 30000, "gold": 1500, "items": ["obelisk_amulet", "supreme_healing_potion"]},
+    },
     "blight_spreads": {
         "name": "The Blight Spreads", "giver": "elowen", "type": "kill", "target": "blighted_treant", "count": 6,
         "min_level": 24, "prereq": None,
@@ -170,5 +182,71 @@ QUESTS = {
                     "the Eldergrove, and Silverbough will not forget your name while a single tree stands.'",
         "reward": {"xp": 70000, "gold": 2500, "items": ["moonstone_ring", "greater_healing_potion",
                                                         "greater_healing_potion"]},
+    },
+
+    # ------------------------------------------------------------------ Dustway
+    "dust_highwaymen": {
+        "name": "Highway Robbery", "giver": "marta", "type": "kill", "target": "highwayman", "count": 6,
+        "min_level": 9, "prereq": None,
+        "offer": "'Highwaymen on Gallows Hill, bold as brass, robbing every cart that comes through the "
+                 "Dry Ford. My guests stop coming, I stop eating. Kill six of them and I'll pay you "
+                 "out of what they'd have taken.'",
+        "progress": "'Still masks on Gallows Hill. ({n}/{count} highwaymen dealt with)'",
+        "complete": "'Ha! The carters are singing again. Here's your pay, and a little something from "
+                    "under the bar.'",
+        "reward": {"xp": 3500, "gold": 150, "items": ["chain_leggings", "healing_potion"]},
+    },
+    "yellowtooth": {
+        "name": "The Laughing Warlord", "giver": "marta", "type": "kill", "target": "yellowtooth", "count": 1,
+        "min_level": 23, "prereq": "dust_highwaymen",
+        "offer": "'The gnolls of the Badlands have a warlord now, a grey old monster called Yellowtooth. "
+                 "Since he took the pack, they don't just scavenge, they raid. Three caravans this "
+                 "season, every soul eaten. His den's at the far end of the canyons, past the Howling "
+                 "Pit. Bring him down.'",
+        "progress": "'You can hear him laughing on the wind some nights. Yellowtooth lives.'",
+        "complete": "'Dead? Truly? Forty years I've kept this house, and that's the best news I've had "
+                    "in all of them. The caravans will come back. Take all of this, you've earned it.'",
+        "reward": {"xp": 35000, "gold": 1500, "items": ["greater_healing_potion", "greater_healing_potion",
+                                                        "runed_shield"]},
+    },
+
+    # ------------------------------------------------------------------ Sunspire
+    "desert_glass": {
+        "name": "Glass from the Sands", "giver": "mehrun", "type": "collect", "target": "desert_glass", "count": 5,
+        "min_level": 40, "prereq": None,
+        "offer": "'Desert glass! The sand was melted by something, long ago, and I believe the glass "
+                 "remembers what. Bring me five shards. The scorpions of the Glass Waste swallow it, "
+                 "the mirage-cats roll in it, and the salt wraiths clutch it like coins. Five shards, "
+                 "and I will pay well.'",
+        "progress": "'Five shards, please. You have {n}.'",
+        "complete": "'Look at the colour! There was fire here once like nothing on this earth. You have "
+                    "done the archive a great service. Take this ring, it was found in these sands.'",
+        "reward": {"xp": 35000, "gold": 1500, "items": ["sunstone_ring", "supreme_mana_potion"]},
+    },
+    "sand_giants": {
+        "name": "Giants on the Causeway", "giver": "idrisa", "type": "kill", "target": "sand_giant", "count": 6,
+        "min_level": 44, "prereq": None,
+        "offer": "'The sand giants of the Causeway have started raiding the northern caravans, and they "
+                 "throw pillars at my patrols like children throwing stones. Go out the North Gate, west "
+                 "to the Giants' Causeway and the Valley of the Kings, and kill six of them.'",
+        "progress": "'The giants still hold the Causeway. ({n}/{count} sand giants slain)'",
+        "complete": "'Six giants! The Sun Guard will drink to you tonight. Take this blade, the Guard's "
+                    "own pattern.'",
+        "reward": {"xp": 45000, "gold": 2000, "items": ["crescent_greatsword", "supreme_healing_potion",
+                                                        "supreme_healing_potion"]},
+    },
+    "sand_king": {
+        "name": "The Last Sand King", "giver": "zahrin", "type": "kill", "target": "ussreth", "count": 1,
+        "min_level": 45, "prereq": None,
+        "offer": "'Three thousand years ago, the Sand Kings ruled all of this desert, and the last of them "
+                 "was buried in a black pyramid north of here with ten thousand slaves. Robbers broke "
+                 "his seal last spring. Now the dead walk, the scarabs swarm, and my people sicken. The "
+                 "pyramid lies beyond the Valley of the Kings. Go down into the tomb, and give Ussreth "
+                 "the rest he will not take.'",
+        "progress": "'The sickness spreads. Ussreth still walks in his tomb.'",
+        "complete": "'The sickness is lifting already. Sunspire owes you its life. Whatever you need "
+                    "in this city, it is yours, and your name will be cut into the Obelisk.'",
+        "reward": {"xp": 150000, "gold": 5000, "items": ["supreme_healing_potion", "supreme_healing_potion",
+                                                         "supreme_mana_potion"]},
     },
 }

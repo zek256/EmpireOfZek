@@ -13,7 +13,7 @@ NPCS = {
         "desc": "A serene priestess in white and gold robes, a sun-disc upon her brow. Her eyes are kind but tired.",
         "greeting": "'May the Dawnfather light your path, traveller. Should you fall, it is here you "
                     "shall awaken.'",
-        "quests": ["bone_king", "bog_hag"],
+        "quests": ["bone_king", "bog_hag", "salt_wraiths"],
     },
     "durgan": {
         "name": "Durgan Ironhand", "keywords": ["durgan", "smith", "blacksmith"],
@@ -132,5 +132,54 @@ NPCS = {
         "desc": "A cheerful elf with flour on her sleeves and a sprig of rosemary tucked behind one pointed ear.",
         "greeting": "'Rest, eat, and if the wardens have sent you south, take a potion or two. Type LIST.'",
         "shop": ["healing_potion", "mana_potion", "greater_healing_potion", "greater_mana_potion"],
+    },
+    # ------------------------------------------------------------------- Dustway
+    "marta": {
+        "name": "Old Marta", "keywords": ["marta", "keeper", "waystation"],
+        "desc": "A leathery old woman in a dusty coat with a loaded crossbow resting across her knees. "
+                "She has kept this waystation for forty years and buried two husbands behind it.",
+        "greeting": "'Last roof before the Badlands. Pay for your water, mind your manners, and don't feed the hyenas.'",
+        "quests": ["dust_highwaymen", "yellowtooth"],
+    },
+    # ------------------------------------------------------------------- Sunspire
+    "zahrin": {
+        "name": "Emira Zahrin of Sunspire", "keywords": ["zahrin", "emira", "ruler", "queen"],
+        "desc": "A woman of middle years in robes of white and gold, with a sun-disc on her brow and the "
+                "steady eyes of someone who has ruled a city in the desert for twenty years.",
+        "greeting": "'Sunspire welcomes every traveller who comes in peace and pays the gate tax.'",
+        "quests": ["sand_king"],
+    },
+    "idrisa": {
+        "name": "Sun-Captain Idrisa", "keywords": ["idrisa", "captain", "guard"],
+        "desc": "A tall, scarred woman in golden scale, a crescent greatsword across her back and sand in every crease of her face.",
+        "greeting": "'The Sun Guard holds the walls. What's beyond them is everyone's problem.'",
+        "quests": ["sand_giants"],
+    },
+    "mehrun": {
+        "name": "Archivist Mehrun", "keywords": ["mehrun", "archivist", "scholar"],
+        "desc": "A thin, stooped man with ink on his nose and spectacles pushed up into his white hair.",
+        "greeting": "'Every grain of sand out there was once a mountain, or a city. I write down which.'",
+        "quests": ["desert_glass"],
+    },
+    "zahir": {
+        "name": "Zahir the Bladewright", "keywords": ["zahir", "bladewright", "smith"],
+        "desc": "A broad, bald smith with a beard braided with gold wire, whose sunsteel is famous from here to the sea.",
+        "greeting": "'Sunsteel, folded a thousand times, quenched in the oasis at dawn. Type LIST.'",
+        "shop": ["sunsteel_scimitar", "dune_recurve", "sunsteel_mail", "sunsteel_helm", "sunsteel_greaves",
+                 "sand_strider_boots", "sunsteel_gauntlets", "sunburst_shield", "crescent_greatsword"],
+    },
+    "amsa": {
+        "name": "Amsa Silkwind", "keywords": ["amsa", "silkwind", "enchanter", "merchant"],
+        "desc": "A small, bright-eyed old woman sitting cross-legged on a heap of silks, a hookah bubbling beside her.",
+        "greeting": "'Silk for the wise, child, and gold for the old woman. Type LIST.'",
+        "shop": ["desert_silk_robe", "silkwind_turban", "oasis_pearl_ring", "sunfire_staff", "silkwind_gloves",
+                 "silkwind_trousers", "obelisk_amulet", "silkwind_slippers", "sunstone_ring"],
+    },
+    "nadim": {
+        "name": "Nadim the Caravan-Master", "keywords": ["nadim", "caravan", "master", "host"],
+        "desc": "A cheerful, round man in a striped robe who has crossed the desert more times than he can count.",
+        "greeting": "'Water, a bed, and a potion for the road! The desert takes the unprepared. Type LIST.'",
+        "shop": ["healing_potion", "mana_potion", "greater_healing_potion", "greater_mana_potion",
+                 "supreme_healing_potion", "supreme_mana_potion"],
     },
 }

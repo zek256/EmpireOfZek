@@ -34,8 +34,9 @@ ROOMS = {
         "Tiers of white stone seating descend in a great half-circle to a stage of cracked marble, "
         "where the last songs of Elandor were sung. The ground has slumped, and drifts of pale sand "
         "have crept in from the south to fill the lowest rows. Silent knights in silver stand on the "
-        "stage as if waiting for a play that will never begin.",
-        {"n": "ruins_plaza"},
+        "stage as if waiting for a play that will never begin. Beyond the stage, a stair runs down "
+        "into the dunes.",
+        {"n": "ruins_plaza", "s": "sunken_stair"},
         spawns=[("moonblade_revenant", 2), ("living_statue", 1)], level=(37, 38)),
     "ruins_library": R(
         "The Library of Whispers", "Ruins of Elandor",
